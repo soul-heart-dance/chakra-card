@@ -9,64 +9,58 @@ st.set_page_config(
     layout="centered"
 )
 
-# CSS 樣式（固定黑底柔光主題）
+# 固定黑色柔光背景
 def set_background():
     st.markdown("""
         <style>
             .stApp {
                 background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000000 100%);
-                text-align: center;
-                font-family: "Noto Sans TC", sans-serif;
                 color: #FFE6F7;
+                font-family: "Noto Sans TC", sans-serif;
+                text-align: center;
             }
-
             .header {
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 gap: 0.8rem;
-                margin-top: 0.5rem;
-                margin-bottom: 1rem;
+                margin-top: 1rem;
+                margin-bottom: 1.5rem;
             }
-
             .header img {
-                width: 58px;
-                height: 58px;
-                border-radius: 12px;
+                width: 60px;
+                height: 60px;
+                object-fit: contain;
+                filter: brightness(1.2);
             }
-
             .header h1 {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
                 font-weight: 600;
                 color: #FFE6F7;
                 letter-spacing: 0.03em;
             }
-
             .sentence {
                 font-size: 1.3rem;
-                background: rgba(255, 255, 255, 0.08);
+                background: rgba(255, 255, 255, 0.1);
                 color: #fff;
-                padding: 1rem 1.2rem;
+                padding: 1rem 1.5rem;
                 border-radius: 0.8rem;
-                margin: 1rem auto;
+                margin: 1.2rem auto;
                 display: inline-block;
                 font-weight: 500;
-                box-shadow: 0 0 15px rgba(255, 192, 203, 0.25);
+                box-shadow: 0 0 15px rgba(255, 192, 203, 0.3);
                 animation: fadeIn 1.5s ease-in;
             }
-
             .angel, .meaning {
                 font-size: 1.1rem;
                 color: #FFE6F7;
                 margin-top: 0.6rem;
                 animation: fadeIn 2s ease-in;
             }
-
             @keyframes fadeIn {
                 0% { opacity: 0; transform: translateY(10px); }
                 100% { opacity: 1; transform: translateY(0); }
             }
-
             .footer {
                 font-size: 0.95rem;
                 color: #FFE6F7;
@@ -75,22 +69,25 @@ def set_background():
                 letter-spacing: 0.02em;
                 opacity: 0.9;
             }
-
+            div[data-testid="stButton"] {
+                display: flex;
+                justify-content: center;
+            }
             button[kind="primary"] {
                 background-color: #FFD6F6 !important;
                 color: #000 !important;
                 font-size: 1.1rem !important;
                 border-radius: 8px !important;
                 border: none !important;
+                padding: 0.4rem 1.2rem !important;
             }
-
             h4 {
                 color: #FFE6F7;
             }
         </style>
     """, unsafe_allow_html=True)
 
-# 套用黑色背景
+# 套用背景
 set_background()
 
 # 載入資料

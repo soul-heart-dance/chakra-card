@@ -83,7 +83,7 @@ if st.session_state.result:
             <h3 style='color:{bg_color}; margin-top:1.2rem;'>
                 🌈 {chakra.split("（")[0]} {seed}（{chakra.split("（")[1]}
             </h3>
-            <div class='sentence'>💭 {card['sentence']}</div>
+            <div class='sentence'>{card['sentence']}</div>
             <div class='angel'>🪽 天使數字：{card['angel_number']}</div>
             <div class='meaning'>✨ {card['angel_meaning']}</div>
         </div>

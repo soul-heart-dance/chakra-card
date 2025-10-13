@@ -9,9 +9,6 @@ st.set_page_config(
     layout="centered"
 )
 
-# -------------------------
-# 資料與樣式
-# -------------------------
 @st.cache_data
 def load_data():
     with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
@@ -25,17 +22,15 @@ def load_css():
 data = load_data()
 st.markdown(f"<style>{load_css()}</style>", unsafe_allow_html=True)
 
-# -------------------------
 # 狀態初始化
-# -------------------------
 if "draw_count" not in st.session_state:
     st.session_state.draw_count = 0
 if "current_card" not in st.session_state:
     st.session_state.current_card = None
+if "anim_class" not in st.session_state:
+    st.session_state.anim_class = "shineA"
 
-# -------------------------
 # Header
-# -------------------------
 logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
 st.markdown(f"""
 <div class="header">
@@ -47,18 +42,14 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# -------------------------
-# 抽卡按鈕
-# -------------------------
+# 按鈕
 button_text = "🔮 抽卡" if st.session_state.draw_count == 0 else "🌙 再抽一張"
 
 st.markdown('<div class="button-wrapper">', unsafe_allow_html=True)
 clicked = st.button(button_text, key="draw_button")
 st.markdown('</div>', unsafe_allow_html=True)
 
-# -------------------------
 # 抽卡邏輯
-# -------------------------
 if clicked:
     st.session_state.draw_count += 1
     chakra = random.choice(list(data.keys()))
@@ -73,30 +64,29 @@ if clicked:
         "sentence": card["sentence"],
         "angel_number": card["angel_number"],
         "angel_meaning": card["angel_meaning"],
-        "anim_key": str(uuid.uuid4())  # 每次抽卡都換 key → 一定觸發閃爍動畫
+        "key": str(uuid.uuid4())
     }
 
-# -------------------------
+    # 每次抽卡切換動畫 class
+    st.session_state.anim_class = "shineB" if st.session_state.anim_class == "shineA" else "shineA"
+
 # 顯示卡片
-# -------------------------
 if st.session_state.current_card:
     c = st.session_state.current_card
     st.markdown(f"""
-    <div class="card-wrapper {c['glow']}" id="{c['anim_key']}">
-      <div class="card-container animate">
-        <h3 style="color:{c['color']}">🌈 {c['name']} {c['seed']}</h3>
-        <div class="sentence">{c['sentence']}</div>
-        <div class="angel">🪽 天使數字：{c['angel_number']}</div>
-        <div class="meaning">✨ {c['angel_meaning']}</div>
-      </div>
+    <div class="card-wrapper {c['glow']} {st.session_state.anim_class}">
+        <div class="card-container">
+            <h3 style="color:{c['color']}">🌈 {c['name']} {c['seed']}</h3>
+            <div class="sentence">{c['sentence']}</div>
+            <div class="angel">🪽 天使數字：{c['angel_number']}</div>
+            <div class="meaning">✨ {c['angel_meaning']}</div>
+        </div>
     </div>
     """, unsafe_allow_html=True)
 else:
     st.markdown("<p class='hint'>🌙 點擊上方按鈕開始抽卡 🌙</p>", unsafe_allow_html=True)
 
-# -------------------------
 # Footer
-# -------------------------
 st.markdown("""
 <div class="footer">
 © 2025 Soul Heart Dance · 與靈魂之心共舞

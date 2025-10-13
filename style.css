@@ -11,7 +11,7 @@
   justify-content: center;
   align-items: center;
   gap: 0.6rem;
-  margin-top: 0.1rem;
+  margin-top: 0.2rem;
 }
 .logo {
   height: 54px;
@@ -29,13 +29,15 @@
   color: #FFD6F6;
 }
 
-/* 按鈕置中 */
-.button-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: 1rem 0;
+/* --- 按鈕 --- */
+.button-center,
+[data-testid="stVerticalBlock"],
+[data-testid="stHorizontalBlock"] {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 100% !important;
+  text-align: center !important;
 }
 
 .stButton > button {
@@ -44,20 +46,18 @@
   border: none !important;
   border-radius: 1rem !important;
   padding: 0.7rem 2rem !important;
-  min-width: 200px !important;   /* 💡 按鈕寬度設定 */
+  min-width: 220px !important;
   font-size: 1.08rem !important;
   font-weight: 500 !important;
   transition: all 0.3s ease;
   box-shadow: 0 0 18px rgba(255, 200, 250, 0.6);
-  cursor: pointer;
 }
-
 .stButton > button:hover {
   background-color: #ffe1f3 !important;
   box-shadow: 0 0 25px rgba(255, 200, 250, 0.8);
 }
 
-/* 卡片外框光暈 */
+/* --- 卡片光暈與內容 --- */
 .card-wrapper {
   border-radius: 1.3rem;
   padding: 6px;
@@ -72,7 +72,6 @@
 .third-glow { box-shadow: 0 0 36px 8px rgba(186, 85,211,0.6); }
 .crown-glow { box-shadow: 0 0 36px 8px rgba(255,182,255,0.6); }
 
-/* 卡片內容 */
 .card-container {
   position: relative;
   background: rgba(255,255,255,0.06);
@@ -84,9 +83,8 @@
   animation: breatheGlow 6s ease-in-out infinite;
 }
 
-/* 兩組柔光動畫輪流，保證每次都播放 */
-.shineA .card-container::before,
-.shineB .card-container::before {
+/* --- 每次新卡都閃爍 --- */
+.animate::before {
   content: "";
   position: absolute;
   top: 0;

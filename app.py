@@ -11,9 +11,8 @@ st.set_page_config(
     layout="centered"
 )
 
-# 取得 logo 路徑
-logo_path = os.path.join(os.getcwd(), "shop_logo.png")
-logo = Image.open(logo_path)
+# 取得 logo 網址（直接從 Hugging Face repo 載入）
+logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
 
 # 黑色柔光背景＋發光按鈕樣式
 def set_background():
@@ -104,9 +103,9 @@ with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
 
 # 頁首（品牌 logo + 標題）
 with st.container():
-    st.image(logo, width=70)
-    st.markdown("""
+    st.markdown(f"""
     <div class="header">
+        <img src="{logo_url}" alt="Soul Heart Dance Logo" width="70">
         <h1>Soul Heart Dance｜七脈輪共振卡</h1>
     </div>
     """, unsafe_allow_html=True)

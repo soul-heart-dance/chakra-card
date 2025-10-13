@@ -1,6 +1,6 @@
-/* 全域樣式 */
+/* 全域背景 */
 .stApp {
-  background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000000 100%);
+  background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000 100%);
   color: #FFE6F7;
   font-family: "Microsoft JhengHei", Verdana, sans-serif;
   text-align: center;
@@ -13,94 +13,94 @@
   justify-content: center;
   align-items: center;
   gap: 0.6rem;
-  margin: 0.2rem 0 0.4rem;
+  margin: 0.3rem 0 0.5rem;
 }
-
 .logo {
   height: 54px;
   border-radius: 50%;
   box-shadow: 0 0 15px rgba(255, 214, 246, 0.6);
 }
-
 .title-line1 {
   font-size: 1.45rem;
   font-weight: 700;
   color: #FFE6F7;
 }
-
 .title-line2 {
   font-size: 1rem;
   font-weight: 500;
   color: #FFD6F6;
 }
 
-/* 按鈕置中 */
+/* 按鈕容器置中 + 淡入淡出動畫 */
 .button-center {
   text-align: center;
-  margin: 0.6rem 0;
+  margin: 0.7rem 0;
+  opacity: 1;
+  transition: opacity 0.5s ease;
 }
+.fadeIn { opacity: 1; animation: fadeIn 0.5s ease forwards; }
+.fadeOut { opacity: 0; animation: fadeOut 0.3s ease forwards; }
+
+@keyframes fadeIn { 0% {opacity: 0;} 100% {opacity: 1;} }
+@keyframes fadeOut { 0% {opacity: 1;} 100% {opacity: 0;} }
 
 .stButton > button {
   background-color: #f9c8e6 !important;
   color: #222 !important;
   border: none !important;
   border-radius: 1rem !important;
-  padding: 0.55rem 1.25rem !important;
+  padding: 0.55rem 1.3rem !important;
   font-size: 1.05rem !important;
   font-weight: 500 !important;
   transition: all 0.3s ease;
   box-shadow: 0 0 18px rgba(255, 200, 250, 0.6);
 }
-
 .stButton > button:hover {
   background-color: #ffe1f3 !important;
   box-shadow: 0 0 25px rgba(255, 200, 250, 0.8);
 }
 
-/* 卡片光暈顏色 */
-.root-glow  { box-shadow: 0 0 36px 8px rgba(255, 102, 102, 0.6); }
-.sacral-glow{ box-shadow: 0 0 36px 8px rgba(255, 165,   0, 0.6); }
-.solar-glow { box-shadow: 0 0 36px 8px rgba(255, 230, 128, 0.6); }
-.heart-glow { box-shadow: 0 0 36px 8px rgba(144, 238, 144, 0.6); }
-.throat-glow{ box-shadow: 0 0 36px 8px rgba(135, 206, 250, 0.6); }
-.third-glow { box-shadow: 0 0 36px 8px rgba(186,  85, 211, 0.6); }
-.crown-glow { box-shadow: 0 0 36px 8px rgba(255, 182, 255, 0.6); }
-
-/* 卡片內容 */
+/* 卡片外光暈 */
 .card-wrapper {
   border-radius: 1.3rem;
   padding: 6px;
   margin: 1rem auto 0;
   width: min(920px, 92vw);
 }
+.root-glow  { box-shadow: 0 0 36px 8px rgba(255,102,102,0.6); }
+.sacral-glow{ box-shadow: 0 0 36px 8px rgba(255,165,  0,0.6); }
+.solar-glow { box-shadow: 0 0 36px 8px rgba(255,230,128,0.6); }
+.heart-glow { box-shadow: 0 0 36px 8px rgba(144,238,144,0.6); }
+.throat-glow{ box-shadow: 0 0 36px 8px rgba(135,206,250,0.6); }
+.third-glow { box-shadow: 0 0 36px 8px rgba(186, 85,211,0.6); }
+.crown-glow { box-shadow: 0 0 36px 8px rgba(255,182,255,0.6); }
 
+/* 卡片主體 */
 .card-container {
   position: relative;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 1.1rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 1.2rem;
   padding: 1.3rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(4px);
   color: #fff;
   animation: breatheGlow 6s ease-in-out infinite;
 }
-
 .sentence {
   font-size: 1.08rem;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255,255,255,0.08);
   padding: 1rem 1.2rem;
   border-radius: 1rem;
   margin: 1rem auto;
   display: inline-block;
 }
-
 .angel, .meaning {
   font-size: 1rem;
   color: #FFE6F7;
   margin-top: 0.4rem;
 }
 
-/* 柔光掃過動畫（用兩組 class 交替） */
+/* 柔光掃過動畫（A/B 交替） */
 .shineA .card-container::before,
 .shineB .card-container::before {
   content: "";
@@ -109,15 +109,12 @@
   left: -100%;
   width: 60%;
   height: 100%;
-  background: linear-gradient(
-    120deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.45) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  animation: shineCard 2.4s ease-in-out;
+  background: linear-gradient(120deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.45) 50%,
+    rgba(255,255,255,0) 100%);
+  animation: shineCard 2.3s ease-in-out;
 }
-
 @keyframes shineCard {
   0% { left: -100%; opacity: 0.3; }
   50% { left: 50%; opacity: 1; }
@@ -126,18 +123,16 @@
 
 /* 呼吸光 */
 @keyframes breatheGlow {
-  0%, 100% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.08); }
-  50% { box-shadow: 0 0 45px rgba(255, 255, 255, 0.2); }
+  0%,100% { box-shadow: 0 0 20px rgba(255,255,255,0.08); }
+  50%     { box-shadow: 0 0 45px rgba(255,255,255,0.2); }
 }
 
-/* 提示 */
+/* 提示 & Footer */
 .hint {
   margin-top: 1rem;
   color: #FFD6F6;
   font-size: 1rem;
 }
-
-/* Footer */
 .footer {
   font-size: 0.9rem;
   color: #FFE6F7;
@@ -146,10 +141,10 @@
   opacity: 0.8;
 }
 
-/* 手機調整 */
+/* 手機版 */
 @media (max-width: 480px) {
   .logo { height: 46px; }
-  .title-line1 { font-size: 1.25rem; }
+  .title-line1 { font-size: 1.28rem; }
   .title-line2 { font-size: 0.92rem; }
   .card-container { padding: 1.1rem; }
 }

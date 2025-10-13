@@ -38,6 +38,7 @@
   align-items: center !important;
   width: 100% !important;
   text-align: center !important;
+  margin: 1.8rem 0 1.4rem 0; /* 上 1.8rem，下 1.4rem */
 }
 
 .stButton > button {

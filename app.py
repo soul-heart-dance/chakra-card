@@ -1,77 +1,97 @@
+import json
+import random
 import streamlit as st
-import json, random
 
-# ---------- 頁面設定 ----------
-st.set_page_config(page_title="七脈輪靈魂共振卡", page_icon="✨", layout="centered")
+# -------------------------
+# 頁面設定
+# -------------------------
+st.set_page_config(
+    page_title="Soul Heart Dance｜七脈輪靈魂共振卡",
+    page_icon="🔮",
+    layout="centered"
+)
 
-# ---------- 載入 JSON ----------
-with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
-    data = json.load(f)
-
-# ---------- 載入 CSS ----------
+# -------------------------
+# 載入 CSS
+# -------------------------
 with open("style.css", "r", encoding="utf-8") as f:
     st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-# ---------- Logo URL ----------
-logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
+# -------------------------
+# 載入 JSON 資料
+# -------------------------
+with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
+    data = json.load(f)
 
-# ---------- 標題區域 ----------
-st.markdown(f"""
-<div class="header" style="margin-top:-1.2rem;">
-  <div class="logo-container">
-    <img src="{logo_url}" alt="Soul Heart Dance Logo">
-  </div>
-  <div>
-    <div class="title-line1">Soul Heart Dance</div>
-    <div class="title-line2">七脈輪靈魂共振卡</div>
-  </div>
-</div>
-""", unsafe_allow_html=True)
-
-# ---------- 抽卡說明 ----------
-st.markdown("<h4>✨ 抽一張今日的靈魂訊息 ✨</h4>", unsafe_allow_html=True)
-
-# ---------- Session 狀態 ----------
+# -------------------------
+# 初始化狀態
+# -------------------------
 if "current_card" not in st.session_state:
     st.session_state.current_card = None
 if "shine_toggle" not in st.session_state:
-    st.session_state.shine_toggle = False  # 控制柔光重新播放
+    st.session_state.shine_toggle = False
 
-# ---------- 抽卡邏輯 ----------
+# -------------------------
+# Header
+# -------------------------
+logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
+
+st.markdown(f"""
+<div class="header">
+    <img src="{logo_url}" alt="Soul Heart Dance Logo">
+    <div class="title">
+        <div class="title-line1">Soul Heart Dance</div>
+        <div class="title-line2">七脈輪靈魂共振卡</div>
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+# -------------------------
+# 抽卡邏輯
+# -------------------------
 button_label = "🔮 抽卡" if not st.session_state.current_card else "🌙 再抽一張"
-if st.button(button_label, key=str(random.random())):
+
+if st.button(button_label, key="draw_button"):
     chakra = random.choice(list(data.keys()))
-    chakra_info = data[chakra]
-    card = random.choice(chakra_info["cards"])
+    card = random.choice(data[chakra]["cards"])
     st.session_state.current_card = {
         "name": chakra,
-        "seed": chakra_info["seed"],
-        "color": chakra_info["color"],
-        "class": chakra_info["class"],
+        "seed": data[chakra]["seed"],
+        "color": data[chakra]["color"],
+        "class": data[chakra]["class"],
         "sentence": card["sentence"],
         "angel_number": card["angel_number"],
         "angel_meaning": card["angel_meaning"]
     }
-    # 每次按下都強制切換動畫狀態
     st.session_state.shine_toggle = not st.session_state.shine_toggle
     st.rerun()
 
-# ---------- 顯示卡片 ----------
+# -------------------------
+# 顯示卡片
+# -------------------------
 if st.session_state.current_card:
     c = st.session_state.current_card
-    card_class = f"{c['class']} shine-card-{str(st.session_state.shine_toggle).lower()}"
+    glow_class = c["class"]
+    shine_class = "shine-card-true" if st.session_state.shine_toggle else "shine-card-false"
+
     st.markdown(f"""
-    <div class="card-container {card_class}">
-        <h3 style="color:{c['color']}">🌈 {c['name']}{c['seed']}</h3>
+    <div class="card-container {glow_class} {shine_class}">
+        <h3 style="color:{c['color']};margin-bottom:0.5rem;">
+            🌈 {c['name']} {c['seed']}
+        </h3>
         <div class="sentence">{c['sentence']}</div>
         <div class="angel">🪽 天使數字：{c['angel_number']}</div>
         <div class="meaning">✨ {c['angel_meaning']}</div>
     </div>
     """, unsafe_allow_html=True)
+else:
+    st.markdown("<p style='text-align:center;color:#FFE6F7;'>🌙 點擊上方按鈕開始抽卡 🌙</p>", unsafe_allow_html=True)
 
-# ---------- 底部 ----------
+# -------------------------
+# Footer
+# -------------------------
 st.markdown("""
 <div class="footer">
-  © 2025 Soul Heart Dance · 與靈魂之心共舞
+    © 2025 Soul Heart Dance · 與靈魂之心共舞
 </div>
 """, unsafe_allow_html=True)

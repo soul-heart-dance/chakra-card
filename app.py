@@ -1,12 +1,8 @@
 import json
 import random
 import streamlit as st
-import time
 import uuid
 
-# -------------------------
-# 頁面設定
-# -------------------------
 st.set_page_config(
     page_title="Soul Heart Dance｜七脈輪靈魂共振卡",
     page_icon="🔮",
@@ -14,7 +10,7 @@ st.set_page_config(
 )
 
 # -------------------------
-# 快取載入
+# 資料與樣式
 # -------------------------
 @st.cache_data
 def load_data():
@@ -32,12 +28,10 @@ st.markdown(f"<style>{load_css()}</style>", unsafe_allow_html=True)
 # -------------------------
 # 狀態初始化
 # -------------------------
+if "draw_count" not in st.session_state:
+    st.session_state.draw_count = 0
 if "current_card" not in st.session_state:
     st.session_state.current_card = None
-if "has_drawn" not in st.session_state:
-    st.session_state.has_drawn = False
-if "card_key" not in st.session_state:
-    st.session_state.card_key = str(uuid.uuid4())
 
 # -------------------------
 # Header
@@ -45,7 +39,7 @@ if "card_key" not in st.session_state:
 logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
 st.markdown(f"""
 <div class="header">
-  <img src="{logo_url}" alt="Soul Heart Dance Logo" class="logo">
+  <img src="{logo_url}" class="logo" alt="Soul Heart Dance Logo">
   <div class="title">
     <div class="title-line1">Soul Heart Dance</div>
     <div class="title-line2">七脈輪靈魂共振卡</div>
@@ -54,20 +48,19 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # -------------------------
-# 按鈕
+# 抽卡按鈕
 # -------------------------
-button_label = "🔮 抽卡" if not st.session_state.has_drawn else "🌙 再抽一張"
+button_text = "🔮 抽卡" if st.session_state.draw_count == 0 else "🌙 再抽一張"
 
-st.markdown('<div class="button-container">', unsafe_allow_html=True)
-clicked = st.button(button_label, key="draw_button_fixed")
+st.markdown('<div class="button-wrapper">', unsafe_allow_html=True)
+clicked = st.button(button_text, key="draw_button")
 st.markdown('</div>', unsafe_allow_html=True)
 
 # -------------------------
 # 抽卡邏輯
 # -------------------------
 if clicked:
-    st.session_state.has_drawn = True
-
+    st.session_state.draw_count += 1
     chakra = random.choice(list(data.keys()))
     meta = data[chakra]
     card = random.choice(meta["cards"])
@@ -79,30 +72,25 @@ if clicked:
         "glow": meta["class"],
         "sentence": card["sentence"],
         "angel_number": card["angel_number"],
-        "angel_meaning": card["angel_meaning"]
+        "angel_meaning": card["angel_meaning"],
+        "anim_key": str(uuid.uuid4())  # 每次抽卡都換 key → 一定觸發閃爍動畫
     }
-
-    # 每次抽卡都重新給一個新的 key，強制 DOM 重建（確保閃爍）
-    st.session_state.card_key = str(uuid.uuid4())
 
 # -------------------------
 # 顯示卡片
 # -------------------------
 if st.session_state.current_card:
     c = st.session_state.current_card
-    st.markdown(
-        f"""
-        <div class="card-wrapper {c['glow']}" id="{st.session_state.card_key}">
-            <div class="card-container animate">
-                <h3 style="color:{c['color']}">🌈 {c['name']} {c['seed']}</h3>
-                <div class="sentence">{c['sentence']}</div>
-                <div class="angel">🪽 天使數字：{c['angel_number']}</div>
-                <div class="meaning">✨ {c['angel_meaning']}</div>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    st.markdown(f"""
+    <div class="card-wrapper {c['glow']}" id="{c['anim_key']}">
+      <div class="card-container animate">
+        <h3 style="color:{c['color']}">🌈 {c['name']} {c['seed']}</h3>
+        <div class="sentence">{c['sentence']}</div>
+        <div class="angel">🪽 天使數字：{c['angel_number']}</div>
+        <div class="meaning">✨ {c['angel_meaning']}</div>
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
 else:
     st.markdown("<p class='hint'>🌙 點擊上方按鈕開始抽卡 🌙</p>", unsafe_allow_html=True)
 
@@ -111,6 +99,6 @@ else:
 # -------------------------
 st.markdown("""
 <div class="footer">
-    © 2025 Soul Heart Dance · 與靈魂之心共舞
+© 2025 Soul Heart Dance · 與靈魂之心共舞
 </div>
 """, unsafe_allow_html=True)

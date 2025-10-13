@@ -9,144 +9,132 @@ st.set_page_config(
     layout="centered"
 )
 
-# 黑色柔光背景 + 星光動態 logo + 優雅字體
+# 柔光背景與字體設定
 def set_background():
     st.markdown("""
         <style>
-            @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600&family=Noto+Sans+TC:wght@400;500&display=swap');
-
-            body {
-                margin: 0;
-                overflow-x: hidden;
-                background-color: #000;
-            }
+            @import url('https://fonts.googleapis.com/css2?family=Verdana&display=swap');
 
             .stApp {
                 background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000000 100%);
                 text-align: center;
-                font-family: 'Noto Sans TC', sans-serif;
+                font-family: "Microsoft JhengHei", Verdana, sans-serif;
                 color: #FFE6F7;
-                animation: fadeIn 2.5s ease-in forwards;
             }
 
-            /* Logo 星光緩慢亮起 */
+            /* Logo 柔光動畫 */
             .logo-container {
-                position: relative;
-                width: 70px;
-                height: 70px;
+                width: 68px;
+                height: 68px;
                 border-radius: 50%;
                 overflow: hidden;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                box-shadow: 0 0 20px rgba(255, 214, 246, 0.2);
-                animation: glowIn 3s ease-in-out forwards;
+                box-shadow: 0 0 18px rgba(255, 214, 246, 0.5);
+                animation: glowPulse 4s ease-in-out infinite alternate;
             }
 
             .logo-container img {
                 width: 100%;
                 height: 100%;
                 border-radius: 50%;
-                opacity: 0;
-                animation: logoFade 4s ease-in-out forwards;
             }
 
-            @keyframes logoFade {
-                0% { opacity: 0; filter: brightness(0.5) blur(3px); }
-                60% { opacity: 0.8; filter: brightness(1.2) blur(1px); }
-                100% { opacity: 1; filter: brightness(1) blur(0); }
+            @keyframes glowPulse {
+                0% { box-shadow: 0 0 10px rgba(255, 214, 246, 0.3); }
+                100% { box-shadow: 0 0 20px rgba(255, 214, 246, 0.7); }
             }
 
-            @keyframes glowIn {
-                0% { box-shadow: 0 0 0px rgba(255, 214, 246, 0.1); }
-                100% { box-shadow: 0 0 18px rgba(255, 214, 246, 0.6); }
-            }
-
-            /* 標題漸入與分行設計 */
+            /* 標題 */
             .header {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                gap: 0.8rem;
                 flex-wrap: wrap;
+                gap: 0.8rem;
                 margin-top: 1.2rem;
-                margin-bottom: 2rem;
-                animation: fadeInUp 3s ease-in;
+                margin-bottom: 1.5rem;
             }
 
             .title-line1 {
-                font-family: 'Cormorant Garamond', serif;
-                font-size: 1.7rem;
+                font-size: 1.6rem;
                 font-weight: 600;
                 color: #FFE6F7;
-                letter-spacing: 0.05em;
-                opacity: 0;
-                animation: textGlow 3s ease-in-out 1s forwards;
             }
 
             .title-line2 {
-                font-family: 'Noto Sans TC', sans-serif;
-                font-size: 1.2rem;
+                font-size: 1.1rem;
                 font-weight: 500;
                 color: #FFD6F6;
-                letter-spacing: 0.05em;
-                opacity: 0;
-                animation: textGlow 3s ease-in-out 1.5s forwards;
             }
 
-            @keyframes textGlow {
-                0% { opacity: 0; text-shadow: none; }
-                100% { opacity: 1; text-shadow: 0 0 12px rgba(255, 214, 246, 0.5); }
+            /* 卡片外框容器（加流光） */
+            .card-container {
+                position: relative;
+                margin-top: 2rem;
+                background: rgba(255, 255, 255, 0.06);
+                border-radius: 1.2rem;
+                padding: 1.5rem;
+                border: 1px solid rgba(255, 214, 246, 0.4);
+                box-shadow: 0 0 20px rgba(255, 214, 246, 0.3);
+                display: inline-block;
+                overflow: hidden;
+                animation: fadeInCard 1.2s ease-in-out;
             }
 
-            @keyframes fadeInUp {
-                0% { opacity: 0; transform: translateY(20px); }
-                100% { opacity: 1; transform: translateY(0); }
+            /* 金粉能量流過動畫 */
+            .card-container::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: -75%;
+                width: 50%;
+                height: 100%;
+                background: linear-gradient(120deg, rgba(255,255,255,0) 0%, rgba(255,220,250,0.6) 50%, rgba(255,255,255,0) 100%);
+                animation: shimmer 3s ease-in-out forwards;
             }
 
-            /* 卡片與內容 */
+            @keyframes shimmer {
+                0% { left: -75%; opacity: 0; }
+                20% { opacity: 1; }
+                100% { left: 125%; opacity: 0; }
+            }
+
+            @keyframes fadeInCard {
+                0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+                100% { opacity: 1; transform: translateY(0) scale(1); }
+            }
+
+            /* 內層訊息氣泡框 */
             .sentence {
                 font-size: 1.2rem;
-                background: rgba(255, 255, 255, 0.08);
+                background: rgba(255, 255, 255, 0.12);
                 color: #fff;
-                padding: 1rem 1.2rem;
-                border-radius: 1rem;
-                margin: 1.5rem auto;
+                padding: 1rem 1.3rem;
+                border-radius: 0.8rem;
+                margin: 1rem auto;
                 display: inline-block;
-                box-shadow: 0 0 15px rgba(255, 192, 203, 0.25);
+                box-shadow: 0 0 10px rgba(255, 192, 203, 0.2);
                 backdrop-filter: blur(4px);
-                animation: fadeIn 1.5s ease-in;
             }
 
             .angel, .meaning {
                 font-size: 1.1rem;
                 color: #FFE6F7;
-                margin-top: 0.6rem;
-                animation: fadeIn 2s ease-in;
+                margin-top: 0.5rem;
             }
 
-            @keyframes fadeIn {
-                0% { opacity: 0; transform: translateY(10px); }
-                100% { opacity: 1; transform: translateY(0); }
-            }
-
-            /* 按鈕樣式 */
+            /* 按鈕 */
             div.stButton > button {
-                background-color: #1c1c1e !important;
-                color: #FFD6F6 !important;
-                border: 1px solid #FFD6F6 !important;
-                border-radius: 10px !important;
-                font-size: 1.1rem !important;
-                padding: 0.6rem 1.2rem !important;
-                box-shadow: 0 0 10px rgba(255, 214, 246, 0.3);
-                transition: all 0.3s ease-in-out;
-            }
-
-            div.stButton > button:hover {
                 background-color: #FFD6F6 !important;
                 color: #000 !important;
-                transform: scale(1.03);
-                box-shadow: 0 0 15px rgba(255, 214, 246, 0.6);
+                font-size: 1.1rem !important;
+                border-radius: 12px !important;
+                border: none !important;
+                box-shadow: 0 0 10px rgba(255, 214, 246, 0.5);
+                transition: all 0.3s ease-in-out;
+            }
+            div.stButton > button:hover {
+                transform: scale(1.05);
+                box-shadow: 0 0 15px rgba(255, 214, 246, 0.8);
             }
 
             .footer {
@@ -155,8 +143,6 @@ def set_background():
                 margin-top: 2rem;
                 padding-bottom: 1rem;
                 opacity: 0.8;
-                letter-spacing: 0.03em;
-                animation: fadeIn 4s ease-in;
             }
 
             h4 {
@@ -173,10 +159,10 @@ set_background()
 with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
     data = json.load(f)
 
-# logo 網址
+# logo 圖片
 logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
 
-# 頁首 - 星光 logo + 標題
+# 標題
 st.markdown(f"""
 <div class="header">
     <div class="logo-container">
@@ -192,6 +178,8 @@ st.markdown(f"""
 # 狀態管理
 if "drawn" not in st.session_state:
     st.session_state.drawn = False
+if "result" not in st.session_state:
+    st.session_state.result = None
 
 button_label = "🔮 抽卡" if not st.session_state.drawn else "🌙 再抽一張"
 
@@ -203,15 +191,21 @@ with col2:
     if st.button(button_label, use_container_width=True):
         chakra = random.choice(list(data.keys()))
         card = random.choice(data[chakra])
+        st.session_state.result = (chakra, card)
         st.session_state.drawn = True
 
-        st.markdown(f"<h3 style='color:#FFD6F6; margin-top:1.2rem;'>🌈 {chakra}</h3>", unsafe_allow_html=True)
-        st.markdown(f"<div class='sentence'>💭 {card['sentence']}</div>", unsafe_allow_html=True)
-        st.markdown(f"<div class='angel'>🪽 天使數字：{card['angel_number']}</div>", unsafe_allow_html=True)
-        st.markdown(f"<div class='meaning'>✨ {card['angel_meaning']}</div>", unsafe_allow_html=True)
-
-# 初始提示
-if not st.session_state.drawn:
+# 顯示抽卡結果
+if st.session_state.result:
+    chakra, card = st.session_state.result
+    st.markdown(f"""
+        <div class="card-container">
+            <h3 style='color:#FFD6F6;'>🌈 {chakra}</h3>
+            <div class='sentence'>💭 {card['sentence']}</div>
+            <div class='angel'>🪽 天使數字：{card['angel_number']}</div>
+            <div class='meaning'>✨ {card['angel_meaning']}</div>
+        </div>
+    """, unsafe_allow_html=True)
+else:
     st.markdown("<p style='text-align:center;color:#FFE6F7;'>🌙 點擊上方按鈕開始抽卡 🌙</p>", unsafe_allow_html=True)
 
 # 底部簽名

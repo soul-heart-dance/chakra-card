@@ -38,6 +38,25 @@ h4 {
   margin-bottom: 1rem;
 }
 
+/* 抽卡按鈕 */
+button[kind="primary"] {
+  background-color: #f9c8e6 !important;
+  color: #2a2a2a !important;
+  border-radius: 1rem !important;
+  padding: 0.4rem 1.2rem !important;
+  font-size: 1.05rem !important;
+  font-weight: 500 !important;
+  border: none !important;
+  transition: all 0.3s ease;
+  width: fit-content !important;
+  margin: 0 auto !important;
+  display: block !important;
+}
+button[kind="primary"]:hover {
+  background-color: #ffe1f3 !important;
+  box-shadow: 0 0 18px rgba(255, 200, 250, 0.8);
+}
+
 /* 卡片樣式 */
 .card-container {
   position: relative;

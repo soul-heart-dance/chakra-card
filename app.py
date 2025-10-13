@@ -35,14 +35,13 @@ if "shine_toggle" not in st.session_state:
 # Header
 # -------------------------
 logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
-
 st.markdown(f"""
 <div class="header">
-    <img src="{logo_url}" alt="Soul Heart Dance Logo">
-    <div class="title">
-        <div class="title-line1">Soul Heart Dance</div>
-        <div class="title-line2">七脈輪靈魂共振卡</div>
-    </div>
+  <img src="{logo_url}" alt="Soul Heart Dance Logo" class="logo">
+  <div class="title">
+    <div class="title-line1">Soul Heart Dance</div>
+    <div class="title-line2">七脈輪靈魂共振卡</div>
+  </div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -63,8 +62,8 @@ if st.button(button_label, key="draw_button"):
         "angel_number": card["angel_number"],
         "angel_meaning": card["angel_meaning"]
     }
+    # 每次抽卡（包含再抽）都觸發閃爍
     st.session_state.shine_toggle = not st.session_state.shine_toggle
-    st.rerun()
 
 # -------------------------
 # 顯示卡片
@@ -72,20 +71,20 @@ if st.button(button_label, key="draw_button"):
 if st.session_state.current_card:
     c = st.session_state.current_card
     glow_class = c["class"]
-    shine_class = "shine-card-true" if st.session_state.shine_toggle else "shine-card-false"
+    shine_class = "shine-on" if st.session_state.shine_toggle else "shine-off"
 
     st.markdown(f"""
-    <div class="card-container {glow_class} {shine_class}">
-        <h3 style="color:{c['color']};margin-bottom:0.5rem;">
-            🌈 {c['name']} {c['seed']}
-        </h3>
-        <div class="sentence">{c['sentence']}</div>
-        <div class="angel">🪽 天使數字：{c['angel_number']}</div>
-        <div class="meaning">✨ {c['angel_meaning']}</div>
+    <div class="card-wrapper {glow_class} {shine_class}">
+        <div class="card-container">
+            <h3 style="color:{c['color']}">🌈 {c['name']} {c['seed']}</h3>
+            <div class="sentence">{c['sentence']}</div>
+            <div class="angel">🪽 天使數字：{c['angel_number']}</div>
+            <div class="meaning">✨ {c['angel_meaning']}</div>
+        </div>
     </div>
     """, unsafe_allow_html=True)
 else:
-    st.markdown("<p style='text-align:center;color:#FFE6F7;'>🌙 點擊上方按鈕開始抽卡 🌙</p>", unsafe_allow_html=True)
+    st.markdown("<p class='hint'>🌙 點擊上方按鈕開始抽卡 🌙</p>", unsafe_allow_html=True)
 
 # -------------------------
 # Footer

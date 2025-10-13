@@ -30,11 +30,10 @@
 }
 
 /* 按鈕置中 */
-.button-wrapper {
+.button-center {
   display: flex;
   justify-content: center;
-  align-items: center;
-  margin: 0.8rem 0;
+  margin: 1rem 0;
 }
 .stButton > button {
   background-color: #f9c8e6 !important;
@@ -52,7 +51,7 @@
   box-shadow: 0 0 25px rgba(255, 200, 250, 0.8);
 }
 
-/* 卡片光暈 */
+/* 卡片外框光暈 */
 .card-wrapper {
   border-radius: 1.3rem;
   padding: 6px;
@@ -79,8 +78,9 @@
   animation: breatheGlow 6s ease-in-out infinite;
 }
 
-/* 柔光掃過 */
-.animate::before {
+/* 兩組柔光動畫輪流，保證每次都播放 */
+.shineA .card-container::before,
+.shineB .card-container::before {
   content: "";
   position: absolute;
   top: 0;

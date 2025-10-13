@@ -16,11 +16,11 @@ def load_data():
         return json.load(f)
 data = load_data()
 
-# 套用CSS
+# 套用 CSS
 with open("style.css", "r", encoding="utf-8") as css:
     st.markdown(f"<style>{css.read()}</style>", unsafe_allow_html=True)
 
-# Logo 改為 URL 模式
+# Logo URL
 logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
 
 # 標題區塊
@@ -41,16 +41,16 @@ if "drawn" not in st.session_state:
     st.session_state.drawn = False
 if "selected" not in st.session_state:
     st.session_state.selected = None
+if "button_label" not in st.session_state:
+    st.session_state.button_label = "🔮 抽卡"
 
-# 按鈕標籤
-button_label = "🔮 抽卡" if not st.session_state.drawn else "🌙 再抽一張"
-
+# 抽卡標題
 st.markdown("<h4>✨ 抽一張今日的靈魂訊息 ✨</h4>", unsafe_allow_html=True)
 
 # 抽卡按鈕
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
-    if st.button(button_label, use_container_width=True):
+    if st.button(st.session_state.button_label, use_container_width=True):
         chakra_name = random.choice(list(data.keys()))
         chakra_info = data[chakra_name]
         card = random.choice(chakra_info["cards"])
@@ -61,15 +61,21 @@ with col2:
             "seed": chakra_info["seed"],
             "color": chakra_info["color"],
             "class": chakra_info["class"],
-            "card": card
+            "card": card,
+            "shine_class": f"shine-{random.randint(1,10000)}"  # 強制刷新動畫
         }
+
+        # 立即更新按鈕文字與畫面
+        st.session_state.button_label = "🌙 再抽一張"
+        st.rerun()
 
 # 顯示抽卡結果
 if st.session_state.drawn and st.session_state.selected:
     c = st.session_state.selected
+    shine_class = c.get("shine_class", "")
     st.markdown(f"""
-    <div class="card-container {c['class']}" style="--chakra-color:{c['color']}">
-        <h3 style="color:{c['color']}">🌈 {c['name']} {c['seed']}</h3>
+    <div class="card-container {c['class']} {shine_class}" style="--chakra-color:{c['color']}">
+        <h3 style="color:{c['color']}">🌈 {c['name']}（{c['card']['chakra']}） {c['seed']}</h3>
         <div class="sentence">{c['card']['sentence']}</div>
         <div class="angel">🪽 天使數字：{c['card']['angel_number']}</div>
         <div class="meaning">✨ {c['card']['angel_meaning']}</div>

@@ -1,91 +1,80 @@
-import json
-import random
 import streamlit as st
+import json, random
 
-# 頁面設定
-st.set_page_config(
-    page_title="Soul Heart Dance｜七脈輪靈魂共振卡",
-    page_icon="🔮",
-    layout="centered"
-)
+# ---------- 基本設定 ----------
+st.set_page_config(page_title="七脈輪靈魂共振卡", page_icon="✨", layout="centered")
 
-# 載入資料
-@st.cache_data
-def load_data():
-    with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
-        return json.load(f)
-data = load_data()
+with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
+    data = json.load(f)
 
-# 套用 CSS
-with open("style.css", "r", encoding="utf-8") as css:
-    st.markdown(f"<style>{css.read()}</style>", unsafe_allow_html=True)
+# ---------- 樣式載入 ----------
+with open("style.css", "r", encoding="utf-8") as f:
+    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-# Logo URL
-logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
-
-# 標題
-st.markdown(f"""
+# ---------- 標題區 ----------
+st.markdown("""
 <div class="header">
   <div class="logo-container">
-    <img src="{logo_url}" alt="Soul Heart Dance Logo">
+    <img src="https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png">
   </div>
-  <div class="title-text">
+  <div>
     <div class="title-line1">Soul Heart Dance</div>
     <div class="title-line2">七脈輪靈魂共振卡</div>
   </div>
 </div>
 """, unsafe_allow_html=True)
 
-# 狀態管理
-if "drawn" not in st.session_state:
-    st.session_state.drawn = False
-if "selected" not in st.session_state:
-    st.session_state.selected = None
-if "button_label" not in st.session_state:
-    st.session_state.button_label = "🔮 抽卡"
-
-# 抽卡說明
 st.markdown("<h4>✨ 抽一張今日的靈魂訊息 ✨</h4>", unsafe_allow_html=True)
 
-# 抽卡按鈕
-col1, col2, col3 = st.columns([1, 2, 1])
-with col2:
-    if st.button(st.session_state.button_label, use_container_width=True):
-        chakra_name = random.choice(list(data.keys()))
-        chakra_info = data[chakra_name]
-        card = random.choice(chakra_info["cards"])
+# ---------- 抽卡功能 ----------
+if "current_card" not in st.session_state:
+    st.session_state.current_card = None
 
-        st.session_state.drawn = True
-        st.session_state.selected = {
-            "name": chakra_name,
-            "seed": chakra_info["seed"],
-            "color": chakra_info["color"],
-            "class": chakra_info["class"],
+col = st.columns([1, 2, 1])
+with col[1]:
+    if st.button("🔮 抽卡" if st.session_state.current_card is None else "🌙 再抽一張"):
+        chakra = random.choice(list(data.keys()))
+        card = random.choice(data[chakra])
+        st.session_state.current_card = {
+            "chakra": chakra,
             "card": card,
-            "shine_class": f"shine-{random.randint(1,10000)}"
+            "color": card.get("color", "#FFE6F7"),
+            "seed": card.get("seed", "")
         }
-
-        st.session_state.button_label = "🌙 再抽一張"
+        # 重新渲染頁面，讓柔光掃過動畫重新啟動
         st.rerun()
 
-# 顯示抽卡結果
-if st.session_state.drawn and st.session_state.selected:
-    c = st.session_state.selected
-    shine_class = c.get("shine_class", "")
+# ---------- 顯示卡片 ----------
+if st.session_state.current_card:
+    chakra = st.session_state.current_card["chakra"]
+    card = st.session_state.current_card["card"]
+    color = st.session_state.current_card["color"]
+    seed = st.session_state.current_card["seed"]
+
+    # 套入脈輪對應色的光暈類別
+    chakra_class_map = {
+        "海底輪": "root-glow",
+        "臍輪": "sacral-glow",
+        "太陽神經叢": "solar-glow",
+        "心輪": "heart-glow",
+        "喉輪": "throat-glow",
+        "眉心輪": "third-glow",
+        "頂輪": "crown-glow"
+    }
+    chakra_class = chakra_class_map.get(chakra, "root-glow")
+
     st.markdown(f"""
-    <div class="card-container {c['class']} {shine_class}" style="--chakra-color:{c['color']}">
-        <h3 style="color:{c['color']}">🌈 {c['name']} {c['seed']}</h3>
-        <div class="sentence">{c['card']['sentence']}</div>
-        <div class="angel">🪽 天使數字：{c['card']['angel_number']}</div>
-        <div class="meaning">✨ {c['card']['angel_meaning']}</div>
+    <div class="card-container {chakra_class} shine-card">
+      <h3 style="color:{color};">🌈 {card['name']}（{chakra}） {seed}</h3>
+      <div class="sentence">{card['message']}</div>
+      <div class="angel">🪽 天使數字：{card['angel_number']}</div>
+      <div class="meaning">✨ {card['meaning']}</div>
     </div>
     """, unsafe_allow_html=True)
-else:
-    st.markdown("<p class='hint'>🌙 點擊上方按鈕開始抽卡 🌙</p>", unsafe_allow_html=True)
 
-# 底部簽名
+# ---------- 底部 ----------
 st.markdown("""
 <div class="footer">
-    © 2025 Soul Heart Dance · 與靈魂之心共舞
+  © 2025 Soul Heart Dance · 與靈魂之心共舞
 </div>
 """, unsafe_allow_html=True)

@@ -1,6 +1,8 @@
 {
   "菈莯（海底輪）": {
     "seed": "Lam",
+    "color": "#FF6666",
+    "class": "root-glow",
     "cards": [
     {
       "sentence": "你不需要急著往前，先讓自己穩下來。",
@@ -156,6 +158,8 @@
   },
   "薇莯（臍輪）": {
     "seed": "Vam",
+    "color": "#FFA046",
+    "class": "sacral-glow",
     "cards": [
     {
       "sentence": "你可以難過，也可以還沒想明白，情緒不需要理由。",
@@ -309,8 +313,10 @@
     }
     ]
   },
-  "蕊莯（太陽神經叢輪）": {
+  "蕊莯（太陽神經叢）": {
     "seed": "Ram",
+    "color": "#FFDC64",
+    "class": "solar-glow",
     "cards": [
     {
       "sentence": "你可以說不，這是尊重自己的一種方式。",
@@ -466,6 +472,8 @@
   },
   "芽莯（心輪）": {
     "seed": "Yam",
+    "color": "#FFB4DC",
+    "class": "heart-glow",
     "cards": [
     {
       "sentence": "愛不是犧牲自己，而是讓彼此都能呼吸。",
@@ -621,6 +629,8 @@
   },
   "哈莯（喉輪）": {
     "seed": "Ham",
+    "color": "#96C8FF",
+    "class": "throat-glow",
     "cards": [
     {
       "sentence": "你可以說出心裡的話，不用先猜別人會怎麼想。",
@@ -775,7 +785,9 @@
     ]
   },
   "歐莯（眉心輪）": {
-    "seed": "Om",
+    "seed": "Sham",
+    "color": "#B496FF",
+    "class": "third-glow",
     "cards": [
     {
       "sentence": "有時答案不是想出來的，而是靜下來，它就出現了。",
@@ -931,6 +943,8 @@
   },
   "奧莯（頂輪）": {
     "seed": "Aum",
+    "color": "#FFC8FF",
+    "class": "crown-glow",
     "cards": [
     {
       "sentence": "有些事不是努力想出來的，而是相信後，答案自然會浮現。",

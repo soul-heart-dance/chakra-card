@@ -37,6 +37,8 @@ if "shine_class" not in st.session_state:
     st.session_state.shine_class = "shineA"
 if "has_drawn" not in st.session_state:
     st.session_state.has_drawn = False
+if "button_class" not in st.session_state:
+    st.session_state.button_class = "fadeIn"
 
 # -------------------------
 # Header
@@ -56,19 +58,18 @@ st.markdown(f"""
 # 抽卡按鈕
 # -------------------------
 button_label = "🔮 抽卡" if not st.session_state.has_drawn else "🌙 再抽一張"
-st.markdown('<div class="button-center">', unsafe_allow_html=True)
+st.markdown(f'<div class="button-center {st.session_state.button_class}">', unsafe_allow_html=True)
 clicked = st.button(button_label, key="draw_button_fixed")
-st.markdown('</div>', unsafe_allow_html=True)
+st.markdown("</div>", unsafe_allow_html=True)
 
 # -------------------------
-# 抽卡動作
+# 抽卡邏輯
 # -------------------------
 if clicked:
-    # 狀態更新放在最前
+    # 按鈕動畫切換
+    st.session_state.button_class = "fadeOut"
     st.session_state.has_drawn = True
-    st.session_state.shine_class = (
-        "shineB" if st.session_state.shine_class == "shineA" else "shineA"
-    )
+    st.session_state.shine_class = "shineB" if st.session_state.shine_class == "shineA" else "shineA"
 
     chakra = random.choice(list(data.keys()))
     meta = data[chakra]
@@ -84,8 +85,9 @@ if clicked:
         "angel_meaning": card["angel_meaning"]
     }
 
-    # 確保每次都重新渲染（讓動畫跑完）
-    time.sleep(0.05)
+    # 微延遲讓 fadeOut 動畫跑完再 rerun
+    time.sleep(0.3)
+    st.session_state.button_class = "fadeIn"
     st.rerun()
 
 # -------------------------

@@ -12,7 +12,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 0.4rem;
-  margin-top: -0.2rem; /* 再縮一點頂部空白 */
+  margin-top: -0.6rem; /* 再縮一點頂部空白 */
   margin-bottom: 0.8rem;
   animation: fadeIn 1.5s ease-in;
 }

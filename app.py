@@ -39,7 +39,7 @@ if "shine_toggle" not in st.session_state:
 
 # ---------- 抽卡邏輯 ----------
 button_label = "🔮 抽卡" if not st.session_state.current_card else "🌙 再抽一張"
-if st.button(button_label):
+if st.button(button_label, key=str(random.random())):
     chakra = random.choice(list(data.keys()))
     chakra_info = data[chakra]
     card = random.choice(chakra_info["cards"])
@@ -52,6 +52,7 @@ if st.button(button_label):
         "angel_number": card["angel_number"],
         "angel_meaning": card["angel_meaning"]
     }
+    # 每次按下都強制切換動畫狀態
     st.session_state.shine_toggle = not st.session_state.shine_toggle
     st.rerun()
 

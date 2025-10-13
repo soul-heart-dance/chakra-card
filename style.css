@@ -1,4 +1,6 @@
-/* 全域設定 */
+/* -------------------------
+   全域設定
+------------------------- */
 .stApp {
   background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000000 100%);
   text-align: center;
@@ -7,58 +9,74 @@
   overflow-x: hidden;
 }
 
-/* Header */
+/* -------------------------
+   Header 區域
+------------------------- */
 .header {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.6rem;
-  margin-top: -0.6rem;
+  margin-top: -0.5rem;
   margin-bottom: 0.6rem;
 }
+
 .logo {
   height: 56px;
   width: auto;
   border-radius: 50%;
   box-shadow: 0 0 15px rgba(255, 214, 246, 0.6);
 }
+
 .title-line1 {
   font-size: 1.4rem;
   font-weight: 600;
   color: #FFE6F7;
 }
+
 .title-line2 {
   font-size: 1rem;
   font-weight: 500;
   color: #FFD6F6;
 }
 
-/* 按鈕 */
+/* -------------------------
+   按鈕樣式
+------------------------- */
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+
 .stButton > button {
   background-color: #f9c8e6 !important;
   color: #222 !important;
   border-radius: 1rem !important;
-  padding: 0.4rem 1.2rem !important;
+  padding: 0.45rem 1.3rem !important;
   font-size: 1.05rem !important;
   font-weight: 500 !important;
   border: none !important;
   transition: all 0.3s ease;
-  box-shadow: 0 0 12px rgba(255, 200, 250, 0.4);
-  margin: 0 auto !important;
-  display: block !important;
-}
-.stButton > button:hover {
-  background-color: #ffe1f3 !important;
-  box-shadow: 0 0 18px rgba(255, 200, 250, 0.8);
+  box-shadow: 0 0 18px rgba(255, 200, 250, 0.6);
 }
 
-/* 卡片外層光暈 */
+.stButton > button:hover {
+  background-color: #ffe1f3 !important;
+  box-shadow: 0 0 25px rgba(255, 200, 250, 0.8);
+}
+
+/* -------------------------
+   卡片外層光暈顏色
+------------------------- */
 .card-wrapper {
   border-radius: 1.4rem;
   padding: 6px;
   margin-top: 1rem;
   transition: box-shadow 1s ease-in-out;
 }
+
 .root-glow { box-shadow: 0 0 35px 8px rgba(255, 102, 102, 0.6); }
 .sacral-glow { box-shadow: 0 0 35px 8px rgba(255, 165, 0, 0.6); }
 .solar-glow { box-shadow: 0 0 35px 8px rgba(255, 230, 128, 0.6); }
@@ -67,7 +85,9 @@
 .third-glow { box-shadow: 0 0 35px 8px rgba(186, 85, 211, 0.6); }
 .crown-glow { box-shadow: 0 0 35px 8px rgba(255, 182, 255, 0.6); }
 
-/* 卡片本體 */
+/* -------------------------
+   卡片內容
+------------------------- */
 .card-container {
   position: relative;
   background: rgba(255, 255, 255, 0.06);
@@ -78,6 +98,7 @@
   color: #fff;
   animation: breatheGlow 6s ease-in-out infinite;
 }
+
 .sentence {
   font-size: 1.1rem;
   background: rgba(255, 255, 255, 0.08);
@@ -86,13 +107,16 @@
   margin: 1rem auto;
   display: inline-block;
 }
+
 .angel, .meaning {
   font-size: 1rem;
   color: #FFE6F7;
   margin-top: 0.4rem;
 }
 
-/* 柔光掃過動畫 */
+/* -------------------------
+   柔光掃過動畫
+------------------------- */
 .shine-on .card-container::before {
   content: "";
   position: absolute;
@@ -108,9 +132,10 @@
   );
   animation: shineCard 2.4s ease-in-out;
 }
+
 @keyframes shineCard {
   0% { left: -100%; opacity: 0.3; }
-  50% { left: 50%; opacity: 0.9; }
+  50% { left: 50%; opacity: 1; }
   100% { left: 120%; opacity: 0; }
 }
 
@@ -120,11 +145,40 @@
   50% { box-shadow: 0 0 45px rgba(255, 255, 255, 0.2); }
 }
 
-/* Footer */
+/* -------------------------
+   提示文字
+------------------------- */
+.hint {
+  margin-top: 1rem;
+  color: #FFD6F6;
+  font-size: 1rem;
+}
+
+/* -------------------------
+   Footer
+------------------------- */
 .footer {
   font-size: 0.9rem;
   color: #FFE6F7;
   margin-top: 2rem;
   padding-bottom: 1rem;
   opacity: 0.8;
+}
+
+/* -------------------------
+   手機版 RWD 調整
+------------------------- */
+@media (max-width: 480px) {
+  .logo {
+    height: 48px;
+  }
+  .title-line1 {
+    font-size: 1.2rem;
+  }
+  .title-line2 {
+    font-size: 0.9rem;
+  }
+  .card-container {
+    padding: 1.1rem;
+  }
 }

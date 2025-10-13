@@ -1,4 +1,3 @@
-/* 背景與全域字型 */
 .stApp {
   background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000 100%);
   color: #FFE6F7;
@@ -12,7 +11,7 @@
   justify-content: center;
   align-items: center;
   gap: 0.6rem;
-  margin: 0.3rem 0 0.6rem;
+  margin-top: 0.3rem;
 }
 .logo {
   height: 54px;
@@ -30,18 +29,18 @@
   color: #FFD6F6;
 }
 
-/* 按鈕真正置中 */
-.button-container {
+/* 按鈕置中 */
+.button-wrapper {
   display: flex;
   justify-content: center;
-  margin: 0.6rem 0 0.8rem;
+  margin: 0.8rem 0;
 }
 .stButton > button {
   background-color: #f9c8e6 !important;
   color: #222 !important;
   border: none !important;
   border-radius: 1rem !important;
-  padding: 0.55rem 1.3rem !important;
+  padding: 0.6rem 1.4rem !important;
   font-size: 1.05rem !important;
   font-weight: 500 !important;
   transition: all 0.3s ease;
@@ -52,7 +51,7 @@
   box-shadow: 0 0 25px rgba(255, 200, 250, 0.8);
 }
 
-/* 卡片外光暈 */
+/* 卡片光暈 */
 .card-wrapper {
   border-radius: 1.3rem;
   padding: 6px;
@@ -67,7 +66,7 @@
 .third-glow { box-shadow: 0 0 36px 8px rgba(186, 85,211,0.6); }
 .crown-glow { box-shadow: 0 0 36px 8px rgba(255,182,255,0.6); }
 
-/* 卡片主體 */
+/* 卡片內容 */
 .card-container {
   position: relative;
   background: rgba(255,255,255,0.06);
@@ -79,7 +78,7 @@
   animation: breatheGlow 6s ease-in-out infinite;
 }
 
-/* 柔光掃過動畫 */
+/* 柔光掃過動畫，每次抽卡都觸發 */
 .animate::before {
   content: "";
   position: absolute;
@@ -91,7 +90,7 @@
     rgba(255,255,255,0) 0%,
     rgba(255,255,255,0.45) 50%,
     rgba(255,255,255,0) 100%);
-  animation: shineCard 2.3s ease-in-out;
+  animation: shineCard 2.4s ease-in-out;
 }
 @keyframes shineCard {
   0% { left: -100%; opacity: 0.3; }
@@ -99,7 +98,13 @@
   100% { left: 120%; opacity: 0; }
 }
 
-/* 卡片內容 */
+/* 呼吸光 */
+@keyframes breatheGlow {
+  0%,100% { box-shadow: 0 0 20px rgba(255,255,255,0.08); }
+  50%     { box-shadow: 0 0 45px rgba(255,255,255,0.2); }
+}
+
+/* 文字區 */
 .sentence {
   font-size: 1.08rem;
   background: rgba(255,255,255,0.08);
@@ -114,13 +119,7 @@
   margin-top: 0.4rem;
 }
 
-/* 呼吸光 */
-@keyframes breatheGlow {
-  0%,100% { box-shadow: 0 0 20px rgba(255,255,255,0.08); }
-  50%     { box-shadow: 0 0 45px rgba(255,255,255,0.2); }
-}
-
-/* 提示與Footer */
+/* 提示與 Footer */
 .hint {
   margin-top: 1rem;
   color: #FFD6F6;

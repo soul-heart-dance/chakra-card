@@ -61,7 +61,7 @@ if st.session_state.current_card:
     card_class = f"{c['class']} shine-card-{str(st.session_state.shine_toggle).lower()}"
     st.markdown(f"""
     <div class="card-container {card_class}">
-        <h3 style="color:{c['color']}">🌈 {c['name']}（{c['seed']}）</h3>
+        <h3 style="color:{c['color']}">🌈 {c['name']}{c['seed']}</h3>
         <div class="sentence">{c['sentence']}</div>
         <div class="angel">🪽 天使數字：{c['angel_number']}</div>
         <div class="meaning">✨ {c['angel_meaning']}</div>

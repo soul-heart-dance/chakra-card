@@ -23,11 +23,11 @@ def load_css():
 data = load_data()
 st.markdown(f"<style>{load_css()}</style>", unsafe_allow_html=True)
 
-# ---------- 狀態 ----------
-if "draw_count" not in st.session_state:
-    st.session_state.draw_count = 0
-if "card_html" not in st.session_state:
-    st.session_state.card_html = None
+# ---------- 初始化 ----------
+if "card" not in st.session_state:
+    st.session_state.card = None
+if "anim_class" not in st.session_state:
+    st.session_state.anim_class = "shineA"
 
 # ---------- Header ----------
 logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
@@ -42,36 +42,51 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # ---------- 抽卡按鈕 ----------
-button_text = "🔮 抽卡" if st.session_state.draw_count == 0 else "🌙 再抽一張"
+if st.session_state.card is None:
+    button_text = "🔮 抽卡"
+else:
+    button_text = "🌙 再抽一張"
 
-st.markdown('<div class="button-center">', unsafe_allow_html=True)
-clicked = st.button(button_text)
+# 置中按鈕
+st.markdown('<div class="button-wrapper">', unsafe_allow_html=True)
+clicked = st.button(button_text, use_container_width=False)
 st.markdown('</div>', unsafe_allow_html=True)
 
 # ---------- 抽卡邏輯 ----------
 if clicked:
-    st.session_state.draw_count += 1
     chakra = random.choice(list(data.keys()))
     meta = data[chakra]
     card = random.choice(meta["cards"])
 
-    # 為每次抽卡產生新的 UUID → 強制 DOM 重建
+    # 每次抽卡切換動畫 class 並換 UUID
+    st.session_state.anim_class = "shineB" if st.session_state.anim_class == "shineA" else "shineA"
     unique_id = str(uuid.uuid4())
 
-    st.session_state.card_html = f"""
-    <div class="card-wrapper {meta['class']}" id="{unique_id}">
-        <div class="card-container animate">
-            <h3 style="color:{meta['color']}">🌈 {chakra} {meta['seed']}</h3>
-            <div class="sentence">{card['sentence']}</div>
-            <div class="angel">🪽 天使數字：{card['angel_number']}</div>
-            <div class="meaning">✨ {card['angel_meaning']}</div>
-        </div>
-    </div>
-    """
+    st.session_state.card = {
+        "chakra": chakra,
+        "seed": meta["seed"],
+        "color": meta["color"],
+        "glow": meta["class"],
+        "sentence": card["sentence"],
+        "angel_number": card["angel_number"],
+        "angel_meaning": card["angel_meaning"],
+        "uid": unique_id,
+        "anim": st.session_state.anim_class
+    }
 
 # ---------- 顯示卡片 ----------
-if st.session_state.card_html:
-    st.markdown(st.session_state.card_html, unsafe_allow_html=True)
+if st.session_state.card:
+    c = st.session_state.card
+    st.markdown(f"""
+    <div class="card-wrapper {c['glow']} {c['anim']}" id="{c['uid']}">
+        <div class="card-container">
+            <h3 style="color:{c['color']}">🌈 {c['chakra']} {c['seed']}</h3>
+            <div class="sentence">{c['sentence']}</div>
+            <div class="angel">🪽 天使數字：{c['angel_number']}</div>
+            <div class="meaning">✨ {c['angel_meaning']}</div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 else:
     st.markdown("<p class='hint'>🌙 點擊上方按鈕開始抽卡 🌙</p>", unsafe_allow_html=True)
 

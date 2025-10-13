@@ -68,7 +68,7 @@ with col2:
     if st.button(st.session_state.button_label, use_container_width=True):
         st.session_state.result = draw_card()
         st.session_state.button_label = "🌙 再抽一張"
-        st.rerun()  # ✅ 立即刷新，第一次就更新文字
+        st.rerun()  # 立即刷新，第一次就更新文字
 
 # 顯示結果
 if st.session_state.result:
@@ -81,7 +81,7 @@ if st.session_state.result:
             <h3 style='color:{bg_color}; margin-top:1.2rem;'>
                 🌈 {chakra.split("（")[0]} {seed}（{chakra.split("（")[1]}
             </h3>
-            <div class='sentence'>💭 {card['sentence']}</div>
+            <div class='sentence'>{card['sentence']}</div>
             <div class='angel'>🪽 天使數字：{card['angel_number']}</div>
             <div class='meaning'>✨ {card['angel_meaning']}</div>
         </div>

@@ -1,10 +1,9 @@
-/* 全域背景 */
+/* 背景與全域字型 */
 .stApp {
   background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000 100%);
   color: #FFE6F7;
   font-family: "Microsoft JhengHei", Verdana, sans-serif;
   text-align: center;
-  overflow-x: hidden;
 }
 
 /* Header */
@@ -13,7 +12,7 @@
   justify-content: center;
   align-items: center;
   gap: 0.6rem;
-  margin: 0.3rem 0 0.5rem;
+  margin: 0.3rem 0 0.6rem;
 }
 .logo {
   height: 54px;
@@ -31,19 +30,12 @@
   color: #FFD6F6;
 }
 
-/* 按鈕容器置中 + 淡入淡出動畫 */
-.button-center {
-  text-align: center;
-  margin: 0.7rem 0;
-  opacity: 1;
-  transition: opacity 0.5s ease;
+/* 按鈕真正置中 */
+.button-container {
+  display: flex;
+  justify-content: center;
+  margin: 0.6rem 0 0.8rem;
 }
-.fadeIn { opacity: 1; animation: fadeIn 0.5s ease forwards; }
-.fadeOut { opacity: 0; animation: fadeOut 0.3s ease forwards; }
-
-@keyframes fadeIn { 0% {opacity: 0;} 100% {opacity: 1;} }
-@keyframes fadeOut { 0% {opacity: 1;} 100% {opacity: 0;} }
-
 .stButton > button {
   background-color: #f9c8e6 !important;
   color: #222 !important;
@@ -86,23 +78,9 @@
   color: #fff;
   animation: breatheGlow 6s ease-in-out infinite;
 }
-.sentence {
-  font-size: 1.08rem;
-  background: rgba(255,255,255,0.08);
-  padding: 1rem 1.2rem;
-  border-radius: 1rem;
-  margin: 1rem auto;
-  display: inline-block;
-}
-.angel, .meaning {
-  font-size: 1rem;
-  color: #FFE6F7;
-  margin-top: 0.4rem;
-}
 
-/* 柔光掃過動畫（A/B 交替） */
-.shineA .card-container::before,
-.shineB .card-container::before {
+/* 柔光掃過動畫 */
+.animate::before {
   content: "";
   position: absolute;
   top: 0;
@@ -121,13 +99,28 @@
   100% { left: 120%; opacity: 0; }
 }
 
+/* 卡片內容 */
+.sentence {
+  font-size: 1.08rem;
+  background: rgba(255,255,255,0.08);
+  padding: 1rem 1.2rem;
+  border-radius: 1rem;
+  margin: 1rem auto;
+  display: inline-block;
+}
+.angel, .meaning {
+  font-size: 1rem;
+  color: #FFE6F7;
+  margin-top: 0.4rem;
+}
+
 /* 呼吸光 */
 @keyframes breatheGlow {
   0%,100% { box-shadow: 0 0 20px rgba(255,255,255,0.08); }
   50%     { box-shadow: 0 0 45px rgba(255,255,255,0.2); }
 }
 
-/* 提示 & Footer */
+/* 提示與Footer */
 .hint {
   margin-top: 1rem;
   color: #FFD6F6;
@@ -144,7 +137,7 @@
 /* 手機版 */
 @media (max-width: 480px) {
   .logo { height: 46px; }
-  .title-line1 { font-size: 1.28rem; }
+  .title-line1 { font-size: 1.25rem; }
   .title-line2 { font-size: 0.92rem; }
   .card-container { padding: 1.1rem; }
 }

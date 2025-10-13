@@ -1,13 +1,13 @@
 import json, random, streamlit as st
 
-# 🌸 頁面設定
+# 頁面設定
 st.set_page_config(
     page_title="Soul Heart Dance｜七脈輪共振卡",
     page_icon="🔮",
     layout="centered"
 )
 
-# 🌈 脈輪光暈顏色對應
+# 脈輪光暈顏色對應
 chakra_colors = {
     "菈莯（海底輪）": "#ff7b7b",
     "薇莯（臍輪）": "#ffa260",
@@ -18,7 +18,7 @@ chakra_colors = {
     "奧莯（頂輪）": "#e5b8ff"
 }
 
-# 🧠 快取資料
+# 快取資料
 @st.cache_data
 def load_data():
     with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
@@ -26,13 +26,13 @@ def load_data():
 
 data = load_data()
 
-# 🎨 載入樣式（含動畫）
+# 載入樣式（含動畫）
 st.markdown(f"<style>{open('style.css').read()}</style>", unsafe_allow_html=True)
 
-# 🪷 Logo（Hugging Face 雲端圖檔路徑）
+# Logo（Hugging Face 雲端圖檔路徑）
 logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
 
-# 🩷 頁首
+# 頁首
 st.markdown(f"""
 <div class="header">
   <div class="logo-container"><img src="{logo_url}" alt="Soul Heart Dance Logo"></div>

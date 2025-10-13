@@ -9,7 +9,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# 黑色柔光背景樣式 + 統一字體
+# 黑色柔光背景 CSS
 def set_background():
     st.markdown("""
         <style>
@@ -18,68 +18,40 @@ def set_background():
                 text-align: center;
                 font-family: "Noto Sans TC", sans-serif;
                 color: #FFE6F7;
-                background-size: 400% 400%;
-                animation: gradientFlow 12s ease infinite;
             }
 
-            @keyframes gradientFlow {
-                0% { background-position: 0% 50%; }
-                50% { background-position: 100% 50%; }
-                100% { background-position: 0% 50%; }
-            }
-
-            /* --- 頁首 logo + 標題 --- */
             .header {
                 display: flex;
-                flex-direction: column;
+                justify-content: center;
                 align-items: center;
-                margin-top: 1.2rem;
+                gap: 0.8rem;
+                margin-top: 1rem;
                 margin-bottom: 1rem;
-                animation: fadeIn 2s ease;
             }
+
             .header img {
-                width: 70px;
-                height: 70px;
-                border-radius: 10px;
-                margin-bottom: 0.5rem;
-                animation: fadeIn 2s ease-in;
+                width: 58px;
+                height: 58px;
+                border-radius: 12px;
             }
+
             .header h1 {
                 font-size: 1.5rem;
                 font-weight: 600;
                 color: #FFE6F7;
-                letter-spacing: 0.05em;
-                margin: 0;
+                letter-spacing: 0.03em;
             }
 
-            /* --- 抽卡按鈕 --- */
-            div.stButton > button:first-child {
-                display: block;
-                margin: 1.5rem auto;
-                background-color: #FFE6F7 !important;
-                color: #000 !important;
-                font-size: 1.1rem !important;
-                border-radius: 10px !important;
-                border: none !important;
-                box-shadow: 0 0 15px rgba(255, 192, 203, 0.4);
-                transition: all 0.3s ease;
-            }
-            div.stButton > button:hover {
-                transform: scale(1.05);
-                box-shadow: 0 0 20px rgba(255, 192, 203, 0.7);
-            }
-
-            /* --- 句子卡片 --- */
             .sentence {
-                font-size: 1.3rem;
-                background: rgba(255, 255, 255, 0.1);
+                font-size: 1.2rem;
+                background: rgba(255, 255, 255, 0.08);
                 color: #fff;
                 padding: 1rem 1.2rem;
-                border-radius: 0.8rem;
-                margin: 1rem auto;
+                border-radius: 1rem;
+                margin: 1.5rem auto;
                 display: inline-block;
-                font-weight: 500;
-                box-shadow: 0 0 15px rgba(255, 192, 203, 0.3);
+                box-shadow: 0 0 15px rgba(255, 192, 203, 0.25);
+                backdrop-filter: blur(4px);
                 animation: fadeIn 1.5s ease-in;
             }
 
@@ -90,55 +62,69 @@ def set_background():
                 animation: fadeIn 2s ease-in;
             }
 
-            /* --- 淡入動畫 --- */
             @keyframes fadeIn {
                 0% { opacity: 0; transform: translateY(10px); }
                 100% { opacity: 1; transform: translateY(0); }
             }
 
-            /* --- 底部 --- */
             .footer {
                 font-size: 0.95rem;
                 color: #FFE6F7;
                 margin-top: 2rem;
                 padding-bottom: 1rem;
+                opacity: 0.8;
                 letter-spacing: 0.02em;
-                opacity: 0.9;
+            }
+
+            h4 {
+                color: #FFE6F7;
             }
         </style>
     """, unsafe_allow_html=True)
 
 
-# 設定背景
-set_background()
-
-# 載入 JSON 檔
+# 載入資料
 with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
     data = json.load(f)
 
-# 取得 logo（用 Hugging Face 上的 URL）
-logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
+# 套用背景
+set_background()
 
-# 頁首：logo + 標題
-st.markdown(f"""
+# 頁首（品牌 logo + 標題）
+st.markdown("""
 <div class="header">
-    <img src="{logo_url}" alt="Soul Heart Dance Logo">
+    <img src="shop_logo.png" alt="Soul Heart Dance Logo">
     <h1>Soul Heart Dance｜七脈輪共振卡</h1>
 </div>
 """, unsafe_allow_html=True)
 
-# 抽卡標題
-st.markdown("<h4>✨ 抽一張今日共振能量 ✨</h4>", unsafe_allow_html=True)
+# 狀態管理：是否已抽過
+if "drawn" not in st.session_state:
+    st.session_state.drawn = False
 
-# 抽卡邏輯
-if st.button("🔮 抽卡"):
-    chakra = random.choice(list(data.keys()))
-    card = random.choice(data[chakra])
+# 抽卡／再抽按鈕
+button_label = "🔮 抽卡" if not st.session_state.drawn else "🌙 再抽一張"
 
-    st.markdown(f"<div class='sentence'>💭 {card['sentence']}</div>", unsafe_allow_html=True)
-    st.markdown(f"<div class='angel'>🪽 天使數字：{card['angel_number']}</div>", unsafe_allow_html=True)
-    st.markdown(f"<div class='meaning'>✨ {card['angel_meaning']}</div>", unsafe_allow_html=True)
-else:
+st.markdown("<h4>✨ 抽一張今日的靈魂訊息 ✨</h4>", unsafe_allow_html=True)
+
+# 抽卡按鈕
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    if st.button(button_label, use_container_width=True):
+        chakra = random.choice(list(data.keys()))
+        card = random.choice(data[chakra])
+        st.session_state.drawn = True
+
+        # 顯示脈輪名稱
+        st.markdown(f"<h3 style='color:#FFD6F6; margin-top:1.2rem;'>🌈 {chakra}</h3>", unsafe_allow_html=True)
+
+        # 卡片內容
+        st.markdown(f"<div class='sentence'>💭 {card['sentence']}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='angel'>🪽 天使數字：{card['angel_number']}</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='meaning'>✨ {card['angel_meaning']}</div>", unsafe_allow_html=True)
+
+# 提示文字
+if not st.session_state.drawn:
     st.markdown("<p style='text-align:center;color:#FFE6F7;'>🌙 點擊上方按鈕開始抽卡 🌙</p>", unsafe_allow_html=True)
 
 # 底部簽名

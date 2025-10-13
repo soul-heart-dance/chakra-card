@@ -12,24 +12,28 @@ st.set_page_config(
 )
 
 # -------------------------
-# 載入 CSS
+# 快取載入資料與樣式
 # -------------------------
-with open("style.css", "r", encoding="utf-8") as f:
-    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+@st.cache_data
+def load_data():
+    with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
+        return json.load(f)
 
-# -------------------------
-# 載入 JSON 資料
-# -------------------------
-with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
-    data = json.load(f)
+@st.cache_data
+def load_css():
+    with open("style.css", "r", encoding="utf-8") as f:
+        return f.read()
+
+data = load_data()
+st.markdown(f"<style>{load_css()}</style>", unsafe_allow_html=True)
 
 # -------------------------
 # 初始化狀態
 # -------------------------
 if "current_card" not in st.session_state:
     st.session_state.current_card = None
-if "shine_toggle" not in st.session_state:
-    st.session_state.shine_toggle = False
+if "shine_key" not in st.session_state:
+    st.session_state.shine_key = 0
 
 # -------------------------
 # Header
@@ -46,11 +50,14 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # -------------------------
-# 抽卡邏輯
+# 抽卡按鈕
 # -------------------------
 button_label = "🔮 抽卡" if not st.session_state.current_card else "🌙 再抽一張"
+st.markdown("<div class='button-wrapper'>", unsafe_allow_html=True)
+button_clicked = st.button(button_label, key=f"draw_button_{st.session_state.shine_key}")
+st.markdown("</div>", unsafe_allow_html=True)
 
-if st.button(button_label, key="draw_button"):
+if button_clicked:
     chakra = random.choice(list(data.keys()))
     card = random.choice(data[chakra]["cards"])
     st.session_state.current_card = {
@@ -62,8 +69,8 @@ if st.button(button_label, key="draw_button"):
         "angel_number": card["angel_number"],
         "angel_meaning": card["angel_meaning"]
     }
-    # 每次抽卡（包含再抽）都觸發閃爍
-    st.session_state.shine_toggle = not st.session_state.shine_toggle
+    # 每次抽卡都換一個 key 讓卡片重新渲染動畫
+    st.session_state.shine_key += 1
 
 # -------------------------
 # 顯示卡片
@@ -71,10 +78,9 @@ if st.button(button_label, key="draw_button"):
 if st.session_state.current_card:
     c = st.session_state.current_card
     glow_class = c["class"]
-    shine_class = "shine-on" if st.session_state.shine_toggle else "shine-off"
 
     st.markdown(f"""
-    <div class="card-wrapper {glow_class} {shine_class}">
+    <div class="card-wrapper {glow_class} shine-on" key="{st.session_state.shine_key}">
         <div class="card-container">
             <h3 style="color:{c['color']}">🌈 {c['name']} {c['seed']}</h3>
             <div class="sentence">{c['sentence']}</div>

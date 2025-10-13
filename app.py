@@ -1,4 +1,6 @@
-import json, random, streamlit as st
+import json
+import random
+import streamlit as st
 
 # 頁面設定
 st.set_page_config(
@@ -7,7 +9,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# 脈輪光暈顏色對應
+# 脈輪光暈顏色設定
 chakra_colors = {
     "菈莯（海底輪）": "#ff7b7b",
     "薇莯（臍輪）": "#ffa260",
@@ -18,7 +20,7 @@ chakra_colors = {
     "奧莯（頂輪）": "#e5b8ff"
 }
 
-# 快取資料
+# 載入 JSON 資料
 @st.cache_data
 def load_data():
     with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
@@ -26,13 +28,13 @@ def load_data():
 
 data = load_data()
 
-# 載入樣式（含動畫）
+# 載入外部樣式
 st.markdown(f"<style>{open('style.css').read()}</style>", unsafe_allow_html=True)
 
-# Logo（Hugging Face 雲端圖檔路徑）
+# Logo（Hugging Face 雲端圖片連結）
 logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
 
-# 頁首
+# 標題區塊
 st.markdown(f"""
 <div class="header">
   <div class="logo-container"><img src="{logo_url}" alt="Soul Heart Dance Logo"></div>
@@ -47,14 +49,20 @@ st.markdown(f"""
 if "result" not in st.session_state:
     st.session_state.result = None
 
-# 抽卡邏輯
+# 抽卡功能
 def draw_card():
     chakra = random.choice(list(data.keys()))
-    card = random.choice(data[chakra])
-    return chakra, card
+    chakra_info = data[chakra]
+    seed = chakra_info.get("seed", "—")
+    card = random.choice(chakra_info["cards"])
+    return chakra, seed, card
 
-# 按鈕
+# 按鈕設定
 button_label = "🔮 抽卡" if not st.session_state.result else "🌙 再抽一張"
+
+st.markdown("<h4>✨ 抽一張今日的靈魂訊息 ✨</h4>", unsafe_allow_html=True)
+
+# 按鈕置中
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
     if st.button(button_label, use_container_width=True):
@@ -62,13 +70,13 @@ with col2:
 
 # 顯示抽卡結果
 if st.session_state.result:
-    chakra, card = st.session_state.result
+    chakra, seed, card = st.session_state.result
     bg_color = chakra_colors.get(chakra, "#FFD6F6")
 
     st.markdown(f"""
         <div class="card-container animate-glow" style="--glow-color:{bg_color};">
             <h3 style="color:{bg_color}; margin-top:1.2rem;">🌈 {chakra}</h3>
-            <div class='seed'>🔮 種子音：{card.get('seed', '—')}</div>
+            <div class='seed'>🔮 種子音：{seed}</div>
             <div class='sentence'>💭 {card['sentence']}</div>
             <div class='angel'>🪽 天使數字：{card['angel_number']}</div>
             <div class='meaning'>✨ {card['angel_meaning']}</div>
@@ -77,7 +85,7 @@ if st.session_state.result:
 else:
     st.markdown("<p>🌙 點擊上方按鈕開始抽卡 🌙</p>", unsafe_allow_html=True)
 
-# 底部簽名
+# 頁尾簽名
 st.markdown("""
 <div class="footer">
     © 2025 Soul Heart Dance · 與靈魂之心共舞

@@ -1,7 +1,20 @@
 import json, random, streamlit as st
 
+# 頁面設定
 st.set_page_config(page_title="Soul Heart Dance｜七脈輪共振卡", page_icon="🔮", layout="centered")
 
+# 脈輪顏色對應
+chakra_colors = {
+    "菈莯（海底輪）": "#ff7b7b",
+    "薇莯（臍輪）": "#ffa260",
+    "蕊莯（太陽神經叢輪）": "#ffe066",
+    "芽莯（心輪）": "#8bd17c",
+    "哈莯（喉輪）": "#7ec8e3",
+    "歐莯（眉心輪）": "#b48eff",
+    "奧莯（頂輪）": "#e5b8ff"
+}
+
+# 載入 JSON（快取）
 @st.cache_data
 def load_data():
     with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
@@ -9,17 +22,14 @@ def load_data():
 
 data = load_data()
 
-def draw_card():
-    chakra = random.choice(list(data.keys()))
-    card = random.choice(data[chakra])
-    return chakra, card
-
+# 套用 CSS
 st.markdown(open("style.css").read(), unsafe_allow_html=True)
 
+# Header
 logo = "shop_logo.png"
 st.markdown(f"""
 <div class="header">
-  <div class="logo-container"><img src="{logo}"></div>
+  <div class="logo-container"><img src="{logo}" alt="Soul Heart Dance Logo"></div>
   <div>
     <div class="title-line1">Soul Heart Dance</div>
     <div class="title-line2">七脈輪共振卡</div>
@@ -27,20 +37,31 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
+# 狀態管理
 if "result" not in st.session_state:
     st.session_state.result = None
 
+# 抽卡邏輯
+def draw_card():
+    chakra = random.choice(list(data.keys()))
+    card = random.choice(data[chakra])
+    return chakra, card
+
+# 抽卡按鈕
+button_label = "🔮 抽卡" if not st.session_state.result else "🌙 再抽一張"
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
-    btn = st.button("🌙 再抽一張" if st.session_state.result else "🔮 抽卡", use_container_width=True)
-if btn:
-    st.session_state.result = draw_card()
+    if st.button(button_label, use_container_width=True):
+        st.session_state.result = draw_card()
 
+# 顯示結果
 if st.session_state.result:
     chakra, card = st.session_state.result
+    bg_color = chakra_colors.get(chakra, "#FFD6F6")
+
     st.markdown(f"""
-        <div class="card-container active">
-            <h3>🌈 {chakra}</h3>
+        <div class="card-container" style="box-shadow: 0 0 40px {bg_color}66;">
+            <h3 style="color:{bg_color}; margin-top:1.2rem;">🌈 {chakra}</h3>
             <div class='sentence'>💭 {card['sentence']}</div>
             <div class='angel'>🪽 天使數字：{card['angel_number']}</div>
             <div class='meaning'>✨ {card['angel_meaning']}</div>
@@ -49,4 +70,9 @@ if st.session_state.result:
 else:
     st.markdown("<p>🌙 點擊上方按鈕開始抽卡 🌙</p>", unsafe_allow_html=True)
 
-st.markdown("<div class='footer'>© 2025 Soul Heart Dance · 與靈魂之心共舞</div>", unsafe_allow_html=True)
+# 底部簽名
+st.markdown("""
+<div class="footer">
+    © 2025 Soul Heart Dance · 與靈魂之心共舞
+</div>
+""", unsafe_allow_html=True)

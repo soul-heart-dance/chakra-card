@@ -1,8 +1,6 @@
 import json
 import random
 import streamlit as st
-from PIL import Image
-import os
 
 # 頁面設定
 st.set_page_config(
@@ -11,10 +9,7 @@ st.set_page_config(
     layout="centered"
 )
 
-# 取得 logo 網址（直接從 Hugging Face repo 載入）
-logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
-
-# 黑色柔光背景＋發光按鈕樣式
+# 黑色柔光背景樣式 + 統一字體
 def set_background():
     st.markdown("""
         <style>
@@ -36,10 +31,9 @@ def set_background():
             /* --- 頁首 logo + 標題 --- */
             .header {
                 display: flex;
-                justify-content: center;
-                align-items: center;
                 flex-direction: column;
-                margin-top: 1rem;
+                align-items: center;
+                margin-top: 1.2rem;
                 margin-bottom: 1rem;
                 animation: fadeIn 2s ease;
             }
@@ -75,13 +69,34 @@ def set_background():
                 box-shadow: 0 0 20px rgba(255, 192, 203, 0.7);
             }
 
-            /* --- 文字動畫 --- */
+            /* --- 句子卡片 --- */
+            .sentence {
+                font-size: 1.3rem;
+                background: rgba(255, 255, 255, 0.1);
+                color: #fff;
+                padding: 1rem 1.2rem;
+                border-radius: 0.8rem;
+                margin: 1rem auto;
+                display: inline-block;
+                font-weight: 500;
+                box-shadow: 0 0 15px rgba(255, 192, 203, 0.3);
+                animation: fadeIn 1.5s ease-in;
+            }
+
+            .angel, .meaning {
+                font-size: 1.1rem;
+                color: #FFE6F7;
+                margin-top: 0.6rem;
+                animation: fadeIn 2s ease-in;
+            }
+
+            /* --- 淡入動畫 --- */
             @keyframes fadeIn {
                 0% { opacity: 0; transform: translateY(10px); }
                 100% { opacity: 1; transform: translateY(0); }
             }
 
-            /* --- 底部文字 --- */
+            /* --- 底部 --- */
             .footer {
                 font-size: 0.95rem;
                 color: #FFE6F7;
@@ -93,25 +108,29 @@ def set_background():
         </style>
     """, unsafe_allow_html=True)
 
-# 套用背景
+
+# 設定背景
 set_background()
 
-# 載入資料
+# 載入 JSON 檔
 with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
     data = json.load(f)
 
-# 頁首（品牌 logo + 標題）
-with st.container():
-    st.markdown(f"""
-    <div class="header">
-        <img src="{logo_url}" alt="Soul Heart Dance Logo" width="70">
-        <h1>Soul Heart Dance｜七脈輪共振卡</h1>
-    </div>
-    """, unsafe_allow_html=True)
+# 取得 logo（用 Hugging Face 上的 URL）
+logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
 
-# 抽卡按鈕
+# 頁首：logo + 標題
+st.markdown(f"""
+<div class="header">
+    <img src="{logo_url}" alt="Soul Heart Dance Logo">
+    <h1>Soul Heart Dance｜七脈輪共振卡</h1>
+</div>
+""", unsafe_allow_html=True)
+
+# 抽卡標題
 st.markdown("<h4>✨ 抽一張今日共振能量 ✨</h4>", unsafe_allow_html=True)
 
+# 抽卡邏輯
 if st.button("🔮 抽卡"):
     chakra = random.choice(list(data.keys()))
     card = random.choice(data[chakra])

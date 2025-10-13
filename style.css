@@ -109,3 +109,25 @@ div.stButton > button:hover {
     padding-bottom: 1rem;
     opacity: 0.8;
 }
+
+/* 淡入／淡出動畫 */
+.fade-in {
+    animation: fadeInCard 1s ease-in-out forwards;
+}
+
+.fade-out {
+    font-size: 1.1rem;
+    color: #FFE6F7;
+    opacity: 0;
+    animation: fadeOutCard 0.8s ease-in-out forwards;
+}
+
+@keyframes fadeInCard {
+    0% { opacity: 0; transform: translateY(15px) scale(0.95); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes fadeOutCard {
+    0% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; transform: scale(0.95); }
+}

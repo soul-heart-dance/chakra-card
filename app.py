@@ -28,7 +28,7 @@ data = load_data()
 load_css()
 
 # === 顯示 Logo 與標題 ===
-logo_path = Path("file/shop_logo.png")
+logo_path = Path("shop_logo.png")
 if logo_path.exists():
     logo_html = f'<img src="{logo_path.as_posix()}" class="logo" alt="Soul Heart Dance Logo">'
 else:

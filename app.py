@@ -29,7 +29,7 @@ def load_data():
 
 data = load_data()
 
-# 載入外部 CSS
+# 套用外部 CSS
 st.markdown(f"<style>{open('style.css').read()}</style>", unsafe_allow_html=True)
 
 # Logo
@@ -49,8 +49,8 @@ st.markdown(f"""
 # 狀態管理
 if "result" not in st.session_state:
     st.session_state.result = None
-if "button_clicked" not in st.session_state:
-    st.session_state.button_clicked = False
+if "button_label" not in st.session_state:
+    st.session_state.button_label = "🔮 抽卡"
 
 # 抽卡邏輯
 def draw_card():
@@ -60,37 +60,28 @@ def draw_card():
     card = random.choice(chakra_info["cards"])
     return chakra, seed, card
 
-# 按鈕文字切換
-button_label = "🔮 抽卡" if not st.session_state.button_clicked else "🌙 再抽一張"
-
-# 標題
+# 抽卡區域
 st.markdown("<h4>✨ 抽一張今日的靈魂訊息 ✨</h4>", unsafe_allow_html=True)
 
-# 按鈕置中
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
-    if st.button(button_label, use_container_width=True):
-        st.session_state.button_clicked = True
-        # ✨ 淡出動畫前的暫停（模擬翻面效果）
-        placeholder = st.empty()
-        placeholder.markdown("<div class='fade-out'>💫 能量切換中...</div>", unsafe_allow_html=True)
-        time.sleep(0.8)
-        # 更新卡牌結果
+    if st.button(st.session_state.button_label, use_container_width=True):
         st.session_state.result = draw_card()
-        placeholder.empty()
+        st.session_state.button_label = "🌙 再抽一張"
+        st.rerun()  # ✅ 立即刷新，第一次就更新文字
 
 # 顯示結果
 if st.session_state.result:
     chakra, seed, card = st.session_state.result
     bg_color = chakra_colors.get(chakra, "#FFD6F6")
 
-    # 顯示卡片（淡入動畫）
+    # 🌈 顯示卡片
     st.markdown(f"""
         <div class="card-container fade-in animate-glow" style="--glow-color:{bg_color};">
             <h3 style='color:{bg_color}; margin-top:1.2rem;'>
                 🌈 {chakra.split("（")[0]} {seed}（{chakra.split("（")[1]}
             </h3>
-            <div class='sentence'>{card['sentence']}</div>
+            <div class='sentence'>💭 {card['sentence']}</div>
             <div class='angel'>🪽 天使數字：{card['angel_number']}</div>
             <div class='meaning'>✨ {card['angel_meaning']}</div>
         </div>

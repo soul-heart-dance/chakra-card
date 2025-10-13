@@ -20,76 +20,75 @@ def set_background():
         <style>
             .stApp {
                 background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000000 100%);
-                color: #FFE6F7;
-                font-family: "Noto Sans TC", sans-serif;
                 text-align: center;
-                padding-bottom: 2rem;
+                font-family: "Noto Sans TC", sans-serif;
+                color: #FFE6F7;
+                background-size: 400% 400%;
+                animation: gradientFlow 12s ease infinite;
             }
+
+            @keyframes gradientFlow {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+            }
+
+            /* --- 頁首 logo + 標題 --- */
             .header {
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 flex-direction: column;
-                gap: 0.6rem;
-                margin-top: 0.5rem;
-                margin-bottom: 1.2rem;
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+                animation: fadeIn 2s ease;
             }
-            .header h1 {
-                font-size: 1.6rem;
-                font-weight: 600;
-                color: #FFE6F7;
-                letter-spacing: 0.03em;
-                margin: 0;
-            }
-            .sentence {
-                font-size: 1.3rem;
-                background: rgba(255, 255, 255, 0.1);
-                color: #fff;
-                padding: 1rem 1.5rem;
-                border-radius: 0.8rem;
-                margin: 1.2rem auto;
-                display: inline-block;
-                font-weight: 500;
-                box-shadow: 0 0 15px rgba(255, 192, 203, 0.3);
-                animation: fadeIn 1.5s ease-in;
-            }
-            .angel, .meaning {
-                font-size: 1.1rem;
-                color: #FFE6F7;
-                margin-top: 0.6rem;
+            .header img {
+                width: 70px;
+                height: 70px;
+                border-radius: 10px;
+                margin-bottom: 0.5rem;
                 animation: fadeIn 2s ease-in;
             }
+            .header h1 {
+                font-size: 1.5rem;
+                font-weight: 600;
+                color: #FFE6F7;
+                letter-spacing: 0.05em;
+                margin: 0;
+            }
+
+            /* --- 抽卡按鈕 --- */
+            div.stButton > button:first-child {
+                display: block;
+                margin: 1.5rem auto;
+                background-color: #FFE6F7 !important;
+                color: #000 !important;
+                font-size: 1.1rem !important;
+                border-radius: 10px !important;
+                border: none !important;
+                box-shadow: 0 0 15px rgba(255, 192, 203, 0.4);
+                transition: all 0.3s ease;
+            }
+            div.stButton > button:hover {
+                transform: scale(1.05);
+                box-shadow: 0 0 20px rgba(255, 192, 203, 0.7);
+            }
+
+            /* --- 文字動畫 --- */
             @keyframes fadeIn {
                 0% { opacity: 0; transform: translateY(10px); }
                 100% { opacity: 1; transform: translateY(0); }
             }
+
+            /* --- 底部文字 --- */
             .footer {
                 font-size: 0.95rem;
                 color: #FFE6F7;
                 margin-top: 2rem;
+                padding-bottom: 1rem;
                 letter-spacing: 0.02em;
                 opacity: 0.9;
-            }
-            div[data-testid="stButton"] {
-                display: flex;
-                justify-content: center;
-            }
-            button[kind="primary"] {
-                background: linear-gradient(135deg, #ffd6f6, #ffc4e1) !important;
-                color: #222 !important;
-                font-size: 1.1rem !important;
-                border-radius: 10px !important;
-                border: none !important;
-                padding: 0.5rem 1.5rem !important;
-                box-shadow: 0 0 10px rgba(255, 150, 200, 0.4);
-                transition: all 0.3s ease-in-out;
-            }
-            button[kind="primary"]:hover {
-                transform: scale(1.05);
-                box-shadow: 0 0 20px rgba(255, 190, 240, 0.8);
-            }
-            h4 {
-                color: #FFE6F7;
             }
         </style>
     """, unsafe_allow_html=True)

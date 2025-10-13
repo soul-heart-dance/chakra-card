@@ -1,70 +1,70 @@
+/* 背景與整體字體 */
 .stApp {
-  background: radial-gradient(circle at 30% 30%, #1a1a1a 0%, #000000 100%);
+  background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000000 100%);
   text-align: center;
-  font-family: "Microsoft JhengHei", "Noto Sans TC", Verdana, sans-serif;
+  font-family: "Microsoft JhengHei", Verdana, sans-serif;
   color: #FFE6F7;
 }
 
-/* Logo 與標題 */
+/* Header 與 Logo */
 .header {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: -1rem; /* 再縮一點頂部空白 */
-  margin-bottom: 0.8rem;
-  animation: fadeIn 1.5s ease-in;
-}
-.logo-container {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  overflow: hidden;
-  box-shadow: 0 0 18px rgba(255, 214, 246, 0.6);
-  animation: pulseGlow 3s infinite alternate;
+  gap: 0.6rem;
+  margin-top: -1.2rem;
+  margin-bottom: 1.2rem;
 }
 .logo-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-@keyframes pulseGlow {
-  0% { box-shadow: 0 0 12px rgba(255, 214, 246, 0.4); }
-  100% { box-shadow: 0 0 24px rgba(255, 214, 246, 0.8); }
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  box-shadow: 0 0 18px rgba(255, 214, 246, 0.8);
 }
 .title-line1 {
-  font-size: 1.55rem;
+  font-size: 1.6rem;
   font-weight: 600;
   color: #FFE6F7;
 }
 .title-line2 {
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   font-weight: 500;
   color: #FFD6F6;
 }
 
-/* 抽卡說明文字 */
+/* 抽卡提示 */
 h4 {
   color: #FFE6F7;
   margin-bottom: 1rem;
 }
 
-/* 卡片外觀 */
+/* 卡片樣式 */
 .card-container {
   position: relative;
   background: rgba(255, 255, 255, 0.06);
   border-radius: 1.2rem;
-  padding: 1.6rem;
-  margin-top: 1.3rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 0 30px var(--chakra-color, rgba(255,255,255,0.15));
-  animation: fadeInCard 0.8s ease-in-out;
-  overflow: hidden;
+  padding: 1.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 25px rgba(255, 192, 203, 0.25);
+  margin-top: 1.4rem;
+  animation: fadeIn 1s ease-in-out;
+}
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(12px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
-/* 柔光掃過效果（每次抽卡觸發） */
-[class*="shine-"]::before {
+/* 各脈輪光暈顏色 */
+.root-glow { box-shadow: 0 0 35px 8px rgba(255, 102, 102, 0.5); }
+.sacral-glow { box-shadow: 0 0 35px 8px rgba(255, 165, 0, 0.5); }
+.solar-glow { box-shadow: 0 0 35px 8px rgba(255, 230, 128, 0.5); }
+.heart-glow { box-shadow: 0 0 35px 8px rgba(144, 238, 144, 0.5); }
+.throat-glow { box-shadow: 0 0 35px 8px rgba(135, 206, 250, 0.5); }
+.third-glow { box-shadow: 0 0 35px 8px rgba(186, 85, 211, 0.5); }
+.crown-glow { box-shadow: 0 0 35px 8px rgba(255, 182, 255, 0.5); }
+
+/* 柔光掃過動畫 */
+.shine-card-true::before, .shine-card-false::before {
   content: "";
   position: absolute;
   top: 0;
@@ -74,7 +74,7 @@ h4 {
   background: linear-gradient(
     120deg,
     rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0.4) 50%,
     rgba(255, 255, 255, 0) 100%
   );
   animation: shineCard 2.4s ease-in-out;
@@ -85,73 +85,11 @@ h4 {
   100% { left: 120%; opacity: 0; }
 }
 
-/* 卡片淡入放大 */
-@keyframes fadeInCard {
-  from { opacity: 0; transform: scale(0.96) translateY(15px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
-}
-
-/* 卡片內容 */
-.sentence {
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-  padding: 1rem 1.2rem;
-  border-radius: 1rem;
-  margin: 1.2rem auto;
-  display: inline-block;
-  box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(4px);
-}
-.angel, .meaning {
-  font-size: 1.05rem;
-  color: #FFE6F7;
-  margin-top: 0.6rem;
-}
-
-/* 脈輪光暈顏色 */
-.root-glow { --chakra-color: #FF6666; }
-.sacral-glow { --chakra-color: #FFA046; }
-.solar-glow { --chakra-color: #FFD966; }
-.heart-glow { --chakra-color: #7ED957; }
-.throat-glow { --chakra-color: #96C8FF; }
-.third-glow { --chakra-color: #B496FF; }
-.crown-glow { --chakra-color: #FFC8FF; }
-
-/* 按鈕樣式 */
-div.stButton > button {
-  position: relative;
-  background-color: #FFD6F6 !important;
-  color: #000 !important;
-  font-size: 1.1rem !important;
-  border-radius: 12px !important;
-  border: none !important;
-  box-shadow: 0 0 10px rgba(255, 214, 246, 0.4);
-  transition: all 0.3s ease-in-out;
-  width: 78% !important;
-  margin: 0 auto;
-  overflow: hidden;
-}
-div.stButton > button:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 18px rgba(255, 214, 246, 0.8);
-}
-
-/* 提示與底部 */
-.hint {
-  color: #FFD6F6;
-  font-size: 0.95rem;
-  margin-top: 0.8rem;
-}
+/* Footer */
 .footer {
   font-size: 0.9rem;
   color: #FFE6F7;
   margin-top: 2rem;
   padding-bottom: 1rem;
   opacity: 0.8;
-}
-
-/* 淡入動畫 */
-@keyframes fadeIn {
-  0% { opacity: 0; transform: translateY(10px); }
-  100% { opacity: 1; transform: translateY(0); }
 }

@@ -23,7 +23,7 @@ with open("style.css", "r", encoding="utf-8") as css:
 # Logo URL
 logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
 
-# 標題區塊
+# 標題
 st.markdown(f"""
 <div class="header">
   <div class="logo-container">
@@ -44,7 +44,7 @@ if "selected" not in st.session_state:
 if "button_label" not in st.session_state:
     st.session_state.button_label = "🔮 抽卡"
 
-# 抽卡標題
+# 抽卡說明
 st.markdown("<h4>✨ 抽一張今日的靈魂訊息 ✨</h4>", unsafe_allow_html=True)
 
 # 抽卡按鈕
@@ -62,10 +62,9 @@ with col2:
             "color": chakra_info["color"],
             "class": chakra_info["class"],
             "card": card,
-            "shine_class": f"shine-{random.randint(1,10000)}"  # 強制刷新動畫
+            "shine_class": f"shine-{random.randint(1,10000)}"
         }
 
-        # 立即更新按鈕文字與畫面
         st.session_state.button_label = "🌙 再抽一張"
         st.rerun()
 
@@ -75,7 +74,7 @@ if st.session_state.drawn and st.session_state.selected:
     shine_class = c.get("shine_class", "")
     st.markdown(f"""
     <div class="card-container {c['class']} {shine_class}" style="--chakra-color:{c['color']}">
-        <h3 style="color:{c['color']}">🌈 {c['name']}（{c['card']['chakra']}） {c['seed']}</h3>
+        <h3 style="color:{c['color']}">🌈 {c['name']} {c['seed']}</h3>
         <div class="sentence">{c['card']['sentence']}</div>
         <div class="angel">🪽 天使數字：{c['card']['angel_number']}</div>
         <div class="meaning">✨ {c['card']['angel_meaning']}</div>

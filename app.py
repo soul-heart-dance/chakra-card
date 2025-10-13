@@ -1,117 +1,86 @@
-import streamlit as st
 import json
 import random
-from pathlib import Path
+import streamlit as st
 
-# === 頁面設定 ===
+# 頁面設定
 st.set_page_config(
     page_title="Soul Heart Dance｜七脈輪靈魂共振卡",
     page_icon="🔮",
     layout="centered"
 )
 
-# === 載入 CSS ===
-def load_css():
-    css_path = Path("style.css")
-    if css_path.exists():
-        with open(css_path, "r", encoding="utf-8") as f:
-            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
-# === 載入 JSON ===
+# 載入資料
 @st.cache_data
 def load_data():
-    path = Path("chakras_affirmations.json")
-    with open(path, "r", encoding="utf-8") as f:
+    with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
         return json.load(f)
-
 data = load_data()
-load_css()
 
-# === 顯示 Logo 與標題 ===
-logo_path = Path("shop_logo.png")
-if logo_path.exists():
-    logo_html = f'<img src="{logo_path.as_posix()}" class="logo" alt="Soul Heart Dance Logo">'
-else:
-    logo_html = '<div class="logo-missing">🌕</div>'
+# 套用CSS
+with open("style.css", "r", encoding="utf-8") as css:
+    st.markdown(f"<style>{css.read()}</style>", unsafe_allow_html=True)
 
+# Logo 改為 URL 模式
+logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
+
+# 標題區塊
 st.markdown(f"""
 <div class="header">
-    {logo_html}
-    <div class="title-container">
-        <div class="title-line1">Soul Heart Dance</div>
-        <div class="title-line2">七脈輪靈魂共振卡</div>
-    </div>
+  <div class="logo-container">
+    <img src="{logo_url}" alt="Soul Heart Dance Logo">
+  </div>
+  <div class="title-text">
+    <div class="title-line1">Soul Heart Dance</div>
+    <div class="title-line2">七脈輪靈魂共振卡</div>
+  </div>
 </div>
 """, unsafe_allow_html=True)
 
-# === 初始化狀態 ===
+# 狀態管理
 if "drawn" not in st.session_state:
     st.session_state.drawn = False
-    st.session_state.button_label = "🔮 抽卡"
-    st.session_state.card = None
-    st.session_state.chakra = None
-    st.session_state.seed = ""
-    st.session_state.chakra_class = ""
-    st.session_state.color = "#FFD6F6"
+if "selected" not in st.session_state:
+    st.session_state.selected = None
 
-# === 抽卡邏輯 ===
-def draw_card():
-    chakra = random.choice(list(data.keys()))
-    info = data[chakra]
-    seed = info.get("seed", "")
-    color = info.get("color", "#FFD6F6")
-    chakra_class = info.get("class", "root-glow")
-    cards = info.get("cards", [])
-    if not cards:
-        return None, None, "", "", color
-    card = random.choice(cards)
-    return chakra, card, seed, chakra_class, color
+# 按鈕標籤
+button_label = "🔮 抽卡" if not st.session_state.drawn else "🌙 再抽一張"
 
-# === 抽卡標題 ===
 st.markdown("<h4>✨ 抽一張今日的靈魂訊息 ✨</h4>", unsafe_allow_html=True)
 
+# 抽卡按鈕
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
-    if st.button(st.session_state.button_label, use_container_width=True):
-        chakra, card, seed, chakra_class, color = draw_card()
-        if card:
-            st.session_state.drawn = True
-            st.session_state.button_label = "🌙 再抽一張"
-            st.session_state.card = card
-            st.session_state.chakra = chakra
-            st.session_state.seed = seed
-            st.session_state.chakra_class = chakra_class
-            st.session_state.color = color
-            st.rerun()
+    if st.button(button_label, use_container_width=True):
+        chakra_name = random.choice(list(data.keys()))
+        chakra_info = data[chakra_name]
+        card = random.choice(chakra_info["cards"])
 
-# === 顯示抽卡結果 ===
-if st.session_state.drawn and st.session_state.card:
-    chakra = st.session_state.chakra
-    card = st.session_state.card
-    seed = st.session_state.seed
-    chakra_class = st.session_state.chakra_class
-    color = st.session_state.color
+        st.session_state.drawn = True
+        st.session_state.selected = {
+            "name": chakra_name,
+            "seed": chakra_info["seed"],
+            "color": chakra_info["color"],
+            "class": chakra_info["class"],
+            "card": card
+        }
 
-    sentence = card.get("sentence", "宇宙正在透過你傳遞訊息。")
-    angel_number = card.get("angel_number", "")
-    angel_meaning = card.get("angel_meaning", "")
-
+# 顯示抽卡結果
+if st.session_state.drawn and st.session_state.selected:
+    c = st.session_state.selected
     st.markdown(f"""
-    <div class="card-container {chakra_class}">
-        <h3 class="chakra-title" style="color:{color};">
-            🌈 {chakra.split('（')[0]} {seed}（{chakra.split('（')[1]}
-        </h3>
-        <div class="sentence">{sentence}</div>
-        <div class="angel">天使數字：{angel_number}</div>
-        <div class="meaning">{angel_meaning}</div>
+    <div class="card-container {c['class']}" style="--chakra-color:{c['color']}">
+        <h3 style="color:{c['color']}">🌈 {c['name']} {c['seed']}</h3>
+        <div class="sentence">{c['card']['sentence']}</div>
+        <div class="angel">🪽 天使數字：{c['card']['angel_number']}</div>
+        <div class="meaning">✨ {c['card']['angel_meaning']}</div>
     </div>
     """, unsafe_allow_html=True)
 else:
-    st.markdown("<p class='hint-text'>🌙 點擊上方按鈕開始抽卡 🌙</p>", unsafe_allow_html=True)
+    st.markdown("<p class='hint'>🌙 點擊上方按鈕開始抽卡 🌙</p>", unsafe_allow_html=True)
 
-# === 頁尾 ===
+# 底部簽名
 st.markdown("""
 <div class="footer">
-© 2025 Soul Heart Dance · 與靈魂之心共舞
+    © 2025 Soul Heart Dance · 與靈魂之心共舞
 </div>
 """, unsafe_allow_html=True)

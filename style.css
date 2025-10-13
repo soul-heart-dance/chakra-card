@@ -1,4 +1,4 @@
-/* 背景與整體字體 */
+/* --- 全域設定 --- */
 .stApp {
   background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000000 100%);
   text-align: center;
@@ -6,23 +6,23 @@
   color: #FFE6F7;
 }
 
-/* Header 與 Logo */
+/* --- Header --- */
 .header {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.6rem;
-  margin-top: -1.2rem;
-  margin-bottom: 1.2rem;
+  margin-top: -0.8rem;
+  margin-bottom: 1rem;
 }
 .logo-container img {
   width: 66px;
   height: 66px;
   border-radius: 50%;
-  box-shadow: 0 0 18px rgba(255, 214, 246, 0.8);
+  box-shadow: 0 0 20px rgba(255, 214, 246, 0.7);
 }
 .title-line1 {
-  font-size: 1.6rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: #FFE6F7;
 }
@@ -32,57 +32,38 @@
   color: #FFD6F6;
 }
 
-/* 抽卡提示 */
-h4 {
-  color: #FFE6F7;
-  margin-bottom: 1rem;
-}
-
-/* 抽卡按鈕 */
-button[kind="primary"] {
+/* --- 按鈕 --- */
+.stButton > button {
   background-color: #f9c8e6 !important;
   color: #2a2a2a !important;
   border-radius: 1rem !important;
-  padding: 0.4rem 1.2rem !important;
-  font-size: 1.05rem !important;
+  padding: 0.5rem 1.6rem !important;
+  font-size: 1.1rem !important;
   font-weight: 500 !important;
   border: none !important;
   transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 200, 250, 0.4);
   width: fit-content !important;
   margin: 0 auto !important;
   display: block !important;
 }
-button[kind="primary"]:hover {
+.stButton > button:hover {
   background-color: #ffe1f3 !important;
   box-shadow: 0 0 18px rgba(255, 200, 250, 0.8);
 }
 
-/* 卡片樣式 */
+/* --- 卡片容器 --- */
 .card-container {
   position: relative;
   background: rgba(255, 255, 255, 0.06);
   border-radius: 1.2rem;
   padding: 1.4rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 25px rgba(255, 192, 203, 0.25);
-  margin-top: 1.4rem;
+  margin-top: 1.2rem;
   animation: fadeIn 1s ease-in-out;
 }
-@keyframes fadeIn {
-  0% { opacity: 0; transform: translateY(12px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
 
-/* 各脈輪光暈顏色 */
-.root-glow { box-shadow: 0 0 35px 8px rgba(255, 102, 102, 0.5); }
-.sacral-glow { box-shadow: 0 0 35px 8px rgba(255, 165, 0, 0.5); }
-.solar-glow { box-shadow: 0 0 35px 8px rgba(255, 230, 128, 0.5); }
-.heart-glow { box-shadow: 0 0 35px 8px rgba(144, 238, 144, 0.5); }
-.throat-glow { box-shadow: 0 0 35px 8px rgba(135, 206, 250, 0.5); }
-.third-glow { box-shadow: 0 0 35px 8px rgba(186, 85, 211, 0.5); }
-.crown-glow { box-shadow: 0 0 35px 8px rgba(255, 182, 255, 0.5); }
-
-/* 柔光掃過動畫 */
+/* --- 柔光掃過 --- */
 .shine-card-true::before, .shine-card-false::before {
   content: "";
   position: absolute;
@@ -104,7 +85,40 @@ button[kind="primary"]:hover {
   100% { left: 120%; opacity: 0; }
 }
 
-/* Footer */
+/* --- 呼吸光暈 --- */
+.card-container {
+  animation: fadeIn 1s ease-in-out, breatheGlow 6s ease-in-out infinite;
+}
+@keyframes breatheGlow {
+  0%, 100% { box-shadow: 0 0 25px rgba(255, 192, 203, 0.25); }
+  50% { box-shadow: 0 0 45px rgba(255, 192, 203, 0.45); }
+}
+
+/* --- 各脈輪光暈 --- */
+.root-glow { box-shadow: 0 0 35px 8px rgba(255, 102, 102, 0.6); }
+.sacral-glow { box-shadow: 0 0 35px 8px rgba(255, 165, 0, 0.6); }
+.solar-glow { box-shadow: 0 0 35px 8px rgba(255, 230, 128, 0.6); }
+.heart-glow { box-shadow: 0 0 35px 8px rgba(144, 238, 144, 0.6); }
+.throat-glow { box-shadow: 0 0 35px 8px rgba(135, 206, 250, 0.6); }
+.third-glow { box-shadow: 0 0 35px 8px rgba(186, 85, 211, 0.6); }
+.crown-glow { box-shadow: 0 0 35px 8px rgba(255, 182, 255, 0.6); }
+
+/* --- 卡片文字 --- */
+.sentence {
+  font-size: 1.2rem;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  padding: 1rem 1.2rem;
+  border-radius: 1rem;
+  margin: 1.2rem auto;
+  display: inline-block;
+  backdrop-filter: blur(4px);
+}
+.angel, .meaning {
+  font-size: 1.1rem;
+  color: #FFE6F7;
+  margin-top: 0.6rem;
+}
 .footer {
   font-size: 0.9rem;
   color: #FFE6F7;

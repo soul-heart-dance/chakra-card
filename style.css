@@ -11,7 +11,7 @@
   justify-content: center;
   align-items: center;
   gap: 0.6rem;
-  margin-top: 0.2rem;
+  margin-top: 0.1rem;
 }
 .logo {
   height: 54px;
@@ -30,9 +30,10 @@
 }
 
 /* 按鈕置中 */
-.button-center {
+.button-wrapper {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin: 0.8rem 0;
 }
 .stButton > button {
@@ -78,8 +79,9 @@
   animation: breatheGlow 6s ease-in-out infinite;
 }
 
-/* 柔光掃過，每次抽卡都強制重建 DOM → 一定觸發 */
-.animate::before {
+/* 柔光掃過動畫 */
+.shineA .card-container::before,
+.shineB .card-container::before {
   content: "";
   position: absolute;
   top: 0;
@@ -90,7 +92,7 @@
     rgba(255,255,255,0) 0%,
     rgba(255,255,255,0.45) 50%,
     rgba(255,255,255,0) 100%);
-  animation: shineCard 2.3s ease-in-out;
+  animation: shineCard 2.4s ease-in-out;
 }
 @keyframes shineCard {
   0% { left: -100%; opacity: 0.3; }

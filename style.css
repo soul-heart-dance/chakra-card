@@ -29,8 +29,13 @@
   color: #FFD6F6;
 }
 
-/* 按鈕置中 */
+/* 按鈕容器置中修正 */
+div[data-testid="stButton"] {
+  display: flex !important;
+  justify-content: center !important;
+}
 .button-wrapper {
+  width: 100%;
   display: flex;
   justify-content: center;
   margin: 0.8rem 0;
@@ -78,8 +83,9 @@
   animation: breatheGlow 6s ease-in-out infinite;
 }
 
-/* 柔光掃過動畫，每次抽卡都觸發 */
-.animate::before {
+/* 雙 class 閃光動畫交替 */
+.shineA .card-container::before,
+.shineB .card-container::before {
   content: "";
   position: absolute;
   top: 0;

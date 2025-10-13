@@ -12,7 +12,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 0.4rem;
-  margin-top: -0.6rem; /* 再縮一點頂部空白 */
+  margin-top: -1rem; /* 再縮一點頂部空白 */
   margin-bottom: 0.8rem;
   animation: fadeIn 1.5s ease-in;
 }
@@ -80,8 +80,8 @@ h4 {
   animation: shineCard 2.4s ease-in-out;
 }
 @keyframes shineCard {
-  0% { left: -100%; opacity: 0.2; }
-  50% { left: 50%; opacity: 0.8; }
+  0% { left: -100%; opacity: 0.3; }
+  50% { left: 50%; opacity: 0.9; }
   100% { left: 120%; opacity: 0; }
 }
 

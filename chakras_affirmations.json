@@ -1,5 +1,7 @@
 {
-  "菈莯（海底輪）": [
+  "菈莯（海底輪）": {
+    "seed": "Lam",
+    "cards": [
     {
       "sentence": "你不需要急著往前，先讓自己穩下來。",
       "angel_number": "4444",
@@ -150,8 +152,11 @@
       "angel_meaning": "起點與自信，提醒你是完整的。",
       "angel_meaning_en": "Beginnings and confidence — you are already whole."
     }
-  ],
-  "薇莯（臍輪）": [
+    ],
+  },
+  "薇莯（臍輪）": {
+    "seed": "Vam",
+    "cards": [
     {
       "sentence": "你可以難過，也可以還沒想明白，情緒不需要理由。",
       "angel_number": "2222",
@@ -302,8 +307,11 @@
       "angel_meaning": "靈魂覺醒，提醒你感覺是靈魂的語言。",
       "angel_meaning_en": "Soul awakening — feelings are your soul’s language."
     }
-  ],
-  "蕊莯（太陽神經叢輪）": [
+    ],
+  },
+  "蕊莯（太陽神經叢輪）": {
+    "seed": "Ram",
+    "cards": [
     {
       "sentence": "你可以說不，這是尊重自己的一種方式。",
       "angel_number": "1111",
@@ -454,8 +462,11 @@
       "angel_meaning": "接納與信任，提醒你價值是與生俱來的。",
       "angel_meaning_en": "Acceptance and trust — your worth was never in question."
     }
-  ],
-  "芽莯（心輪）": [
+    ],
+  },
+  "芽莯（心輪）": {
+    "seed": "Yam",
+    "cards": [
     {
       "sentence": "愛不是犧牲自己，而是讓彼此都能呼吸。",
       "angel_number": "2222",
@@ -606,8 +617,11 @@
       "angel_meaning": "釋放與信任，提醒你真愛不佔有。",
       "angel_meaning_en": "Release and trust — true love does not possess."
     }
-  ],
-  "哈莯（喉輪）": [
+    ],
+  },
+  "哈莯（喉輪）": {
+    "seed": "Ham",
+    "cards": [
     {
       "sentence": "你可以說出心裡的話，不用先猜別人會怎麼想。",
       "angel_number": "1111",
@@ -758,8 +772,11 @@
       "angel_meaning": "釋放與信任，提醒你清楚勝於喧嘩。",
       "angel_meaning_en": "Release and trust — clarity speaks louder than noise."
     }
-  ],
-  "歐莯（眉心輪）": [
+    ],
+  },
+  "歐莯（眉心輪）": {
+    "seed": "Om",
+    "cards": [
     {
       "sentence": "有時答案不是想出來的，而是靜下來，它就出現了。",
       "angel_number": "1111",
@@ -910,8 +927,11 @@
       "angel_meaning": "清晰與覺察，提醒你直覺是最準的指南。",
       "angel_meaning_en": "Clarity and awareness — intuition is your surest guide."
     }
-  ],
-  "奧莯（頂輪）": [
+    ],
+  },
+  "奧莯（頂輪）": {
+    "seed": "Aum",
+    "cards": [
     {
       "sentence": "有些事不是努力想出來的，而是相信後，答案自然會浮現。",
       "angel_number": "1111",
@@ -1063,4 +1083,5 @@
       "angel_meaning_en": "Connection and resonance — your calm is met by the world."
     }
   ]
+  }
 }

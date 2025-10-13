@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 # 取得 logo 路徑
-logo_path = os.path.join(os.path.dirname(__file__), "shop_logo.png")
+logo_path = os.path.join(os.getcwd(), "shop_logo.png")
 logo = Image.open(logo_path)
 
 # 黑色柔光背景＋發光按鈕樣式

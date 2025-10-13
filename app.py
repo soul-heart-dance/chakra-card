@@ -1,6 +1,7 @@
 import json
 import random
 import streamlit as st
+import time
 
 # 頁面設定
 st.set_page_config(
@@ -20,7 +21,7 @@ chakra_colors = {
     "奧莯（頂輪）": "#e5b8ff"
 }
 
-# 載入 JSON 資料
+# 載入 JSON
 @st.cache_data
 def load_data():
     with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
@@ -28,7 +29,7 @@ def load_data():
 
 data = load_data()
 
-# 套用外部 CSS
+# 載入外部 CSS
 st.markdown(f"<style>{open('style.css').read()}</style>", unsafe_allow_html=True)
 
 # Logo
@@ -65,21 +66,27 @@ button_label = "🔮 抽卡" if not st.session_state.button_clicked else "🌙 �
 # 標題
 st.markdown("<h4>✨ 抽一張今日的靈魂訊息 ✨</h4>", unsafe_allow_html=True)
 
-# 抽卡按鈕置中
+# 按鈕置中
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
     if st.button(button_label, use_container_width=True):
+        st.session_state.button_clicked = True
+        # ✨ 淡出動畫前的暫停（模擬翻面效果）
+        placeholder = st.empty()
+        placeholder.markdown("<div class='fade-out'>💫 能量切換中...</div>", unsafe_allow_html=True)
+        time.sleep(0.8)
+        # 更新卡牌結果
         st.session_state.result = draw_card()
-        st.session_state.button_clicked = True  # ✅ 修正：第一次按就更新狀態
+        placeholder.empty()
 
 # 顯示結果
 if st.session_state.result:
     chakra, seed, card = st.session_state.result
     bg_color = chakra_colors.get(chakra, "#FFD6F6")
 
-    # 顯示卡片
+    # 顯示卡片（淡入動畫）
     st.markdown(f"""
-        <div class="card-container animate-glow" style="--glow-color:{bg_color};">
+        <div class="card-container fade-in animate-glow" style="--glow-color:{bg_color};">
             <h3 style='color:{bg_color}; margin-top:1.2rem;'>
                 🌈 {chakra.split("（")[0]} {seed}（{chakra.split("（")[1]}
             </h3>

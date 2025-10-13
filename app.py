@@ -29,7 +29,10 @@ load_css()
 
 # === 顯示 Logo 與標題 ===
 logo_path = Path("file/shop_logo.png")
-logo_html = f'<img src="{logo_path.as_posix()}" class="logo" alt="Soul Heart Dance Logo">' if logo_path.exists() else ""
+if logo_path.exists():
+    logo_html = f'<img src="{logo_path.as_posix()}" class="logo" alt="Soul Heart Dance Logo">'
+else:
+    logo_html = '<div class="logo-missing">🌕</div>'
 
 st.markdown(f"""
 <div class="header">
@@ -49,26 +52,28 @@ if "drawn" not in st.session_state:
     st.session_state.chakra = None
     st.session_state.seed = ""
     st.session_state.chakra_class = ""
+    st.session_state.color = "#FFD6F6"
 
 # === 抽卡邏輯 ===
 def draw_card():
     chakra = random.choice(list(data.keys()))
     info = data[chakra]
     seed = info.get("seed", "")
+    color = info.get("color", "#FFD6F6")
+    chakra_class = info.get("class", "root-glow")
     cards = info.get("cards", [])
     if not cards:
-        return None, None, "", ""
+        return None, None, "", "", color
     card = random.choice(cards)
-    chakra_class = info.get("class", "root-glow")
-    return chakra, card, seed, chakra_class
+    return chakra, card, seed, chakra_class, color
 
-# === 抽卡區 ===
+# === 抽卡標題 ===
 st.markdown("<h4>✨ 抽一張今日的靈魂訊息 ✨</h4>", unsafe_allow_html=True)
 
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
     if st.button(st.session_state.button_label, use_container_width=True):
-        chakra, card, seed, chakra_class = draw_card()
+        chakra, card, seed, chakra_class, color = draw_card()
         if card:
             st.session_state.drawn = True
             st.session_state.button_label = "🌙 再抽一張"
@@ -76,6 +81,7 @@ with col2:
             st.session_state.chakra = chakra
             st.session_state.seed = seed
             st.session_state.chakra_class = chakra_class
+            st.session_state.color = color
             st.rerun()
 
 # === 顯示抽卡結果 ===
@@ -84,6 +90,7 @@ if st.session_state.drawn and st.session_state.card:
     card = st.session_state.card
     seed = st.session_state.seed
     chakra_class = st.session_state.chakra_class
+    color = st.session_state.color
 
     sentence = card.get("sentence", "宇宙正在透過你傳遞訊息。")
     angel_number = card.get("angel_number", "")
@@ -91,7 +98,9 @@ if st.session_state.drawn and st.session_state.card:
 
     st.markdown(f"""
     <div class="card-container {chakra_class}">
-        <h3 class="chakra-title">🌈 {chakra.split('（')[0]} {seed}（{chakra.split('（')[1]}</h3>
+        <h3 class="chakra-title" style="color:{color};">
+            🌈 {chakra.split('（')[0]} {seed}（{chakra.split('（')[1]}
+        </h3>
         <div class="sentence">{sentence}</div>
         <div class="angel">天使數字：{angel_number}</div>
         <div class="meaning">{angel_meaning}</div>

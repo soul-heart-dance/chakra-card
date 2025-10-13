@@ -1,92 +1,155 @@
-/* 全域 */
-.stApp{
-  background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000 100%);
-  color:#FFE6F7;
-  font-family:"Microsoft JhengHei", Verdana, sans-serif;
-  text-align:center;
-  overflow-x:hidden;
+/* 全域樣式 */
+.stApp {
+  background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000000 100%);
+  color: #FFE6F7;
+  font-family: "Microsoft JhengHei", Verdana, sans-serif;
+  text-align: center;
+  overflow-x: hidden;
 }
 
 /* Header */
-.header{
-  display:flex; justify-content:center; align-items:center; gap:.6rem;
-  margin:.2rem 0 .6rem;
-}
-.logo{
-  height:56px; width:auto; border-radius:50%;
-  box-shadow:0 0 16px rgba(255,214,246,.7);
-}
-.title-line1{ font-size:1.45rem; font-weight:700; color:#FFE6F7; }
-.title-line2{ font-size:1.0rem;  font-weight:500; color:#FFD6F6; }
-
-/* 按鈕：置中、固定寬度的外框以確保在各裝置都居中 */
-.cta{ width:100%; display:flex; justify-content:center; margin:.5rem 0 .4rem; }
-.stButton>button{
-  background:#f8cce9 !important; color:#222 !important;
-  border:none !important; border-radius:16px !important;
-  padding:.55rem 1.2rem !important; font-size:1.06rem !important; font-weight:600 !important;
-  box-shadow:0 0 18px rgba(255,200,250,.65); transition:all .25s ease;
-}
-.stButton>button:hover{
-  background:#ffe4f4 !important; box-shadow:0 0 24px rgba(255,200,250,.85);
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0.2rem 0 0.4rem;
 }
 
-/* 卡片外圈光暈（依脈輪變色） */
-.card-wrapper{
-  border-radius:20px; padding:6px; margin:1rem auto 0; width:min(920px, 92vw);
+.logo {
+  height: 54px;
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(255, 214, 246, 0.6);
 }
-.root-glow  { box-shadow:0 0 36px 8px rgba(255,102,102,.65); }    /* 海底輪 紅 */
-.sacral-glow{ box-shadow:0 0 36px 8px rgba(255,165,  0,.65); }    /* 臍輪 橘 */
-.solar-glow { box-shadow:0 0 36px 8px rgba(255,230,128,.65); }    /* 太陽神經叢 黃 */
-.heart-glow { box-shadow:0 0 36px 8px rgba(144,238,144,.65); }    /* 心輪 綠 */
-.throat-glow{ box-shadow:0 0 36px 8px rgba(135,206,250,.65); }    /* 喉輪 藍 */
-.third-glow { box-shadow:0 0 36px 8px rgba(186, 85,211,.65); }    /* 眉心 藍紫 */
-.crown-glow { box-shadow:0 0 36px 8px rgba(255,182,255,.65); }    /* 頂輪 粉紫 */
 
-/* 卡片本體 */
-.card-container{
-  position:relative;
-  background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.22);
-  border-radius:18px; padding:1.3rem;
+.title-line1 {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #FFE6F7;
+}
+
+.title-line2 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #FFD6F6;
+}
+
+/* 按鈕置中 */
+.button-center {
+  text-align: center;
+  margin: 0.6rem 0;
+}
+
+.stButton > button {
+  background-color: #f9c8e6 !important;
+  color: #222 !important;
+  border: none !important;
+  border-radius: 1rem !important;
+  padding: 0.55rem 1.25rem !important;
+  font-size: 1.05rem !important;
+  font-weight: 500 !important;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 18px rgba(255, 200, 250, 0.6);
+}
+
+.stButton > button:hover {
+  background-color: #ffe1f3 !important;
+  box-shadow: 0 0 25px rgba(255, 200, 250, 0.8);
+}
+
+/* 卡片光暈顏色 */
+.root-glow  { box-shadow: 0 0 36px 8px rgba(255, 102, 102, 0.6); }
+.sacral-glow{ box-shadow: 0 0 36px 8px rgba(255, 165,   0, 0.6); }
+.solar-glow { box-shadow: 0 0 36px 8px rgba(255, 230, 128, 0.6); }
+.heart-glow { box-shadow: 0 0 36px 8px rgba(144, 238, 144, 0.6); }
+.throat-glow{ box-shadow: 0 0 36px 8px rgba(135, 206, 250, 0.6); }
+.third-glow { box-shadow: 0 0 36px 8px rgba(186,  85, 211, 0.6); }
+.crown-glow { box-shadow: 0 0 36px 8px rgba(255, 182, 255, 0.6); }
+
+/* 卡片內容 */
+.card-wrapper {
+  border-radius: 1.3rem;
+  padding: 6px;
+  margin: 1rem auto 0;
+  width: min(920px, 92vw);
+}
+
+.card-container {
+  position: relative;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 1.1rem;
+  padding: 1.3rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(4px);
-  color:#fff; animation:breatheGlow 6s ease-in-out infinite;
+  color: #fff;
+  animation: breatheGlow 6s ease-in-out infinite;
 }
-.sentence{
-  font-size:1.08rem; background:rgba(255,255,255,.10);
-  padding:1rem 1.2rem; border-radius:14px; margin:1rem auto; display:inline-block;
-}
-.angel,.meaning{ font-size:1rem; color:#FFE6F7; margin-top:.5rem; }
 
-/* 柔光掃過：用兩個類名交替觸發動畫（按鈕 key 固定） */
+.sentence {
+  font-size: 1.08rem;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1rem 1.2rem;
+  border-radius: 1rem;
+  margin: 1rem auto;
+  display: inline-block;
+}
+
+.angel, .meaning {
+  font-size: 1rem;
+  color: #FFE6F7;
+  margin-top: 0.4rem;
+}
+
+/* 柔光掃過動畫（用兩組 class 交替） */
 .shineA .card-container::before,
-.shineB .card-container::before{
-  content:"";
-  position:absolute; top:0; left:-100%; height:100%; width:60%;
-  background:linear-gradient(120deg, rgba(255,255,255,0) 0%,
-                                      rgba(255,255,255,.45) 50%,
-                                      rgba(255,255,255,0) 100%);
-  animation:shineCard 2.2s ease-in-out;
-}
-@keyframes shineCard{
-  0%{ left:-100%; opacity:.25; }
-  50%{ left:50%;  opacity:1; }
-  100%{ left:120%; opacity:0; }
-}
-/* 卡片微呼吸 */
-@keyframes breatheGlow{
-  0%,100%{ box-shadow:0 0 20px rgba(255,255,255,.08); }
-  50%{    box-shadow:0 0 44px rgba(255,255,255,.18); }
+.shineB .card-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shineCard 2.4s ease-in-out;
 }
 
-/* 初始提示 & 頁尾 */
-.hint{ margin-top:1.1rem; color:#FFD6F6; font-size:1rem; }
-.footer{ font-size:.92rem; color:#FFE6F7; margin:2rem 0 1rem; opacity:.85; }
+@keyframes shineCard {
+  0% { left: -100%; opacity: 0.3; }
+  50% { left: 50%; opacity: 1; }
+  100% { left: 120%; opacity: 0; }
+}
 
-/* 手機 RWD */
-@media (max-width:480px){
-  .logo{ height:48px; }
-  .title-line1{ font-size:1.28rem; }
-  .title-line2{ font-size:.95rem; }
-  .card-container{ padding:1.1rem; }
+/* 呼吸光 */
+@keyframes breatheGlow {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.08); }
+  50% { box-shadow: 0 0 45px rgba(255, 255, 255, 0.2); }
+}
+
+/* 提示 */
+.hint {
+  margin-top: 1rem;
+  color: #FFD6F6;
+  font-size: 1rem;
+}
+
+/* Footer */
+.footer {
+  font-size: 0.9rem;
+  color: #FFE6F7;
+  margin-top: 2rem;
+  padding-bottom: 1rem;
+  opacity: 0.8;
+}
+
+/* 手機調整 */
+@media (max-width: 480px) {
+  .logo { height: 46px; }
+  .title-line1 { font-size: 1.25rem; }
+  .title-line2 { font-size: 0.92rem; }
+  .card-container { padding: 1.1rem; }
 }

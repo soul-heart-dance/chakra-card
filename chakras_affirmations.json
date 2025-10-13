@@ -1,6 +1,6 @@
 {
-  "菈莯（海底輪）": {
-    "seed": "Lam",
+  "菈莯": {
+    "seed": "Lam (海底輪)",
     "color": "#FF6666",
     "class": "root-glow",
     "cards": [
@@ -156,8 +156,8 @@
     }
     ]
   },
-  "薇莯（臍輪）": {
-    "seed": "Vam",
+  "薇莯": {
+    "seed": "Vam (臍輪)",
     "color": "#FFA046",
     "class": "sacral-glow",
     "cards": [
@@ -313,8 +313,8 @@
     }
     ]
   },
-  "蕊莯（太陽神經叢）": {
-    "seed": "Ram",
+  "蕊莯": {
+    "seed": "Ram (太陽神經叢輪)",
     "color": "#FFDC64",
     "class": "solar-glow",
     "cards": [
@@ -470,8 +470,8 @@
     }
     ]
   },
-  "芽莯（心輪）": {
-    "seed": "Yam",
+  "芽莯": {
+    "seed": "Yam (心輪)",
     "color": "#7ED957",
     "class": "heart-glow",
     "cards": [
@@ -627,8 +627,8 @@
     }
     ]
   },
-  "哈莯（喉輪）": {
-    "seed": "Ham",
+  "哈莯": {
+    "seed": "Ham (喉輪)",
     "color": "#96C8FF",
     "class": "throat-glow",
     "cards": [
@@ -784,8 +784,8 @@
     }
     ]
   },
-  "歐莯（眉心輪）": {
-    "seed": "Sham",
+  "歐莯": {
+    "seed": "Om (眉心輪)",
     "color": "#B496FF",
     "class": "third-glow",
     "cards": [
@@ -941,8 +941,8 @@
     }
     ]
   },
-  "奧莯（頂輪）": {
-    "seed": "Aum",
+  "奧莯": {
+    "seed": "Aum (頂輪)",
     "color": "#FFC8FF",
     "class": "crown-glow",
     "cards": [

@@ -1,103 +1,51 @@
-/* 主體背景與字體設定 */
+/* 通用樣式 */
 .stApp {
-    background: radial-gradient(circle at 30% 30%, #1a1a1a 0%, #000000 100%);
+    background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000000 100%);
     text-align: center;
-    font-family: "Noto Sans TC", "Microsoft JhengHei", "Poppins", "Verdana", sans-serif;
+    font-family: "Microsoft JhengHei", "Verdana", sans-serif;
     color: #FFE6F7;
-    padding: 0 1rem;
     overflow-x: hidden;
 }
 
-/* 標題與 Logo */
+/* Header 樣式 */
 .header {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    margin-top: 0.8rem;
+    gap: 0.8rem;
+    margin-top: 1rem;
     margin-bottom: 1.2rem;
+    flex-wrap: wrap;
 }
 
-.logo-container {
-    width: 64px;
-    height: 64px;
+.logo {
+    width: 58px;
+    height: 58px;
     border-radius: 50%;
-    overflow: hidden;
-    box-shadow: 0 0 15px rgba(255, 214, 246, 0.6);
-}
-
-.logo-container img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 214, 246, 0.4);
 }
 
 .title-line1 {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 600;
     color: #FFE6F7;
+    line-height: 1.2;
 }
 
 .title-line2 {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 500;
     color: #FFD6F6;
 }
 
-/* 抽卡卡片樣式 */
-.card-container {
-    background: rgba(255, 255, 255, 0.06);
-    border-radius: 1.2rem;
-    padding: 1.5rem;
-    border: 1px solid rgba(255, 214, 246, 0.4);
-    box-shadow: 0 0 25px rgba(255, 214, 246, 0.25);
-    display: inline-block;
-    animation: fadeInCard 1.2s ease-in-out;
-    transition: all 0.3s ease;
-}
-
-/* 光暈效果（根據脈輪類型變色） */
-.root-glow    { box-shadow: 0 0 25px rgba(255, 102, 102, 0.6) !important; }   /* 海底輪：紅 */
-.sacral-glow  { box-shadow: 0 0 25px rgba(255, 153, 102, 0.6) !important; }  /* 臍輪：橙 */
-.solar-glow   { box-shadow: 0 0 25px rgba(255, 230, 102, 0.6) !important; }  /* 太陽神經叢輪：黃 */
-.heart-glow   { box-shadow: 0 0 25px rgba(153, 255, 204, 0.6) !important; }  /* 心輪：綠 */
-.throat-glow  { box-shadow: 0 0 25px rgba(102, 204, 255, 0.6) !important; }  /* 喉輪：藍 */
-.third-glow   { box-shadow: 0 0 25px rgba(204, 153, 255, 0.6) !important; }  /* 眉心輪：靛紫 */
-.crown-glow   { box-shadow: 0 0 25px rgba(230, 204, 255, 0.6) !important; }  /* 頂輪：紫白 */
-
-@keyframes fadeInCard {
-    0% { opacity: 0; transform: translateY(15px) scale(0.97); }
-    100% { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-/* 抽卡按鈕 */
-div.stButton > button {
-    background-color: #FFD6F6 !important;
-    color: #000 !important;
-    font-size: 1.1rem !important;
-    border-radius: 12px !important;
-    border: none !important;
-    box-shadow: 0 0 10px rgba(255, 214, 246, 0.5);
-    transition: all 0.3s ease-in-out;
-    width: 80% !important;
-    max-width: 260px;
-    margin: 0 auto;
-}
-
-div.stButton > button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(255, 214, 246, 0.8);
-}
-
-/* 卡片文字內容 */
+/* 抽卡內容 */
 .sentence {
     font-size: 1.2rem;
     background: rgba(255, 255, 255, 0.08);
     color: #fff;
     padding: 1rem 1.2rem;
     border-radius: 1rem;
-    margin: 1.3rem auto;
+    margin: 1.5rem auto;
     display: inline-block;
     box-shadow: 0 0 15px rgba(255, 192, 203, 0.25);
     backdrop-filter: blur(4px);
@@ -105,37 +53,46 @@ div.stButton > button:hover {
 }
 
 .angel, .meaning {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: #FFE6F7;
     margin-top: 0.6rem;
-    animation: fadeIn 1.8s ease-in;
+    animation: fadeIn 2s ease-in;
 }
 
+/* 光圈動畫 */
+.card-container {
+    transition: box-shadow 0.8s ease-in-out;
+    border-radius: 1rem;
+    padding: 1rem;
+    display: inline-block;
+}
+
+.root-glow { box-shadow: 0 0 25px 6px rgba(255, 102, 102, 0.4); }
+.sacral-glow { box-shadow: 0 0 25px 6px rgba(255, 165, 0, 0.4); }
+.solar-glow { box-shadow: 0 0 25px 6px rgba(255, 220, 100, 0.4); }
+.heart-glow { box-shadow: 0 0 25px 6px rgba(255, 179, 217, 0.4); }
+.throat-glow { box-shadow: 0 0 25px 6px rgba(150, 200, 255, 0.4); }
+.third-glow { box-shadow: 0 0 25px 6px rgba(180, 150, 255, 0.4); }
+.crown-glow { box-shadow: 0 0 25px 6px rgba(255, 200, 255, 0.4); }
+
+/* 動畫 */
 @keyframes fadeIn {
     0% { opacity: 0; transform: translateY(10px); }
     100% { opacity: 1; transform: translateY(0); }
 }
 
-/* 底部文字 */
+/* Footer */
 .footer {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #FFE6F7;
     margin-top: 2rem;
     padding-bottom: 1rem;
     opacity: 0.8;
-    letter-spacing: 0.02em;
 }
 
-/* 手機版調整 */
-@media (max-width: 768px) {
-    .title-line1 { font-size: 1.4rem; }
-    .title-line2 { font-size: 1rem; }
-    h4 { font-size: 1.1rem !important; }
+/* 手機排版優化 */
+@media screen and (max-width: 768px) {
+    .title-line1 { font-size: 1.2rem; }
+    .title-line2 { font-size: 1.05rem; }
     .sentence { font-size: 1.05rem; padding: 0.9rem 1rem; }
-    .angel, .meaning { font-size: 1rem; }
-    div.stButton > button {
-        font-size: 1rem !important;
-        width: 85% !important;
-        max-width: 240px;
-    }
 }

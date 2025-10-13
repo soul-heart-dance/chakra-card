@@ -23,11 +23,11 @@ def load_css():
 data = load_data()
 st.markdown(f"<style>{load_css()}</style>", unsafe_allow_html=True)
 
-# ---------- 初始化 ----------
+# ---------- 初始化狀態 ----------
 if "card" not in st.session_state:
     st.session_state.card = None
-if "anim_class" not in st.session_state:
-    st.session_state.anim_class = "shineA"
+if "anim_key" not in st.session_state:
+    st.session_state.anim_key = 0
 
 # ---------- Header ----------
 logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
@@ -41,27 +41,12 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# ---------- 抽卡按鈕 ----------
-if st.session_state.card is None:
-    button_text = "🔮 抽卡"
-else:
-    button_text = "🌙 再抽一張"
-
-# 置中按鈕
-st.markdown('<div class="button-wrapper">', unsafe_allow_html=True)
-clicked = st.button(button_text, use_container_width=False)
-st.markdown('</div>', unsafe_allow_html=True)
-
 # ---------- 抽卡邏輯 ----------
-if clicked:
+def draw_card():
     chakra = random.choice(list(data.keys()))
     meta = data[chakra]
     card = random.choice(meta["cards"])
-
-    # 每次抽卡切換動畫 class 並換 UUID
-    st.session_state.anim_class = "shineB" if st.session_state.anim_class == "shineA" else "shineA"
-    unique_id = str(uuid.uuid4())
-
+    st.session_state.anim_key += 1  # 改 key 讓 DOM 重新建立（強制觸發動畫）
     st.session_state.card = {
         "chakra": chakra,
         "seed": meta["seed"],
@@ -70,16 +55,21 @@ if clicked:
         "sentence": card["sentence"],
         "angel_number": card["angel_number"],
         "angel_meaning": card["angel_meaning"],
-        "uid": unique_id,
-        "anim": st.session_state.anim_class
+        "uid": str(uuid.uuid4())
     }
+
+# ---------- 按鈕 ----------
+button_text = "🔮 抽卡" if st.session_state.card is None else "🌙 再抽一張"
+st.markdown('<div class="button-wrapper">', unsafe_allow_html=True)
+st.button(button_text, key="draw_button", on_click=draw_card)
+st.markdown('</div>', unsafe_allow_html=True)
 
 # ---------- 顯示卡片 ----------
 if st.session_state.card:
     c = st.session_state.card
     st.markdown(f"""
-    <div class="card-wrapper {c['glow']} {c['anim']}" id="{c['uid']}">
-        <div class="card-container">
+    <div class="card-wrapper {c['glow']}" id="{st.session_state.anim_key}">
+        <div class="card-container animate">
             <h3 style="color:{c['color']}">🌈 {c['chakra']} {c['seed']}</h3>
             <div class="sentence">{c['sentence']}</div>
             <div class="angel">🪽 天使數字：{c['angel_number']}</div>

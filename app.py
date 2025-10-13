@@ -1,6 +1,8 @@
 import json
 import random
 import streamlit as st
+from PIL import Image
+import os
 
 # 頁面設定
 st.set_page_config(
@@ -9,7 +11,11 @@ st.set_page_config(
     layout="centered"
 )
 
-# 固定黑色柔光背景
+# 取得 logo 路徑
+logo_path = os.path.join(os.path.dirname(__file__), "shop_logo.png")
+logo = Image.open(logo_path)
+
+# 黑色柔光背景＋發光按鈕樣式
 def set_background():
     st.markdown("""
         <style>
@@ -18,26 +24,23 @@ def set_background():
                 color: #FFE6F7;
                 font-family: "Noto Sans TC", sans-serif;
                 text-align: center;
+                padding-bottom: 2rem;
             }
             .header {
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                gap: 0.8rem;
-                margin-top: 1rem;
-                margin-bottom: 1.5rem;
-            }
-            .header img {
-                width: 60px;
-                height: 60px;
-                object-fit: contain;
-                filter: brightness(1.2);
+                flex-direction: column;
+                gap: 0.6rem;
+                margin-top: 0.5rem;
+                margin-bottom: 1.2rem;
             }
             .header h1 {
                 font-size: 1.6rem;
                 font-weight: 600;
                 color: #FFE6F7;
                 letter-spacing: 0.03em;
+                margin: 0;
             }
             .sentence {
                 font-size: 1.3rem;
@@ -65,7 +68,6 @@ def set_background():
                 font-size: 0.95rem;
                 color: #FFE6F7;
                 margin-top: 2rem;
-                padding-bottom: 1rem;
                 letter-spacing: 0.02em;
                 opacity: 0.9;
             }
@@ -74,12 +76,18 @@ def set_background():
                 justify-content: center;
             }
             button[kind="primary"] {
-                background-color: #FFD6F6 !important;
-                color: #000 !important;
+                background: linear-gradient(135deg, #ffd6f6, #ffc4e1) !important;
+                color: #222 !important;
                 font-size: 1.1rem !important;
-                border-radius: 8px !important;
+                border-radius: 10px !important;
                 border: none !important;
-                padding: 0.4rem 1.2rem !important;
+                padding: 0.5rem 1.5rem !important;
+                box-shadow: 0 0 10px rgba(255, 150, 200, 0.4);
+                transition: all 0.3s ease-in-out;
+            }
+            button[kind="primary"]:hover {
+                transform: scale(1.05);
+                box-shadow: 0 0 20px rgba(255, 190, 240, 0.8);
             }
             h4 {
                 color: #FFE6F7;
@@ -95,12 +103,13 @@ with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
     data = json.load(f)
 
 # 頁首（品牌 logo + 標題）
-st.markdown("""
-<div class="header">
-    <img src="shop_logo.png" alt="Soul Heart Dance Logo">
-    <h1>Soul Heart Dance｜七脈輪共振卡</h1>
-</div>
-""", unsafe_allow_html=True)
+with st.container():
+    st.image(logo, width=70)
+    st.markdown("""
+    <div class="header">
+        <h1>Soul Heart Dance｜七脈輪共振卡</h1>
+    </div>
+    """, unsafe_allow_html=True)
 
 # 抽卡按鈕
 st.markdown("<h4>✨ 抽一張今日共振能量 ✨</h4>", unsafe_allow_html=True)

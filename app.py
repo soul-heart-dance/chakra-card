@@ -1,9 +1,13 @@
 import json, random, streamlit as st
 
-# 頁面設定
-st.set_page_config(page_title="Soul Heart Dance｜七脈輪共振卡", page_icon="🔮", layout="centered")
+# 🌸 頁面設定
+st.set_page_config(
+    page_title="Soul Heart Dance｜七脈輪共振卡",
+    page_icon="🔮",
+    layout="centered"
+)
 
-# 脈輪顏色對應
+# 🌈 脈輪光暈顏色對應
 chakra_colors = {
     "菈莯（海底輪）": "#ff7b7b",
     "薇莯（臍輪）": "#ffa260",
@@ -14,7 +18,7 @@ chakra_colors = {
     "奧莯（頂輪）": "#e5b8ff"
 }
 
-# 載入 JSON（快取）
+# 🧠 快取資料
 @st.cache_data
 def load_data():
     with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
@@ -22,14 +26,16 @@ def load_data():
 
 data = load_data()
 
-# 套用 CSS
-st.markdown(open("style.css").read(), unsafe_allow_html=True)
+# 🎨 載入樣式（含動畫）
+st.markdown(f"<style>{open('style.css').read()}</style>", unsafe_allow_html=True)
 
-# Header
-logo = "shop_logo.png"
+# 🪷 Logo（Hugging Face 雲端圖檔路徑）
+logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
+
+# 🩷 頁首
 st.markdown(f"""
 <div class="header">
-  <div class="logo-container"><img src="{logo}" alt="Soul Heart Dance Logo"></div>
+  <div class="logo-container"><img src="{logo_url}" alt="Soul Heart Dance Logo"></div>
   <div>
     <div class="title-line1">Soul Heart Dance</div>
     <div class="title-line2">七脈輪共振卡</div>
@@ -47,21 +53,22 @@ def draw_card():
     card = random.choice(data[chakra])
     return chakra, card
 
-# 抽卡按鈕
+# 按鈕
 button_label = "🔮 抽卡" if not st.session_state.result else "🌙 再抽一張"
 col1, col2, col3 = st.columns([1, 2, 1])
 with col2:
     if st.button(button_label, use_container_width=True):
         st.session_state.result = draw_card()
 
-# 顯示結果
+# 顯示抽卡結果
 if st.session_state.result:
     chakra, card = st.session_state.result
     bg_color = chakra_colors.get(chakra, "#FFD6F6")
 
     st.markdown(f"""
-        <div class="card-container" style="box-shadow: 0 0 40px {bg_color}66;">
+        <div class="card-container animate-glow" style="--glow-color:{bg_color};">
             <h3 style="color:{bg_color}; margin-top:1.2rem;">🌈 {chakra}</h3>
+            <div class='seed'>🔮 種子音：{card.get('seed', '—')}</div>
             <div class='sentence'>💭 {card['sentence']}</div>
             <div class='angel'>🪽 天使數字：{card['angel_number']}</div>
             <div class='meaning'>✨ {card['angel_meaning']}</div>

@@ -39,6 +39,13 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
+# ---------- 標題文字 ----------
+st.markdown("""
+<div class="subtitle">
+✨ 今日的靈魂訊息 ✨
+</div>
+""", unsafe_allow_html=True)
+
 # ---------- 抽卡邏輯 ----------
 def draw_card():
     chakra = random.choice(list(data.keys()))

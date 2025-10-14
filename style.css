@@ -146,19 +146,24 @@
   opacity: 0.8;
 }
 
-/* 桌面版卡片光暈與內容完全置中 */
+/* 卡片與光暈偏右的問題（桌面版） */
 @media screen and (min-width: 768px) {
-  .chakra-card {
-    display: block;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    position: relative;
-    left: 0;
-    right: 0;
+  /* 讓 Streamlit 包的外層容器強制居中 */
+  [data-testid="stVerticalBlock"] {
+    display: flex;
+    justify-content: center;
   }
 
-  /* 確保光暈中心與卡片中心對齊 */
+  /* 保持卡片寬度一致，確保陰影與卡片同步置中 */
+  .chakra-card {
+    width: 480px;
+    margin: 0 auto !important;
+    position: relative;
+  }
+
+  /* 修正光暈位置 */
   .chakra-card::before {
+    position: absolute;
     left: 50%;
     transform: translateX(-50%);
   }

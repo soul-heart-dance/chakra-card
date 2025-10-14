@@ -146,10 +146,20 @@
   opacity: 0.8;
 }
 
-/* 桌面版卡片置中修正，保留手機風格 */
+/* 桌面版卡片光暈與內容完全置中 */
 @media screen and (min-width: 768px) {
   .chakra-card {
-    margin-left: auto;
-    margin-right: auto;
+    display: block;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    position: relative;
+    left: 0;
+    right: 0;
+  }
+
+  /* 確保光暈中心與卡片中心對齊 */
+  .chakra-card::before {
+    left: 50%;
+    transform: translateX(-50%);
   }
 }

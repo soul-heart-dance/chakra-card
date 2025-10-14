@@ -11,7 +11,7 @@
   justify-content: center;
   align-items: center;
   gap: 0.6rem;
-  margin-top: -1rem;
+  margin-top: -2rem;
 }
 .logo {
   height: 54px;
@@ -31,8 +31,7 @@
 .subtitle {
   font-size: 1.2rem;
   color: #FFE6F7;
-  margin-top: 1.2rem;
-  margin-bottom: 0rem;
+  margin-top: 1.4rem;
   text-align: center;
   letter-spacing: 1px;
 }
@@ -46,7 +45,7 @@
   align-items: center !important;
   width: 100% !important;
   text-align: center !important;
-  margin: 1.2rem 0 1.2rem 0; /* 上 1.2rem，下 1.2rem */
+  margin: 1rem 0 1rem 0; /* 上 1rem，下 1rem */
 }
 
 .stButton > button {

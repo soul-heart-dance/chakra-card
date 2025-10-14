@@ -146,71 +146,10 @@
   opacity: 0.8;
 }
 
-/* ---------- 桌面版 (Desktop View) 修正 ---------- */
+/* 桌面版卡片置中修正，保留手機風格 */
 @media screen and (min-width: 768px) {
-  /* 主容器置中 */
-  .main {
-    max-width: 720px;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  /* Logo 與標題置中排列 */
-  .header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 1.5rem;
-  }
-
-  .logo {
-    width: 100px;
-    margin-bottom: 1rem;
-  }
-
-  .title {
-    text-align: center;
-  }
-
-  /* 副標題間距調整 */
-  .subtitle {
-    font-size: 1.4rem;
-    color: #ffe6f7;
-    margin-top: 1rem;
-    margin-bottom: 1.2rem;
-    text-align: center;
-  }
-
-  /* 抽卡按鈕置中 */
-  .button-center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 1.5rem auto 2rem auto;
-  }
-
-  .stButton button {
-    width: 240px;
-    font-size: 1.2rem;
-    padding: 0.8rem 1.2rem;
-    border-radius: 1.6rem;
-  }
-
-  /* 卡片居中且寬版 */
   .chakra-card {
-    width: 640px;
-    margin: 0 auto;
-  }
-
-  /* 卡片內文字置中 */
-  .chakra-card h3,
-  .chakra-card p {
-    text-align: center;
-  }
-
-  /* 頁尾置中 */
-  .footer {
-    text-align: center;
-    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 }

@@ -28,6 +28,14 @@
   font-weight: 500;
   color: #FFD6F6;
 }
+.subtitle {
+  font-size: 1.2rem;
+  color: #FFE6F7;
+  margin-top: 1.2rem;
+  margin-bottom: 0.8rem;
+  text-align: center;
+  letter-spacing: 1px;
+}
 
 /* --- 按鈕 --- */
 .button-center,
@@ -38,7 +46,7 @@
   align-items: center !important;
   width: 100% !important;
   text-align: center !important;
-  margin: 1.4rem 0 1.4rem 0; /* 上 1.4rem，下 1.4rem */
+  margin: 1.2rem 0 1.2rem 0; /* 上 1.2rem，下 1.2rem */
 }
 
 .stButton > button {

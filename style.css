@@ -203,3 +203,19 @@
     display: none !important;
   }
 }
+
+/* 徹底移除左邊殘影灰塊 */
+[data-testid="stElementContainer"] div:empty,
+[data-testid="stMarkdownContainer"] div:empty,
+.element-container > div:empty,
+.block-container div[data-testid="stVerticalBlock"] > div:empty {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  left: -9999px !important;
+}

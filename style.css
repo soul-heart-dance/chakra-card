@@ -1,3 +1,4 @@
+/* --- 整體背景與字體 --- */
 .stApp {
   background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000 100%);
   color: #FFE6F7;
@@ -5,7 +6,7 @@
   text-align: center;
 }
 
-/* Header */
+/* --- Header --- */
 .header {
   display: flex;
   justify-content: center;
@@ -45,7 +46,7 @@
   align-items: center !important;
   width: 100% !important;
   text-align: center !important;
-  margin: 0.8rem 0 0.8rem 0; /* 上 0.8rem，下 0.8rem */
+  margin: 0.8rem 0 0.8rem 0;
 }
 
 .stButton > button {
@@ -71,6 +72,9 @@
   padding: 6px;
   margin: 1rem auto 0;
   width: min(920px, 92vw);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .root-glow  { box-shadow: 0 0 36px 8px rgba(255,102,102,0.6); }
 .sacral-glow{ box-shadow: 0 0 36px 8px rgba(255,165,  0,0.6); }
@@ -91,24 +95,23 @@
   animation: breatheGlow 6s ease-in-out infinite;
 }
 
-/* --- 每次新卡都閃爍 --- */
-.animate::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 60%;
-  height: 100%;
-  background: linear-gradient(120deg,
-    rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.45) 50%,
-    rgba(255,255,255,0) 100%);
-  animation: shineCard 2.3s ease-in-out;
+/* --- 光暈閃一下 --- */
+.card-wrapper.animate {
+  animation: pulseGlow 1.2s ease-in-out;
 }
-@keyframes shineCard {
-  0% { left: -100%; opacity: 0.3; }
-  50% { left: 50%; opacity: 1; }
-  100% { left: 120%; opacity: 0; }
+@keyframes pulseGlow {
+  0% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  40% {
+    transform: scale(1.02);
+    filter: brightness(1.6);
+  }
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
 }
 
 /* 呼吸光 */
@@ -117,7 +120,7 @@
   50%     { box-shadow: 0 0 45px rgba(255,255,255,0.2); }
 }
 
-/* 文字 */
+/* --- 文字 --- */
 .sentence {
   font-size: 1.08rem;
   background: rgba(255,255,255,0.08);
@@ -132,7 +135,7 @@
   margin-top: 0.4rem;
 }
 
-/* 提示與 Footer */
+/* --- 提示與 Footer --- */
 .hint {
   margin-top: 1rem;
   color: #FFD6F6;
@@ -146,76 +149,21 @@
   opacity: 0.8;
 }
 
-/* 桌面版卡片光暈貼邊 + 清除殘影層 + 水平完美置中修正 */
+/* --- 桌面版卡片置中修正 --- */
 @media screen and (min-width: 768px) {
-  /* 最外層容器置中 */
   [data-testid="stElementContainer"] {
     display: flex !important;
     justify-content: center !important;
   }
-
-  /* 卡片容器本身居中 */
   .card-wrapper {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin: 0 auto !important;
     width: fit-content;
     left: 50%;
     transform: translateX(-50%);
   }
-
-  /* 光暈貼邊 */
-  .card-wrapper::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 1.3rem;
-    filter: blur(50px);
-    opacity: 0.85;
-    z-index: -1;
-    transition: all 0.8s ease-in-out;
-  }
-
-  /* 光暈閃爍動畫 */
-  .card-wrapper.animate::before {
-    opacity: 1;
-    filter: blur(70px);
-    transform: scale(1.02);
-  }
-
-  /* 修正卡片寬度與中心對齊 */
   .card-container {
     width: 100%;
     max-width: 480px;
     margin: 0 auto;
   }
-
-  /* 移除第一次閃爍留下的空層與灰塊 */
-  [data-testid="stElementContainer"] > div:empty {
-    display: none !important;
-    width: 0 !important;
-    height: 0 !important;
-    overflow: hidden !important;
-  }
-  .stMarkdown div:empty {
-    display: none !important;
-  }
-}
-
-/* 徹底移除左邊殘影灰塊 */
-[data-testid="stElementContainer"] div:empty,
-[data-testid="stMarkdownContainer"] div:empty,
-.element-container > div:empty,
-.block-container div[data-testid="stVerticalBlock"] > div:empty {
-  display: none !important;
-  visibility: hidden !important;
-  width: 0 !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-  position: absolute !important;
-  left: -9999px !important;
 }

@@ -151,16 +151,37 @@
 
 /* --- 桌面版卡片置中修正 --- */
 @media screen and (min-width: 768px) {
+  /* 最外層容器置中 */
   [data-testid="stElementContainer"] {
     display: flex !important;
     justify-content: center !important;
   }
+
+  /* 卡片容器本身居中 */
   .card-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 0 auto !important;
     width: fit-content;
     left: 50%;
     transform: translateX(-50%);
   }
+
+  /* 光暈貼邊 */
+  .card-wrapper::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 1.3rem;
+    filter: blur(50px);
+    opacity: 0.85;
+    z-index: -1;
+    transition: all 0.8s ease-in-out;
+  }
+
+  /* 修正卡片寬度與中心對齊 */
   .card-container {
     width: 100%;
     max-width: 480px;

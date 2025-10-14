@@ -171,3 +171,27 @@
     transform: translateX(-50%);
   }
 }
+
+/* 桌面版光暈緊貼卡片邊緣 */
+@media screen and (min-width: 768px) {
+  .card-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 105%;
+    height: 105%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    filter: blur(60px);
+    opacity: 0.8;
+    z-index: -1;
+    transition: all 0.8s ease-in-out;
+  }
+
+  .card-wrapper.animate::before {
+    opacity: 1;
+    filter: blur(80px);
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}

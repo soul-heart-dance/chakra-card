@@ -1,16 +1,25 @@
 import streamlit as st
 from pages.chakra_card import render_chakra_card
 from pages.admin_report import render_admin_report
+from pathlib import Path
 
 # ---- 頁面設定 ----
 st.set_page_config(
     page_title="Soul Heart Dance｜七脈輪靈魂共振卡",
     page_icon="🔮",
     layout="centered",
-    initial_sidebar_state="collapsed",  # 🚫 關閉側邊欄
+    initial_sidebar_state="collapsed",  # 關閉側邊欄
 )
 
-# ---- 顯示靈魂連線動畫（全域）----
+# ---- 先插入 CSS （用 style 標籤覆蓋預設樣式）----
+css_path = Path("style.css")
+if css_path.exists():
+    st.markdown(
+        f"<style>{css_path.read_text(encoding='utf-8')}</style>",
+        unsafe_allow_html=True
+    )
+
+# ---- 插入 loader ----
 st.markdown("""
 <div id="loader">
   <div class="glow-circle"></div>

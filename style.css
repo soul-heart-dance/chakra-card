@@ -1,16 +1,13 @@
-/* ================================
-🌸  Soul Heart Dance Chakra Card Style
-================================ */
-
-/* 🌸 全站通用樣式載入區 */
+/* 🌸 全站通用樣式 */
 html, body, .stApp {
   background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000 100%) !important;
   color: #FFE6F7 !important;
   font-family: "Microsoft JhengHei", Verdana, sans-serif !important;
   text-align: center !important;
+  overflow-x: hidden;
 }
 
-/* 🌸 全站星光漂浮背景 */
+/* 🌌 星光漂浮背景 */
 body::before {
   content: "";
   position: fixed;
@@ -22,7 +19,7 @@ body::before {
               radial-gradient(circle, rgba(200,180,255,0.1) 1px, transparent 2px);
   background-size: 150px 150px, 200px 200px, 250px 250px;
   background-position: 0 0, 50px 80px, 100px 130px;
-  animation: sparkleMove 40s linear infinite;
+  animation: sparkleMove 45s linear infinite;
   z-index: 0;
 }
 
@@ -31,15 +28,9 @@ body::before {
   to { background-position: -200px -200px, -250px -250px, -300px -300px; }
 }
 
-/* 🌸 隱藏多餘 Streamlit 元素 */
-header, footer, .stDeployButton {display: none !important;}
-
-/* --- 整體背景與字體 --- */
-.stApp {
-  background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000 100%);
-  color: #FFE6F7;
-  font-family: "Microsoft JhengHei", Verdana, sans-serif;
-  text-align: center;
+/* 隱藏預設 sidebar、footer */
+header, footer, .stDeployButton, [data-testid="stSidebar"] {
+  display: none !important;
 }
 
 /* --- Header --- */
@@ -48,23 +39,27 @@ header, footer, .stDeployButton {display: none !important;}
   justify-content: center;
   align-items: center;
   gap: 0.6rem;
-  margin-top: -2.5rem;
+  margin-top: -1.6rem;  /* 🩷 微調上方距離 */
 }
+
 .logo {
   height: 54px;
   border-radius: 50%;
   box-shadow: 0 0 15px rgba(255, 214, 246, 0.6);
 }
+
 .title-line1 {
   font-size: 1.45rem;
   font-weight: 700;
   color: #FFE6F7;
 }
+
 .title-line2 {
   font-size: 1rem;
   font-weight: 500;
   color: #FFD6F6;
 }
+
 .subtitle {
   font-size: 1.2rem;
   color: #FFE6F7;
@@ -97,6 +92,7 @@ header, footer, .stDeployButton {display: none !important;}
   transition: all 0.3s ease;
   box-shadow: 0 0 18px rgba(255, 200, 250, 0.6);
 }
+
 .stButton > button:hover {
   background-color: #ffe1f3 !important;
   box-shadow: 0 0 25px rgba(255, 200, 250, 0.8);
@@ -112,12 +108,13 @@ header, footer, .stDeployButton {display: none !important;}
   justify-content: center;
   align-items: center;
 }
+
 .root-glow  { box-shadow: 0 0 36px 8px rgba(255,102,102,0.6); }
-.sacral-glow{ box-shadow: 0 0 36px 8px rgba(255,165,  0,0.6); }
+.sacral-glow{ box-shadow: 0 0 36px 8px rgba(255,165,0,0.6); }
 .solar-glow { box-shadow: 0 0 36px 8px rgba(255,230,128,0.6); }
 .heart-glow { box-shadow: 0 0 36px 8px rgba(144,238,144,0.6); }
 .throat-glow{ box-shadow: 0 0 36px 8px rgba(135,206,250,0.6); }
-.third-glow { box-shadow: 0 0 36px 8px rgba(186, 85,211,0.6); }
+.third-glow { box-shadow: 0 0 36px 8px rgba(186,85,211,0.6); }
 .crown-glow { box-shadow: 0 0 36px 8px rgba(255,182,255,0.6); }
 
 .card-container {
@@ -131,23 +128,13 @@ header, footer, .stDeployButton {display: none !important;}
   animation: breatheGlow 6s ease-in-out infinite;
 }
 
-/* --- 光暈閃一下 --- */
-.card-wrapper.animate {
-  animation: pulseGlow 1.2s ease-in-out;
-}
-@keyframes pulseGlow {
-  0% { transform: scale(1); filter: brightness(1); }
-  40% { transform: scale(1.02); filter: brightness(1.6); }
-  100% { transform: scale(1); filter: brightness(1); }
-}
-
-/* 呼吸光 */
+/* 光暈閃爍動畫 */
 @keyframes breatheGlow {
   0%,100% { box-shadow: 0 0 20px rgba(255,255,255,0.08); }
   50%     { box-shadow: 0 0 45px rgba(255,255,255,0.2); }
 }
 
-/* --- 文字 --- */
+/* --- 文字樣式 --- */
 .sentence {
   font-size: 1.08rem;
   background: rgba(255,255,255,0.08);
@@ -156,6 +143,7 @@ header, footer, .stDeployButton {display: none !important;}
   margin: 1rem auto;
   display: inline-block;
 }
+
 .angel, .meaning {
   font-size: 1rem;
   color: #FFE6F7;
@@ -168,6 +156,7 @@ header, footer, .stDeployButton {display: none !important;}
   color: #FFD6F6;
   font-size: 1rem;
 }
+
 .footer {
   font-size: 0.9rem;
   color: #FFE6F7;
@@ -176,103 +165,59 @@ header, footer, .stDeployButton {display: none !important;}
   opacity: 0.8;
 }
 
-/* --- 桌面版卡片置中修正 --- */
-@media screen and (min-width: 768px) {
-  [data-testid="stElementContainer"] {
-    display: flex !important;
-    justify-content: center !important;
-  }
-  .card-wrapper {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto !important;
-    width: fit-content;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .card-wrapper::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 1.3rem;
-    filter: blur(50px);
-    opacity: 0.85;
-    z-index: -1;
-    transition: all 0.8s ease-in-out;
-  }
-  .card-container {
-    width: 100%;
-    max-width: 480px;
-    margin: 0 auto;
-  }
-}
-
-/* ================================
-🌙 靈魂連線載入動畫（星光漂浮＋粉光球）
-================================ */
+/* --- 靈魂連線載入動畫 --- */
 .loader-wrapper {
-  position: fixed !important;
-  inset: 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   background: radial-gradient(circle at center, rgba(0,0,0,0.95) 0%, rgba(0,0,0,1) 100%);
-  z-index: 99999;
-  overflow: hidden;
-  animation: fadeout 2s ease-in-out forwards;
-  animation-delay: 2s;
+  z-index: 9999;
+  animation: fadeout 1.8s ease-in-out forwards;
+  animation-delay: 1.8s;
 }
 
-/* 粉光球 */
 .glow-circle {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: radial-gradient(circle at center, rgba(255,192,203,0.9), rgba(255,182,193,0.1));
-  box-shadow: 0 0 60px 25px rgba(255,192,203,0.5);
+  background: radial-gradient(circle at center, rgba(255,192,203,0.9), rgba(255,182,193,0.15));
+  box-shadow: 0 0 80px 40px rgba(255,182,193,0.4);
   animation: pulse 1.6s infinite ease-in-out;
 }
 
-/* 星光粒子 */
-.star {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  background: #ffd6f6;
-  border-radius: 50%;
-  opacity: 0.8;
-  animation: twinkle 4s infinite ease-in-out;
-}
-@keyframes twinkle {
-  0%, 100% { transform: scale(1); opacity: 0.6; }
-  50% { transform: scale(1.8); opacity: 1; }
-}
-
-/* 文字閃光 */
 .loader-text {
   color: #ffe3f1;
   font-size: 22px;
   margin-top: 35px;
   font-family: "Noto Sans TC", sans-serif;
-  text-shadow: 0 0 10px #ffb6c1, 0 0 20px rgba(255,182,193,0.6);
+  text-shadow: 0 0 12px #ffb6c1, 0 0 24px rgba(255,192,203,0.5);
   letter-spacing: 2px;
   text-align: center;
-  animation: glowtext 1.6s infinite ease-in-out;
 }
 
-/* 動畫區 */
 @keyframes pulse {
-  0% { transform: scale(0.95); opacity: 0.8; }
+  0% { transform: scale(0.9); opacity: 0.8; }
   50% { transform: scale(1.05); opacity: 1; }
-  100% { transform: scale(0.95); opacity: 0.8; }
+  100% { transform: scale(0.9); opacity: 0.8; }
 }
-@keyframes glowtext {
-  0%, 100% { text-shadow: 0 0 8px #ffcce0, 0 0 20px rgba(255,192,203,0.5); opacity: 0.9; }
-  50% { text-shadow: 0 0 16px #ffd9ec, 0 0 35px rgba(255,182,193,0.8); opacity: 1; }
-}
+
 @keyframes fadeout {
-  100% { opacity: 0; visibility: hidden; transform: scale(1.05); }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+  }
+}
+
+/* --- 手機版調整 --- */
+@media screen and (max-width: 480px) {
+  .title-line1 { font-size: 1.25rem; }
+  .title-line2 { font-size: 0.9rem; }
+  .header { margin-top: -1.8rem; }
 }

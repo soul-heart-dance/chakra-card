@@ -1,9 +1,15 @@
-/* === 全域背景與字體 === */
-.stApp {
-  background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000 100%);
-  color: #FFE6F7;
-  font-family: "Microsoft JhengHei", Verdana, sans-serif;
-  text-align: center;
+/* --- 覆蓋 Streamlit 預設樣式 --- */
+html, body, .stApp {
+  background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000 100%) !important;
+  color: #FFE6F7 !important;
+  font-family: "Microsoft JhengHei", Verdana, sans-serif !important;
+  text-align: center !important;
+  overflow-x: hidden !important;
+}
+
+/* --- 關閉側邊欄 --- */
+[data-testid="stSidebar"], section[data-testid="stSidebar"] {
+  display: none !important;
 }
 
 /* --- Header --- */
@@ -24,7 +30,7 @@
 .subtitle { font-size: 1.2rem; margin-top: 1.2rem; color: #FFE6F7; }
 
 /* --- 按鈕 --- */
-.stButton > button {
+div.stButton > button {
   background-color: #f9c8e6 !important;
   color: #222 !important;
   border: none !important;
@@ -34,10 +40,44 @@
   font-size: 1.08rem !important;
   box-shadow: 0 0 18px rgba(255, 200, 250, 0.6);
   transition: all 0.3s ease;
+  display: inline-block !important;
+  text-align: center !important;
 }
-.stButton > button:hover {
+div.stButton > button:hover {
   background-color: #ffe1f3 !important;
   box-shadow: 0 0 25px rgba(255, 200, 250, 0.8);
+}
+
+/* --- 卡片 --- */
+.card-wrapper {
+  border-radius: 1.3rem;
+  padding: 6px;
+  margin: 1rem auto 0;
+  width: min(920px, 92vw);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.root-glow  { box-shadow: 0 0 36px 8px rgba(255,102,102,0.6); }
+.sacral-glow{ box-shadow: 0 0 36px 8px rgba(255,165,0,0.6); }
+.solar-glow { box-shadow: 0 0 36px 8px rgba(255,230,128,0.6); }
+.heart-glow { box-shadow: 0 0 36px 8px rgba(144,238,144,0.6); }
+.throat-glow{ box-shadow: 0 0 36px 8px rgba(135,206,250,0.6); }
+.third-glow { box-shadow: 0 0 36px 8px rgba(186,85,211,0.6); }
+.crown-glow { box-shadow: 0 0 36px 8px rgba(255,182,255,0.6); }
+
+.card-container {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 1.2rem;
+  padding: 1.3rem;
+  backdrop-filter: blur(4px);
+  color: #fff;
+  animation: breatheGlow 6s ease-in-out infinite;
+}
+@keyframes breatheGlow {
+  0%,100% { box-shadow: 0 0 20px rgba(255,255,255,0.08); }
+  50%     { box-shadow: 0 0 45px rgba(255,255,255,0.2); }
 }
 
 /* --- Loader --- */
@@ -75,7 +115,7 @@
 }
 
 /* --- 星光粒子 --- */
-body::before {
+.stApp::before {
   content: "";
   position: fixed;
   top: 0; left: 0;

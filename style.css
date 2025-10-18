@@ -1,4 +1,4 @@
-/* --- 覆蓋 Streamlit 預設樣式 --- */
+/* --- 全域背景 --- */
 html, body, .stApp {
   background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000 100%) !important;
   color: #FFE6F7 !important;
@@ -7,78 +7,93 @@ html, body, .stApp {
   overflow-x: hidden !important;
 }
 
-/* --- 關閉側邊欄 --- */
+/* --- 移除側邊欄 --- */
 [data-testid="stSidebar"], section[data-testid="stSidebar"] {
   display: none !important;
 }
 
 /* --- Header --- */
 .header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.6rem;
-  margin-top: -2rem;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 0.6rem !important;
+  margin-top: -2rem !important;
 }
 .logo {
-  height: 54px;
-  border-radius: 50%;
-  box-shadow: 0 0 15px rgba(255, 214, 246, 0.6);
+  height: 56px !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 20px rgba(255, 214, 246, 0.7) !important;
 }
-.title-line1 { font-size: 1.45rem; font-weight: 700; color: #FFE6F7; }
-.title-line2 { font-size: 1rem; font-weight: 500; color: #FFD6F6; }
-.subtitle { font-size: 1.2rem; margin-top: 1.2rem; color: #FFE6F7; }
+.title-line1 { font-size: 1.5rem !important; font-weight: 700 !important; color: #FFE6F7 !important; }
+.title-line2 { font-size: 1rem !important; font-weight: 500 !important; color: #FFD6F6 !important; }
+.subtitle { font-size: 1.2rem !important; margin-top: 1.2rem !important; color: #FFE6F7 !important; }
 
 /* --- 按鈕 --- */
-div.stButton > button {
+.stButton {
+  display: flex !important;
+  justify-content: center !important;
+}
+.stButton > button {
   background-color: #f9c8e6 !important;
   color: #222 !important;
   border: none !important;
   border-radius: 1rem !important;
-  padding: 0.7rem 2rem !important;
+  padding: 0.8rem 2.4rem !important;
   min-width: 220px !important;
-  font-size: 1.08rem !important;
-  box-shadow: 0 0 18px rgba(255, 200, 250, 0.6);
-  transition: all 0.3s ease;
-  display: inline-block !important;
-  text-align: center !important;
+  font-size: 1.1rem !important;
+  font-weight: 500 !important;
+  transition: all 0.35s ease !important;
+  box-shadow: 0 0 20px rgba(255, 200, 250, 0.65) !important;
 }
-div.stButton > button:hover {
+.stButton > button:hover {
   background-color: #ffe1f3 !important;
-  box-shadow: 0 0 25px rgba(255, 200, 250, 0.8);
+  box-shadow: 0 0 28px rgba(255, 200, 250, 0.8) !important;
 }
 
 /* --- 卡片 --- */
 .card-wrapper {
-  border-radius: 1.3rem;
-  padding: 6px;
-  margin: 1rem auto 0;
-  width: min(920px, 92vw);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  border-radius: 1.3rem !important;
+  padding: 6px !important;
+  margin: 1.2rem auto 0 !important;
+  width: min(920px, 92vw) !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  transition: all 0.6s ease-in-out !important;
 }
-.root-glow  { box-shadow: 0 0 36px 8px rgba(255,102,102,0.6); }
-.sacral-glow{ box-shadow: 0 0 36px 8px rgba(255,165,0,0.6); }
-.solar-glow { box-shadow: 0 0 36px 8px rgba(255,230,128,0.6); }
-.heart-glow { box-shadow: 0 0 36px 8px rgba(144,238,144,0.6); }
-.throat-glow{ box-shadow: 0 0 36px 8px rgba(135,206,250,0.6); }
-.third-glow { box-shadow: 0 0 36px 8px rgba(186,85,211,0.6); }
-.crown-glow { box-shadow: 0 0 36px 8px rgba(255,182,255,0.6); }
-
 .card-container {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 1.2rem;
-  padding: 1.3rem;
-  backdrop-filter: blur(4px);
-  color: #fff;
-  animation: breatheGlow 6s ease-in-out infinite;
+  position: relative !important;
+  background: rgba(255,255,255,0.06) !important;
+  border: 1px solid rgba(255,255,255,0.15) !important;
+  border-radius: 1.2rem !important;
+  padding: 1.3rem !important;
+  backdrop-filter: blur(6px) !important;
+  color: #fff !important;
+  box-shadow: 0 0 45px rgba(255, 180, 230, 0.25) !important;
+  animation: breatheGlow 6s ease-in-out infinite !important;
 }
 @keyframes breatheGlow {
-  0%,100% { box-shadow: 0 0 20px rgba(255,255,255,0.08); }
-  50%     { box-shadow: 0 0 45px rgba(255,255,255,0.2); }
+  0%,100% { box-shadow: 0 0 25px rgba(255, 200, 240, 0.3); }
+  50% { box-shadow: 0 0 55px rgba(255, 200, 240, 0.6); }
 }
+
+/* --- 文字樣式 --- */
+.sentence {
+  font-size: 1.08rem !important;
+  background: rgba(255,255,255,0.08) !important;
+  padding: 1rem 1.2rem !important;
+  border-radius: 1rem !important;
+  margin: 1rem auto !important;
+  display: inline-block !important;
+}
+.angel, .meaning {
+  font-size: 1rem !important;
+  color: #FFE6F7 !important;
+  margin-top: 0.4rem !important;
+}
+.hint { margin-top: 1rem !important; color: #FFD6F6 !important; font-size: 1rem !important; }
+.footer { font-size: 0.9rem !important; color: #FFE6F7 !important; margin-top: 2rem !important; padding-bottom: 1rem !important; opacity: 0.85 !important; }
 
 /* --- Loader --- */
 #loader {
@@ -88,30 +103,33 @@ div.stButton > button:hover {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at center, rgba(0,0,0,0.95), rgba(0,0,0,1));
+  background: radial-gradient(circle at center, rgba(0,0,0,0.97), rgba(0,0,0,1));
   z-index: 9999;
+  opacity: 1;
   animation: fadeOutLoader 5s ease-in-out forwards;
+  animation-delay: 1.2s;
 }
 #loader .glow-circle {
   width: 120px; height: 120px; border-radius: 50%;
-  background: radial-gradient(circle at center, rgba(255,192,203,0.9), rgba(255,182,193,0.15));
-  box-shadow: 0 0 80px 40px rgba(255,182,193,0.4);
-  animation: pulse 2.4s infinite ease-in-out;
+  background: radial-gradient(circle at center, rgba(255,192,203,0.9), rgba(255,182,193,0.1));
+  box-shadow: 0 0 80px 40px rgba(255,182,193,0.45);
+  animation: pulse 2.8s infinite ease-in-out;
 }
 #loader .loader-text {
   color: #ffe3f1;
   font-size: 22px;
   margin-top: 35px;
-  text-shadow: 0 0 12px #ffb6c1, 0 0 24px rgba(255,192,203,0.5);
-}
-@keyframes fadeOutLoader {
-  0%,75% { opacity: 1; }
-  100% { opacity: 0; visibility: hidden; }
+  text-shadow: 0 0 12px #ffb6c1, 0 0 24px rgba(255,192,203,0.6);
+  letter-spacing: 2px;
 }
 @keyframes pulse {
   0% { transform: scale(0.9); opacity: 0.8; }
-  50% { transform: scale(1.08); opacity: 1; }
+  50% { transform: scale(1.1); opacity: 1; }
   100% { transform: scale(0.9); opacity: 0.8; }
+}
+@keyframes fadeOutLoader {
+  0%,80% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
 }
 
 /* --- 星光粒子 --- */
@@ -121,16 +139,22 @@ div.stButton > button:hover {
   top: 0; left: 0;
   width: 100%; height: 100%;
   background:
-    radial-gradient(circle, rgba(255,255,255,0.12) 2px, transparent 2px),
-    radial-gradient(circle, rgba(255,200,250,0.1) 1.5px, transparent 2px),
+    radial-gradient(circle, rgba(255,255,255,0.15) 2px, transparent 2px),
+    radial-gradient(circle, rgba(255,200,250,0.12) 1.5px, transparent 2px),
     radial-gradient(circle, rgba(200,180,255,0.1) 1px, transparent 2px);
   background-size: 150px 150px, 200px 200px, 250px 250px;
   background-position: 0 0, 80px 60px, 120px 100px;
   animation: sparkle 90s linear infinite;
-  z-index: -1;
+  z-index: 0;
   opacity: 0.7;
+  pointer-events: none;
 }
 @keyframes sparkle {
   from { background-position: 0 0, 80px 60px, 120px 100px; }
   to { background-position: -600px -600px, -500px -400px, -700px -700px; }
+}
+
+/* --- 修正 Streamlit Layout spacing --- */
+.block-container {
+  padding-top: 0.5rem !important;
 }

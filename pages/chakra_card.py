@@ -5,7 +5,7 @@ import uuid
 from counter_utils import bump_counter
 
 def render_chakra_card():
-    # 載入樣式
+    # 套用樣式
     with open("style.css", "r", encoding="utf-8") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
@@ -21,8 +21,8 @@ def render_chakra_card():
     </div>
     """, unsafe_allow_html=True)
 
-    # 標題
     st.markdown("<div class='subtitle'>✨ 今日的靈魂訊息 ✨</div>", unsafe_allow_html=True)
+
     bump_counter()
 
     with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
@@ -46,13 +46,11 @@ def render_chakra_card():
             "uid": str(uuid.uuid4())
         }
 
-    # 抽卡按鈕
     btn_text = "🔮 抽卡" if not st.session_state.card else "🌙 再抽一張"
     st.markdown('<div class="button-center">', unsafe_allow_html=True)
     st.button(btn_text, on_click=draw_card, key="draw_card_btn")
     st.markdown('</div>', unsafe_allow_html=True)
 
-    # 卡片顯示
     if st.session_state.card:
         c = st.session_state.card
         st.markdown(f"""

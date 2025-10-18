@@ -1,30 +1,35 @@
 import streamlit as st
 import time
-from counter_utils import fetch_report
 import pandas as pd
+from counter_utils import fetch_report
 
 def render_admin_report():
+    # --- CSS ---
     with open("style.css", "r", encoding="utf-8") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-    # --- 載入動畫 ---
+    # --- 載入動畫（淡入） ---
     st.markdown("""
     <div class="loader-wrapper" id="soul-loader">
         <div class="glow-circle"></div>
-        <div class="loader-text">🌸 資料同步中...</div>
+        <div class="loader-text">🌙 正在載入訪問報表...</div>
     </div>
     <script>
-    setTimeout(function(){
-        const loader = document.getElementById('soul-loader');
-        if (loader){
-            loader.style.opacity='0';
-            setTimeout(()=>loader.remove(),1600);
-        }
-    }, 2200);
+    window.addEventListener("load", () => {
+      const loader = document.getElementById("soul-loader");
+      if (!loader) return;
+      loader.style.opacity = "0";
+      setTimeout(() => {
+        loader.style.visibility = "hidden";
+        loader.remove();
+      }, 1600);
+    });
     </script>
     """, unsafe_allow_html=True)
-    time.sleep(2.2)
 
+    time.sleep(1.8)
+
+    # --- 取得資料 ---
     data = fetch_report()
     rows = data["rows"]
 

@@ -1,34 +1,28 @@
 import streamlit as st
 import pandas as pd
-import altair as alt
-from counter_utils import load_counter
+from counter_utils import fetch_report
 
 def render_admin_report():
-    """Sara 專用後台統計畫面"""
-    st.title("📊 七脈輪靈魂共振卡｜訪問統計報表")
+    st.markdown("<style>.stApp{color:#FFE6F7;}</style>", unsafe_allow_html=True)
+    st.title("📊 訪問統計（管理者）")
 
     try:
-        data = load_counter()
-        if not data or not data.get("dates"):
-            st.info("目前尚無訪問資料 🌙")
-            return
-
-        # 將資料轉成 DataFrame
-        df = pd.DataFrame(list(data["dates"].items()), columns=["日期", "訪問數"])
-
-        # 顯示統計表格
-        st.dataframe(df, use_container_width=True)
-
-        # 折線圖
-        chart = (
-            alt.Chart(df)
-            .mark_line(point=True)
-            .encode(x="日期", y="訪問數")
-            .properties(title="每日訪問趨勢")
-        )
-        st.altair_chart(chart, use_container_width=True)
-
-        st.markdown(f"🌕 累積訪問次數：**{data['total']}**")
-
+        data = fetch_report()
     except Exception as e:
-        st.error(f"⚠️ 無法載入報表資料：{e}")
+        st.error(f"讀取統計資料失敗：{e}")
+        return
+
+    st.markdown(
+        f"**今日訪問**：{data['today']}　|　**累積訪問**：{data['total']}"
+    )
+
+    rows = data["rows"]
+    if not rows:
+        st.info("目前還沒有資料。")
+        return
+
+    df = pd.DataFrame(rows, columns=["日期", "訪問數", "累積訪問"])
+    st.dataframe(df, use_container_width=True)
+
+    # 簡單折線圖（使用 Streamlit 內建）
+    st.line_chart(df.set_index("日期")[["訪問數","累積訪問"]])

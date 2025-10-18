@@ -24,24 +24,33 @@ def bump_counter():
     sheet = _get_gsheet()
     today = datetime.now().strftime("%Y-%m-%d")
 
-    # 取得現有資料
     existing = sheet.get_all_records()
     existing_dates = {row["日期"]: row for row in existing if "日期" in row}
 
+    # 取得當天與總訪問數
     if today in existing_dates:
-        # 更新當日訪問次數
+        row = existing_dates[today]
+        today_count = _safe_int(row.get("訪問數", 0)) + 1
+        total_count = _safe_int(row.get("累積訪問", 0)) + 1
         cell = sheet.find(today)
         if cell:
-            today_count = int(existing_dates[today]["訪問數"]) + 1
-            total_count = int(existing_dates[today]["累積訪問"])
             sheet.update_cell(cell.row, 2, today_count)
+            sheet.update_cell(cell.row, 3, total_count)
     else:
-        # 新增今日記錄
-        total_count = 1 if not existing else existing[-1]["累積訪問"] + 1
-        today_count = 1
+        # 新增第一筆或下一天資料
+        last_total = _safe_int(existing[-1].get("累積訪問", 0)) if existing else 0
+        today_count, total_count = 1, last_total + 1
         sheet.append_row([today, today_count, total_count])
 
     return {"today": today_count, "total": total_count}
+
+
+def _safe_int(value):
+    """防呆轉換數字"""
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return 0
 
 
 def load_counter():
@@ -51,6 +60,12 @@ def load_counter():
     if not records:
         return {"dates": {}, "total": 0}
 
-    dates = {r["日期"]: r["訪問數"] for r in records if "日期" in r}
-    total = records[-1]["累積訪問"]
+    dates = {}
+    for r in records:
+        try:
+            dates[r["日期"]] = _safe_int(r["訪問數"])
+        except KeyError:
+            pass
+
+    total = _safe_int(records[-1].get("累積訪問", 0))
     return {"dates": dates, "total": total}

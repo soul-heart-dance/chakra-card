@@ -5,58 +5,79 @@ import json
 from counter_utils import bump_counter
 
 def render_chakra_card():
-    """主要抽卡頁面"""
-    st.markdown("<h1 style='text-align:center;'>Soul Heart Dance</h1>", unsafe_allow_html=True)
-    st.markdown("<h3 style='text-align:center;'>七脈輪靈魂共振卡 ✨</h3>", unsafe_allow_html=True)
-    st.markdown("<p style='text-align:center;'>✨ 今日的靈魂訊息 ✨</p>", unsafe_allow_html=True)
+    """訪客抽卡頁面（不顯示統計）"""
+    st.set_page_config(page_title="Soul Heart Dance｜七脈輪靈魂共振卡", page_icon="🔮", layout="centered")
 
-    # 計數邏輯
+    # 載入資料與樣式
+    with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
+        data = json.load(f)
+    with open("style.css", "r", encoding="utf-8") as f:
+        css = f.read()
+    st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
+
+    # 每次進入仍會計數（但不顯示）
     try:
-        counter_data = bump_counter()
-        st.markdown(
-            f"<div style='text-align:center; color:#aaa;'>今日訪問：{counter_data['today']} ｜ 累積訪問：{counter_data['total']}</div>",
-            unsafe_allow_html=True
-        )
-    except Exception as e:
-        st.error(f"⚠️ 計數器錯誤：{e}")
+        bump_counter()
+    except:
+        pass
 
-    # 抽卡狀態初始化
+    # 初始化
     if "card" not in st.session_state:
         st.session_state.card = None
 
+    # Header
+    logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
+    st.markdown(f"""
+    <div class="header">
+      <img src="{logo_url}" class="logo" alt="Soul Heart Dance Logo">
+      <div class="title">
+        <div class="title-line1">Soul Heart Dance</div>
+        <div class="title-line2">七脈輪靈魂共振卡</div>
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # 副標題
+    st.markdown("<div class='subtitle'>✨ 今日的靈魂訊息 ✨</div>", unsafe_allow_html=True)
+
+    # 抽卡邏輯
+    def draw_card():
+        chakra = random.choice(list(data.keys()))
+        meta = data[chakra]
+        card = random.choice(meta["cards"])
+        return {
+            "chakra": chakra,
+            "seed": meta["seed"],
+            "color": meta["color"],
+            "glow": meta["class"],
+            "sentence": card["sentence"],
+            "angel_number": card["angel_number"],
+            "angel_meaning": card["angel_meaning"],
+            "uid": str(uuid.uuid4())
+        }
+
     # 抽卡按鈕
     button_text = "🔮 抽卡" if st.session_state.card is None else "🌙 再抽一張"
-    if st.button(button_text):
+    st.markdown('<div class="button-center">', unsafe_allow_html=True)
+    if st.button(button_text, key="draw_card"):
         st.session_state.card = draw_card()
+    st.markdown('</div>', unsafe_allow_html=True)
 
-    # 顯示抽卡內容
+    # 顯示卡片
     if st.session_state.card:
         c = st.session_state.card
         st.markdown(f"""
-        <div style='border:1px solid #FFD6F6; border-radius:15px; padding:20px; margin-top:20px; text-align:center; color:{c['color']}; background-color:#111;'>
-            <h3>🌈 {c['chakra']} {c['seed']}</h3>
-            <div style='margin:10px 0;'>{c['sentence']}</div>
-            <div>🪽 天使數字：{c['angel_number']}</div>
-            <div>✨ {c['angel_meaning']}</div>
+        <div class="card-wrapper {c['glow']}" id="{c['uid']}">
+            <div class="card-container animate">
+                <h3 style="color:{c['color']}">🌈 {c['chakra']} {c['seed']}</h3>
+                <div class="sentence">{c['sentence']}</div>
+                <div class="angel">🪽 天使數字：{c['angel_number']}</div>
+                <div class="meaning">✨ {c['angel_meaning']}</div>
+            </div>
         </div>
         """, unsafe_allow_html=True)
     else:
-        st.markdown("<p style='text-align:center;'>🌙 點擊上方按鈕開始抽卡 🌙</p>", unsafe_allow_html=True)
+        st.markdown("<p class='hint'>🌙 點擊上方按鈕開始抽卡 🌙</p>", unsafe_allow_html=True)
 
-
-def draw_card():
-    """抽卡邏輯"""
-    with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
-        data = json.load(f)
-    chakra = random.choice(list(data.keys()))
-    meta = data[chakra]
-    card = random.choice(meta["cards"])
-    return {
-        "chakra": chakra,
-        "seed": meta["seed"],
-        "color": meta["color"],
-        "sentence": card["sentence"],
-        "angel_number": card["angel_number"],
-        "angel_meaning": card["angel_meaning"],
-        "uid": str(uuid.uuid4())
-    }
+    # Footer
+    st.markdown("<div class='footer'>© 2025 Soul Heart Dance · 與靈魂之心共舞</div>", unsafe_allow_html=True)

@@ -5,30 +5,32 @@ html, body, .stApp {
   font-family: "Microsoft JhengHei", Verdana, sans-serif !important;
   text-align: center !important;
   overflow-x: hidden;
+  position: relative;
+  z-index: 0;
 }
 
-/* 🌌 星光漂浮背景 */
-body::before {
+/* 🌌 星光漂浮背景 — 修正層級與透明感 */
+.stApp::before {
   content: "";
   position: fixed;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  pointer-events: none;
   background: radial-gradient(circle, rgba(255,255,255,0.15) 2px, transparent 2px),
               radial-gradient(circle, rgba(255,200,250,0.12) 1.5px, transparent 2px),
               radial-gradient(circle, rgba(200,180,255,0.1) 1px, transparent 2px);
   background-size: 150px 150px, 200px 200px, 250px 250px;
   background-position: 0 0, 50px 80px, 100px 130px;
-  animation: sparkleMove 45s linear infinite;
-  z-index: 0;
+  animation: sparkleMove 80s linear infinite; /* 🩵 放慢漂浮速度 */
+  z-index: -1;
+  opacity: 0.7;
 }
 
 @keyframes sparkleMove {
   from { background-position: 0 0, 50px 80px, 100px 130px; }
-  to { background-position: -200px -200px, -250px -250px, -300px -300px; }
+  to { background-position: -400px -400px, -350px -300px, -500px -500px; }
 }
 
-/* 隱藏預設 sidebar、footer */
+/* 隱藏預設元素 */
 header, footer, .stDeployButton, [data-testid="stSidebar"] {
   display: none !important;
 }
@@ -39,7 +41,7 @@ header, footer, .stDeployButton, [data-testid="stSidebar"] {
   justify-content: center;
   align-items: center;
   gap: 0.6rem;
-  margin-top: -1.6rem;  /* 🩷 微調上方距離 */
+  margin-top: -0.6rem; /* 🎯 改回較貼合的位置 */
 }
 
 .logo {
@@ -52,32 +54,23 @@ header, footer, .stDeployButton, [data-testid="stSidebar"] {
   font-size: 1.45rem;
   font-weight: 700;
   color: #FFE6F7;
+  margin-bottom: 0;
 }
 
 .title-line2 {
   font-size: 1rem;
   font-weight: 500;
   color: #FFD6F6;
-}
-
-.subtitle {
-  font-size: 1.2rem;
-  color: #FFE6F7;
-  margin-top: 1.8rem;
-  text-align: center;
-  letter-spacing: 1px;
+  margin-top: -0.2rem;
 }
 
 /* --- 按鈕 --- */
-.button-center,
-[data-testid="stVerticalBlock"],
-[data-testid="stHorizontalBlock"] {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  width: 100% !important;
-  text-align: center !important;
-  margin: 0.8rem 0 0.8rem 0;
+.button-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 1rem 0;
 }
 
 .stButton > button {
@@ -92,7 +85,6 @@ header, footer, .stDeployButton, [data-testid="stSidebar"] {
   transition: all 0.3s ease;
   box-shadow: 0 0 18px rgba(255, 200, 250, 0.6);
 }
-
 .stButton > button:hover {
   background-color: #ffe1f3 !important;
   box-shadow: 0 0 25px rgba(255, 200, 250, 0.8);
@@ -108,7 +100,6 @@ header, footer, .stDeployButton, [data-testid="stSidebar"] {
   justify-content: center;
   align-items: center;
 }
-
 .root-glow  { box-shadow: 0 0 36px 8px rgba(255,102,102,0.6); }
 .sacral-glow{ box-shadow: 0 0 36px 8px rgba(255,165,0,0.6); }
 .solar-glow { box-shadow: 0 0 36px 8px rgba(255,230,128,0.6); }
@@ -128,58 +119,24 @@ header, footer, .stDeployButton, [data-testid="stSidebar"] {
   animation: breatheGlow 6s ease-in-out infinite;
 }
 
-/* 光暈閃爍動畫 */
 @keyframes breatheGlow {
   0%,100% { box-shadow: 0 0 20px rgba(255,255,255,0.08); }
   50%     { box-shadow: 0 0 45px rgba(255,255,255,0.2); }
 }
 
-/* --- 文字樣式 --- */
-.sentence {
-  font-size: 1.08rem;
-  background: rgba(255,255,255,0.08);
-  padding: 1rem 1.2rem;
-  border-radius: 1rem;
-  margin: 1rem auto;
-  display: inline-block;
-}
-
-.angel, .meaning {
-  font-size: 1rem;
-  color: #FFE6F7;
-  margin-top: 0.4rem;
-}
-
-/* --- 提示與 Footer --- */
-.hint {
-  margin-top: 1rem;
-  color: #FFD6F6;
-  font-size: 1rem;
-}
-
-.footer {
-  font-size: 0.9rem;
-  color: #FFE6F7;
-  margin-top: 2rem;
-  padding-bottom: 1rem;
-  opacity: 0.8;
-}
-
-/* --- 靈魂連線載入動畫 --- */
+/* --- 靈魂連線載入動畫（放慢動畫＋確保置中） --- */
 .loader-wrapper {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at center, rgba(0,0,0,0.95) 0%, rgba(0,0,0,1) 100%);
+  background: radial-gradient(circle at center, rgba(0,0,0,0.96) 0%, rgba(0,0,0,1) 100%);
   z-index: 9999;
-  animation: fadeout 1.8s ease-in-out forwards;
-  animation-delay: 1.8s;
+  animation: fadeout 3.6s ease-in-out forwards; /* 🌸放慢退出速度 */
+  animation-delay: 2.4s; /* 🌸延遲再退出 */
 }
 
 .glow-circle {
@@ -188,7 +145,7 @@ header, footer, .stDeployButton, [data-testid="stSidebar"] {
   border-radius: 50%;
   background: radial-gradient(circle at center, rgba(255,192,203,0.9), rgba(255,182,193,0.15));
   box-shadow: 0 0 80px 40px rgba(255,182,193,0.4);
-  animation: pulse 1.6s infinite ease-in-out;
+  animation: pulse 2.4s infinite ease-in-out; /* 🌸放慢呼吸節奏 */
 }
 
 .loader-text {
@@ -203,21 +160,17 @@ header, footer, .stDeployButton, [data-testid="stSidebar"] {
 
 @keyframes pulse {
   0% { transform: scale(0.9); opacity: 0.8; }
-  50% { transform: scale(1.05); opacity: 1; }
+  50% { transform: scale(1.08); opacity: 1; }
   100% { transform: scale(0.9); opacity: 0.8; }
 }
 
 @keyframes fadeout {
-  100% {
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(1.1);
-  }
+  100% { opacity: 0; visibility: hidden; transform: scale(1.05); }
 }
 
 /* --- 手機版調整 --- */
 @media screen and (max-width: 480px) {
   .title-line1 { font-size: 1.25rem; }
   .title-line2 { font-size: 0.9rem; }
-  .header { margin-top: -1.8rem; }
+  .header { margin-top: -1rem; } /* 🩷 小螢幕再稍微貼近 */
 }

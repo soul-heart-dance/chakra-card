@@ -13,7 +13,7 @@ query_params = st.query_params
 mode = query_params.get("page", ["card"])[0]
 sara_key = query_params.get("sara", ["0"])[0]
 
-# 管理者暗碼
+# 模式切換
 if sara_key == "1":
     render_admin_report()
 elif mode == "admin":

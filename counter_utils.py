@@ -1,27 +1,29 @@
+# counter_utils.py
 import json
-import os
+from pathlib import Path
 from datetime import datetime
 
-DATA_DIR = "data"
-COUNTER_FILE = os.path.join(DATA_DIR, "counter.json")
-os.makedirs(DATA_DIR, exist_ok=True)
+DATA_DIR = Path(__file__).parent / "data"
+COUNTER_FILE = DATA_DIR / "counter.json"
+DATA_DIR.mkdir(exist_ok=True)
 
-def update_counter():
-    """更新訪問計數並回傳目前統計資料"""
-    if not os.path.exists(COUNTER_FILE):
-        data = {"total": 0, "dates": {}}
-    else:
-        try:
-            with open(COUNTER_FILE, "r", encoding="utf-8") as f:
-                data = json.load(f)
-        except Exception:
-            data = {"total": 0, "dates": {}}
+def _load():
+    if COUNTER_FILE.exists():
+        return json.loads(COUNTER_FILE.read_text(encoding="utf-8"))
+    return {"total": 0, "dates": {}}
 
+def _save(data):
+    COUNTER_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+
+def bump_counter():
+    """每次開頁＋1。回傳最新資料 dict。"""
+    data = _load()
     today = datetime.now().strftime("%Y-%m-%d")
     data["total"] += 1
     data["dates"][today] = data["dates"].get(today, 0) + 1
-
-    with open(COUNTER_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-
+    _save(data)
     return data
+
+def read_counter():
+    """只讀取計數（不+1）。"""
+    return _load()

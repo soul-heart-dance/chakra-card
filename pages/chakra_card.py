@@ -6,7 +6,7 @@ import uuid
 from counter_utils import bump_counter
 
 def render_chakra_card():
-    # --- 加載 CSS ---
+    # --- CSS ---
     with open("style.css", "r", encoding="utf-8") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
@@ -17,18 +17,22 @@ def render_chakra_card():
         <div class="loader-text">🌸 靈魂正在連線中...</div>
     </div>
     <script>
-    setTimeout(function(){
-        const loader = document.getElementById('soul-loader');
-        if (loader){
-            loader.style.opacity='0';
-            setTimeout(()=>loader.remove(),1600);
-        }
-    }, 2200);
+    window.addEventListener("load", () => {
+      const loader = document.getElementById("soul-loader");
+      if (!loader) return;
+      loader.style.opacity = "0";
+      setTimeout(() => {
+        loader.style.visibility = "hidden";
+        loader.remove();
+      }, 1600);
+    });
     </script>
     """, unsafe_allow_html=True)
-    time.sleep(2.2)
 
-    # --- 顯示 Header ---
+    # --- 延遲讓動畫顯示 ---
+    time.sleep(1.8)
+
+    # --- Header ---
     logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
     st.markdown(f"""
     <div class="header">
@@ -39,13 +43,12 @@ def render_chakra_card():
       </div>
     </div>
     """, unsafe_allow_html=True)
-
     st.markdown("<div class='subtitle'>✨ 今日的靈魂訊息 ✨</div>", unsafe_allow_html=True)
 
     # --- 計數更新 ---
     bump_counter()
 
-    # --- 抽卡邏輯 ---
+    # --- 抽卡資料 ---
     with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
         data = json.load(f)
 
@@ -72,6 +75,7 @@ def render_chakra_card():
     st.button(btn_text, on_click=draw_card, key="draw_card")
     st.markdown('</div>', unsafe_allow_html=True)
 
+    # --- 顯示卡片 ---
     if st.session_state.card:
         c = st.session_state.card
         st.markdown(f"""

@@ -7,34 +7,48 @@ html, body, .stApp {
   overflow-x: hidden !important;
 }
 
-/* --- 移除側邊欄 --- */
-[data-testid="stSidebar"], section[data-testid="stSidebar"] {
+/* --- 側邊欄強制隱藏（全版本 Streamlit） --- */
+[data-testid="stSidebar"], section[data-testid="stSidebar"], div[data-testid="stSidebarNav"] {
   display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
 }
 
-/* --- Header --- */
+/* --- Header 區域 --- */
 .header {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
   gap: 0.6rem !important;
-  margin-top: -2rem !important;
+  margin-top: -1.4rem !important;
 }
 .logo {
   height: 56px !important;
   border-radius: 50% !important;
-  box-shadow: 0 0 20px rgba(255, 214, 246, 0.7) !important;
+  box-shadow: 0 0 20px rgba(255, 214, 246, 0.8) !important;
 }
-.title-line1 { font-size: 1.5rem !important; font-weight: 700 !important; color: #FFE6F7 !important; }
-.title-line2 { font-size: 1rem !important; font-weight: 500 !important; color: #FFD6F6 !important; }
-.subtitle { font-size: 1.2rem !important; margin-top: 1.2rem !important; color: #FFE6F7 !important; }
+.title-line1 {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  color: #FFE6F7 !important;
+}
+.title-line2 {
+  font-size: 1rem !important;
+  color: #FFD6F6 !important;
+  margin-top: -2px !important;
+}
+.subtitle {
+  font-size: 1.2rem !important;
+  margin-top: 1.3rem !important;
+  color: #FFE6F7 !important;
+}
 
-/* --- 按鈕 --- */
-.stButton {
+/* --- 按鈕置中 --- */
+div.stButton {
   display: flex !important;
   justify-content: center !important;
 }
-.stButton > button {
+div.stButton > button {
   background-color: #f9c8e6 !important;
   color: #222 !important;
   border: none !important;
@@ -43,57 +57,39 @@ html, body, .stApp {
   min-width: 220px !important;
   font-size: 1.1rem !important;
   font-weight: 500 !important;
-  transition: all 0.35s ease !important;
   box-shadow: 0 0 20px rgba(255, 200, 250, 0.65) !important;
+  transition: all 0.35s ease !important;
 }
-.stButton > button:hover {
+div.stButton > button:hover {
   background-color: #ffe1f3 !important;
   box-shadow: 0 0 28px rgba(255, 200, 250, 0.8) !important;
 }
 
-/* --- 卡片 --- */
+/* --- 卡片區域 --- */
 .card-wrapper {
   border-radius: 1.3rem !important;
-  padding: 6px !important;
+  padding: 8px !important;
   margin: 1.2rem auto 0 !important;
   width: min(920px, 92vw) !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  transition: all 0.6s ease-in-out !important;
 }
 .card-container {
   position: relative !important;
-  background: rgba(255,255,255,0.06) !important;
-  border: 1px solid rgba(255,255,255,0.15) !important;
+  background: rgba(255,255,255,0.05) !important;
+  border: 1px solid rgba(255,255,255,0.2) !important;
   border-radius: 1.2rem !important;
-  padding: 1.3rem !important;
-  backdrop-filter: blur(6px) !important;
+  padding: 1.4rem !important;
+  backdrop-filter: blur(4px) !important;
   color: #fff !important;
-  box-shadow: 0 0 45px rgba(255, 180, 230, 0.25) !important;
-  animation: breatheGlow 6s ease-in-out infinite !important;
+  box-shadow: 0 0 50px 15px rgba(255, 180, 230, 0.25) !important;
+  animation: breatheGlow 5s ease-in-out infinite !important;
 }
 @keyframes breatheGlow {
-  0%,100% { box-shadow: 0 0 25px rgba(255, 200, 240, 0.3); }
-  50% { box-shadow: 0 0 55px rgba(255, 200, 240, 0.6); }
+  0%,100% { box-shadow: 0 0 25px rgba(255, 180, 230, 0.4); }
+  50% { box-shadow: 0 0 60px rgba(255, 180, 230, 0.7); }
 }
-
-/* --- 文字樣式 --- */
-.sentence {
-  font-size: 1.08rem !important;
-  background: rgba(255,255,255,0.08) !important;
-  padding: 1rem 1.2rem !important;
-  border-radius: 1rem !important;
-  margin: 1rem auto !important;
-  display: inline-block !important;
-}
-.angel, .meaning {
-  font-size: 1rem !important;
-  color: #FFE6F7 !important;
-  margin-top: 0.4rem !important;
-}
-.hint { margin-top: 1rem !important; color: #FFD6F6 !important; font-size: 1rem !important; }
-.footer { font-size: 0.9rem !important; color: #FFE6F7 !important; margin-top: 2rem !important; padding-bottom: 1rem !important; opacity: 0.85 !important; }
 
 /* --- Loader --- */
 #loader {
@@ -103,11 +99,9 @@ html, body, .stApp {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at center, rgba(0,0,0,0.97), rgba(0,0,0,1));
-  z-index: 9999;
-  opacity: 1;
+  background: radial-gradient(circle at center, rgba(0,0,0,0.96), rgba(0,0,0,1));
+  z-index: 998; /* 👈 調低，讓星光粒子在上層 */
   animation: fadeOutLoader 5s ease-in-out forwards;
-  animation-delay: 1.2s;
 }
 #loader .glow-circle {
   width: 120px; height: 120px; border-radius: 50%;
@@ -132,7 +126,7 @@ html, body, .stApp {
   100% { opacity: 0; visibility: hidden; }
 }
 
-/* --- 星光粒子 --- */
+/* --- 星光粒子層 (提到最上層) --- */
 .stApp::before {
   content: "";
   position: fixed;
@@ -145,7 +139,7 @@ html, body, .stApp {
   background-size: 150px 150px, 200px 200px, 250px 250px;
   background-position: 0 0, 80px 60px, 120px 100px;
   animation: sparkle 90s linear infinite;
-  z-index: 0;
+  z-index: 999; /* 👈 比 loader 還高 */
   opacity: 0.7;
   pointer-events: none;
 }
@@ -154,7 +148,16 @@ html, body, .stApp {
   to { background-position: -600px -600px, -500px -400px, -700px -700px; }
 }
 
-/* --- 修正 Streamlit Layout spacing --- */
+/* --- footer 調整 --- */
+.footer {
+  font-size: 0.9rem !important;
+  color: #FFE6F7 !important;
+  margin-top: 2rem !important;
+  padding-bottom: 1rem !important;
+  opacity: 0.85 !important;
+}
+
+/* --- 手機版 Layout spacing --- */
 .block-container {
-  padding-top: 0.5rem !important;
+  padding-top: 0.6rem !important;
 }

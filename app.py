@@ -7,9 +7,10 @@ st.set_page_config(
     page_title="Soul Heart Dance｜七脈輪靈魂共振卡",
     page_icon="🔮",
     layout="centered",
+    initial_sidebar_state="collapsed",  # 🚫 關閉側邊欄
 )
 
-# ---- 全域靈魂載入動畫 ----
+# ---- 顯示靈魂連線動畫（全域）----
 st.markdown("""
 <div id="loader">
   <div class="glow-circle"></div>
@@ -17,7 +18,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ---- 控制進入哪個頁面 ----
+# ---- 控制頁面 ----
 query_params = st.query_params
 mode = query_params.get("page", ["card"])[0]
 sara_key = query_params.get("sara", ["0"])[0]

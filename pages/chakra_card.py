@@ -2,10 +2,11 @@ import streamlit as st
 import random
 import uuid
 import json
+import time
 from counter_utils import bump_counter
 
 def render_chakra_card():
-    """訪客抽卡頁面（不顯示統計）"""
+    """訪客抽卡頁面（含柔光載入動畫）"""
     st.set_page_config(page_title="Soul Heart Dance｜七脈輪靈魂共振卡", page_icon="🔮", layout="centered")
 
     # 載入資料與樣式
@@ -15,15 +16,67 @@ def render_chakra_card():
         css = f.read()
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 
-    # 每次進入仍會計數（但不顯示）
+    # 背景計數（不顯示）
     try:
         bump_counter()
     except:
         pass
 
-    # 初始化
+    # ✅ 初始化 session_state
     if "card" not in st.session_state:
         st.session_state.card = None
+    if "clicked" not in st.session_state:
+        st.session_state.clicked = False
+    if "show_loader" not in st.session_state:
+        st.session_state.show_loader = True
+
+    # ✅ 柔光載入動畫
+    if st.session_state.show_loader:
+        loader_html = """
+        <div class="loader-wrapper">
+          <div class="glow-circle"></div>
+          <div class="loader-text">🌸 靈魂正在連線中...</div>
+        </div>
+        <style>
+          .loader-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 85vh;
+            animation: fadeout 1.8s ease-in-out forwards;
+            animation-delay: 1.8s;
+          }
+          .glow-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, rgba(255,192,203,0.9), rgba(255,182,193,0.1));
+            box-shadow: 0 0 60px 25px rgba(255,192,203,0.5);
+            animation: pulse 1.5s infinite ease-in-out;
+          }
+          .loader-text {
+            color: #ffd9ec;
+            font-size: 20px;
+            margin-top: 30px;
+            font-family: "Noto Sans TC", sans-serif;
+            text-shadow: 0 0 10px #ffb6c1;
+          }
+          @keyframes pulse {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+          }
+          @keyframes fadeout {
+            100% { opacity: 0; visibility: hidden; }
+          }
+        </style>
+        """
+        st.markdown(loader_html, unsafe_allow_html=True)
+        time.sleep(1.8)
+        st.session_state.show_loader = False
+        st.experimental_rerun()
+        return
 
     # Header
     logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
@@ -59,12 +112,14 @@ def render_chakra_card():
     # 抽卡按鈕
     button_text = "🔮 抽卡" if st.session_state.card is None else "🌙 再抽一張"
     st.markdown('<div class="button-center">', unsafe_allow_html=True)
-    if st.button(button_text, key="draw_card"):
+    if st.button(button_text, key="draw_button"):
         st.session_state.card = draw_card()
+        st.session_state.clicked = True
+        st.experimental_rerun()
     st.markdown('</div>', unsafe_allow_html=True)
 
     # 顯示卡片
-    if st.session_state.card:
+    if st.session_state.card and st.session_state.clicked:
         c = st.session_state.card
         st.markdown(f"""
         <div class="card-wrapper {c['glow']}" id="{c['uid']}">

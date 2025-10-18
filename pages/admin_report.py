@@ -1,9 +1,10 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime
+import plotly.graph_objects as go
 
 def show_admin_report(counter_data):
-    # --- 套用柔光主題 ---
+    # --- 柔光主題樣式 ---
     st.markdown("""
         <style>
         body, .stApp {
@@ -43,7 +44,7 @@ def show_admin_report(counter_data):
     """, unsafe_allow_html=True)
 
     # --- 主標題 ---
-    st.markdown('<div class="report-title">📊 靈魂訪問統計儀表板</div>', unsafe_allow_html=True)
+    st.markdown('<div class="report-title">📊 靈魂訪問能量波動儀</div>', unsafe_allow_html=True)
 
     today = datetime.now().strftime("%Y-%m-%d")
     today_count = counter_data["dates"].get(today, 0)
@@ -59,28 +60,47 @@ def show_admin_report(counter_data):
     </div>
     """, unsafe_allow_html=True)
 
-    # --- 統計資料表 ---
+    # --- 統計資料 ---
     if counter_data["dates"]:
         rows = sorted(counter_data["dates"].items(), key=lambda x: x[0])
         df = pd.DataFrame(rows, columns=["日期", "訪問次數"])
 
         st.markdown('<div class="report-box">', unsafe_allow_html=True)
         st.markdown("🗓️ <b>每日訪問紀錄</b>", unsafe_allow_html=True)
-        st.dataframe(
-            df,
-            hide_index=True,
-            use_container_width=True,
-        )
+        st.dataframe(df, hide_index=True, use_container_width=True)
         st.markdown("</div>", unsafe_allow_html=True)
 
-        # --- 折線圖 ---
+        # --- 🌈 粉金柔光折線圖 ---
         st.markdown('<div class="report-box">', unsafe_allow_html=True)
-        st.markdown("📈 <b>訪問趨勢圖</b>", unsafe_allow_html=True)
-        st.line_chart(
-            df.set_index("日期"),
-            height=240,
-            use_container_width=True
+        st.markdown("🌙 <b>能量波動圖</b>", unsafe_allow_html=True)
+
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(
+            x=df["日期"],
+            y=df["訪問次數"],
+            mode="lines+markers",
+            line=dict(color="rgba(255,192,203,0.9)", width=3),
+            marker=dict(
+                size=8,
+                color="rgba(255,223,240,1)",
+                line=dict(width=1, color="rgba(255,255,255,0.7)")
+            ),
+            fill='tozeroy',
+            fillcolor='rgba(255,182,193,0.15)',
+            hovertemplate="📅 %{x}<br>✨ 訪問次數：%{y}<extra></extra>"
+        ))
+
+        fig.update_layout(
+            height=320,
+            margin=dict(l=20, r=20, t=20, b=30),
+            paper_bgcolor="rgba(0,0,0,0)",
+            plot_bgcolor="rgba(0,0,0,0)",
+            font=dict(color="#FFE6F7", size=13),
+            xaxis=dict(showgrid=False),
+            yaxis=dict(showgrid=True, gridcolor="rgba(255,255,255,0.1)")
         )
+
+        st.plotly_chart(fig, use_container_width=True)
         st.markdown("</div>", unsafe_allow_html=True)
 
         # --- 匯出按鈕 ---

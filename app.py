@@ -79,7 +79,7 @@ st.markdown("""
 counter_data = update_counter()
 
 # === 隱藏版管理檢視 ===
-query_params = st.experimental_get_query_params()
+query_params = st.query_params
 if query_params.get("sara") == ["1"]:
     today = datetime.now().strftime("%Y-%m-%d")
     today_count = counter_data["dates"].get(today, 0)

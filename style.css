@@ -187,4 +187,54 @@
     max-width: 480px;
     margin: 0 auto;
   }
+
+  /* 🌸 靈魂連線載入動畫（完美置中＋星光淡入淡出） */
+.loader-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, rgba(0,0,0,0.9) 0%, rgba(0,0,0,1) 100%);
+  z-index: 9999;
+  animation: fadeout 1.8s ease-in-out forwards;
+  animation-delay: 1.8s;
+}
+
+.glow-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(255,192,203,0.9), rgba(255,182,193,0.15));
+  box-shadow: 0 0 80px 40px rgba(255,182,193,0.4);
+  animation: pulse 1.6s infinite ease-in-out;
+}
+
+.loader-text {
+  color: #ffe3f1;
+  font-size: 22px;
+  margin-top: 35px;
+  font-family: "Noto Sans TC", sans-serif;
+  text-shadow: 0 0 12px #ffb6c1, 0 0 24px rgba(255,192,203,0.5);
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+@keyframes fadeout {
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+  }
+}
 }

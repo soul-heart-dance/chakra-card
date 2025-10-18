@@ -3,6 +3,28 @@ import random
 import streamlit as st
 import uuid
 
+from datetime import datetime
+import os
+from urllib.parse import urlparse, parse_qs
+
+COUNTER_FILE = "counter.json"
+
+def update_counter():
+    """更新訪問計數"""
+    if not os.path.exists(COUNTER_FILE):
+        data = {"total": 0, "dates": {}}
+    else:
+        with open(COUNTER_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+    today = datetime.now().strftime("%Y-%m-%d")
+    data["total"] += 1
+    data["dates"][today] = data["dates"].get(today, 0) + 1
+
+    with open(COUNTER_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+    return data
+
 st.set_page_config(
     page_title="Soul Heart Dance｜七脈輪靈魂共振卡",
     page_icon="🔮",
@@ -46,6 +68,24 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+# ---------- 計數器 ----------
+counter_data = update_counter()
+
+# ---------- 隱藏版管理者檢視 ----------
+query_params = st.query_params
+if query_params.get("sara") == ["1"]:  # Sara 專用暗號
+    today = datetime.now().strftime("%Y-%m-%d")
+    today_count = counter_data["dates"].get(today, 0)
+    total_count = counter_data["total"]
+    st.markdown(
+        f"""
+        <div style='text-align:right; font-size:0.9rem; color:#FFD6F6; opacity:0.85;'>
+        今日訪問：{today_count}　|　累積訪問：{total_count}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
 # ---------- 抽卡邏輯 ----------
 def draw_card():
     chakra = random.choice(list(data.keys()))
@@ -66,7 +106,7 @@ def draw_card():
 # ---------- 按鈕 ----------
 button_text = "🔮 抽卡" if st.session_state.card is None else "🌙 再抽一張"
 st.markdown('<div class="button-center">', unsafe_allow_html=True)
-st.button(button_text, on_click=draw_card, key=str(uuid.uuid4()))
+st.button(button_text, on_click=draw_card, key="draw_button")
 st.markdown('</div>', unsafe_allow_html=True)
 
 # ---------- 顯示卡片 ----------

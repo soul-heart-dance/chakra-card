@@ -9,8 +9,20 @@ DATA_DIR.mkdir(exist_ok=True)
 
 def _load():
     if COUNTER_FILE.exists():
-        return json.loads(COUNTER_FILE.read_text(encoding="utf-8"))
-    return {"total": 0, "dates": {}}
+        try:
+            text = COUNTER_FILE.read_text(encoding="utf-8").strip()
+            if not text:
+                raise ValueError("Empty file")
+            return json.loads(text)
+        except Exception:
+            # 自動修復損壞或空檔
+            data = {"total": 0, "dates": {}}
+            _save(data)
+            return data
+    else:
+        data = {"total": 0, "dates": {}}
+        _save(data)
+        return data
 
 def _save(data):
     COUNTER_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")

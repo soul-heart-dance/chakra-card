@@ -2,36 +2,45 @@ import json
 import random
 import streamlit as st
 import uuid
-
-from datetime import datetime
 import os
-from urllib.parse import urlparse, parse_qs
+from datetime import datetime
 
+# === 計數器檔案 ===
 COUNTER_FILE = "counter.json"
 
 def update_counter():
     """更新訪問計數"""
-    if not os.path.exists(COUNTER_FILE):
-        data = {"total": 0, "dates": {}}
-    else:
-        with open(COUNTER_FILE, "r", encoding="utf-8") as f:
-            data = json.load(f)
+    data = {"total": 0, "dates": {}}
+
+    # 嘗試讀取舊資料（若檔案存在）
+    if os.path.exists(COUNTER_FILE):
+        try:
+            with open(COUNTER_FILE, "r", encoding="utf-8") as f:
+                data = json.load(f)
+        except Exception:
+            pass  # 避免格式錯誤導致程式中斷
 
     today = datetime.now().strftime("%Y-%m-%d")
     data["total"] += 1
     data["dates"][today] = data["dates"].get(today, 0) + 1
 
-    with open(COUNTER_FILE, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+    # 嘗試寫入（若無權限，略過）
+    try:
+        with open(COUNTER_FILE, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+    except Exception:
+        st.session_state.no_write = True
+
     return data
 
+# === 基本設定 ===
 st.set_page_config(
     page_title="Soul Heart Dance｜七脈輪靈魂共振卡",
     page_icon="🔮",
     layout="centered"
 )
 
-# ---------- 載入資料與樣式 ----------
+# === 載入資料與樣式 ===
 @st.cache_data
 def load_data():
     with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
@@ -45,11 +54,11 @@ def load_css():
 data = load_data()
 st.markdown(f"<style>{load_css()}</style>", unsafe_allow_html=True)
 
-# ---------- 初始化 ----------
+# === 初始化 ===
 if "card" not in st.session_state:
     st.session_state.card = None
 
-# ---------- Header ----------
+# === Header ===
 logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
 st.markdown(f"""
 <div class="header">
@@ -61,22 +70,21 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# ---------- 標題文字 ----------
+# === 標題 ===
 st.markdown("""
-<div class="subtitle">
-✨ 今日的靈魂訊息 ✨
-</div>
+<div class="subtitle">✨ 今日的靈魂訊息 ✨</div>
 """, unsafe_allow_html=True)
 
-# ---------- 計數器 ----------
+# === 更新計數 ===
 counter_data = update_counter()
 
-# ---------- 隱藏版管理者檢視 ----------
-query_params = st.query_params
-if query_params.get("sara") == ["1"]:  # Sara 專用暗號
+# === 隱藏版管理檢視 ===
+query_params = st.experimental_get_query_params()
+if query_params.get("sara") == ["1"]:
     today = datetime.now().strftime("%Y-%m-%d")
     today_count = counter_data["dates"].get(today, 0)
     total_count = counter_data["total"]
+
     st.markdown(
         f"""
         <div style='text-align:right; font-size:0.9rem; color:#FFD6F6; opacity:0.85;'>
@@ -86,12 +94,16 @@ if query_params.get("sara") == ["1"]:  # Sara 專用暗號
         unsafe_allow_html=True
     )
 
-# ---------- 抽卡邏輯 ----------
+    # 顯示是否可寫入提示（僅管理模式下）
+    if st.session_state.get("no_write"):
+        st.warning("⚠️ 目前空間未啟用 Persistent storage，訪問數據暫不會保存。")
+
+# === 抽卡邏輯 ===
 def draw_card():
     chakra = random.choice(list(data.keys()))
     meta = data[chakra]
     card = random.choice(meta["cards"])
-    uid = str(uuid.uuid4())  # 每次抽新卡都創建唯一 key
+    uid = str(uuid.uuid4())
     st.session_state.card = {
         "chakra": chakra,
         "seed": meta["seed"],
@@ -103,13 +115,13 @@ def draw_card():
         "uid": uid
     }
 
-# ---------- 按鈕 ----------
+# === 按鈕 ===
 button_text = "🔮 抽卡" if st.session_state.card is None else "🌙 再抽一張"
 st.markdown('<div class="button-center">', unsafe_allow_html=True)
 st.button(button_text, on_click=draw_card, key="draw_button")
 st.markdown('</div>', unsafe_allow_html=True)
 
-# ---------- 顯示卡片 ----------
+# === 顯示卡片 ===
 if st.session_state.card:
     c = st.session_state.card
     st.markdown(f"""
@@ -125,7 +137,7 @@ if st.session_state.card:
 else:
     st.markdown("<p class='hint'>🌙 點擊上方按鈕開始抽卡 🌙</p>", unsafe_allow_html=True)
 
-# ---------- Footer ----------
+# === Footer ===
 st.markdown("""
 <div class="footer">
 © 2025 Soul Heart Dance · 與靈魂之心共舞

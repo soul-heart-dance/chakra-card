@@ -3,28 +3,32 @@ import pandas as pd
 import altair as alt
 from counter_utils import load_counter
 
-def show_admin_report():
-    query_params = st.query_params
-    if query_params.get("sara") != ["1"]:
-        st.error("🚫 沒有權限訪問此頁面")
-        return
+def render_admin_report():
+    """Sara 專用後台統計畫面"""
+    st.title("📊 七脈輪靈魂共振卡｜訪問統計報表")
 
-    st.title("📊 訪問統計報表")
+    try:
+        data = load_counter()
+        if not data or not data.get("dates"):
+            st.info("目前尚無訪問資料 🌙")
+            return
 
-    counter = load_counter()
-    if not counter["dates"]:
-        st.info("尚無資料可顯示 🌙")
-        return
+        # 將資料轉成 DataFrame
+        df = pd.DataFrame(list(data["dates"].items()), columns=["日期", "訪問數"])
 
-    today = pd.Timestamp.today().strftime("%Y-%m-%d")
-    today_count = counter["dates"].get(today, 0)
-    st.markdown(f"✨ 今日訪問：**{today_count}**　|　累積訪問：**{counter['total']}**")
+        # 顯示統計表格
+        st.dataframe(df, use_container_width=True)
 
-    df = pd.DataFrame(list(counter["dates"].items()), columns=["日期", "訪問次數"])
-    st.table(df)
-
-    if len(df) > 1:
-        chart = alt.Chart(df).mark_line(point=True).encode(
-            x="日期", y="訪問次數"
-        ).properties(height=300)
+        # 折線圖
+        chart = (
+            alt.Chart(df)
+            .mark_line(point=True)
+            .encode(x="日期", y="訪問數")
+            .properties(title="每日訪問趨勢")
+        )
         st.altair_chart(chart, use_container_width=True)
+
+        st.markdown(f"🌕 累積訪問次數：**{data['total']}**")
+
+    except Exception as e:
+        st.error(f"⚠️ 無法載入報表資料：{e}")

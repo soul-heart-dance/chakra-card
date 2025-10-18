@@ -6,7 +6,7 @@ from google.oauth2.service_account import Credentials
 
 # ---- 讀 ENV ----
 SHEET_ID   = os.environ.get("GOOGLE_SHEET_ID", "").strip()
-CREDS_JSON = os.environ.get("GOOGLE_CREDENTIALS_JSON", "").strip()
+CREDS_JSON = os.environ.get("GOOGLE_CREDENTIALS", "").strip()
 
 # ---- 工具 ----
 def _to_int(x):

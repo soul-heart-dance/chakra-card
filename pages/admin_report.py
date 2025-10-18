@@ -1,32 +1,30 @@
 import streamlit as st
-from counter_utils import get_gsheet
 import pandas as pd
 import altair as alt
+from counter_utils import load_counter
 
-st.set_page_config(page_title="管理者報表", page_icon="📊", layout="centered")
+def show_admin_report():
+    query_params = st.query_params
+    if query_params.get("sara") != ["1"]:
+        st.error("🚫 沒有權限訪問此頁面")
+        return
 
-params = st.query_params
-if params.get("sara") != ["1"]:
-    st.error("🚫 沒有權限訪問此頁面")
-    st.stop()
+    st.title("📊 訪問統計報表")
 
-sheet = get_gsheet()
-records = sheet.get_all_records()
+    counter = load_counter()
+    if not counter["dates"]:
+        st.info("尚無資料可顯示 🌙")
+        return
 
-if not records:
-    st.info("尚無資料")
-else:
-    df = pd.DataFrame(records)
-    total_visits = df["訪問數"].sum()
-    today = df.iloc[-1]["訪問數"]
+    today = pd.Timestamp.today().strftime("%Y-%m-%d")
+    today_count = counter["dates"].get(today, 0)
+    st.markdown(f"✨ 今日訪問：**{today_count}**　|　累積訪問：**{counter['total']}**")
 
-    st.markdown(f"### 今日訪問：{today} | 累積訪問：{total_visits}")
+    df = pd.DataFrame(list(counter["dates"].items()), columns=["日期", "訪問次數"])
+    st.table(df)
 
-    chart = alt.Chart(df).mark_line(point=True).encode(
-        x='日期',
-        y='訪問數',
-        tooltip=['日期', '訪問數']
-    ).properties(title="📈 訪問趨勢圖", width=500)
-
-    st.altair_chart(chart, use_container_width=True)
-    st.dataframe(df)
+    if len(df) > 1:
+        chart = alt.Chart(df).mark_line(point=True).encode(
+            x="日期", y="訪問次數"
+        ).properties(height=300)
+        st.altair_chart(chart, use_container_width=True)

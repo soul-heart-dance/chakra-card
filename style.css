@@ -104,18 +104,9 @@
   animation: pulseGlow 1.2s ease-in-out;
 }
 @keyframes pulseGlow {
-  0% {
-    transform: scale(1);
-    filter: brightness(1);
-  }
-  40% {
-    transform: scale(1.02);
-    filter: brightness(1.6);
-  }
-  100% {
-    transform: scale(1);
-    filter: brightness(1);
-  }
+  0% { transform: scale(1); filter: brightness(1); }
+  40% { transform: scale(1.02); filter: brightness(1.6); }
+  100% { transform: scale(1); filter: brightness(1); }
 }
 
 /* 呼吸光 */
@@ -187,7 +178,7 @@
 }
 
 /* ================================
-🌙 靈魂連線載入動畫（完美置中＋星光淡入淡出）
+🌙 靈魂連線載入動畫（星光漂浮＋粉光球）
 ================================ */
 .loader-wrapper {
   position: fixed !important;
@@ -198,17 +189,37 @@
   justify-content: center;
   background: radial-gradient(circle at center, rgba(0,0,0,0.95) 0%, rgba(0,0,0,1) 100%);
   z-index: 99999;
-  animation: fadeout 1.8s ease-in-out forwards;
-  animation-delay: 1.8s;
+  overflow: hidden;
+  animation: fadeout 2s ease-in-out forwards;
+  animation-delay: 2s;
 }
+
+/* 粉光球 */
 .glow-circle {
   width: 120px;
   height: 120px;
   border-radius: 50%;
   background: radial-gradient(circle at center, rgba(255,192,203,0.9), rgba(255,182,193,0.1));
   box-shadow: 0 0 60px 25px rgba(255,192,203,0.5);
-  animation: pulse 1.5s infinite ease-in-out;
+  animation: pulse 1.6s infinite ease-in-out;
 }
+
+/* 星光粒子 */
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: #ffd6f6;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle 4s infinite ease-in-out;
+}
+@keyframes twinkle {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.8); opacity: 1; }
+}
+
+/* 文字閃光 */
 .loader-text {
   color: #ffe3f1;
   font-size: 22px;
@@ -219,6 +230,8 @@
   text-align: center;
   animation: glowtext 1.6s infinite ease-in-out;
 }
+
+/* 動畫區 */
 @keyframes pulse {
   0% { transform: scale(0.95); opacity: 0.8; }
   50% { transform: scale(1.05); opacity: 1; }
@@ -229,9 +242,5 @@
   50% { text-shadow: 0 0 16px #ffd9ec, 0 0 35px rgba(255,182,193,0.8); opacity: 1; }
 }
 @keyframes fadeout {
-  100% {
-    opacity: 0;
-    visibility: hidden;
-    transform: scale(1.05);
-  }
+  100% { opacity: 0; visibility: hidden; transform: scale(1.05); }
 }

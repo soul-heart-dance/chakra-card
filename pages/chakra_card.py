@@ -1,4 +1,3 @@
-# pages/chakra_draw.py
 import json, random, uuid
 import streamlit as st
 from counter_utils import bump_counter
@@ -43,7 +42,7 @@ def _draw_one(cards):
 def render():
     st.set_page_config(page_title="Soul Heart Dance｜七脈輪靈魂共振卡", page_icon="🔮", layout="centered")
     _load_css()
-    bump_counter()  # 計數＋1（訪客不會看到數字）
+    bump_counter()
 
     cards = _load_cards()
     if "card" not in st.session_state:
@@ -51,14 +50,13 @@ def render():
 
     _header()
 
-    # 按鈕
     btn_text = "🔮 抽卡" if st.session_state.card is None else "🌙 再抽一張"
     st.markdown('<div class="button-center">', unsafe_allow_html=True)
     if st.button(btn_text, key="draw_button"):
         st.session_state.card = _draw_one(cards)
+        st.rerun()  # ← 強制刷新
     st.markdown('</div>', unsafe_allow_html=True)
 
-    # 顯示
     if st.session_state.card:
         c = st.session_state.card
         st.markdown(f"""
@@ -76,6 +74,5 @@ def render():
 
     st.markdown("""<div class="footer">© 2025 Soul Heart Dance · 與靈魂之心共舞</div>""", unsafe_allow_html=True)
 
-# 讓 Streamlit 直接跑這頁時可顯示
 if __name__ == "__main__":
     render()

@@ -15,7 +15,7 @@ def render_admin_report():
         st.markdown(
             f"""
             <div style='text-align:center; color:#ffb6c1;'>
-                <h3>📊 訪問統計（管理者）</h3>
+                <h3>🌌 訪問統計（管理者）</h3>
                 <div style='margin-top:2rem; color:#ff9999; font-size:1.05rem;'>
                     ❌ 讀取統計資料失敗：{e}
                 </div>

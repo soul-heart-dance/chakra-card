@@ -1,77 +1,101 @@
-import json, os
+import os
+import json
 from datetime import datetime
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+from google.oauth2.service_account import Credentials
 
-def _get_gsheet():
-    """連接 Google Sheet"""
-    creds_json = os.environ.get("GOOGLE_CREDENTIALS")
-    sheet_id = os.environ.get("GOOGLE_SHEET_ID")
+# ---- 讀 ENV ----
+SHEET_ID   = os.environ.get("GOOGLE_SHEET_ID", "").strip()
+CREDS_JSON = os.environ.get("GOOGLE_CREDENTIALS_JSON", "").strip()
 
-    if not creds_json or not sheet_id:
-        raise Exception("❌ GOOGLE API 金鑰或試算表 ID 尚未設定！")
-
-    creds_dict = json.loads(creds_json)
-    scope = [
-        "https://spreadsheets.google.com/feeds",
-        "https://www.googleapis.com/auth/drive"
-    ]
-    creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
-    gc = gspread.authorize(creds)
-    return gc.open_by_key(sheet_id).sheet1
-
-
-def _safe_int(value):
-    """防呆轉換數字"""
+# ---- 工具 ----
+def _to_int(x):
     try:
-        return int(str(value).strip())
-    except Exception:
+        if x is None:
+            return 0
+        if isinstance(x, (int, float)):
+            return int(x)
+        s = str(x).strip()
+        return int(s) if s else 0
+    except:
         return 0
 
+def _today():
+    return datetime.now().strftime("%Y-%m-%d")
 
+# ---- 取得工作表 ----
+def get_gsheet():
+    if not SHEET_ID or not CREDS_JSON:
+        raise Exception("❌ GOOGLE API 金鑰或試算表 ID 尚未設定！")
+    creds_info = json.loads(CREDS_JSON)
+    scopes = ["https://www.googleapis.com/auth/spreadsheets"]
+    creds = Credentials.from_service_account_info(creds_info, scopes=scopes)
+    gc = gspread.authorize(creds)
+    sh = gc.open_by_key(SHEET_ID)
+    try:
+        ws = sh.worksheet("visits")
+    except gspread.WorksheetNotFound:
+        ws = sh.add_worksheet(title="visits", rows=1000, cols=3)
+        ws.update("A1:C1", [["日期", "訪問數", "累積訪問"]])
+    # 確保有表頭
+    headers = ws.row_values(1)
+    if headers[:3] != ["日期", "訪問數", "累積訪問"]:
+        ws.update("A1:C1", [["日期", "訪問數", "累積訪問"]])
+    return ws
+
+# ---- 寫入 + 回傳統計（每次載入抽卡頁時呼叫一次）----
 def bump_counter():
-    """更新訪問統計，確保欄位正確"""
-    sheet = _get_gsheet()
-    today = datetime.now().strftime("%Y-%m-%d")
-    records = sheet.get_all_records()
+    ws = get_gsheet()
+    values = ws.get_all_values()  # 含表頭
+    today = _today()
 
-    # 檢查欄位結構
-    if not records:
-        sheet.append_row(["日期", "訪問數", "累積訪問"])
-        sheet.append_row([today, 1, 1])
+    # 只有表頭 -> 第一天
+    if len(values) == 1:
+        ws.append_row([today, 1, 1])
         return {"today": 1, "total": 1}
 
-    # 現有資料
-    existing_dates = {r["日期"]: r for r in records if "日期" in r}
-    last_total = _safe_int(records[-1].get("累積訪問", 0))
+    last_row = values[-1]
+    last_date = last_row[0] if len(last_row) > 0 else ""
+    last_visit = _to_int(last_row[1] if len(last_row) > 1 else 0)
+    last_total = _to_int(last_row[2] if len(last_row) > 2 else 0)
 
-    if today in existing_dates:
-        row = existing_dates[today]
-        today_count = _safe_int(row.get("訪問數", 0)) + 1
-        total_count = last_total  # 不重複加總訪問
-        cell = sheet.find(today)
-        if cell:
-            sheet.update_cell(cell.row, 2, today_count)
+    # 取「前一天的累積」作為 today 的基底
+    prev_total = 0
+    if len(values) >= 3:
+        prev_row = values[-2]
+        prev_total = _to_int(prev_row[2] if len(prev_row) > 2 else 0)
+
+    if last_date == today:
+        # 同一天：更新當天行
+        today_count = last_visit + 1
+        # 當天累積＝「前一天累積」＋「當天累計訪問」
+        total_count = prev_total + today_count
+        ws.update(f"A{len(values)}:C{len(values)}", [[today, today_count, total_count]])
+        return {"today": today_count, "total": total_count}
     else:
-        today_count, total_count = 1, last_total + 1
-        sheet.append_row([today, today_count, total_count])
+        # 新的一天：新增一行
+        today_count = 1
+        total_count = last_total + today_count
+        ws.append_row([today, today_count, total_count])
+        return {"today": today_count, "total": total_count}
 
-    return {"today": today_count, "total": total_count}
-
-
-def load_counter():
-    """讀取報表資料"""
-    sheet = _get_gsheet()
-    records = sheet.get_all_records()
-    if not records:
-        return {"dates": {}, "total": 0}
-
-    dates = {}
-    for r in records:
-        date = r.get("日期")
-        count = _safe_int(r.get("訪問數", 0))
-        if date:
-            dates[date] = count
-
-    total = _safe_int(records[-1].get("累積訪問", 0))
-    return {"dates": dates, "total": total}
+# ---- 讀取完整資料（給管理者頁）----
+def fetch_report():
+    ws = get_gsheet()
+    values = ws.get_all_values()
+    # 沒資料只回表頭
+    if len(values) <= 1:
+        return {
+            "rows": [],
+            "today": 0,
+            "total": 0
+        }
+    rows = []
+    for r in values[1:]:
+        date = r[0] if len(r) > 0 else ""
+        day = _to_int(r[1] if len(r) > 1 else 0)
+        total = _to_int(r[2] if len(r) > 2 else 0)
+        rows.append((date, day, total))
+    today = rows[-1][1]
+    total = rows[-1][2]
+    return {"rows": rows, "today": today, "total": total}

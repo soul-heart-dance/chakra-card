@@ -1,84 +1,18 @@
-html, body, .stApp {
-  background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000 100%) !important;
-  color: #FFE6F7 !important;
-  font-family: "Microsoft JhengHei", Verdana, sans-serif !important;
-  text-align: center !important;
-  overflow-x: hidden;
-  position: relative;
-  z-index: 0;
-}
-
-/* 🌟 星光粒子背景（永久存在） */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: radial-gradient(circle, rgba(255,255,255,0.15) 2px, transparent 2px),
-              radial-gradient(circle, rgba(255,200,250,0.12) 1.5px, transparent 2px),
-              radial-gradient(circle, rgba(200,180,255,0.1) 1px, transparent 2px);
-  background-size: 150px 150px, 200px 200px, 250px 250px;
-  background-position: 0 0, 50px 80px, 100px 130px;
-  animation: sparkleMove 80s linear infinite;
-  z-index: -2;
-  opacity: 0.7;
-  pointer-events: none;
-}
-@keyframes sparkleMove {
-  from { background-position: 0 0, 50px 80px, 100px 130px; }
-  to { background-position: -400px -400px, -350px -300px, -500px -500px; }
-}
-
-/* 🌸 靈魂連線中動畫（背景不消失） */
-.loader-wrapper {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.9);
-  z-index: 9999;
-  opacity: 1;
-  animation: fadeOutLoader 3s ease-in-out forwards;
-  animation-delay: 2s;
-}
-@keyframes fadeOutLoader {
-  0%, 80% { opacity: 1; }
-  100% { opacity: 0; visibility: hidden; }
-}
-
-.glow-circle {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  background: radial-gradient(circle at center, rgba(255,192,203,0.9), rgba(255,182,193,0.15));
-  box-shadow: 0 0 80px 40px rgba(255,182,193,0.4);
-  animation: pulse 2.4s infinite ease-in-out;
-}
-
-.loader-text {
-  color: #ffe3f1;
-  font-size: 22px;
-  margin-top: 35px;
-  text-shadow: 0 0 12px #ffb6c1, 0 0 24px rgba(255,192,203,0.5);
-  letter-spacing: 2px;
+/* === 全域背景與字體 === */
+.stApp {
+  background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000 100%);
+  color: #FFE6F7;
+  font-family: "Microsoft JhengHei", Verdana, sans-serif;
   text-align: center;
 }
 
-@keyframes pulse {
-  0% { transform: scale(0.9); opacity: 0.8; }
-  50% { transform: scale(1.08); opacity: 1; }
-  100% { transform: scale(0.9); opacity: 0.8; }
-}
-
-/* Header */
+/* --- Header --- */
 .header {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.6rem;
-  margin-top: -1.5rem;
+  margin-top: -2.2rem;
 }
 .logo {
   height: 54px;
@@ -98,18 +32,18 @@ body::before {
 .subtitle {
   font-size: 1.2rem;
   color: #FFE6F7;
-  margin-top: 1.8rem;
-  text-align: center;
+  margin-top: 1.2rem;
   letter-spacing: 1px;
 }
 
-/* 按鈕 */
-.button-center {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin: 1rem 0;
+/* --- 按鈕 --- */
+.button-center,
+[data-testid="stVerticalBlock"],
+[data-testid="stHorizontalBlock"] {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 0.8rem 0 0.8rem 0;
 }
 .stButton > button {
   background-color: #f9c8e6 !important;
@@ -128,7 +62,7 @@ body::before {
   box-shadow: 0 0 25px rgba(255, 200, 250, 0.8);
 }
 
-/* 卡片 */
+/* --- 卡片 --- */
 .card-wrapper {
   border-radius: 1.3rem;
   padding: 6px;
@@ -146,8 +80,8 @@ body::before {
 .third-glow { box-shadow: 0 0 36px 8px rgba(186,85,211,0.6); }
 .crown-glow { box-shadow: 0 0 36px 8px rgba(255,182,255,0.6); }
 
-/* 內容卡 */
 .card-container {
+  position: relative;
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.2);
   border-radius: 1.2rem;
@@ -156,30 +90,89 @@ body::before {
   color: #fff;
   animation: breatheGlow 6s ease-in-out infinite;
 }
+
+/* --- 光暈閃一下 --- */
+.card-wrapper.animate {
+  animation: pulseGlow 1.2s ease-in-out;
+}
+@keyframes pulseGlow {
+  0% { transform: scale(1); filter: brightness(1); }
+  40% { transform: scale(1.02); filter: brightness(1.6); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+
+/* --- 呼吸光 --- */
 @keyframes breatheGlow {
   0%,100% { box-shadow: 0 0 20px rgba(255,255,255,0.08); }
   50%     { box-shadow: 0 0 45px rgba(255,255,255,0.2); }
 }
 
-/* Footer */
-.footer {
-  font-size: 0.9rem;
-  color: #FFE6F7;
-  margin-top: 2rem;
-  padding-bottom: 1rem;
-  opacity: 0.8;
+/* --- 文字 --- */
+.sentence {
+  font-size: 1.08rem;
+  background: rgba(255,255,255,0.08);
+  padding: 1rem 1.2rem;
+  border-radius: 1rem;
+  margin: 1rem auto;
+  display: inline-block;
 }
-
-/* 管理者頁 */
-.admin-title {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #FFD6F6;
-  margin-top: 0.6rem;
-}
-.admin-sub {
+.angel, .meaning {
   font-size: 1rem;
-  opacity: 0.85;
   color: #FFE6F7;
-  margin-bottom: 1rem;
+  margin-top: 0.4rem;
+}
+.hint { margin-top: 1rem; color: #FFD6F6; font-size: 1rem; }
+.footer { font-size: 0.9rem; color: #FFE6F7; margin-top: 2rem; padding-bottom: 1rem; opacity: 0.8; }
+
+/* --- Loader 與 星光背景 --- */
+#loader {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, rgba(0,0,0,0.95), rgba(0,0,0,1));
+  z-index: 9999;
+  opacity: 1;
+  animation: fadeOutLoader 3.6s ease-in-out forwards;
+  animation-delay: 2.2s;
+}
+#loader .glow-circle {
+  width: 120px; height: 120px; border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(255,192,203,0.9), rgba(255,182,193,0.15));
+  box-shadow: 0 0 80px 40px rgba(255,182,193,0.4);
+  animation: pulse 2.4s infinite ease-in-out;
+}
+#loader .loader-text {
+  color: #ffe3f1; font-size: 22px; margin-top: 35px;
+  text-shadow: 0 0 12px #ffb6c1, 0 0 24px rgba(255,192,203,0.5);
+  letter-spacing: 2px; text-align: center;
+}
+@keyframes pulse {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+@keyframes fadeOutLoader {
+  0%,75% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+body::before {
+  content: "";
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.15) 2px, transparent 2px),
+              radial-gradient(circle, rgba(255,200,250,0.12) 1.5px, transparent 2px),
+              radial-gradient(circle, rgba(200,180,255,0.1) 1px, transparent 2px);
+  background-size: 150px 150px, 200px 200px, 250px 250px;
+  background-position: 0 0, 50px 80px, 100px 130px;
+  animation: sparkleMove 80s linear infinite;
+  z-index: -1;
+  opacity: 0.6;
+  pointer-events: none;
+}
+@keyframes sparkleMove {
+  from { background-position: 0 0, 50px 80px, 100px 130px; }
+  to { background-position: -400px -400px, -350px -300px, -500px -500px; }
 }

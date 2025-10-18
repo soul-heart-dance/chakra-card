@@ -1,32 +1,32 @@
 import streamlit as st
+from counter_utils import get_gsheet
 import pandas as pd
-from datetime import datetime
-from counter_utils import read_counter
+import altair as alt
 
-st.set_page_config(page_title="Soul Heart Dance｜訪問統計", page_icon="📊", layout="centered")
+st.set_page_config(page_title="管理者報表", page_icon="📊", layout="centered")
 
-if st.query_params.get("sara") != ["1"]:
+params = st.query_params
+if params.get("sara") != ["1"]:
     st.error("🚫 沒有權限訪問此頁面")
     st.stop()
 
-with open("style.css", "r", encoding="utf-8") as f:
-    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+sheet = get_gsheet()
+records = sheet.get_all_records()
 
-st.markdown("<h2 style='text-align:center;'>📊 訪問統計</h2>", unsafe_allow_html=True)
-
-data = read_counter()
-today = datetime.now().strftime("%Y-%m-%d")
-today_count = data["dates"].get(today, 0)
-total_count = data["total"]
-
-st.markdown(
-    f"<div style='text-align:center;color:#FFD6F6;'>✨ 今日訪問：<b>{today_count}</b>　|　累積訪問：<b>{total_count}</b></div>",
-    unsafe_allow_html=True
-)
-
-if data["dates"]:
-    df = pd.DataFrame(sorted(data["dates"].items()), columns=["日期", "訪問次數"])
-    st.line_chart(df.set_index("日期"), height=260, use_container_width=True)
-    st.dataframe(df, use_container_width=True, hide_index=True)
+if not records:
+    st.info("尚無資料")
 else:
-    st.info("目前沒有資料。")
+    df = pd.DataFrame(records)
+    total_visits = df["訪問數"].sum()
+    today = df.iloc[-1]["訪問數"]
+
+    st.markdown(f"### 今日訪問：{today} | 累積訪問：{total_visits}")
+
+    chart = alt.Chart(df).mark_line(point=True).encode(
+        x='日期',
+        y='訪問數',
+        tooltip=['日期', '訪問數']
+    ).properties(title="📈 訪問趨勢圖", width=500)
+
+    st.altair_chart(chart, use_container_width=True)
+    st.dataframe(df)

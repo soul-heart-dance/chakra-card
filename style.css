@@ -28,7 +28,7 @@ html, body, .stApp {
   to { background-position: -400px -400px, -350px -300px, -500px -500px; }
 }
 
-/* Loader */
+/* 🌸 靈魂連線中動畫（純 CSS 版本） */
 .loader-wrapper {
   position: fixed;
   top: 0; left: 0;
@@ -39,9 +39,15 @@ html, body, .stApp {
   justify-content: center;
   background: radial-gradient(circle at center, rgba(0,0,0,0.96) 0%, rgba(0,0,0,1) 100%);
   z-index: 9999;
+  animation: fadeOutLoader 2.8s ease-in-out forwards;
+  animation-delay: 2s;
   pointer-events: none;
-  opacity: 1;
 }
+@keyframes fadeOutLoader {
+  0%, 80% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; transform: scale(1.05); }
+}
+
 .glow-circle {
   width: 120px;
   height: 120px;
@@ -65,18 +71,8 @@ html, body, .stApp {
 }
 
 /* Header */
-.header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.6rem;
-  margin-top: -1.5rem;
-}
-.logo {
-  height: 54px;
-  border-radius: 50%;
-  box-shadow: 0 0 15px rgba(255, 214, 246, 0.6);
-}
+.header { display: flex; justify-content: center; align-items: center; gap: 0.6rem; margin-top: -1.5rem; }
+.logo { height: 54px; border-radius: 50%; box-shadow: 0 0 15px rgba(255, 214, 246, 0.6); }
 .title-line1 { font-size: 1.45rem; font-weight: 700; color: #FFE6F7; }
 .title-line2 { font-size: 1rem; font-weight: 500; color: #FFD6F6; }
 
@@ -109,24 +105,7 @@ html, body, .stApp {
 .third-glow { box-shadow: 0 0 36px 8px rgba(186,85,211,0.6); }
 .crown-glow { box-shadow: 0 0 36px 8px rgba(255,182,255,0.6); }
 
-/* 內容卡 */
-.card-container {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 1.2rem;
-  padding: 1.3rem;
-  backdrop-filter: blur(4px);
-  color: #fff;
-  animation: breatheGlow 6s ease-in-out infinite;
-}
-@keyframes breatheGlow {
-  0%,100% { box-shadow: 0 0 20px rgba(255,255,255,0.08); }
-  50%     { box-shadow: 0 0 45px rgba(255,255,255,0.2); }
-}
-
 /* Footer */
 .footer { font-size: 0.9rem; color: #FFE6F7; margin-top: 2rem; padding-bottom: 1rem; opacity: 0.8; }
-
-/* 管理者頁 */
 .admin-title { font-size: 1.6rem; font-weight: 700; color: #FFD6F6; margin-top: 0.6rem; }
 .admin-sub { font-size: 1rem; opacity: 0.85; color: #FFE6F7; margin-bottom: 1rem; }

@@ -41,9 +41,8 @@ html, body, .stApp {
   background: radial-gradient(circle at center, rgba(0,0,0,0.96) 0%, rgba(0,0,0,1) 100%);
   z-index: 9999;
   pointer-events: none;
-  transition: opacity 1.6s ease-in-out;
-  animation: fadeout 3.6s ease-in-out forwards;
-  animation-delay: 2.4s;
+  opacity: 1;
+  transition: opacity 1.6s ease-in-out, visibility 0s linear 1.6s;
 }
 
 .glow-circle {
@@ -67,9 +66,6 @@ html, body, .stApp {
   0% { transform: scale(0.9); opacity: 0.8; }
   50% { transform: scale(1.08); opacity: 1; }
   100% { transform: scale(0.9); opacity: 0.8; }
-}
-@keyframes fadeout {
-  100% { opacity: 0; visibility: hidden; transform: scale(1.05); }
 }
 
 /* --- Header --- */

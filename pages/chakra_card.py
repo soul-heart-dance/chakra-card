@@ -1,19 +1,52 @@
-import json, random, uuid
+import json, random, uuid, logging
 import streamlit as st
 from counter_utils import bump_counter
 
-# 讀卡片資料與 CSS
+# ============ 載入資料與樣式 ============
 @st.cache_data
 def load_data():
-    with open("chakras_affirmations.json","r",encoding="utf-8") as f:
+    with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
         return json.load(f)
+
 @st.cache_data
 def load_css():
-    with open("style.css","r",encoding="utf-8") as f:
+    with open("style.css", "r", encoding="utf-8") as f:
         return f.read()
 
+# ============ 靈魂連線動畫 ============
+def render_loader():
+    stars_html = ""
+    for i in range(40):
+        top = random.randint(0, 100)
+        left = random.randint(0, 100)
+        delay = round(random.uniform(0, 2), 2)
+        stars_html += f'<div class="star" style="top:{top}%; left:{left}%; animation-delay:{delay}s;"></div>'
+
+    loader_html = f"""
+    <div class="loader-wrapper">
+        {stars_html}
+        <div class="glow-circle"></div>
+        <div class="loader-text">🌸靈魂正在連線中...</div>
+    </div>
+    """
+    st.markdown(loader_html, unsafe_allow_html=True)
+
+# ============ 主畫面 ============
 def render_chakra_card():
     st.markdown(f"<style>{load_css()}</style>", unsafe_allow_html=True)
+    render_loader()  # 進入頁面顯示動畫
+
+    # 嘗試寫入訪問統計（靜默處理）
+    try:
+        bump_counter()
+    except Exception:
+        logging.exception("Counter write failed")
+
+    # 初始化狀態
+    if "card" not in st.session_state:
+        st.session_state.card = None
+
+    data = load_data()
 
     # Header
     logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
@@ -27,21 +60,7 @@ def render_chakra_card():
     </div>
     """, unsafe_allow_html=True)
 
-    # 抬頭
     st.markdown('<div class="subtitle">✨ 今日的靈魂訊息 ✨</div>', unsafe_allow_html=True)
-
-    # 進入頁面 → 計數（訪客版只做計數，不顯示數字）
-    try:
-        bump_counter()
-    except Exception as e:
-        # 即使寫入失敗，也不要讓畫面黑掉
-        st.toast("計數寫入暫時失敗，但不影響抽卡使用 💖", icon="⚠️")
-
-    # Session 初始化
-    if "card" not in st.session_state:
-        st.session_state.card = None
-
-    data = load_data()
 
     # 抽卡邏輯
     def draw_card():
@@ -64,10 +83,10 @@ def render_chakra_card():
     st.markdown('<div class="button-center">', unsafe_allow_html=True)
     if st.button(btn_text, use_container_width=False):
         draw_card()
-        st.rerun()   # 立即更新按鈕文字
+        st.rerun()
     st.markdown('</div>', unsafe_allow_html=True)
 
-    # 卡片
+    # 卡片顯示
     if st.session_state.card:
         c = st.session_state.card
         st.markdown(f"""

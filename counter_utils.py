@@ -1,50 +1,61 @@
-import os
-import json
+import json, os
 from datetime import datetime
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 
-# ===== Google Sheet 驗證與連線 =====
-def get_gsheet():
+COUNTER_FILE = "data/counter.json"
+
+def _load_local_counter():
+    if not os.path.exists(COUNTER_FILE):
+        return {"total": 0, "dates": {}}
+    try:
+        with open(COUNTER_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception:
+        return {"total": 0, "dates": {}}
+
+def _save_local_counter(data):
+    os.makedirs(os.path.dirname(COUNTER_FILE), exist_ok=True)
+    with open(COUNTER_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+def _get_gsheet():
     creds_json = os.environ.get("GOOGLE_CREDENTIALS")
     sheet_id = os.environ.get("GOOGLE_SHEET_ID")
 
     if not creds_json or not sheet_id:
         raise Exception("❌ GOOGLE API 金鑰或試算表 ID 尚未設定！")
 
-    creds = json.loads(creds_json)
+    creds_dict = json.loads(creds_json)
     scope = ["https://spreadsheets.google.com/feeds",
-             "https://www.googleapis.com/auth/spreadsheets",
-             "https://www.googleapis.com/auth/drive.file"]
-    credentials = ServiceAccountCredentials.from_json_keyfile_dict(creds, scope)
-    client = gspread.authorize(credentials)
-    return client.open_by_key(sheet_id).sheet1
+             "https://www.googleapis.com/auth/drive"]
+    creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
+    gc = gspread.authorize(creds)
+    return gc.open_by_key(sheet_id).sheet1
 
-
-# ===== 更新訪問計數 =====
 def bump_counter():
-    sheet = get_gsheet()
+    """更新訪問數據（含 Google Sheet 備份）"""
+    data = _load_local_counter()
     today = datetime.now().strftime("%Y-%m-%d")
+    data["total"] += 1
+    data["dates"][today] = data["dates"].get(today, 0) + 1
+    _save_local_counter(data)
 
-    # 讀取試算表資料
-    records = sheet.get_all_records()
-    today_row = None
-    total_count = 0
+    try:
+        sheet = _get_gsheet()
+        existing = sheet.get_all_records()
+        existing_dates = {row["日期"]: row for row in existing if "日期" in row}
+        if today in existing_dates:
+            cell = sheet.find(today)
+            if cell:
+                sheet.update_cell(cell.row, 2, data["dates"][today])
+        else:
+            sheet.append_row([today, data["dates"][today], data["total"]])
+    except Exception as e:
+        print(f"[WARN] Google Sheet 更新失敗：{e}")
 
-    if records:
-        total_count = sum(r.get("訪問數", 0) for r in records)
-        for i, row in enumerate(records, start=2):
-            if row["日期"] == today:
-                today_row = i
-                break
+    return data
 
-    # 更新今日數字
-    if today_row:
-        new_value = records[today_row - 2]["訪問數"] + 1
-        sheet.update_cell(today_row, 2, new_value)
-    else:
-        new_value = 1
-        sheet.append_row([today, new_value])
-
-    total_count = total_count + 1
-    return {"today": new_value, "total": total_count}
+def load_counter():
+    """僅讀取統計資料"""
+    return _load_local_counter()

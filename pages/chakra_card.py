@@ -6,7 +6,7 @@ import time
 from counter_utils import bump_counter
 
 def render_chakra_card():
-    """訪客抽卡頁面（含柔光載入動畫）"""
+    """訪客抽卡頁面（含柔光載入動畫與粉光按鈕特效）"""
     st.set_page_config(page_title="Soul Heart Dance｜七脈輪靈魂共振卡", page_icon="🔮", layout="centered")
 
     # 載入資料與樣式
@@ -16,13 +16,13 @@ def render_chakra_card():
         css = f.read()
     st.markdown(f"<style>{css}</style>", unsafe_allow_html=True)
 
-    # 背景計數（不顯示）
+    # 背景統計
     try:
         bump_counter()
     except:
         pass
 
-    # ✅ 初始化 session_state
+    # Session 初始化
     if "card" not in st.session_state:
         st.session_state.card = None
     if "clicked" not in st.session_state:
@@ -30,7 +30,7 @@ def render_chakra_card():
     if "show_loader" not in st.session_state:
         st.session_state.show_loader = True
 
-    # ✅ 柔光載入動畫
+    # 🌸 柔光載入動畫
     if st.session_state.show_loader:
         loader_html = """
         <div class="loader-wrapper">
@@ -75,7 +75,7 @@ def render_chakra_card():
         st.markdown(loader_html, unsafe_allow_html=True)
         time.sleep(1.8)
         st.session_state.show_loader = False
-        st.experimental_rerun()
+        st.rerun()
         return
 
     # Header
@@ -109,13 +109,44 @@ def render_chakra_card():
             "uid": str(uuid.uuid4())
         }
 
-    # 抽卡按鈕
+    # 🌸 抽卡按鈕（粉光閃爍特效）
     button_text = "🔮 抽卡" if st.session_state.card is None else "🌙 再抽一張"
+    st.markdown("""
+    <style>
+      .button-center {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        margin-bottom: 30px;
+      }
+      div[data-testid="stButton"] button {
+        background: linear-gradient(145deg, #ffc1e3, #ffb6c1);
+        color: #2e2e2e;
+        font-size: 20px;
+        border-radius: 50px;
+        border: none;
+        padding: 0.6em 1.6em;
+        font-weight: 600;
+        box-shadow: 0 0 20px rgba(255,182,193,0.5);
+        transition: all 0.25s ease-in-out;
+      }
+      div[data-testid="stButton"] button:hover {
+        transform: scale(1.08);
+        box-shadow: 0 0 35px rgba(255,182,193,0.8);
+        background: linear-gradient(145deg, #ffd6e9, #ffc1e3);
+      }
+      div[data-testid="stButton"] button:active {
+        transform: scale(0.95);
+        box-shadow: 0 0 25px rgba(255,105,180,0.7);
+      }
+    </style>
+    """, unsafe_allow_html=True)
+
     st.markdown('<div class="button-center">', unsafe_allow_html=True)
     if st.button(button_text, key="draw_button"):
         st.session_state.card = draw_card()
         st.session_state.clicked = True
-        st.experimental_rerun()
+        st.rerun()
     st.markdown('</div>', unsafe_allow_html=True)
 
     # 顯示卡片

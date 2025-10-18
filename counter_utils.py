@@ -1,37 +1,50 @@
+import os
 import json
-from pathlib import Path
 from datetime import datetime
+import gspread
+from oauth2client.service_account import ServiceAccountCredentials
 
-DATA_DIR = Path(__file__).parent / "data"
-COUNTER_FILE = DATA_DIR / "counter.json"
-DATA_DIR.mkdir(exist_ok=True)
+# ===== Google Sheet 驗證與連線 =====
+def get_gsheet():
+    creds_json = os.environ.get("GOOGLE_CREDENTIALS")
+    sheet_id = os.environ.get("GOOGLE_SHEET_ID")
 
-def _load():
-    if COUNTER_FILE.exists():
-        try:
-            text = COUNTER_FILE.read_text(encoding="utf-8").strip()
-            if not text:
-                raise ValueError("empty file")
-            return json.loads(text)
-        except Exception:
-            data = {"total": 0, "dates": {}}
-            _save(data)
-            return data
-    else:
-        data = {"total": 0, "dates": {}}
-        _save(data)
-        return data
+    if not creds_json or not sheet_id:
+        raise Exception("❌ GOOGLE API 金鑰或試算表 ID 尚未設定！")
 
-def _save(data):
-    COUNTER_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    creds = json.loads(creds_json)
+    scope = ["https://spreadsheets.google.com/feeds",
+             "https://www.googleapis.com/auth/spreadsheets",
+             "https://www.googleapis.com/auth/drive.file"]
+    credentials = ServiceAccountCredentials.from_json_keyfile_dict(creds, scope)
+    client = gspread.authorize(credentials)
+    return client.open_by_key(sheet_id).sheet1
 
+
+# ===== 更新訪問計數 =====
 def bump_counter():
-    data = _load()
+    sheet = get_gsheet()
     today = datetime.now().strftime("%Y-%m-%d")
-    data["total"] += 1
-    data["dates"][today] = data["dates"].get(today, 0) + 1
-    _save(data)
-    return data
 
-def read_counter():
-    return _load()
+    # 讀取試算表資料
+    records = sheet.get_all_records()
+    today_row = None
+    total_count = 0
+
+    if records:
+        total_count = sum(r.get("訪問數", 0) for r in records)
+        for i, row in enumerate(records, start=2):
+            if row["日期"] == today:
+                today_row = i
+                break
+
+    # 更新今日數字
+    if today_row:
+        new_value = records[today_row - 2]["訪問數"] + 1
+        sheet.update_cell(today_row, 2, new_value)
+    else:
+        new_value = 1
+        sheet.append_row([today, new_value])
+
+    total_count = total_count + 1
+    return {"today": new_value, "total": total_count}

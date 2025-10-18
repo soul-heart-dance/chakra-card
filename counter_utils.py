@@ -12,49 +12,55 @@ def _get_gsheet():
         raise Exception("❌ GOOGLE API 金鑰或試算表 ID 尚未設定！")
 
     creds_dict = json.loads(creds_json)
-    scope = ["https://spreadsheets.google.com/feeds",
-             "https://www.googleapis.com/auth/drive"]
+    scope = [
+        "https://spreadsheets.google.com/feeds",
+        "https://www.googleapis.com/auth/drive"
+    ]
     creds = ServiceAccountCredentials.from_json_keyfile_dict(creds_dict, scope)
     gc = gspread.authorize(creds)
     return gc.open_by_key(sheet_id).sheet1
 
 
+def _safe_int(value):
+    """防呆轉換數字"""
+    try:
+        return int(str(value).strip())
+    except Exception:
+        return 0
+
+
 def bump_counter():
-    """更新訪問統計"""
+    """更新訪問統計，確保欄位正確"""
     sheet = _get_gsheet()
     today = datetime.now().strftime("%Y-%m-%d")
+    records = sheet.get_all_records()
 
-    existing = sheet.get_all_records()
-    existing_dates = {row["日期"]: row for row in existing if "日期" in row}
+    # 檢查欄位結構
+    if not records:
+        sheet.append_row(["日期", "訪問數", "累積訪問"])
+        sheet.append_row([today, 1, 1])
+        return {"today": 1, "total": 1}
 
-    # 取得當天與總訪問數
+    # 現有資料
+    existing_dates = {r["日期"]: r for r in records if "日期" in r}
+    last_total = _safe_int(records[-1].get("累積訪問", 0))
+
     if today in existing_dates:
         row = existing_dates[today]
         today_count = _safe_int(row.get("訪問數", 0)) + 1
-        total_count = _safe_int(row.get("累積訪問", 0)) + 1
+        total_count = last_total  # 不重複加總訪問
         cell = sheet.find(today)
         if cell:
             sheet.update_cell(cell.row, 2, today_count)
-            sheet.update_cell(cell.row, 3, total_count)
     else:
-        # 新增第一筆或下一天資料
-        last_total = _safe_int(existing[-1].get("累積訪問", 0)) if existing else 0
         today_count, total_count = 1, last_total + 1
         sheet.append_row([today, today_count, total_count])
 
     return {"today": today_count, "total": total_count}
 
 
-def _safe_int(value):
-    """防呆轉換數字"""
-    try:
-        return int(value)
-    except (TypeError, ValueError):
-        return 0
-
-
 def load_counter():
-    """讀取試算表資料（用於報表）"""
+    """讀取報表資料"""
     sheet = _get_gsheet()
     records = sheet.get_all_records()
     if not records:
@@ -62,10 +68,10 @@ def load_counter():
 
     dates = {}
     for r in records:
-        try:
-            dates[r["日期"]] = _safe_int(r["訪問數"])
-        except KeyError:
-            pass
+        date = r.get("日期")
+        count = _safe_int(r.get("訪問數", 0))
+        if date:
+            dates[date] = count
 
     total = _safe_int(records[-1].get("累積訪問", 0))
     return {"dates": dates, "total": total}

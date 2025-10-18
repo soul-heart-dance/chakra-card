@@ -2,15 +2,14 @@ import streamlit as st
 import json
 import random
 import uuid
-import time
 from counter_utils import bump_counter
 
 def render_chakra_card():
-    # 套用 CSS
+    # 載入樣式
     with open("style.css", "r", encoding="utf-8") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-    # 純 CSS Loader
+    # 載入時顯示 loader（不暫停）
     st.markdown("""
     <div class="loader-wrapper">
         <div class="glow-circle"></div>
@@ -18,8 +17,7 @@ def render_chakra_card():
     </div>
     """, unsafe_allow_html=True)
 
-    time.sleep(2.8)
-
+    # 正常主畫面
     logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
     st.markdown(f"""
     <div class="header">

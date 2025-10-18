@@ -12,39 +12,18 @@
   justify-content: center;
   align-items: center;
   gap: 0.6rem;
-  margin-top: -2.2rem;
+  margin-top: -2rem;
 }
 .logo {
   height: 54px;
   border-radius: 50%;
   box-shadow: 0 0 15px rgba(255, 214, 246, 0.6);
 }
-.title-line1 {
-  font-size: 1.45rem;
-  font-weight: 700;
-  color: #FFE6F7;
-}
-.title-line2 {
-  font-size: 1rem;
-  font-weight: 500;
-  color: #FFD6F6;
-}
-.subtitle {
-  font-size: 1.2rem;
-  color: #FFE6F7;
-  margin-top: 1.2rem;
-  letter-spacing: 1px;
-}
+.title-line1 { font-size: 1.45rem; font-weight: 700; color: #FFE6F7; }
+.title-line2 { font-size: 1rem; font-weight: 500; color: #FFD6F6; }
+.subtitle { font-size: 1.2rem; margin-top: 1.2rem; color: #FFE6F7; }
 
 /* --- 按鈕 --- */
-.button-center,
-[data-testid="stVerticalBlock"],
-[data-testid="stHorizontalBlock"] {
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center !important;
-  margin: 0.8rem 0 0.8rem 0;
-}
 .stButton > button {
   background-color: #f9c8e6 !important;
   color: #222 !important;
@@ -53,78 +32,15 @@
   padding: 0.7rem 2rem !important;
   min-width: 220px !important;
   font-size: 1.08rem !important;
-  font-weight: 500 !important;
-  transition: all 0.3s ease;
   box-shadow: 0 0 18px rgba(255, 200, 250, 0.6);
+  transition: all 0.3s ease;
 }
 .stButton > button:hover {
   background-color: #ffe1f3 !important;
   box-shadow: 0 0 25px rgba(255, 200, 250, 0.8);
 }
 
-/* --- 卡片 --- */
-.card-wrapper {
-  border-radius: 1.3rem;
-  padding: 6px;
-  margin: 1rem auto 0;
-  width: min(920px, 92vw);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.root-glow  { box-shadow: 0 0 36px 8px rgba(255,102,102,0.6); }
-.sacral-glow{ box-shadow: 0 0 36px 8px rgba(255,165,0,0.6); }
-.solar-glow { box-shadow: 0 0 36px 8px rgba(255,230,128,0.6); }
-.heart-glow { box-shadow: 0 0 36px 8px rgba(144,238,144,0.6); }
-.throat-glow{ box-shadow: 0 0 36px 8px rgba(135,206,250,0.6); }
-.third-glow { box-shadow: 0 0 36px 8px rgba(186,85,211,0.6); }
-.crown-glow { box-shadow: 0 0 36px 8px rgba(255,182,255,0.6); }
-
-.card-container {
-  position: relative;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 1.2rem;
-  padding: 1.3rem;
-  backdrop-filter: blur(4px);
-  color: #fff;
-  animation: breatheGlow 6s ease-in-out infinite;
-}
-
-/* --- 光暈閃一下 --- */
-.card-wrapper.animate {
-  animation: pulseGlow 1.2s ease-in-out;
-}
-@keyframes pulseGlow {
-  0% { transform: scale(1); filter: brightness(1); }
-  40% { transform: scale(1.02); filter: brightness(1.6); }
-  100% { transform: scale(1); filter: brightness(1); }
-}
-
-/* --- 呼吸光 --- */
-@keyframes breatheGlow {
-  0%,100% { box-shadow: 0 0 20px rgba(255,255,255,0.08); }
-  50%     { box-shadow: 0 0 45px rgba(255,255,255,0.2); }
-}
-
-/* --- 文字 --- */
-.sentence {
-  font-size: 1.08rem;
-  background: rgba(255,255,255,0.08);
-  padding: 1rem 1.2rem;
-  border-radius: 1rem;
-  margin: 1rem auto;
-  display: inline-block;
-}
-.angel, .meaning {
-  font-size: 1rem;
-  color: #FFE6F7;
-  margin-top: 0.4rem;
-}
-.hint { margin-top: 1rem; color: #FFD6F6; font-size: 1rem; }
-.footer { font-size: 0.9rem; color: #FFE6F7; margin-top: 2rem; padding-bottom: 1rem; opacity: 0.8; }
-
-/* --- Loader 與 星光背景 --- */
+/* --- Loader --- */
 #loader {
   position: fixed;
   inset: 0;
@@ -134,9 +50,7 @@
   justify-content: center;
   background: radial-gradient(circle at center, rgba(0,0,0,0.95), rgba(0,0,0,1));
   z-index: 9999;
-  opacity: 1;
-  animation: fadeOutLoader 3.6s ease-in-out forwards;
-  animation-delay: 2.2s;
+  animation: fadeOutLoader 5s ease-in-out forwards;
 }
 #loader .glow-circle {
   width: 120px; height: 120px; border-radius: 50%;
@@ -145,34 +59,38 @@
   animation: pulse 2.4s infinite ease-in-out;
 }
 #loader .loader-text {
-  color: #ffe3f1; font-size: 22px; margin-top: 35px;
+  color: #ffe3f1;
+  font-size: 22px;
+  margin-top: 35px;
   text-shadow: 0 0 12px #ffb6c1, 0 0 24px rgba(255,192,203,0.5);
-  letter-spacing: 2px; text-align: center;
+}
+@keyframes fadeOutLoader {
+  0%,75% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
 }
 @keyframes pulse {
   0% { transform: scale(0.9); opacity: 0.8; }
   50% { transform: scale(1.08); opacity: 1; }
   100% { transform: scale(0.9); opacity: 0.8; }
 }
-@keyframes fadeOutLoader {
-  0%,75% { opacity: 1; }
-  100% { opacity: 0; visibility: hidden; }
-}
+
+/* --- 星光粒子 --- */
 body::before {
   content: "";
-  position: fixed; top: 0; left: 0;
+  position: fixed;
+  top: 0; left: 0;
   width: 100%; height: 100%;
-  background: radial-gradient(circle, rgba(255,255,255,0.15) 2px, transparent 2px),
-              radial-gradient(circle, rgba(255,200,250,0.12) 1.5px, transparent 2px),
-              radial-gradient(circle, rgba(200,180,255,0.1) 1px, transparent 2px);
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.12) 2px, transparent 2px),
+    radial-gradient(circle, rgba(255,200,250,0.1) 1.5px, transparent 2px),
+    radial-gradient(circle, rgba(200,180,255,0.1) 1px, transparent 2px);
   background-size: 150px 150px, 200px 200px, 250px 250px;
-  background-position: 0 0, 50px 80px, 100px 130px;
-  animation: sparkleMove 80s linear infinite;
+  background-position: 0 0, 80px 60px, 120px 100px;
+  animation: sparkle 90s linear infinite;
   z-index: -1;
-  opacity: 0.6;
-  pointer-events: none;
+  opacity: 0.7;
 }
-@keyframes sparkleMove {
-  from { background-position: 0 0, 50px 80px, 100px 130px; }
-  to { background-position: -400px -400px, -350px -300px, -500px -500px; }
+@keyframes sparkle {
+  from { background-position: 0 0, 80px 60px, 120px 100px; }
+  to { background-position: -600px -600px, -500px -400px, -700px -700px; }
 }

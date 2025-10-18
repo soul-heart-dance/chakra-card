@@ -1,3 +1,7 @@
+/* ================================
+🌸  Soul Heart Dance Chakra Card Style
+================================ */
+
 /* --- 整體背景與字體 --- */
 .stApp {
   background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000 100%);
@@ -151,13 +155,10 @@
 
 /* --- 桌面版卡片置中修正 --- */
 @media screen and (min-width: 768px) {
-  /* 最外層容器置中 */
   [data-testid="stElementContainer"] {
     display: flex !important;
     justify-content: center !important;
   }
-
-  /* 卡片容器本身居中 */
   .card-wrapper {
     position: relative;
     display: flex;
@@ -168,8 +169,6 @@
     left: 50%;
     transform: translateX(-50%);
   }
-
-  /* 光暈貼邊 */
   .card-wrapper::before {
     content: "";
     position: absolute;
@@ -180,61 +179,59 @@
     z-index: -1;
     transition: all 0.8s ease-in-out;
   }
-
-  /* 修正卡片寬度與中心對齊 */
   .card-container {
     width: 100%;
     max-width: 480px;
     margin: 0 auto;
   }
+}
 
-  /* 🌸 靈魂連線載入動畫（完美置中＋星光淡入淡出） */
+/* ================================
+🌙 靈魂連線載入動畫（完美置中＋星光淡入淡出）
+================================ */
 .loader-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  position: fixed !important;
+  inset: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at center, rgba(0,0,0,0.9) 0%, rgba(0,0,0,1) 100%);
-  z-index: 9999;
+  background: radial-gradient(circle at center, rgba(0,0,0,0.95) 0%, rgba(0,0,0,1) 100%);
+  z-index: 99999;
   animation: fadeout 1.8s ease-in-out forwards;
   animation-delay: 1.8s;
 }
-
 .glow-circle {
   width: 120px;
   height: 120px;
   border-radius: 50%;
-  background: radial-gradient(circle at center, rgba(255,192,203,0.9), rgba(255,182,193,0.15));
-  box-shadow: 0 0 80px 40px rgba(255,182,193,0.4);
-  animation: pulse 1.6s infinite ease-in-out;
+  background: radial-gradient(circle at center, rgba(255,192,203,0.9), rgba(255,182,193,0.1));
+  box-shadow: 0 0 60px 25px rgba(255,192,203,0.5);
+  animation: pulse 1.5s infinite ease-in-out;
 }
-
 .loader-text {
   color: #ffe3f1;
   font-size: 22px;
   margin-top: 35px;
   font-family: "Noto Sans TC", sans-serif;
-  text-shadow: 0 0 12px #ffb6c1, 0 0 24px rgba(255,192,203,0.5);
+  text-shadow: 0 0 10px #ffb6c1, 0 0 20px rgba(255,182,193,0.6);
   letter-spacing: 2px;
   text-align: center;
+  animation: glowtext 1.6s infinite ease-in-out;
 }
-
 @keyframes pulse {
-  0% { transform: scale(0.9); opacity: 0.8; }
+  0% { transform: scale(0.95); opacity: 0.8; }
   50% { transform: scale(1.05); opacity: 1; }
-  100% { transform: scale(0.9); opacity: 0.8; }
+  100% { transform: scale(0.95); opacity: 0.8; }
 }
-
+@keyframes glowtext {
+  0%, 100% { text-shadow: 0 0 8px #ffcce0, 0 0 20px rgba(255,192,203,0.5); opacity: 0.9; }
+  50% { text-shadow: 0 0 16px #ffd9ec, 0 0 35px rgba(255,182,193,0.8); opacity: 1; }
+}
 @keyframes fadeout {
   100% {
     opacity: 0;
     visibility: hidden;
-    transform: scale(1.1);
+    transform: scale(1.05);
   }
-}
 }

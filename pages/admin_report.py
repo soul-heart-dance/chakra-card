@@ -4,7 +4,7 @@ import plotly.express as px
 from counter_utils import fetch_report
 
 def render_admin_report():
-    st.set_page_config(page_title="Soul Heart Dance｜訪問統計（管理者）", page_icon="📊")
+    st.set_page_config(page_title="Soul Heart Dance｜訪問統計（管理者）", page_icon="🌌")
 
     try:
         data = fetch_report()

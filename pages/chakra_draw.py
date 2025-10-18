@@ -1,27 +1,18 @@
-import json
-import random
+# pages/chakra_draw.py
+import json, random, uuid
 import streamlit as st
-import uuid
+from counter_utils import bump_counter
 
-# ----------- 載入資料與樣式 -----------
+def _load_css():
+    with open("style.css", "r", encoding="utf-8") as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
 @st.cache_data
-def load_data():
+def _load_cards():
     with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
         return json.load(f)
 
-@st.cache_data
-def load_css():
-    with open("style.css", "r", encoding="utf-8") as f:
-        return f.read()
-
-data = load_data()
-st.markdown(f"<style>{load_css()}</style>", unsafe_allow_html=True)
-
-# ----------- 主畫面 -----------
-def show_chakra_draw(counter_data):
-    if "card" not in st.session_state:
-        st.session_state.card = None
-
+def _header():
     logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
     st.markdown(f"""
     <div class="header">
@@ -32,33 +23,42 @@ def show_chakra_draw(counter_data):
       </div>
     </div>
     """, unsafe_allow_html=True)
-
-    # 標題
     st.markdown('<div class="subtitle">✨ 今日的靈魂訊息 ✨</div>', unsafe_allow_html=True)
 
-    # 抽卡邏輯
-    def draw_card():
-        chakra = random.choice(list(data.keys()))
-        meta = data[chakra]
-        card = random.choice(meta["cards"])
-        st.session_state.card = {
-            "chakra": chakra,
-            "seed": meta["seed"],
-            "color": meta["color"],
-            "glow": meta["class"],
-            "sentence": card["sentence"],
-            "angel_number": card["angel_number"],
-            "angel_meaning": card["angel_meaning"],
-            "uid": str(uuid.uuid4())
-        }
+def _draw_one(cards):
+    chakra = random.choice(list(cards.keys()))
+    meta = cards[chakra]
+    c = random.choice(meta["cards"])
+    return {
+        "chakra": chakra,
+        "seed": meta["seed"],
+        "color": meta["color"],
+        "glow": meta["class"],
+        "sentence": c["sentence"],
+        "angel_number": c["angel_number"],
+        "angel_meaning": c["angel_meaning"],
+        "uid": str(uuid.uuid4())
+    }
+
+def render():
+    st.set_page_config(page_title="Soul Heart Dance｜七脈輪靈魂共振卡", page_icon="🔮", layout="centered")
+    _load_css()
+    bump_counter()  # 計數＋1（訪客不會看到數字）
+
+    cards = _load_cards()
+    if "card" not in st.session_state:
+        st.session_state.card = None
+
+    _header()
 
     # 按鈕
     btn_text = "🔮 抽卡" if st.session_state.card is None else "🌙 再抽一張"
     st.markdown('<div class="button-center">', unsafe_allow_html=True)
-    st.button(btn_text, on_click=draw_card, key="draw_button")
-    st.markdown("</div>", unsafe_allow_html=True)
+    if st.button(btn_text, key="draw_button"):
+        st.session_state.card = _draw_one(cards)
+    st.markdown('</div>', unsafe_allow_html=True)
 
-    # 顯示卡片或提示
+    # 顯示
     if st.session_state.card:
         c = st.session_state.card
         st.markdown(f"""
@@ -73,3 +73,9 @@ def show_chakra_draw(counter_data):
         """, unsafe_allow_html=True)
     else:
         st.markdown("<p class='hint'>🌙 點擊上方按鈕開始抽卡 🌙</p>", unsafe_allow_html=True)
+
+    st.markdown("""<div class="footer">© 2025 Soul Heart Dance · 與靈魂之心共舞</div>""", unsafe_allow_html=True)
+
+# 讓 Streamlit 直接跑這頁時可顯示
+if __name__ == "__main__":
+    render()

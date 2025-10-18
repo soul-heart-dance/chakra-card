@@ -1,35 +1,34 @@
 import streamlit as st
-import time
 import json
 import random
 import uuid
+import time
 from counter_utils import bump_counter
 
 def render_chakra_card():
-    # --- CSS ---
+    # --- 套用 CSS ---
     with open("style.css", "r", encoding="utf-8") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-    # --- 載入動畫（靈魂連線中） ---
+    # --- 載入動畫 ---
     st.markdown("""
     <div class="loader-wrapper" id="soul-loader">
         <div class="glow-circle"></div>
         <div class="loader-text">🌸 靈魂正在連線中...</div>
     </div>
     <script>
-    window.addEventListener("load", () => {
+    setTimeout(() => {
       const loader = document.getElementById("soul-loader");
-      if (!loader) return;
-      loader.style.opacity = "0";
-      setTimeout(() => {
-        loader.style.visibility = "hidden";
-        loader.remove();
-      }, 1600);
-    });
+      if (loader) {
+        loader.style.opacity = "0";
+        loader.style.transition = "opacity 1.6s ease-in-out";
+        setTimeout(() => loader.remove(), 1800);
+      }
+    }, 2200);
     </script>
     """, unsafe_allow_html=True)
 
-    # --- 延遲讓動畫顯示 ---
+    # --- 延遲顯示主畫面 ---
     time.sleep(1.8)
 
     # --- Header ---
@@ -45,10 +44,10 @@ def render_chakra_card():
     """, unsafe_allow_html=True)
     st.markdown("<div class='subtitle'>✨ 今日的靈魂訊息 ✨</div>", unsafe_allow_html=True)
 
-    # --- 計數更新 ---
+    # --- 更新統計 ---
     bump_counter()
 
-    # --- 抽卡資料 ---
+    # --- 讀取資料 ---
     with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
         data = json.load(f)
 
@@ -75,7 +74,7 @@ def render_chakra_card():
     st.button(btn_text, on_click=draw_card, key="draw_card")
     st.markdown('</div>', unsafe_allow_html=True)
 
-    # --- 顯示卡片 ---
+    # --- 顯示抽卡結果 ---
     if st.session_state.card:
         c = st.session_state.card
         st.markdown(f"""

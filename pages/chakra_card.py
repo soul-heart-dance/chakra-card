@@ -1,45 +1,25 @@
+import json, random, uuid
 import streamlit as st
-import random
-import uuid
-import json
-import time
 from counter_utils import bump_counter
 
+# 讀卡片資料與 CSS
+@st.cache_data
+def load_data():
+    with open("chakras_affirmations.json","r",encoding="utf-8") as f:
+        return json.load(f)
+@st.cache_data
+def load_css():
+    with open("style.css","r",encoding="utf-8") as f:
+        return f.read()
+
 def render_chakra_card():
-    """訪客抽卡頁面（柔光載入動畫＋按鈕粉光特效）"""
-    st.set_page_config(page_title="Soul Heart Dance｜七脈輪靈魂共振卡", page_icon="🔮", layout="centered")
-
-    # 載入資料與樣式
-    with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
-        data = json.load(f)
-    with open("style.css", "r", encoding="utf-8") as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
-    try:
-        bump_counter()
-    except:
-        pass
-
-    if "card" not in st.session_state:
-        st.session_state.card = None
-    if "clicked" not in st.session_state:
-        st.session_state.clicked = False
-    if "show_loader" not in st.session_state:
-        st.session_state.show_loader = True
-
-    # 🌸 柔光載入動畫
-    if st.session_state.show_loader:
-        st.markdown('<div class="loader-wrapper"><div class="glow-circle"></div><div class="loader-text">🌸 靈魂正在連線中...</div></div>', unsafe_allow_html=True)
-        time.sleep(1.8)
-        st.session_state.show_loader = False
-        st.rerun()
-        return
+    st.markdown(f"<style>{load_css()}</style>", unsafe_allow_html=True)
 
     # Header
     logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
     st.markdown(f"""
     <div class="header">
-      <img src="{logo_url}" class="logo">
+      <img src="{logo_url}" class="logo" alt="Soul Heart Dance Logo">
       <div class="title">
         <div class="title-line1">Soul Heart Dance</div>
         <div class="title-line2">七脈輪靈魂共振卡</div>
@@ -47,13 +27,28 @@ def render_chakra_card():
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown("<div class='subtitle'>✨ 今日的靈魂訊息 ✨</div>", unsafe_allow_html=True)
+    # 抬頭
+    st.markdown('<div class="subtitle">✨ 今日的靈魂訊息 ✨</div>', unsafe_allow_html=True)
 
+    # 進入頁面 → 計數（訪客版只做計數，不顯示數字）
+    try:
+        bump_counter()
+    except Exception as e:
+        # 即使寫入失敗，也不要讓畫面黑掉
+        st.toast("計數寫入暫時失敗，但不影響抽卡使用 💖", icon="⚠️")
+
+    # Session 初始化
+    if "card" not in st.session_state:
+        st.session_state.card = None
+
+    data = load_data()
+
+    # 抽卡邏輯
     def draw_card():
         chakra = random.choice(list(data.keys()))
         meta = data[chakra]
         card = random.choice(meta["cards"])
-        return {
+        st.session_state.card = {
             "chakra": chakra,
             "seed": meta["seed"],
             "color": meta["color"],
@@ -64,15 +59,16 @@ def render_chakra_card():
             "uid": str(uuid.uuid4())
         }
 
-    button_text = "🔮 抽卡" if st.session_state.card is None else "🌙 再抽一張"
+    # 按鈕
+    btn_text = "🔮 抽卡" if st.session_state.card is None else "🌙 再抽一張"
     st.markdown('<div class="button-center">', unsafe_allow_html=True)
-    if st.button(button_text, key="draw_button"):
-        st.session_state.card = draw_card()
-        st.session_state.clicked = True
-        st.rerun()
+    if st.button(btn_text, use_container_width=False):
+        draw_card()
+        st.rerun()   # 立即更新按鈕文字
     st.markdown('</div>', unsafe_allow_html=True)
 
-    if st.session_state.card and st.session_state.clicked:
+    # 卡片
+    if st.session_state.card:
         c = st.session_state.card
         st.markdown(f"""
         <div class="card-wrapper {c['glow']}" id="{c['uid']}">
@@ -87,4 +83,5 @@ def render_chakra_card():
     else:
         st.markdown("<p class='hint'>🌙 點擊上方按鈕開始抽卡 🌙</p>", unsafe_allow_html=True)
 
+    # Footer
     st.markdown("<div class='footer'>© 2025 Soul Heart Dance · 與靈魂之心共舞</div>", unsafe_allow_html=True)

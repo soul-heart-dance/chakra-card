@@ -26,9 +26,6 @@ def render_admin_report():
 
     # ---- 統計數字區塊 ----
     st.markdown(f"""
-    <div class='subtitle'>
-      📊 訪問統計（管理者）
-    </div>
     <div class='admin-sub' style='margin-top:0.8rem; font-size:1.05rem; color:#FFD6F6;'>
       🌸 今日訪問：{data['today']}　🌕 累積訪問：{data['total']}
     </div>
@@ -54,7 +51,6 @@ def render_admin_report():
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
         font_color="#FFE6F7",
-        legend_title_text="📈 指標",
         legend=dict(
             orientation="h",
             yanchor="bottom",

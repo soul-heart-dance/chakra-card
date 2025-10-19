@@ -98,7 +98,7 @@ div[data-testid="stButtonContainer"],
   --chakra-color: #ffb4f0;
   border-radius: 1.2rem !important;
   padding: 12px !important;
-  margin: 0.2rem auto !important;
+  margin: 0.1rem auto !important;
   width: min(560px, 92vw) !important;
   display: flex !important;
   justify-content: center !important;
@@ -167,7 +167,7 @@ div[data-testid="stButtonContainer"],
   justify-content: center;
   background: radial-gradient(circle at center, rgba(0,0,0,0.96), rgba(0,0,0,1));
   z-index: 998;
-  animation: fadeOutLoader 3.5s ease-in-out forwards;
+  animation: fadeOutLoader 4s ease-in-out forwards;
 }
 #loader .glow-circle {
   width: 120px; height: 120px; border-radius: 50%;

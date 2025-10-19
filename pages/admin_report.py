@@ -51,7 +51,7 @@ def render_admin_report():
         x="日期",
         y=["當日訪問", "累積訪問"],
         markers=True,
-        color_discrete_sequence=["#f6a8ff", "#8c52ff"]  # 粉金 & 紫
+        color_discrete_sequence=["#f6a8ff", "#8c52ff"]
     )
     fig.update_traces(line=dict(width=3))
     fig.update_layout(
@@ -73,14 +73,14 @@ def render_admin_report():
     # ---- 顯示圖表 ----
     st.plotly_chart(fig, use_container_width=True)
 
-    # ---- 自訂下載 CSV 按鈕（台灣時間命名）----
+    # ---- 自訂下載 CSV 按鈕（以台灣時間命名）----
     csv_buffer = StringIO()
     df.to_csv(csv_buffer, index=False, encoding="utf-8-sig")
-    csv_buffer.seek(0)
+    csv_data = csv_buffer.getvalue()  # ✅ 改這裡
 
     st.download_button(
         label="💾 下載報表（CSV）",
-        data=csv_buffer,
+        data=csv_data,  # ✅ 改成字串內容
         file_name=csv_filename,
         mime="text/csv",
         use_container_width=True

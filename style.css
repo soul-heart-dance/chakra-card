@@ -195,27 +195,46 @@ html, body, .stApp {
   box-shadow: 0 0 60px 16px var(--chakra-color, #ffb4f0);
 }
 
-/* === 按鈕置中 === */
-div[data-testid="stVerticalBlock"] > div:has(.stButton),
-div[data-testid="stHorizontalBlock"] > div:has(.stButton),
-div[data-testid="stVerticalBlock"] div[data-testid="stHorizontalBlock"] {
-  text-align: center !important;
+/* === 🌸 Streamlit 按鈕置中回復穩定版（維持原始大小、手機桌面通用） === */
+.stButton {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
   width: 100% !important;
-}
-
-.stButton {
-  display: flex !important;
-  justify-content: center !important;
-  width: 100% !important;
+  text-align: center !important;
+  margin: 0 auto !important;
 }
 
 .stButton > button {
+  background-color: #f9c8e6 !important;
+  color: #222 !important;
+  border: none !important;
+  border-radius: 1rem !important;
+  padding: 0.8rem 2.4rem !important;
+  font-size: 1.1rem !important;
+  font-weight: 500 !important;
   display: inline-flex !important;
   justify-content: center !important;
   align-items: center !important;
   text-align: center !important;
   margin: 0 auto !important;
+  box-shadow: 0 0 25px rgba(255, 200, 250, 0.7) !important;
+  transition: all 0.35s ease !important;
+}
+
+.stButton > button:hover {
+  background-color: #ffe1f3 !important;
+  box-shadow: 0 0 28px rgba(255, 200, 250, 0.9) !important;
+}
+
+/* === 🌈 修正卡片寬度歪掉問題 === */
+.card-wrapper {
+  width: min(600px, 92vw);
+  margin: 1.5rem auto;
+}
+
+.card-container {
+  max-width: 100%;
+  text-align: center;
+  margin: 0 auto;
 }

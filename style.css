@@ -237,13 +237,24 @@ div[data-testid="stButtonContainer"],
   text-align: center !important;
 }
 
-/* === 🖥️ 桌面版卡片柔光收斂 === */
+/* === 🖥️ 桌面版卡片柔光收斂＋脈輪色同步 === */
 @media screen and (min-width: 768px) {
   .card-wrapper {
-    box-shadow: 0 0 10px 2px rgba(255, 180, 240, 0.4) !important;
+    box-shadow: 0 0 12px 3px var(--chakra-color, rgba(255, 180, 240, 0.4)) !important;
+    transition: box-shadow 0.45s ease, transform 0.4s ease;
   }
+
   .card-wrapper:hover {
-    box-shadow: 0 0 18px 4px rgba(255, 180, 240, 0.6) !important;
-    transform: scale(1.015);
+    box-shadow: 0 0 20px 5px var(--chakra-color, rgba(255, 180, 240, 0.6)) !important;
+    transform: scale(1.01);
+  }
+
+  .card-container {
+    animation: desktopGlow 6s ease-in-out infinite !important;
+  }
+
+  @keyframes desktopGlow {
+    0%, 100% { box-shadow: 0 0 10px var(--chakra-color, rgba(255, 180, 240, 0.3)); }
+    50% { box-shadow: 0 0 18px var(--chakra-color, rgba(255, 180, 240, 0.55)); }
   }
 }

@@ -1,5 +1,3 @@
-/* === 🌸 Soul Heart Dance — Final Stable Version === */
-
 /* --- 全域背景 --- */
 html, body, .stApp {
   background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000 100%) !important;
@@ -183,5 +181,24 @@ html, body, .stApp {
 /* --- 手機間距修正 --- */
 .block-container {
   padding-top: 0.8rem !important;
+  text-align: center !important;
+}
+
+/* === 🌈 卡片光暈隨脈輪顏色同步 === */
+.card-wrapper {
+  --chakra-color: #ffb4f0;
+  box-shadow: 0 0 36px 10px var(--chakra-color, #ffb4f0);
+  transition: box-shadow 0.6s ease, transform 0.4s ease;
+}
+.card-wrapper:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 60px 16px var(--chakra-color, #ffb4f0);
+}
+
+/* === 🌸 Streamlit 按鈕完全置中修正 === */
+div[data-testid="stVerticalBlock"] > div > div.stButton {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
   text-align: center !important;
 }

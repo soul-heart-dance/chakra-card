@@ -45,12 +45,13 @@ def render_admin_report():
         x="日期",
         y=["當日訪問", "累積訪問"],
         markers=True,
-        color_discrete_sequence=["#f6a8ff", "#ffdecc"]
+        color_discrete_sequence=["#f6a8ff", "#c9a3ff"]
     )
     fig.update_layout(
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
         font_color="#FFE6F7",
+        legend_title_text=None,
         legend=dict(
             orientation="h",
             yanchor="bottom",

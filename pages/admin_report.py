@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from io import StringIO
+from io import BytesIO
 from datetime import datetime, timedelta, timezone
 from counter_utils import fetch_report
 
@@ -70,21 +70,34 @@ def render_admin_report():
         margin=dict(t=50, b=40, l=20, r=20)
     )
 
-    # ---- 顯示圖表 ----
-    st.plotly_chart(fig, use_container_width=True)
+    # ---- 隱藏 Plotly 原始工具列的下載按鈕 ----
+    st.plotly_chart(
+        fig,
+        use_container_width=True,
+        config={
+            "displaylogo": False,
+            "modeBarButtonsToRemove": ["toImage"]
+        }
+    )
 
-    # ---- 自訂下載 CSV 按鈕（以台灣時間命名）----
-    csv_buffer = StringIO()
-    df.to_csv(csv_buffer, index=False, encoding="utf-8-sig")
-    csv_data = csv_buffer.getvalue()  # ✅ 改這裡
+    # ---- 自訂下載 CSV 按鈕（以台灣時間命名，UTF-8-sig）----
+    csv_data = df.to_csv(index=False, encoding="utf-8-sig").encode("utf-8-sig")  # ✅ 轉 bytes
+    csv_bytes = BytesIO(csv_data)
 
     st.download_button(
         label="💾 下載報表（CSV）",
-        data=csv_data,  # ✅ 改成字串內容
+        data=csv_bytes,
         file_name=csv_filename,
         mime="text/csv",
         use_container_width=True
     )
+
+    # ---- 溫柔提示 ----
+    st.markdown("""
+    <div style="color:#FFD6F6; font-size:0.9rem; margin-top:-0.3rem; text-align:center;">
+      ✨ 檔名與時間皆已依台灣時區命名（UTF-8 編碼格式）
+    </div>
+    """, unsafe_allow_html=True)
 
     # ---- 表格顯示 ----
     st.dataframe(

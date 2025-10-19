@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from counter_utils import fetch_report
+from datetime import datetime, timedelta, timezone
 
 def render_admin_report():
     # ---- 套用全域樣式 ----
@@ -47,6 +48,11 @@ def render_admin_report():
         markers=True,
         color_discrete_sequence=["#f6a8ff", "#8c52ff"]
     )
+
+    # === 取得台灣時間（UTC+8） ===
+    taiwan_now = datetime.now(timezone(timedelta(hours=8)))
+    plot_filename = f"Soul_Heart_Dance_Report_{taiwan_now.strftime('%Y%m%d_%H%M%S')}"
+
     fig.update_layout(
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
@@ -58,6 +64,13 @@ def render_admin_report():
             y=1.02,
             xanchor="center",
             x=0.5
+        ),
+        # 自訂 Plotly 下載檔名
+        modebar=dict(
+            toImageButtonOptions=dict(
+                filename=plot_filename,
+                scale=2  # 解析度更高
+            )
         )
     )
 

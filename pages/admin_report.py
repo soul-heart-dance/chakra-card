@@ -52,19 +52,14 @@ def render_admin_report():
         color_discrete_sequence=["#f6a8ff", "#8c52ff"]
     )
 
-    # ---- 愛心點與柔光線條設定 ----
+    # 線條與節點樣式（hover 顯示 💖）
     fig.update_traces(
         line=dict(width=4, shape="spline"),
-        marker=dict(
-            size=14,
-            symbol="heart",  # 💖 讓點變成愛心
-            opacity=1,
-            line=dict(width=1, color="white")
-        ),
-        hovertemplate="<b>%{x}</b><br>✨ %{y}<extra></extra>"
+        marker=dict(size=10, opacity=1, color="#FFE6F7", line=dict(width=1, color="white")),
+        hovertemplate="💖 <b>%{x}</b><br>✨ %{y}<extra></extra>"
     )
 
-    # ---- 模擬 glow 效果的背景光暈 ----
+    # 模擬 glow 效果
     for i, color in enumerate(["#f6a8ff", "#8c52ff"]):
         fig.add_scatter(
             x=df["日期"],
@@ -75,7 +70,6 @@ def render_admin_report():
             showlegend=False
         )
 
-    # ---- 柔光互動風格 ----
     fig.update_layout(
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
@@ -97,7 +91,7 @@ def render_admin_report():
         margin=dict(t=50, b=40, l=20, r=20)
     )
 
-    # ---- 顯示圖表（移除下載圖檔按鈕）----
+    # ---- 顯示圖表（隱藏下載圖檔按鈕）----
     st.plotly_chart(
         fig,
         use_container_width=True,

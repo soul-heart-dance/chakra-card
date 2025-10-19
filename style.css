@@ -184,7 +184,7 @@ html, body, .stApp {
   text-align: center !important;
 }
 
-/* === 🌈 卡片光暈隨脈輪顏色同步 === */
+/* === 卡片光暈隨脈輪顏色同步 === */
 .card-wrapper {
   --chakra-color: #ffb4f0;
   box-shadow: 0 0 36px 10px var(--chakra-color, #ffb4f0);
@@ -195,10 +195,20 @@ html, body, .stApp {
   box-shadow: 0 0 60px 16px var(--chakra-color, #ffb4f0);
 }
 
-/* === 🌸 Streamlit 按鈕完全置中修正 === */
-div[data-testid="stVerticalBlock"] > div > div.stButton {
+/* === Streamlit 手機版按鈕完全置中 === */
+div[data-testid="stVerticalBlock"] div.stButton,
+div[data-testid="stHorizontalBlock"] div.stButton,
+div.stButton {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
+  text-align: center !important;
+  width: 100% !important;
+  margin: 0 auto !important;
+}
+
+.stButton > button {
+  display: inline-block !important;
+  margin: 0 auto !important;
   text-align: center !important;
 }

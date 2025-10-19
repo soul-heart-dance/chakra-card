@@ -221,3 +221,22 @@ div[data-testid="stButtonContainer"],
   padding-top: 1rem !important;
   text-align: center !important;
 }
+
+/* === 🔧 最終修正：外層容器水平置中，避免按鈕偏左 === */
+[data-testid="stVerticalBlock"] {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 auto !important;
+  padding: 0 !important;
+  text-align: center !important;
+}
+
+/* 強化 stButton 置中效果，防止上層干擾 */
+div[data-testid="stVerticalBlock"] div.stButton {
+  justify-content: center !important;
+  align-items: center !important;
+  margin: 0 auto !important;
+  width: auto !important;
+}

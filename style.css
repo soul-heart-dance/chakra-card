@@ -1,4 +1,4 @@
-/* === 🌸 全域背景 === */
+/* === 🌌 全域背景 === */
 html, body, .stApp {
   background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000 100%) !important;
   color: #FFE6F7 !important;
@@ -13,13 +13,13 @@ html, body, .stApp {
   margin-top: 0 !important;
 }
 
-/* === 隱藏 Streamlit 預設元件 === */
+/* === 隱藏不必要元件 === */
 [data-testid="stSidebar"], header, [data-testid="stHeader"], [data-testid="stToolbar"] {
   display: none !important;
   visibility: hidden !important;
 }
 
-/* === Header：logo 左 + 標題右 === */
+/* === Header === */
 .header {
   display: flex !important;
   justify-content: center !important;
@@ -28,8 +28,8 @@ html, body, .stApp {
   margin: 1.2rem auto 0.6rem auto !important;
 }
 .logo {
-  width: 72px !important;
-  height: 72px !important;
+  width: 70px !important;
+  height: 70px !important;
   border-radius: 50% !important;
   box-shadow: 0 0 16px rgba(255, 214, 246, 0.85) !important;
 }
@@ -64,7 +64,7 @@ html, body, .stApp {
   justify-content: center;
   background: radial-gradient(circle at center, rgba(0,0,0,0.96), rgba(0,0,0,1));
   z-index: 9999;
-  animation: fadeOutLoader 5s ease-in-out forwards;
+  animation: fadeOutLoader 4.5s ease-in-out forwards;
 }
 #loader .glow-circle {
   width: 120px; height: 120px; border-radius: 50%;
@@ -85,28 +85,29 @@ html, body, .stApp {
   100% { transform: scale(0.9); opacity: 0.8; }
 }
 @keyframes fadeOutLoader {
-  0%,80% { opacity: 1; }
+  0%,75% { opacity: 1; }
   100% { opacity: 0; visibility: hidden; }
 }
 
-/* === 主內容淡入 === */
+/* === 內容淡入 === */
 .stApp {
   opacity: 0;
   animation: fadeInContent 5s ease-in-out forwards;
-  animation-delay: 2.5s;
+  animation-delay: 2s;
 }
 @keyframes fadeInContent {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-/* === 按鈕置中 === */
-div[data-testid="stVerticalBlock"] > div > div.stButton,
-.row-widget.stButton {
+/* === 按鈕完全置中 === */
+.row-widget.stButton, .stButton, div[data-testid="stButtonContainer"] {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
+  width: 100% !important;
   text-align: center !important;
+  margin: 1rem auto !important;
 }
 .stButton > button {
   background-color: #f9c8e6 !important;
@@ -139,8 +140,8 @@ div[data-testid="stVerticalBlock"] > div > div.stButton,
   transition: box-shadow 0.4s ease, transform 0.4s ease;
 }
 .card-wrapper:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0 35px 10px var(--chakra-color, #ffb4f0);
+  transform: scale(1.01);
+  box-shadow: 0 0 30px 8px var(--chakra-color, #ffb4f0);
 }
 
 /* === 卡片內容 === */
@@ -158,26 +159,6 @@ div[data-testid="stVerticalBlock"] > div > div.stButton,
 @keyframes breatheGlow {
   0%,100% { box-shadow: 0 0 14px rgba(255, 190, 240, 0.25); }
   50% { box-shadow: 0 0 28px rgba(255, 190, 240, 0.55); }
-}
-
-/* === 主要文字 === */
-.sentence {
-  font-size: 1.08rem !important;
-  background: rgba(255,255,255,0.08) !important;
-  padding: 1rem 1.2rem !important;
-  border-radius: 1rem !important;
-  margin: 1rem auto !important;
-  display: inline-block !important;
-}
-.angel, .meaning {
-  font-size: 1rem !important;
-  color: #FFE6F7 !important;
-  margin-top: 0.4rem !important;
-}
-.hint {
-  margin-top: 1rem !important;
-  color: #FFD6F6 !important;
-  font-size: 1rem !important;
 }
 
 /* === Footer === */

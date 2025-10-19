@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
+import plotly.graph_objects as go
 from io import BytesIO
 from datetime import datetime, timedelta, timezone
 from counter_utils import fetch_report
@@ -43,36 +43,30 @@ def render_admin_report():
     taiwan_now = datetime.now(timezone(timedelta(hours=8)))
     csv_filename = f"Soul_Heart_Dance_Report_{taiwan_now.strftime('%Y%m%d_%H%M%S')}.csv"
 
-    # ---- 柔光粉金＋紫色線條 ----
-    fig = px.line(
-        df,
-        x="日期",
-        y=["當日訪問", "累積訪問"],
-        markers=True,
-        color_discrete_sequence=["#f6a8ff", "#8c52ff"]
-    )
+    # ---- 🌸 柔光粉金＋紫色乾淨風格折線圖 ----
+    fig = go.Figure()
 
-    # 🩷 更新線條與 hover 效果
-    fig.update_traces(
-        line=dict(width=4, shape="spline"),
-        marker=dict(size=10, color="#FFE6F7", line=dict(width=1, color="white")),
-        hovertemplate="💖 <b>%{x}</b><br>✨ %{y}<extra></extra>"
-    )
+    # 當日訪問線
+    fig.add_trace(go.Scatter(
+        x=df["日期"], y=df["當日訪問"],
+        mode="lines+markers",
+        name="當日訪問",
+        line=dict(color="#f6a8ff", width=3, shape="spline"),
+        marker=dict(size=8, color="#f6a8ff", line=dict(width=1, color="#fff")),
+        hovertemplate="🌸 <b>%{x}</b><br>✨ 當日訪問：%{y}<extra></extra>"
+    ))
 
-    # 🩵 模擬 glow：用兩層寬線覆蓋
-    colors = ["#f6a8ff", "#8c52ff"]
-    for i, col in enumerate(colors):
-        fig.add_scatter(
-            x=df["日期"],
-            y=df[["當日訪問", "累積訪問"][i]],
-            mode="lines",
-            line=dict(width=14, color=col),
-            opacity=0.07,  # ✅ 把透明度設在這層 trace，而不是 line 裡
-            hoverinfo="skip",
-            showlegend=False
-        )
+    # 累積訪問線
+    fig.add_trace(go.Scatter(
+        x=df["日期"], y=df["累積訪問"],
+        mode="lines+markers",
+        name="累積訪問",
+        line=dict(color="#8c52ff", width=3, shape="spline"),
+        marker=dict(size=8, color="#8c52ff", line=dict(width=1, color="#fff")),
+        hovertemplate="🌕 <b>%{x}</b><br>✨ 累積訪問：%{y}<extra></extra>"
+    ))
 
-    # 🌙 外觀設定
+    # ---- 外觀設定 ----
     fig.update_layout(
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
@@ -89,7 +83,7 @@ def render_admin_report():
             y=1.02,
             xanchor="center",
             x=0.5,
-            font=dict(size=14)
+            font=dict(size=14, color="#FFE6F7")
         ),
         margin=dict(t=50, b=40, l=20, r=20)
     )

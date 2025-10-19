@@ -3,6 +3,7 @@ import json
 from datetime import datetime
 import gspread
 from google.oauth2.service_account import Credentials
+import pytz
 
 # ---- 讀 ENV ----
 SHEET_ID   = os.environ.get("GOOGLE_SHEET_ID", "").strip()
@@ -20,8 +21,10 @@ def _to_int(x):
     except:
         return 0
 
+# 改為台灣時區
 def _today():
-    return datetime.now().strftime("%Y-%m-%d")
+    tz = pytz.timezone("Asia/Taipei")
+    return datetime.now(tz).strftime("%Y-%m-%d")
 
 # ---- 取得工作表 ----
 def get_gsheet():

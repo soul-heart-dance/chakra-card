@@ -52,24 +52,27 @@ def render_admin_report():
         color_discrete_sequence=["#f6a8ff", "#8c52ff"]
     )
 
-    # 線條與節點樣式（hover 顯示 💖）
+    # 🩷 更新線條與 hover 效果
     fig.update_traces(
         line=dict(width=4, shape="spline"),
-        marker=dict(size=10, opacity=1, color="#FFE6F7", line=dict(width=1, color="white")),
+        marker=dict(size=10, color="#FFE6F7", line=dict(width=1, color="white")),
         hovertemplate="💖 <b>%{x}</b><br>✨ %{y}<extra></extra>"
     )
 
-    # 模擬 glow 效果
-    for i, color in enumerate(["#f6a8ff", "#8c52ff"]):
+    # 🩵 模擬 glow：用兩層寬線覆蓋
+    colors = ["#f6a8ff", "#8c52ff"]
+    for i, col in enumerate(colors):
         fig.add_scatter(
             x=df["日期"],
             y=df[["當日訪問", "累積訪問"][i]],
             mode="lines",
-            line=dict(width=18, color=color, opacity=0.08),
+            line=dict(width=14, color=col),
+            opacity=0.07,  # ✅ 把透明度設在這層 trace，而不是 line 裡
             hoverinfo="skip",
             showlegend=False
         )
 
+    # 🌙 外觀設定
     fig.update_layout(
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
@@ -119,11 +122,7 @@ def render_admin_report():
     """, unsafe_allow_html=True)
 
     # ---- 表格 ----
-    st.dataframe(
-        df,
-        hide_index=True,
-        use_container_width=True,
-    )
+    st.dataframe(df, hide_index=True, use_container_width=True)
 
     # ---- Footer ----
     st.markdown("""

@@ -195,20 +195,27 @@ html, body, .stApp {
   box-shadow: 0 0 60px 16px var(--chakra-color, #ffb4f0);
 }
 
-/* === Streamlit 手機版按鈕完全置中 === */
-div[data-testid="stVerticalBlock"] div.stButton,
-div[data-testid="stHorizontalBlock"] div.stButton,
-div.stButton {
+/* === 按鈕置中 === */
+div[data-testid="stVerticalBlock"] > div:has(.stButton),
+div[data-testid="stHorizontalBlock"] > div:has(.stButton),
+div[data-testid="stVerticalBlock"] div[data-testid="stHorizontalBlock"] {
+  text-align: center !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  text-align: center !important;
   width: 100% !important;
-  margin: 0 auto !important;
+}
+
+.stButton {
+  display: flex !important;
+  justify-content: center !important;
+  width: 100% !important;
 }
 
 .stButton > button {
-  display: inline-block !important;
-  margin: 0 auto !important;
+  display: inline-flex !important;
+  justify-content: center !important;
+  align-items: center !important;
   text-align: center !important;
+  margin: 0 auto !important;
 }

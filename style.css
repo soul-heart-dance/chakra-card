@@ -167,7 +167,7 @@ div[data-testid="stButtonContainer"],
   justify-content: center;
   background: radial-gradient(circle at center, rgba(0,0,0,0.96), rgba(0,0,0,1));
   z-index: 998;
-  animation: fadeOutLoader 4s ease-in-out forwards;
+  animation: fadeOutLoader 4.5s ease-in-out forwards;
 }
 #loader .glow-circle {
   width: 120px; height: 120px; border-radius: 50%;

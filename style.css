@@ -235,13 +235,14 @@ div[data-testid="stButtonContainer"],
   text-align: center !important;
 }
 
-/* === 🖥️ 桌面版卡片光暈微調 === */
+/* === 🖥️ 桌面版卡片柔光收斂版 === */
 @media screen and (min-width: 768px) {
   .card-wrapper {
-    box-shadow: 0 0 20px 4px var(--chakra-color, #ffb4f0) !important;
+    box-shadow: 0 0 12px 3px var(--chakra-color, #ffb4f0) !important;
   }
   .card-wrapper:hover {
-    box-shadow: 0 0 32px 8px var(--chakra-color, #ffb4f0) !important;
+    box-shadow: 0 0 20px 5px var(--chakra-color, #ffb4f0) !important;
+    transform: scale(1.015);
   }
 }
 

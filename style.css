@@ -44,12 +44,14 @@ html, body, .stApp {
 .title-line2 {
   font-size: 1rem !important;
   color: #FFD6F6 !important;
-  margin-top: -2px !important;
+  margin-top: 0.1rem !important;
+  text-align: center !important;
+  display: block !important;
 }
 
 .subtitle {
   font-size: 1.15rem !important;
-  margin-top: 1rem !important;
+  margin-top: 1.6rem !important;
   color: #FFE6F7 !important;
   text-shadow: 0 0 8px rgba(255, 180, 255, 0.6) !important;
 }
@@ -149,7 +151,8 @@ div[data-testid="stButtonContainer"],
   margin-top: 0.4rem !important;
 }
 .hint {
-  margin-top: 1rem !important;
+  margin-top: 0.8rem !important;
+  margin-bottom: 0.3rem !important;
   color: #FFD6F6 !important;
   font-size: 1rem !important;
 }

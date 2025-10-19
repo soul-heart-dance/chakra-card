@@ -1,8 +1,9 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from counter_utils import fetch_report
+from io import StringIO
 from datetime import datetime, timedelta, timezone
+from counter_utils import fetch_report
 
 def render_admin_report():
     # ---- 套用全域樣式 ----
@@ -40,9 +41,9 @@ def render_admin_report():
     # ---- 整理資料表 ----
     df = pd.DataFrame(rows, columns=["日期", "當日訪問", "累積訪問"])
 
-    # ---- 台灣時間（UTC+8）作為檔名基準 ----
+    # ---- 台灣時間（UTC+8） ----
     taiwan_now = datetime.now(timezone(timedelta(hours=8)))
-    plot_filename = f"Soul_Heart_Dance_Report_{taiwan_now.strftime('%Y%m%d_%H%M%S')}"
+    csv_filename = f"Soul_Heart_Dance_Report_{taiwan_now.strftime('%Y%m%d_%H%M%S')}.csv"
 
     # ---- 柔光粉金＋紫色風格折線圖 ----
     fig = px.line(
@@ -52,7 +53,6 @@ def render_admin_report():
         markers=True,
         color_discrete_sequence=["#f6a8ff", "#8c52ff"]  # 粉金 & 紫
     )
-
     fig.update_traces(line=dict(width=3))
     fig.update_layout(
         plot_bgcolor="rgba(0,0,0,0)",
@@ -70,16 +70,20 @@ def render_admin_report():
         margin=dict(t=50, b=40, l=20, r=20)
     )
 
-    # ✅ 設定 Plotly 下載圖檔檔名（以台灣時間命名）
-    st.plotly_chart(
-        fig,
-        use_container_width=True,
-        config={
-            "toImageButtonOptions": {
-                "filename": plot_filename,
-                "scale": 2
-            }
-        }
+    # ---- 顯示圖表 ----
+    st.plotly_chart(fig, use_container_width=True)
+
+    # ---- 自訂下載 CSV 按鈕（台灣時間命名）----
+    csv_buffer = StringIO()
+    df.to_csv(csv_buffer, index=False, encoding="utf-8-sig")
+    csv_buffer.seek(0)
+
+    st.download_button(
+        label="💾 下載報表（CSV）",
+        data=csv_buffer,
+        file_name=csv_filename,
+        mime="text/csv",
+        use_container_width=True
     )
 
     # ---- 表格顯示 ----

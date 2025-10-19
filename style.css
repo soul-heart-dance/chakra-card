@@ -1,4 +1,4 @@
-/* === 🌌 全域背景設定 === */
+/* === 🌌 全域背景 === */
 html, body, .stApp {
   background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000 100%) !important;
   color: #FFE6F7 !important;
@@ -7,7 +7,7 @@ html, body, .stApp {
   overflow-x: hidden !important;
 }
 
-/* === 隱藏 Streamlit 內建元件 === */
+/* === 隱藏 Streamlit 元件 === */
 [data-testid="stSidebar"], header, [data-testid="stHeader"], [data-testid="stToolbar"] {
   display: none !important;
   visibility: hidden !important;
@@ -19,52 +19,45 @@ html, body, .stApp {
   justify-content: center !important;
   align-items: center !important;
   gap: 0.8rem !important;
-  margin-top: 1.5rem !important;
-  flex-wrap: wrap !important;
+  margin-top: 1.2rem !important;
   text-align: left !important;
+  flex-wrap: wrap !important;
 }
-
 .logo {
   width: 78px !important;
   height: 78px !important;
   border-radius: 50% !important;
-  box-shadow: 0 0 20px rgba(255, 214, 246, 0.85) !important;
+  box-shadow: 0 0 18px rgba(255, 214, 246, 0.85) !important;
 }
-
 .title {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
 }
-
 .title-line1 {
   font-size: 1.6rem !important;
   font-weight: 700 !important;
   color: #FFE6F7 !important;
-  text-shadow: 0 0 10px rgba(255, 180, 255, 0.6) !important;
 }
-
 .title-line2 {
   font-size: 1rem !important;
   color: #FFD6F6 !important;
   margin-top: -3px !important;
 }
-
 .subtitle {
-  font-size: 1.15rem !important;
+  font-size: 1.1rem !important;
   margin-top: 1.2rem !important;
   color: #FFE6F7 !important;
-  text-shadow: 0 0 8px rgba(255, 180, 255, 0.6) !important;
 }
 
-/* === 按鈕完全置中 === */
-.button-center {
+/* === 按鈕置中（覆蓋所有層）=== */
+.row-widget.stButton, .stButton {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
   width: 100% !important;
-  margin: 1.2rem auto !important;
+  margin: 1rem auto !important;
   text-align: center !important;
 }
 
@@ -76,40 +69,34 @@ html, body, .stApp {
   padding: 0.8rem 2.2rem !important;
   font-size: 1.1rem !important;
   font-weight: 500 !important;
-  box-shadow: 0 0 25px rgba(255, 200, 250, 0.6) !important;
+  box-shadow: 0 0 20px rgba(255, 200, 250, 0.6) !important;
   transition: all 0.35s ease !important;
-  display: inline-flex !important;
-  justify-content: center !important;
-  align-items: center !important;
 }
-
 .stButton > button:hover {
   background-color: #ffe1f3 !important;
-  box-shadow: 0 0 28px rgba(255, 200, 250, 0.9) !important;
+  box-shadow: 0 0 25px rgba(255, 200, 250, 0.9) !important;
 }
 
 /* === 卡片光暈柔化 === */
 .card-wrapper {
   --chakra-color: #ffb4f0;
   border-radius: 1.2rem !important;
-  padding: 12px !important;
+  padding: 10px !important;
   margin: 1.5rem auto !important;
   width: min(520px, 90vw) !important;
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  box-shadow: 0 0 24px 6px var(--chakra-color, #ffb4f0);
-  transition: box-shadow 0.5s ease, transform 0.4s ease;
+  box-shadow: 0 0 18px 3px var(--chakra-color, #ffb4f0);
+  transition: box-shadow 0.4s ease, transform 0.3s ease;
 }
-
 .card-wrapper:hover {
   transform: scale(1.01);
-  box-shadow: 0 0 40px 10px var(--chakra-color, #ffb4f0);
+  box-shadow: 0 0 30px 8px var(--chakra-color, #ffb4f0);
 }
 
-/* === 卡片本體 === */
+/* === 卡片內容 === */
 .card-container {
-  position: relative !important;
   background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)) !important;
   border: 1px solid rgba(255,255,255,0.25) !important;
   border-radius: 1rem !important;
@@ -120,30 +107,44 @@ html, body, .stApp {
   text-align: center !important;
   max-width: 100% !important;
 }
-
 @keyframes breatheGlow {
-  0%,100% { box-shadow: 0 0 16px rgba(255, 190, 240, 0.25); }
-  50% { box-shadow: 0 0 38px rgba(255, 190, 240, 0.6); }
+  0%,100% { box-shadow: 0 0 12px rgba(255, 190, 240, 0.25); }
+  50% { box-shadow: 0 0 30px rgba(255, 190, 240, 0.6); }
 }
 
-/* === 主要文字 === */
-.sentence {
-  font-size: 1.08rem !important;
-  background: rgba(255,255,255,0.08) !important;
-  padding: 1rem 1.2rem !important;
-  border-radius: 1rem !important;
-  margin: 1rem auto !important;
-  display: inline-block !important;
+/* === Loader === */
+#loader {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, rgba(0,0,0,0.96), rgba(0,0,0,1));
+  z-index: 9999;
+  animation: fadeOutLoader 4s ease-in-out forwards;
+  animation-fill-mode: forwards;
 }
-.angel, .meaning {
-  font-size: 1rem !important;
-  color: #FFE6F7 !important;
-  margin-top: 0.4rem !important;
+#loader .glow-circle {
+  width: 120px; height: 120px; border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(255,192,203,0.9), rgba(255,182,193,0.1));
+  box-shadow: 0 0 80px 40px rgba(255,182,193,0.45);
+  animation: pulse 2.8s infinite ease-in-out;
 }
-.hint {
-  margin-top: 1rem !important;
-  color: #FFD6F6 !important;
-  font-size: 1rem !important;
+#loader .loader-text {
+  color: #ffe3f1;
+  font-size: 22px;
+  margin-top: 35px;
+  text-shadow: 0 0 12px #ffb6c1, 0 0 24px rgba(255,192,203,0.6);
+}
+@keyframes pulse {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+@keyframes fadeOutLoader {
+  0%,80% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; }
 }
 
 /* === Footer === */
@@ -155,8 +156,13 @@ html, body, .stApp {
   opacity: 0.85 !important;
 }
 
-/* === 手機間距修正 === */
-.block-container {
-  padding-top: 1rem !important;
-  text-align: center !important;
+/* === 手機排版 === */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column !important;
+    text-align: center !important;
+  }
+  .title {
+    align-items: center !important;
+  }
 }

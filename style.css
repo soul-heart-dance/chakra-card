@@ -7,7 +7,7 @@ html, body, .stApp {
   overflow-x: hidden !important;
 }
 
-/* === 隱藏 Streamlit 內建元件 === */
+/* === 🧩 隱藏 Streamlit 內建元件 === */
 [data-testid="stSidebar"], header, [data-testid="stHeader"], [data-testid="stToolbar"] {
   display: none !important;
   visibility: hidden !important;
@@ -16,10 +16,10 @@ html, body, .stApp {
   overflow: hidden !important;
 }
 
-/* === Header（Logo + 標題）=== */
+/* === 💫 Header（Logo + 標題）=== */
 .header {
   display: flex !important;
-  flex-direction: row !important; /* ✅ 改成橫向排列 */
+  flex-direction: row !important;
   justify-content: center !important;
   align-items: center !important;
   text-align: left !important;
@@ -54,7 +54,7 @@ html, body, .stApp {
   text-shadow: 0 0 8px rgba(255, 180, 255, 0.6) !important;
 }
 
-/* === Streamlit 按鈕完全置中 === */
+/* === 🔮 Streamlit 按鈕完全置中 === */
 .row-widget.stButton,
 div[data-testid="stVerticalBlock"] div.stButton,
 div[data-testid="stButtonContainer"],
@@ -67,6 +67,7 @@ div[data-testid="stButtonContainer"],
   margin: 1rem auto !important;
 }
 
+/* ✨ 按鈕樣式（維持大小與柔光） */
 .stButton > button {
   background-color: #f9c8e6 !important;
   color: #222 !important;
@@ -86,13 +87,12 @@ div[data-testid="stButtonContainer"],
   margin: 0 auto !important;
 }
 
-/* hover 效果 */
 .stButton > button:hover {
   background-color: #ffe1f3 !important;
   box-shadow: 0 0 30px rgba(255, 200, 250, 0.9) !important;
 }
 
-/* === 卡片外框（光暈隨脈輪顏色）=== */
+/* === 💎 卡片外框（光暈隨脈輪顏色）=== */
 .card-wrapper {
   --chakra-color: #ffb4f0;
   border-radius: 1.2rem !important;
@@ -111,7 +111,7 @@ div[data-testid="stButtonContainer"],
   box-shadow: 0 0 42px 10px var(--chakra-color, #ffb4f0);
 }
 
-/* === 卡片本體 === */
+/* === 📜 卡片內容區 === */
 .card-container {
   position: relative !important;
   background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)) !important;
@@ -130,7 +130,7 @@ div[data-testid="stButtonContainer"],
   50% { box-shadow: 0 0 40px rgba(255, 190, 240, 0.6); }
 }
 
-/* === 文字樣式 === */
+/* === ✨ 文字樣式 === */
 .sentence {
   font-size: 1.08rem !important;
   background: rgba(255,255,255,0.08) !important;
@@ -150,7 +150,7 @@ div[data-testid="stButtonContainer"],
   font-size: 1rem !important;
 }
 
-/* === Loader === */
+/* === 🌸 Loader 動畫 === */
 #loader {
   position: fixed;
   inset: 0;
@@ -163,7 +163,9 @@ div[data-testid="stButtonContainer"],
   animation: fadeOutLoader 5s ease-in-out forwards;
 }
 #loader .glow-circle {
-  width: 120px; height: 120px; border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
   background: radial-gradient(circle at center, rgba(255,192,203,0.9), rgba(255,182,193,0.1));
   box-shadow: 0 0 80px 40px rgba(255,182,193,0.45);
   animation: pulse 2.8s infinite ease-in-out;
@@ -185,7 +187,7 @@ div[data-testid="stButtonContainer"],
   100% { opacity: 0; visibility: hidden; }
 }
 
-/* === 星光粒子層 === */
+/* === ✨ 星光粒子層 === */
 .stApp::before {
   content: "";
   position: fixed;
@@ -207,7 +209,7 @@ div[data-testid="stButtonContainer"],
   to { background-position: -600px -600px, -500px -400px, -700px -700px; }
 }
 
-/* === Footer === */
+/* === 🌙 Footer === */
 .footer {
   font-size: 0.9rem !important;
   color: #FFE6F7 !important;
@@ -216,13 +218,13 @@ div[data-testid="stButtonContainer"],
   opacity: 0.85 !important;
 }
 
-/* === 手機調整 === */
+/* === 📱 手機版微調 === */
 .block-container {
   padding-top: 1rem !important;
   text-align: center !important;
 }
 
-/* === 🔧 最終修正：外層容器水平置中，避免按鈕偏左 === */
+/* === 🧭 外層容器置中修正（防止按鈕偏左） === */
 [data-testid="stVerticalBlock"] {
   display: flex !important;
   flex-direction: column !important;
@@ -233,10 +235,22 @@ div[data-testid="stButtonContainer"],
   text-align: center !important;
 }
 
-/* 強化 stButton 置中效果，防止上層干擾 */
-div[data-testid="stVerticalBlock"] div.stButton {
-  justify-content: center !important;
-  align-items: center !important;
-  margin: 0 auto !important;
-  width: auto !important;
+/* === 🖥️ 桌面版卡片光暈微調 === */
+@media screen and (min-width: 768px) {
+  .card-wrapper {
+    box-shadow: 0 0 20px 4px var(--chakra-color, #ffb4f0) !important;
+  }
+  .card-wrapper:hover {
+    box-shadow: 0 0 32px 8px var(--chakra-color, #ffb4f0) !important;
+  }
+}
+
+/* === 📱 手機維持柔光 === */
+@media screen and (max-width: 767px) {
+  .card-wrapper {
+    box-shadow: 0 0 28px 6px var(--chakra-color, #ffb4f0) !important;
+  }
+  .card-wrapper:hover {
+    box-shadow: 0 0 42px 10px var(--chakra-color, #ffb4f0) !important;
+  }
 }

@@ -43,7 +43,7 @@ else:
     st.markdown("""
     <div id="loader">
       <div class="glow-circle"></div>
-      <div class="loader-text">🌸 靈魂正在連線中...</div>
+      <div class="loader-text">💫 靈魂正在為你準備今日的指引…</div>
     </div>
     """, unsafe_allow_html=True)
     render_chakra_card()

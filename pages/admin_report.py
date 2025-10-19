@@ -10,7 +10,7 @@ def render_admin_report():
     with open("style.css", "r", encoding="utf-8") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-    # ---- Header：與抽卡頁相同的 Logo + 標題樣式 ----
+    # ---- Header ----
     logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
     st.markdown(f"""
     <div class="header">
@@ -22,18 +22,16 @@ def render_admin_report():
     </div>
     """, unsafe_allow_html=True)
 
-    # ---- 取得訪問資料 ----
+    # ---- 取得資料 ----
     data = fetch_report()
     rows = data["rows"]
 
-    # ---- 統計數字區塊 ----
     st.markdown(f"""
     <div class='admin-sub' style='margin-top:0.8rem; font-size:1.05rem; color:#FFD6F6;'>
       🌸 今日訪問：{data['today']}　🌕 累積訪問：{data['total']}
     </div>
     """, unsafe_allow_html=True)
 
-    # ---- 若無資料 ----
     if not rows:
         st.info("目前尚無訪問資料")
         return
@@ -45,7 +43,7 @@ def render_admin_report():
     taiwan_now = datetime.now(timezone(timedelta(hours=8)))
     csv_filename = f"Soul_Heart_Dance_Report_{taiwan_now.strftime('%Y%m%d_%H%M%S')}.csv"
 
-    # ---- 柔光粉金＋紫色風格折線圖 ----
+    # ---- 柔光粉金＋紫色線條 ----
     fig = px.line(
         df,
         x="日期",
@@ -53,12 +51,41 @@ def render_admin_report():
         markers=True,
         color_discrete_sequence=["#f6a8ff", "#8c52ff"]
     )
-    fig.update_traces(line=dict(width=3))
+
+    # ---- 愛心點與柔光線條設定 ----
+    fig.update_traces(
+        line=dict(width=4, shape="spline"),
+        marker=dict(
+            size=14,
+            symbol="heart",  # 💖 讓點變成愛心
+            opacity=1,
+            line=dict(width=1, color="white")
+        ),
+        hovertemplate="<b>%{x}</b><br>✨ %{y}<extra></extra>"
+    )
+
+    # ---- 模擬 glow 效果的背景光暈 ----
+    for i, color in enumerate(["#f6a8ff", "#8c52ff"]):
+        fig.add_scatter(
+            x=df["日期"],
+            y=df[["當日訪問", "累積訪問"][i]],
+            mode="lines",
+            line=dict(width=18, color=color, opacity=0.08),
+            hoverinfo="skip",
+            showlegend=False
+        )
+
+    # ---- 柔光互動風格 ----
     fig.update_layout(
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
         font_color="#FFE6F7",
-        legend_title_text=None,
+        hovermode="x unified",
+        hoverlabel=dict(
+            bgcolor="rgba(255,230,247,0.9)",
+            font_color="#000",
+            font_size=13
+        ),
         legend=dict(
             orientation="h",
             yanchor="bottom",
@@ -70,37 +97,34 @@ def render_admin_report():
         margin=dict(t=50, b=40, l=20, r=20)
     )
 
-    # ---- 使用 HTML 嵌入方式顯示 Plotly 圖，確保隱藏下載按鈕 ----
-    plot_html = fig.to_html(
-        include_plotlyjs="cdn",
+    # ---- 顯示圖表（移除下載圖檔按鈕）----
+    st.plotly_chart(
+        fig,
+        use_container_width=True,
         config={
             "displaylogo": False,
-            "modeBarButtonsToRemove": ["toImage"],  # ✅ 真正移除下載按鈕
+            "modeBarButtonsToRemove": ["toImage", "editInChartStudio", "sendDataToCloud"],
             "responsive": True
         }
     )
-    st.components.v1.html(plot_html, height=500)
 
-    # ---- 自訂下載 CSV 按鈕（以台灣時間命名，UTF-8-sig）----
-    csv_data = df.to_csv(index=False, encoding="utf-8-sig").encode("utf-8-sig")  # ✅ 轉 bytes
-    csv_bytes = BytesIO(csv_data)
-
+    # ---- 自訂下載 CSV 按鈕 ----
+    csv_data = df.to_csv(index=False, encoding="utf-8-sig").encode("utf-8-sig")
     st.download_button(
         label="💾 下載報表（CSV）",
-        data=csv_bytes,
+        data=BytesIO(csv_data),
         file_name=csv_filename,
         mime="text/csv",
         use_container_width=True
     )
 
-    # ---- 溫柔提示 ----
     st.markdown("""
     <div style="color:#FFD6F6; font-size:0.9rem; margin-top:-0.3rem; text-align:center;">
       ✨ 檔名與時間皆已依台灣時區命名（UTF-8 編碼格式）
     </div>
     """, unsafe_allow_html=True)
 
-    # ---- 表格顯示 ----
+    # ---- 表格 ----
     st.dataframe(
         df,
         hide_index=True,

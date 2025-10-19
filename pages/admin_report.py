@@ -45,7 +45,7 @@ def render_admin_report():
         x="日期",
         y=["當日訪問", "累積訪問"],
         markers=True,
-        color_discrete_sequence=["#f6a8ff", "#c9a3ff"]
+        color_discrete_sequence=["#f6a8ff", "#8c52ff"]
     )
     fig.update_layout(
         plot_bgcolor="rgba(0,0,0,0)",

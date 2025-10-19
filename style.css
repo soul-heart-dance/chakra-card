@@ -1,121 +1,57 @@
-/* === 🌸 基本設定 === */
-body, .stApp {
-  background-color: #000;
-  color: #fff;
-  font-family: "Noto Sans TC", "微軟正黑體", sans-serif;
-  overflow-x: hidden;
+/* === 🌸 Soul Heart Dance — Final Stable Version === */
+
+/* --- 全域背景 --- */
+html, body, .stApp {
+  background: radial-gradient(circle at 30% 30%, #1b1b1b 0%, #000 100%) !important;
+  color: #FFE6F7 !important;
+  font-family: "Microsoft JhengHei", Verdana, sans-serif !important;
+  text-align: center !important;
+  overflow-x: hidden !important;
 }
 
-/* Header */
+/* --- 移除 Streamlit 的 header / toolbar / sidebar --- */
+[data-testid="stSidebar"], section[data-testid="stSidebar"], div[data-testid="stToolbar"], header, [data-testid="stHeader"] {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+}
+
+/* --- Header 標題 --- */
 .header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  margin-top: 1.5rem;
-}
-
-.logo {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  box-shadow: 0 0 20px rgba(255, 200, 250, 0.8);
-  margin-bottom: 0.5rem;
-}
-
-.title-line1 {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: #f5d2f7;
-  text-shadow: 0 0 12px rgba(255, 180, 255, 0.6);
-}
-
-.title-line2 {
-  font-size: 1rem;
-  color: #f0c9ff;
-  margin-top: -0.2rem;
-}
-
-.subtitle {
-  text-align: center;
-  font-size: 1.2rem;
-  margin-top: 0.8rem;
-  margin-bottom: 1.5rem;
-  color: #fbe6ff;
-  text-shadow: 0 0 8px rgba(255, 180, 255, 0.6);
-}
-
-/* === 🌈 卡片設定（光暈隨脈輪顏色變）=== */
-.card-wrapper {
-  position: relative;
-  border-radius: 1.3rem;
-  padding: 14px;
-  margin: 1.5rem auto;
-  width: min(900px, 92vw);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.4s ease;
-}
-
-.card-wrapper::before {
-  content: "";
-  position: absolute;
-  inset: -16px;
-  border-radius: 1.6rem;
-  background: radial-gradient(circle at 50% 50%,
-              color-mix(in srgb, var(--chakra-color, #ffb4f0) 35%, transparent) 0%,
-              transparent 75%);
-  z-index: -1;
-  pointer-events: none;
-  filter: drop-shadow(0 0 25px var(--chakra-color, #ffb4f0));
-}
-
-.card-container {
-  position: relative;
-  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
-  border: 1px solid rgba(255,255,255,0.25);
-  border-radius: 1.2rem;
-  padding: 1.4rem;
-  backdrop-filter: blur(6px);
-  color: #fff;
-  animation: breatheGlow 6s ease-in-out infinite;
-}
-
-@keyframes breatheGlow {
-  0%,100% { box-shadow: 0 0 20px rgba(255, 200, 240, 0.25); }
-  50% { box-shadow: 0 0 55px rgba(255, 200, 240, 0.65); }
-}
-
-.card-container h3 {
-  text-align: center;
-  font-size: 1.4rem;
-  margin-bottom: 0.8rem;
-}
-
-.sentence, .angel, .meaning {
-  text-align: center;
-  margin: 0.4rem 0;
-  font-size: 1.05rem;
-}
-
-.hint {
-  text-align: center;
-  color: #ffcfff;
-  font-size: 1.05rem;
-}
-
-/* === 🌸 完全置中按鈕 === */
-.button-center, .stButton {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  width: 100% !important;
-  text-align: center !important;
-  margin: 0 auto !important;
+  gap: 0.6rem !important;
+  margin-top: -1.6rem !important;
+}
+.logo {
+  height: 54px !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 16px rgba(255, 214, 246, 0.8) !important;
+}
+.title-line1 {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  color: #FFE6F7 !important;
+}
+.title-line2 {
+  font-size: 1rem !important;
+  color: #FFD6F6 !important;
+  margin-top: -2px !important;
+}
+.subtitle {
+  font-size: 1.15rem !important;
+  margin-top: 1.3rem !important;
+  color: #FFE6F7 !important;
 }
 
+/* --- 按鈕 --- */
+.stButton {
+  display: flex !important;
+  justify-content: center !important;
+}
 .stButton > button {
   background-color: #f9c8e6 !important;
   color: #222 !important;
@@ -125,22 +61,127 @@ body, .stApp {
   min-width: 220px !important;
   font-size: 1.1rem !important;
   font-weight: 500 !important;
-  margin: 0 auto !important;
-  display: block !important;
   box-shadow: 0 0 25px rgba(255, 200, 250, 0.7) !important;
   transition: all 0.35s ease !important;
+  text-align: center !important;
 }
-
 .stButton > button:hover {
   background-color: #ffe1f3 !important;
   box-shadow: 0 0 28px rgba(255, 200, 250, 0.9) !important;
 }
 
-/* Footer */
+/* --- 卡片容器 --- */
+.card-wrapper {
+  border-radius: 1.3rem !important;
+  padding: 10px !important;
+  margin: 1.5rem auto !important;
+  width: min(900px, 92vw) !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  filter: drop-shadow(0 0 15px rgba(255, 170, 230, 0.35)) drop-shadow(0 0 35px rgba(255, 190, 250, 0.25)) !important;
+}
+
+.card-container {
+  position: relative !important;
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)) !important;
+  border: 1px solid rgba(255,255,255,0.25) !important;
+  border-radius: 1.2rem !important;
+  padding: 1.4rem !important;
+  backdrop-filter: blur(6px) !important;
+  color: #fff !important;
+  animation: breatheGlow 6s ease-in-out infinite !important;
+}
+
+@keyframes breatheGlow {
+  0%,100% { box-shadow: 0 0 20px rgba(255, 190, 240, 0.3); }
+  50% { box-shadow: 0 0 55px rgba(255, 190, 240, 0.65); }
+}
+
+/* --- 主要文字 --- */
+.sentence {
+  font-size: 1.08rem !important;
+  background: rgba(255,255,255,0.08) !important;
+  padding: 1rem 1.2rem !important;
+  border-radius: 1rem !important;
+  margin: 1rem auto !important;
+  display: inline-block !important;
+}
+.angel, .meaning {
+  font-size: 1rem !important;
+  color: #FFE6F7 !important;
+  margin-top: 0.4rem !important;
+}
+.hint { margin-top: 1rem !important; color: #FFD6F6 !important; font-size: 1rem !important; }
+
+/* --- Loader --- */
+#loader {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, rgba(0,0,0,0.96), rgba(0,0,0,1));
+  z-index: 998; /* loader 在下，星光在上 */
+  animation: fadeOutLoader 5s ease-in-out forwards;
+}
+#loader .glow-circle {
+  width: 120px; height: 120px; border-radius: 50%;
+  background: radial-gradient(circle at center, rgba(255,192,203,0.9), rgba(255,182,193,0.1));
+  box-shadow: 0 0 80px 40px rgba(255,182,193,0.45);
+  animation: pulse 2.8s infinite ease-in-out;
+}
+#loader .loader-text {
+  color: #ffe3f1;
+  font-size: 22px;
+  margin-top: 35px;
+  text-shadow: 0 0 12px #ffb6c1, 0 0 24px rgba(255,192,203,0.6);
+  letter-spacing: 2px;
+}
+@keyframes pulse {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+@keyframes fadeOutLoader {
+  0%,80% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+/* --- 星光粒子層 --- */
+.stApp::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background:
+    radial-gradient(circle, rgba(255,255,255,0.15) 2px, transparent 2px),
+    radial-gradient(circle, rgba(255,200,250,0.12) 1.5px, transparent 2px),
+    radial-gradient(circle, rgba(200,180,255,0.1) 1px, transparent 2px);
+  background-size: 150px 150px, 200px 200px, 250px 250px;
+  background-position: 0 0, 80px 60px, 120px 100px;
+  animation: sparkle 90s linear infinite;
+  z-index: 999; /* 星光在最上層 */
+  opacity: 0.7;
+  pointer-events: none;
+}
+@keyframes sparkle {
+  from { background-position: 0 0, 80px 60px, 120px 100px; }
+  to { background-position: -600px -600px, -500px -400px, -700px -700px; }
+}
+
+/* --- Footer --- */
 .footer {
-  text-align: center;
-  margin-top: 2rem;
-  font-size: 0.9rem;
-  color: #e6d1f5;
-  opacity: 0.8;
+  font-size: 0.9rem !important;
+  color: #FFE6F7 !important;
+  margin-top: 2rem !important;
+  padding-bottom: 1rem !important;
+  opacity: 0.85 !important;
+}
+
+/* --- 手機間距修正 --- */
+.block-container {
+  padding-top: 0.8rem !important;
+  text-align: center !important;
 }

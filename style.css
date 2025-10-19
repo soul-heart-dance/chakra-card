@@ -51,7 +51,7 @@ html, body, .stApp {
 
 .subtitle {
   font-size: 1.15rem !important;
-  margin-top: 1.6rem !important;
+  margin-top: 1.8rem !important;
   color: #FFE6F7 !important;
   text-shadow: 0 0 8px rgba(255, 180, 255, 0.6) !important;
 }
@@ -151,7 +151,7 @@ div[data-testid="stButtonContainer"],
   margin-top: 0.4rem !important;
 }
 .hint {
-  margin-top: 0.8rem !important;
+  margin-top: 0.3rem !important;
   margin-bottom: 0.3rem !important;
   color: #FFD6F6 !important;
   font-size: 1rem !important;

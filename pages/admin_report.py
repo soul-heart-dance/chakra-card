@@ -40,19 +40,20 @@ def render_admin_report():
     # ---- 整理資料表 ----
     df = pd.DataFrame(rows, columns=["日期", "當日訪問", "累積訪問"])
 
-    # ---- 柔光粉金風格折線圖 ----
+    # ---- 台灣時間（UTC+8）作為檔名基準 ----
+    taiwan_now = datetime.now(timezone(timedelta(hours=8)))
+    plot_filename = f"Soul_Heart_Dance_Report_{taiwan_now.strftime('%Y%m%d_%H%M%S')}"
+
+    # ---- 柔光粉金＋紫色風格折線圖 ----
     fig = px.line(
         df,
         x="日期",
         y=["當日訪問", "累積訪問"],
         markers=True,
-        color_discrete_sequence=["#f6a8ff", "#8c52ff"]
+        color_discrete_sequence=["#f6a8ff", "#8c52ff"]  # 粉金 & 紫
     )
 
-    # === 取得台灣時間（UTC+8） ===
-    taiwan_now = datetime.now(timezone(timedelta(hours=8)))
-    plot_filename = f"Soul_Heart_Dance_Report_{taiwan_now.strftime('%Y%m%d_%H%M%S')}"
-
+    fig.update_traces(line=dict(width=3))
     fig.update_layout(
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
@@ -63,18 +64,23 @@ def render_admin_report():
             yanchor="bottom",
             y=1.02,
             xanchor="center",
-            x=0.5
+            x=0.5,
+            font=dict(size=14)
         ),
-        # 自訂 Plotly 下載檔名
-        modebar=dict(
-            toImageButtonOptions=dict(
-                filename=plot_filename,
-                scale=2  # 解析度更高
-            )
-        )
+        margin=dict(t=50, b=40, l=20, r=20)
     )
 
-    st.plotly_chart(fig, use_container_width=True)
+    # ✅ 設定 Plotly 下載圖檔檔名（以台灣時間命名）
+    st.plotly_chart(
+        fig,
+        use_container_width=True,
+        config={
+            "toImageButtonOptions": {
+                "filename": plot_filename,
+                "scale": 2
+            }
+        }
+    )
 
     # ---- 表格顯示 ----
     st.dataframe(

@@ -70,7 +70,6 @@ def render_admin_report():
         margin=dict(t=50, b=40, l=20, r=20)
     )
 
-    
     # ---- 保留互動功能，只隱藏下載圖檔按鈕 ----
     st.plotly_chart(
         fig,
@@ -81,8 +80,8 @@ def render_admin_report():
             "toImageButtonOptions": {"format": "png", "filename": "disabled"},  # 進一步確保不顯示
             "modeBarButtonsToAdd": [],               # 不新增其他按鈕
             "responsive": True
-    }
-)
+        }
+    )
 
     # ---- 自訂下載 CSV 按鈕（以台灣時間命名，UTF-8-sig）----
     csv_data = df.to_csv(index=False, encoding="utf-8-sig").encode("utf-8-sig")  # ✅ 轉 bytes

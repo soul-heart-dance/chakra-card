@@ -188,7 +188,7 @@ div[data-testid="stButtonContainer"],
   100% { transform: scale(0.9); opacity: 0.8; }
 }
 @keyframes fadeOutLoader {
-  0%,60% { opacity: 1; }
+  0%,70% { opacity: 1; }
   100% { opacity: 0; visibility: hidden; transform: scale(1.02); }
 }
 

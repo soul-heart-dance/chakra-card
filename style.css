@@ -91,7 +91,7 @@ div[data-testid="stButtonContainer"],
   box-shadow: 0 0 30px rgba(255, 200, 250, 0.9) !important;
 }
 
-/* === 💎 卡片外框（光暈隨脈輪顏色）=== */
+/* === 💎 卡片外框（手機保留光暈、桌面移除）=== */
 .card-wrapper {
   --chakra-color: #ffb4f0;
   border-radius: 1.2rem !important;
@@ -237,15 +237,14 @@ div[data-testid="stButtonContainer"],
   text-align: center !important;
 }
 
-/* === 🖥️ 桌面版卡片柔光收斂＋脈輪色同步 === */
+/* === 🖥️ 桌面版卡片乾淨版（移除外層光暈）=== */
 @media screen and (min-width: 768px) {
   .card-wrapper {
-    box-shadow: 0 0 12px 3px var(--chakra-color, rgba(255, 180, 240, 0.4)) !important;
-    transition: box-shadow 0.45s ease, transform 0.4s ease;
+    box-shadow: none !important; /* 移除外圈光暈 */
+    transition: transform 0.4s ease;
   }
 
   .card-wrapper:hover {
-    box-shadow: 0 0 20px 5px var(--chakra-color, rgba(255, 180, 240, 0.6)) !important;
     transform: scale(1.01);
   }
 
@@ -254,7 +253,11 @@ div[data-testid="stButtonContainer"],
   }
 
   @keyframes desktopGlow {
-    0%, 100% { box-shadow: 0 0 10px var(--chakra-color, rgba(255, 180, 240, 0.3)); }
-    50% { box-shadow: 0 0 18px var(--chakra-color, rgba(255, 180, 240, 0.55)); }
+    0%, 100% {
+      box-shadow: 0 0 10px var(--chakra-color, rgba(255, 180, 240, 0.25));
+    }
+    50% {
+      box-shadow: 0 0 20px var(--chakra-color, rgba(255, 180, 240, 0.55));
+    }
   }
 }

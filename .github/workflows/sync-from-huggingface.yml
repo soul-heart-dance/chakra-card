@@ -1,0 +1,64 @@
+name: Sync from Hugging Face Space → GitHub
+
+on:
+  # 手動觸發
+  workflow_dispatch: {}
+  # 每天 01:00 UTC = 台灣時間 09:00
+  schedule:
+    - cron: "0 1 * * *"
+
+permissions:
+  contents: write
+
+env:
+  HF_SPACE: soul-heart-dance/chakra-card   # ← 換成妳的 Hugging Face Space 名稱
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout GitHub repo
+        uses: actions/checkout@v4
+
+      - name: Configure git user
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Fetch from Hugging Face Space
+        env:
+          HUGGINGFACE_TOKEN: ${{ secrets.HF_READ_TOKEN }}  # 使用 Hugging Face Token
+        run: |
+          echo "🚀 Cloning Hugging Face Space: $HF_SPACE"
+          rm -rf hf-space
+          git clone https://huggingface.co/spaces/$HF_SPACE hf-space
+
+          cd hf-space
+          echo "📦 Fetching LFS objects (for large files like images)..."
+          git lfs pull
+          cd ..
+
+          echo "🌸 Sync completed. Preparing to push changes to GitHub..."
+          # 保留 .github/workflows，不讓它被刪掉
+          rsync -a --delete --exclude ".git" --exclude ".github/workflows" ./hf-space/ ./
+
+          # === 更新 README.md 的最後同步時間 ===
+          TAIPEI_TIME=$(TZ='Asia/Taipei' date '+%Y-%m-%d %H:%M:%S')
+          if grep -q "Last synced from Hugging Face" README.md; then
+            sed -i "s|Last synced from Hugging Face:.*|Last synced from Hugging Face: ${TAIPEI_TIME} (Taipei Time)|" README.md
+          else
+            echo -e "\n---\n⏰ Last synced from Hugging Face: ${TAIPEI_TIME} (Taipei Time)" >> README.md
+          fi
+
+          # === Commit & Push ===
+          git add -A
+          if git diff --cached --quiet; then
+            echo "✅ No changes to commit."
+          else
+            git commit -m "chore(sync): update from HF Space at ${TAIPEI_TIME} (Taipei Time)"
+            git push origin main
+          fi
+
+      - name: Cleanup
+        run: rm -rf hf-space

@@ -3,7 +3,7 @@ name: Sync from Hugging Face Space → GitHub
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: "0 1 * * *" # 每天 01:00 UTC = 台灣 09:00
+    - cron: "0 1 * * *" # 每天 01:00 UTC = 台灣早上 09:00
 
 permissions:
   contents: write
@@ -38,7 +38,6 @@ jobs:
           cd ..
 
           echo "🌸 Sync completed. Preparing to push changes to GitHub..."
-
           # 🩷 加上 ignore-errors 防止「file vanished」中斷
           rsync -a --delete --ignore-errors --exclude ".git*" --exclude ".github/workflows" ./hf-space/ ./
 
@@ -50,6 +49,7 @@ jobs:
             echo -e "\n---\n⏰ Last synced from Hugging Face: ${TAIPEI_TIME} (Taipei Time)" >> README.md
           fi
 
+          # === Commit & Push ===
           git add -A
           if git diff --cached --quiet; then
             echo "✅ No changes to commit."
@@ -59,6 +59,7 @@ jobs:
           fi
 
       - name: Cleanup
+        run: rm -rf hf-space      - name: Cleanup
         run: rm -rf hf-space          cd hf-space
           echo "📦 Fetching LFS objects (for large files like images)..."
           git lfs pull

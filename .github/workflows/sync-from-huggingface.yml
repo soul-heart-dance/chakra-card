@@ -38,8 +38,8 @@ jobs:
           cd ..
 
           echo "🌸 Sync completed. Preparing to push changes to GitHub..."
-          # 🩷 加上 ignore-errors 防止「file vanished」中斷
-          rsync -a --delete --ignore-errors --exclude ".git*" --exclude ".github/workflows" ./hf-space/ ./
+          # 🩷 加上 ignore-errors + || true 防止「file vanished」中斷
+          rsync -a --delete --ignore-errors --exclude ".git*" --exclude ".github/workflows" ./hf-space/ ./ || true
 
           # === 更新 README.md 的最後同步時間 ===
           TAIPEI_TIME=$(TZ='Asia/Taipei' date '+%Y-%m-%d %H:%M:%S')

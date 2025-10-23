@@ -3,7 +3,7 @@ name: Sync from Hugging Face Space → GitHub
 on:
   workflow_dispatch: {}
   schedule:
-    - cron: "0 1 * * *" # 每天 01:00 UTC = 台灣早上 09:00
+    - cron: "0 23 * * *" # 每天 23:00 UTC ≈ 台灣早上 07:00 執行，延遲後約 09:00 完成
 
 permissions:
   contents: write
@@ -29,23 +29,23 @@ jobs:
           HUGGINGFACE_TOKEN: ${{ secrets.HF_READ_TOKEN }}
         run: |
           echo "🚀 Cloning Hugging Face Space: $HF_SPACE"
-          rm -rf hf-space
-          git clone https://huggingface.co/spaces/$HF_SPACE hf-space
+          rm -rf /tmp/hf-space
+          git clone https://huggingface.co/spaces/$HF_SPACE /tmp/hf-space
 
           echo "📦 Fetching LFS objects (for large files like images)..."
-          cd hf-space
+          cd /tmp/hf-space
           git lfs pull
-          cd ..
+          cd -
 
           echo "🌸 Sync completed. Preparing to push changes to GitHub..."
           echo "🔧 Running rsync..."
 
-          # 注意：來源目錄要結尾加「/」，目標不要加「/」
+          # ✅ 從 /tmp/hf-space → 當前 repo 資料夾
           rsync -av --delete \
             --ignore-errors \
             --exclude ".git*" \
             --exclude ".github/workflows" \
-            hf-space/ . || true
+            /tmp/hf-space/ ./ || true
 
           echo "🪄 rsync done, updating README timestamp..."
 
@@ -68,4 +68,4 @@ jobs:
           fi
 
       - name: Cleanup
-        run: rm -rf hf-space
+        run: rm -rf /tmp/hf-space

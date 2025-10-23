@@ -118,6 +118,19 @@ def render_admin_report():
     # ---- 表格 ----
     st.dataframe(df, hide_index=True, use_container_width=True)
 
+    # 🔧 減少表格與底部距離
+    st.markdown("""
+        <style>
+        div[data-testid="stDataFrame"] {
+            margin-bottom: -1rem !important;
+        }
+        .footer {
+            margin-top: 0.5rem !important;
+            padding-top: 0.2rem !important;
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
     # ---- Footer ----
     st.markdown("""
     <div class='footer'>

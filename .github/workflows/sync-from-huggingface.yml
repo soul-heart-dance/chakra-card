@@ -32,14 +32,22 @@ jobs:
           rm -rf hf-space
           git clone https://huggingface.co/spaces/$HF_SPACE hf-space
 
-          cd hf-space
           echo "📦 Fetching LFS objects (for large files like images)..."
+          cd hf-space
           git lfs pull
           cd ..
 
           echo "🌸 Sync completed. Preparing to push changes to GitHub..."
-          # 🩷 加上 ignore-errors + || true 防止「file vanished」中斷
-          rsync -a --delete --ignore-errors --exclude ".git*" --exclude ".github/workflows" ./hf-space/ ./ || true
+          echo "🔧 Running rsync..."
+
+          # 注意：來源目錄要結尾加「/」，目標不要加「/」
+          rsync -av --delete \
+            --ignore-errors \
+            --exclude ".git*" \
+            --exclude ".github/workflows" \
+            hf-space/ . || true
+
+          echo "🪄 rsync done, updating README timestamp..."
 
           # === 更新 README.md 的最後同步時間 ===
           TAIPEI_TIME=$(TZ='Asia/Taipei' date '+%Y-%m-%d %H:%M:%S')
@@ -49,13 +57,14 @@ jobs:
             echo -e "\n---\n⏰ Last synced from Hugging Face: ${TAIPEI_TIME} (Taipei Time)" >> README.md
           fi
 
-          # === Commit & Push ===
+          echo "📤 Preparing to push changes..."
           git add -A
           if git diff --cached --quiet; then
             echo "✅ No changes to commit."
           else
             git commit -m "chore(sync): update from HF Space at ${TAIPEI_TIME} (Taipei Time)"
             git push origin main
+            echo "✅ Changes pushed to GitHub."
           fi
 
       - name: Cleanup

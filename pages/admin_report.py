@@ -5,8 +5,9 @@ from io import BytesIO
 from datetime import datetime, timedelta, timezone
 from counter_utils import fetch_report
 
+
 def render_admin_report():
-    # ---- 套用全域樣式 ----
+    # ---- 全域樣式 ----
     with open("style.css", "r", encoding="utf-8") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
@@ -22,118 +23,157 @@ def render_admin_report():
     </div>
     """, unsafe_allow_html=True)
 
-    # ---- 取得資料 ----
+    # ---- 取數 ----
     data = fetch_report()
     rows = data["rows"]
-
-    st.markdown(f"""
-    <div class='admin-sub' style='margin-top:0.8rem; font-size:1.05rem; color:#FFD6F6;'>
-      🌸 今日訪問：{data['today']}　🌕 累積訪問：{data['total']}
-    </div>
-    """, unsafe_allow_html=True)
-
     if not rows:
         st.info("目前尚無訪問資料")
         return
 
-    # ---- 整理資料表 ----
+    # ---- 資料整理 ----
     df = pd.DataFrame(rows, columns=["日期", "當日訪問", "累積訪問"])
+    df["日期"] = pd.to_datetime(df["日期"]).dt.strftime("%Y-%m-%d")  # ✅ 只顯示年月日
+    df["年月"] = pd.to_datetime(df["日期"]).dt.to_period("M").astype(str)  # ✅ 顯示年月
 
-    # ---- 台灣時間（UTC+8） ----
+    # ---- 預設顯示最新月份 ----
+    latest_month = sorted(df["年月"].unique(), reverse=True)[0]
+    month_df = df[df["年月"] == latest_month]
+    today_count = int(data["today"])
+
+    # ---- 台灣時間給 CSV 用 ----
     taiwan_now = datetime.now(timezone(timedelta(hours=8)))
-    csv_filename = f"Soul_Heart_Dance_Report_{taiwan_now.strftime('%Y%m%d_%H%M%S')}.csv"
+    csv_filename = f"Soul_Heart_Dance_Report_{latest_month}_{taiwan_now.strftime('%H%M%S')}.csv"
 
-    # ---- 🌸 柔光粉金＋紫色乾淨風格折線圖 ----
+    # ---- 統計數字 ----
+    st.markdown(
+        f"""
+        <div class='admin-sub' style='margin-top:0.8rem; font-size:1.05rem; color:#FFD6F6;'>
+          🌸 今日訪問：{today_count}　🌕 累積訪問：{data['total']}
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # ---- 折線圖（當月）----
     fig = go.Figure()
-
-    # 當日訪問線
     fig.add_trace(go.Scatter(
-        x=df["日期"], y=df["當日訪問"],
-        mode="lines+markers",
-        name="當日訪問",
+        x=month_df["日期"], y=month_df["當日訪問"],
+        mode="lines+markers", name="當日訪問",
         line=dict(color="#f6a8ff", width=3, shape="spline"),
         marker=dict(size=8, color="#f6a8ff", line=dict(width=1, color="#fff")),
         hovertemplate="🌸 <b>%{x}</b><br>✨ 當日訪問：%{y}<extra></extra>"
     ))
-
-    # 累積訪問線
     fig.add_trace(go.Scatter(
-        x=df["日期"], y=df["累積訪問"],
-        mode="lines+markers",
-        name="累積訪問",
+        x=month_df["日期"], y=month_df["累積訪問"],
+        mode="lines+markers", name="累積訪問",
         line=dict(color="#8c52ff", width=3, shape="spline"),
         marker=dict(size=8, color="#8c52ff", line=dict(width=1, color="#fff")),
         hovertemplate="🌕 <b>%{x}</b><br>✨ 累積訪問：%{y}<extra></extra>"
     ))
-
-    # ---- 外觀設定 ----
     fig.update_layout(
         plot_bgcolor="rgba(0,0,0,0)",
         paper_bgcolor="rgba(0,0,0,0)",
         font_color="#FFE6F7",
         hovermode="x unified",
-        hoverlabel=dict(
-            bgcolor="rgba(255,230,247,0.9)",
-            font_color="#000",
-            font_size=13
-        ),
-        legend=dict(
-            orientation="h",
-            yanchor="bottom",
-            y=1.02,
-            xanchor="center",
-            x=0.5,
-            font=dict(size=14, color="#FFE6F7")
-        ),
+        hoverlabel=dict(bgcolor="rgba(255,230,247,0.9)", font_color="#000", font_size=13),
+        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="center", x=0.5, font=dict(size=14)),
         margin=dict(t=50, b=40, l=20, r=20)
     )
+    st.plotly_chart(fig, use_container_width=True,
+                    config={"displaylogo": False, "modeBarButtonsToRemove": ["toImage"]})
 
-    # ---- 顯示圖表（隱藏下載圖檔按鈕）----
-    st.plotly_chart(
-        fig,
-        use_container_width=True,
-        config={
-            "displaylogo": False,
-            "modeBarButtonsToRemove": ["toImage", "editInChartStudio", "sendDataToCloud"],
-            "responsive": True
-        }
-    )
+    # —— 間距：圖表與下載按鈕之間 ——
+    st.markdown("<div style='height:10px'></div>", unsafe_allow_html=True)
 
-    # ---- 自訂下載 CSV 按鈕 ----
-    csv_data = df.to_csv(index=False, encoding="utf-8-sig").encode("utf-8-sig")
+    # ---- 下載報表（依目前顯示月份命名）----
+    csv_data = month_df.to_csv(index=False, encoding="utf-8-sig").encode("utf-8-sig")
     st.download_button(
-        label="💾 下載報表（CSV）",
+        label=f"💾 下載 {latest_month} 報表（CSV）",
         data=BytesIO(csv_data),
         file_name=csv_filename,
         mime="text/csv",
         use_container_width=True
     )
 
-    st.markdown("""
-    <div style="color:#FFD6F6; font-size:0.9rem; margin-top:-0.3rem; text-align:center;">
-      ✨ 檔名與時間皆已依台灣時區命名（UTF-8 編碼格式）
-    </div>
-    """, unsafe_allow_html=True)
-
-    # ---- 表格 ----
-    st.dataframe(df, hide_index=True, use_container_width=True)
-
-    # 🔧 減少表格與底部距離
+    # ✨ Hover 動態特效（粉金柔光）
     st.markdown("""
         <style>
-        div[data-testid="stDataFrame"] {
-            margin-bottom: -1rem !important;
+        div.stDownloadButton > button {
+            border: 1.2px solid #f6a8ff !important;
+            color: #FFD6F6 !important;
+            border-radius: 0.6rem !important;
+            transition: all 0.3s ease-in-out !important;
         }
-        .footer {
-            margin-top: 0.5rem !important;
-            padding-top: 0.2rem !important;
+        div.stDownloadButton > button:hover {
+            box-shadow: 0 0 10px #f6a8ffaa !important;
+            border-color: #ffbdfb !important;
+            background-color: rgba(246, 168, 255, 0.08) !important;
         }
         </style>
     """, unsafe_allow_html=True)
 
-    # ---- Footer ----
+    # ---- 月份選單（表格上方）----
+    months = sorted(df["年月"].unique(), reverse=True)
+    selected_month = st.selectbox("查詢時間", months, index=months.index(latest_month))
+    table_df = df[df["年月"] == selected_month]
+
+    # 下拉選單整體與選項完全置左 + 粉柔hover效果
     st.markdown("""
-    <div class='footer'>
-      © 2025 Soul Heart Dance · 與靈魂之心共舞
-    </div>
+        <style>
+        /* 外層容器對齊 */
+        div[data-baseweb="select"] {
+            text-align: left !important;
+            border: 1.2px solid #f6a8ff !important;
+            border-radius: 0.6rem !important;
+        }
+
+        /* 已選取項目文字置左 */
+        div[data-baseweb="select"] > div {
+            justify-content: flex-start !important;
+            text-align: left !important;
+            padding-left: 0.5rem !important;
+        }
+
+        /* 下拉選項列表置左 */
+        ul[role="listbox"] li div {
+            text-align: left !important;
+            justify-content: flex-start !important;
+            padding-left: 0.5rem !important;
+        }
+
+        /* Hover 粉柔光 */
+        div[data-baseweb="select"]:hover {
+            box-shadow: 0 0 8px #f6a8ff66 !important;
+            border-color: #ffbdfb !important;
+        }
+
+        /* Label 樣式 */
+        label[data-testid="stWidgetLabel"] {
+            font-size: 1rem !important;
+            color: #FFD6F6 !important;
+            margin-bottom: 0.3rem !important;
+            padding-left: 0.1rem !important;
+        }
+        </style>
     """, unsafe_allow_html=True)
+
+    # —— 間距：選單與表格 ——
+    st.markdown("<div style='height:6px'></div>", unsafe_allow_html=True)
+
+    # ---- 表格 ----
+    st.dataframe(table_df[["日期", "當日訪問", "累積訪問"]],
+                 hide_index=True, use_container_width=True)
+
+    # ---- Footer 間距 ----
+    st.markdown("""
+        <style>
+          div[data-testid="stDataFrame"] { margin-bottom: -0.3rem !important; }
+          .footer { margin-top: 0.6rem !important; padding-top: 0 !important; }
+        </style>
+    """, unsafe_allow_html=True)
+
+    # ---- Footer ----
+    st.markdown(
+        "<div class='footer'>© 2025 Soul Heart Dance · 與靈魂之心共舞</div>",
+        unsafe_allow_html=True
+    )

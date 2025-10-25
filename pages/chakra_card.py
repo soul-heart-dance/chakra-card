@@ -5,11 +5,11 @@ import uuid
 from counter_utils import bump_counter
 
 def render_chakra_card():
-    # 套用樣式
+    # === 🌸 套用樣式 ===
     with open("style.css", "r", encoding="utf-8") as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-    # Header
+    # === 🌟 Header ===
     logo_url = "https://huggingface.co/spaces/soul-heart-dance/chakra-card/resolve/main/shop_logo.png"
     st.markdown(f"""
     <div class="header">
@@ -21,19 +21,18 @@ def render_chakra_card():
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown("<div class='subtitle'>✨ 今日的靈魂訊息 ✨</div>", unsafe_allow_html=True)
-
+    # === 📈 計數功能 ===
     bump_counter()
 
-    # 載入卡片資料
+    # === 📜 載入卡片資料 ===
     with open("chakras_affirmations.json", "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    # 初始化狀態
+    # === 🩵 初始化狀態 ===
     if "card" not in st.session_state:
         st.session_state.card = None
 
-    # 抽卡函數
+    # === 🔮 抽卡邏輯 ===
     def draw_card():
         chakra = random.choice(list(data.keys()))
         meta = data[chakra]
@@ -48,16 +47,28 @@ def render_chakra_card():
             "uid": str(uuid.uuid4())
         }
 
-    # --- 按鈕置中 ---
+    # === 💖 小小提醒（輕盈版） ===
+    st.markdown("""
+    <div class="reminder-box fade-in">
+      💖 <b>小小提醒：</b><br>
+      想著當下最想了解的問題再抽，<br>
+      或讓自己放鬆、隨心點選也可以。<br>
+      靈魂總會在此刻傳遞最適合你的指引 🌙
+    </div>
+    """, unsafe_allow_html=True)
+
+    # === ✨ 副標題 ===
+    st.markdown("<div class='subtitle'>✨ 今日的靈魂訊息 ✨</div>", unsafe_allow_html=True)
+
+    # === 🔘 抽卡按鈕（置中） ===
     btn_text = "🔮 抽卡" if not st.session_state.card else "🌙 再抽一張"
     st.markdown('<div class="button-center">', unsafe_allow_html=True)
     st.button(btn_text, on_click=draw_card, key="draw_card_btn")
     st.markdown('</div>', unsafe_allow_html=True)
 
-    # --- 顯示卡片 ---
+    # === 🌈 顯示卡片 ===
     if st.session_state.card:
         c = st.session_state.card
-        # 動態設定光暈顏色
         st.markdown(f"""
         <div class="card-wrapper" id="{c['uid']}" style="--chakra-color: {c['color']}">
             <div class="card-container animate">
@@ -71,5 +82,5 @@ def render_chakra_card():
     else:
         st.markdown("<p class='hint'>🌙 點擊上方按鈕開始抽卡 🌙</p>", unsafe_allow_html=True)
 
-    # --- Footer ---
+    # === 💫 Footer ===
     st.markdown("<div class='footer'>© 2025 Soul Heart Dance · 與靈魂之心共舞</div>", unsafe_allow_html=True)

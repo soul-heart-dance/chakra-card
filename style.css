@@ -51,7 +51,7 @@ html, body, .stApp {
 
 .subtitle {
   font-size: 1.15rem !important;
-  margin-top: 1.9rem !important;
+  margin-top: 1rem !important;
   color: #FFE6F7 !important;
   text-shadow: 0 0 8px rgba(255, 180, 255, 0.6) !important;
 }
@@ -263,4 +263,33 @@ div[data-testid="stButtonContainer"],
       box-shadow: 0 0 20px var(--chakra-color, rgba(255, 180, 240, 0.55));
     }
   }
+}
+
+/* 🌸 抽卡頁・小小提醒框（輕盈淡粉版） */
+.reminder-box {
+  background: rgba(255, 230, 247, 0.05);
+  border: 1px solid rgba(255, 200, 250, 0.25);
+  border-radius: 0.8rem;
+  padding: 0.7rem 0.9rem;
+  text-align: left;
+  font-size: 0.8rem;
+  color: #FFD6F6;
+  margin: 1.9rem auto 1.2rem auto;
+  width: min(250px, 60vw);
+  box-shadow: 0 0 10px rgba(255, 200, 250, 0.18);
+  backdrop-filter: blur(4px);
+  line-height: 1.55;
+  opacity: 0;
+  animation: fadeIn 1.6s ease forwards;
+}
+
+.reminder-box:hover {
+  box-shadow: 0 0 20px rgba(255, 200, 250, 0.35);
+  border-color: #ffbdfb;
+}
+
+/* 🌟 淡入動畫 */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
 }

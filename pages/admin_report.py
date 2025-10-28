@@ -32,23 +32,30 @@ def render_admin_report():
 
     # ---- 資料整理 ----
     df = pd.DataFrame(rows, columns=["日期", "當日訪問", "累積訪問"])
-    df["日期"] = pd.to_datetime(df["日期"]).dt.strftime("%Y-%m-%d")  # ✅ 只顯示年月日
-    df["年月"] = pd.to_datetime(df["日期"]).dt.to_period("M").astype(str)  # ✅ 顯示年月
+    df["日期"] = pd.to_datetime(df["日期"]).dt.strftime("%Y-%m-%d")
+    df["年月"] = pd.to_datetime(df["日期"]).dt.to_period("M").astype(str)
+
+    # ---- 台灣時間 ----
+    taiwan_now = datetime.now(timezone(timedelta(hours=8)))
+    today_str = taiwan_now.strftime("%Y-%m-%d")
+    csv_filename = f"Soul_Heart_Dance_Report_{taiwan_now.strftime('%Y-%m')}_{taiwan_now.strftime('%H%M%S')}.csv"
+
+    # ---- 今日訪問數（確保不帶昨天數字）----
+    if today_str in df["日期"].values:
+        today_count = int(df.loc[df["日期"] == today_str, "當日訪問"].values[0])
+    else:
+        today_count = 0
 
     # ---- 預設顯示最新月份 ----
     latest_month = sorted(df["年月"].unique(), reverse=True)[0]
     month_df = df[df["年月"] == latest_month]
-    today_count = int(data["today"])
-
-    # ---- 台灣時間給 CSV 用 ----
-    taiwan_now = datetime.now(timezone(timedelta(hours=8)))
-    csv_filename = f"Soul_Heart_Dance_Report_{latest_month}_{taiwan_now.strftime('%H%M%S')}.csv"
 
     # ---- 統計數字 ----
     st.markdown(
         f"""
         <div class='admin-sub' style='margin-top:0.8rem; font-size:1.05rem; color:#FFD6F6;'>
-          🌸 今日訪問：{today_count}　🌕 累積訪問：{data['total']}
+          🌸 今日訪問：{today_count}　
+          🌕 累積訪問：{data['total']}
         </div>
         """,
         unsafe_allow_html=True
@@ -120,39 +127,45 @@ def render_admin_report():
     # 下拉選單整體與選項完全置左 + 粉柔hover效果
     st.markdown("""
         <style>
-        /* 外層容器對齊 */
         div[data-baseweb="select"] {
             text-align: left !important;
             border: 1.2px solid #f6a8ff !important;
             border-radius: 0.6rem !important;
         }
-
-        /* 已選取項目文字置左 */
         div[data-baseweb="select"] > div {
             justify-content: flex-start !important;
             text-align: left !important;
             padding-left: 0.5rem !important;
         }
-
-        /* 下拉選項列表置左 */
         ul[role="listbox"] li div {
             text-align: left !important;
             justify-content: flex-start !important;
             padding-left: 0.5rem !important;
         }
-
-        /* Hover 粉柔光 */
         div[data-baseweb="select"]:hover {
             box-shadow: 0 0 8px #f6a8ff66 !important;
             border-color: #ffbdfb !important;
         }
-
-        /* Label 樣式 */
         label[data-testid="stWidgetLabel"] {
             font-size: 1rem !important;
             color: #FFD6F6 !important;
             margin-bottom: 0.3rem !important;
             padding-left: 0.1rem !important;
+        }
+        /* 更新時間浮動提示 */
+        .update-time {
+            position: fixed;
+            bottom: 14px;
+            right: 20px;
+            font-size: 0.88rem;
+            color: #e8d4ff;
+            opacity: 0.7;
+            text-shadow: 0 0 6px #cfa7ff;
+            animation: glow 4s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from { text-shadow: 0 0 6px #cfa7ff; opacity: 0.65; }
+            to { text-shadow: 0 0 12px #ffdbff; opacity: 0.95; }
         }
         </style>
     """, unsafe_allow_html=True)
@@ -174,6 +187,9 @@ def render_admin_report():
 
     # ---- Footer ----
     st.markdown(
-        "<div class='footer'>© 2025 Soul Heart Dance · 與靈魂之心共舞</div>",
+        f"""
+        <div class='footer'>© 2025 Soul Heart Dance · 與靈魂之心共舞</div>
+        <div class='update-time'>🕓 更新時間：{taiwan_now.strftime('%Y-%m-%d %H:%M')}（台北時間）</div>
+        """,
         unsafe_allow_html=True
     )

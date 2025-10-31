@@ -1,1101 +1,926 @@
 {
-  "菈莯": {
-    "seed": "Lam (海底輪)",
-    "color": "#FF6666",
-    "class": "root-glow",
-    "cards": [
+"菈莯": {
+  "seed": "Lam (海底輪)",
+  "color": "#FF6666",
+  "class": "root-glow",
+  "cards": [
     {
-      "sentence": "你不需要急著往前，先讓自己穩下來。",
+      "sentence": "先讓自己坐下來，世界不會因為你慢一點就不轉了。",
       "angel_number": "4444",
-      "angel_meaning": "穩定與支持，提醒你被守護著。",
-      "angel_meaning_en": "Stability and support — a reminder that you are protected."
+      "angel_meaning": "你被穩穩接住，一切都有支撐。"
     },
     {
-      "sentence": "今天可以什麼都不做，讓自己歇一會兒就好。",
+      "sentence": "今天不一定要前進，有時停下來也是一種力量。",
       "angel_number": "1111",
-      "angel_meaning": "新的開始，回到當下的自己。",
-      "angel_meaning_en": "A new beginning — return to yourself in the present moment."
+      "angel_meaning": "新的開始，不需要急著開始。"
     },
     {
-      "sentence": "慢一點沒關係，重要的事不會錯過你。",
+      "sentence": "不用撐著，呼吸一下就好。",
       "angel_number": "5555",
-      "angel_meaning": "改變中的穩定，提醒你順著節奏前行。",
-      "angel_meaning_en": "Stability in change — flow with the rhythm instead of rushing."
+      "angel_meaning": "在改變中找到安穩的節奏。"
     },
     {
-      "sentence": "你不是落後，只是在整理自己。",
+      "sentence": "你不是落後，只是在整理回家的路。",
       "angel_number": "3333",
-      "angel_meaning": "心靈協調與支持，鼓勵你相信自己的步調。",
-      "angel_meaning_en": "Harmony and support — trust the pace that feels right for you."
+      "angel_meaning": "心的方向正在被重新對準。"
     },
     {
-      "sentence": "安全感不是別人給的，是你對自己的溫柔。",
+      "sentence": "安全感不是從別人那裡來，而是你對自己說：沒事的。",
       "angel_number": "8888",
-      "angel_meaning": "內在力量與豐盛，提醒你擁有足夠的支持。",
-      "angel_meaning_en": "Inner strength and abundance — you already hold what you need."
+      "angel_meaning": "你就是那份支持。"
     },
     {
-      "sentence": "別擔心太遠的事，先照顧好眼前的自己。",
+      "sentence": "先照顧好身體，它比你更知道節奏。",
       "angel_number": "2222",
-      "angel_meaning": "平衡與安定，讓你專注於當下。",
-      "angel_meaning_en": "Balance and calm — stay grounded in what’s here now."
+      "angel_meaning": "回到當下的呼吸與感覺。"
     },
     {
-      "sentence": "你有權利休息，不用等到累垮才停下。",
+      "sentence": "你不需要等到累垮才休息，放鬆本身就是信任。",
       "angel_number": "7777",
-      "angel_meaning": "內在覺醒與信任，允許自己放慢腳步。",
-      "angel_meaning_en": "Inner awakening and trust — allow yourself to slow down."
+      "angel_meaning": "放慢一點，世界會等你。"
     },
     {
-      "sentence": "你已經走得比自己以為的更遠。",
+      "sentence": "你早就比以前更穩了，只是自己還沒發現。",
       "angel_number": "9999",
-      "angel_meaning": "完成與力量，提醒你比想像中更堅強。",
-      "angel_meaning_en": "Completion and strength — you’re stronger than you think."
+      "angel_meaning": "完成一個階段，新的平靜正在生根。"
     },
     {
-      "sentence": "當心煩時，先深呼吸，讓節奏慢一點。",
+      "sentence": "每一次深呼吸，都是回家的方向。",
       "angel_number": "111",
-      "angel_meaning": "新的意識開始，回到身體的穩定感。",
-      "angel_meaning_en": "A new awareness — find safety through your breath."
+      "angel_meaning": "當下就是你的安全地帶。"
     },
     {
-      "sentence": "每次呼吸，都是在對自己說：我在這裡，沒事的。",
-      "angel_number": "555",
-      "angel_meaning": "生命的流動，提醒你當下即是力量。",
-      "angel_meaning_en": "Flow of life — the present moment is your power."
-    },
-    {
-      "sentence": "別忘了，大地一直在接住你。",
+      "sentence": "讓自己靠在生活裡，地球正在接住你。",
       "angel_number": "444",
-      "angel_meaning": "支持與根基，提醒你被大地承接著。",
-      "angel_meaning_en": "Support and grounding — the earth is always beneath you."
+      "angel_meaning": "被大地擁抱著，無需懷疑。"
     },
     {
-      "sentence": "穩定不是不變，而是知道自己能應付變化。",
+      "sentence": "你不必什麼都想通，穩穩活著就很好。",
       "angel_number": "333",
-      "angel_meaning": "清晰與自信，鼓勵你看見自己的力量。",
-      "angel_meaning_en": "Clarity and confidence — see your strength clearly."
+      "angel_meaning": "清晰會在平靜裡出現。"
     },
     {
-      "sentence": "你不需要懂一切，只要相信你能找到方法。",
-      "angel_number": "777",
-      "angel_meaning": "靈性引導，提醒你信任過程。",
-      "angel_meaning_en": "Spiritual guidance — trust the process, even a little is enough."
-    },
-    {
-      "sentence": "覺得卡住時，出去走走，換個空氣會舒服些。",
-      "angel_number": "222",
-      "angel_meaning": "平衡與流動，動起來會讓能量重新循環。",
-      "angel_meaning_en": "Balance and movement — gentle motion resets your energy."
-    },
-    {
-      "sentence": "有時的安全感，就是慢一點說話、慢一點呼吸。",
+      "sentence": "有時一碗熱湯、一場小睡，就是靈魂在說：謝謝你。", 
       "angel_number": "6666",
-      "angel_meaning": "溫柔與自我照顧，提醒你回到自然節奏。",
-      "angel_meaning_en": "Gentleness and self-care — reconnect with the rhythm of nature."
+      "angel_meaning": "照顧自己是最深的靈性實踐。"
     },
     {
-      "sentence": "你正在學著安定自己，這就是成長。",
+      "sentence": "放鬆不是懶惰，是信任生命的流。",
+      "angel_number": "777",
+      "angel_meaning": "信任過程，你正被溫柔帶著走。"
+    },
+    {
+      "sentence": "出去走走，讓風幫你整理那些想不通的事。",
+      "angel_number": "222",
+      "angel_meaning": "流動會讓能量重新清澈。"
+    },
+    {
+      "sentence": "有時不安，只是靈魂在提醒你回到身體裡。",
       "angel_number": "888",
-      "angel_meaning": "成長與穩定，每一步都算數。",
-      "angel_meaning_en": "Growth and stability — every small step matters."
+      "angel_meaning": "穩定不在外面，而在呼吸之間。"
     },
     {
-      "sentence": "有時停下來，不是放棄，而是讓自己喘口氣。",
+      "sentence": "你正在學會信任自己，這件事值得被慶祝。",
       "angel_number": "999",
-      "angel_meaning": "完成與釋放，提醒你放下急切。",
-      "angel_meaning_en": "Completion and release — patience brings clarity."
+      "angel_meaning": "完成舊的循環，迎接更柔軟的力量。"
     },
     {
-      "sentence": "別小看自己撐過的那些時刻，那就是力量。",
+      "sentence": "每一次撐過，都在累積你的根。",
       "angel_number": "111",
-      "angel_meaning": "新的階段開始，帶著過去的力量前進。",
-      "angel_meaning_en": "A new stage begins — carry your strength forward."
+      "angel_meaning": "新的穩定正在生成。"
     },
     {
-      "sentence": "安全感，是知道自己就算慢，也走得下去。",
-      "angel_number": "5555",
-      "angel_meaning": "變化中的安定，鼓勵你順著步調前行。",
-      "angel_meaning_en": "Stability through change — go at your own rhythm."
-    },
-    {
-      "sentence": "你不需要完美，只要誠實地在生活就好。",
-      "angel_number": "3333",
-      "angel_meaning": "內外一致，提醒你真實就是力量。",
-      "angel_meaning_en": "Alignment — being real is your strength."
-    },
-    {
-      "sentence": "沒人懂也沒關係，你懂自己就夠了。",
-      "angel_number": "4444",
-      "angel_meaning": "守護與信任，宇宙在默默支持你。",
-      "angel_meaning_en": "Protection and trust — unseen forces are supporting you."
-    },
-    {
-      "sentence": "覺得亂的時候，就先整理一個小角落。",
-      "angel_number": "2222",
-      "angel_meaning": "平衡與溫柔，提醒你回到可掌握的部分。",
-      "angel_meaning_en": "Balance and gentleness — return to what you can hold."
-    },
-    {
-      "sentence": "你本來就有力量，只是有時忘了而已。",
-      "angel_number": "8888",
-      "angel_meaning": "豐盛與價值，提醒你是重要的。",
-      "angel_meaning_en": "Abundance and worth — you matter deeply."
-    },
-    {
-      "sentence": "有時穩定不是靠抓緊，而是學會放鬆。",
-      "angel_number": "6666",
-      "angel_meaning": "和諧與放下，讓能量自然流動。",
-      "angel_meaning_en": "Harmony and release — let energy move naturally."
-    },
-    {
-      "sentence": "相信自己已經足夠，這就是你的根。",
-      "angel_number": "1111",
-      "angel_meaning": "起點與自信，提醒你是完整的。",
-      "angel_meaning_en": "Beginnings and confidence — you are already whole."
-    }
-    ]
-  },
-  "薇莯": {
-    "seed": "Vam (臍輪)",
-    "color": "#FFA046",
-    "class": "sacral-glow",
-    "cards": [
-    {
-      "sentence": "你可以難過，也可以還沒想明白，情緒不需要理由。",
-      "angel_number": "2222",
-      "angel_meaning": "平衡與情緒流動，允許自己真實感受。",
-      "angel_meaning_en": "Balance and emotional flow — allow yourself to feel honestly."
-    },
-    {
-      "sentence": "不一定要好起來，先讓自己被理解就好。",
-      "angel_number": "3333",
-      "angel_meaning": "理解與接納，提醒你情緒是需要被看見的。",
-      "angel_meaning_en": "Understanding and acceptance — your feelings deserve to be seen."
-    },
-    {
-      "sentence": "不用急著想開，先陪自己待在現在的狀態就好。",
-      "angel_number": "1111",
-      "angel_meaning": "新的覺察，提醒你誠實面對自己就是療癒。",
-      "angel_meaning_en": "New awareness — honesty with yourself is healing."
-    },
-    {
-      "sentence": "有時哭出來，只是身體在放鬆，不是脆弱。",
-      "angel_number": "7777",
-      "angel_meaning": "釋放與流動，提醒你眼淚是清理的能量。",
-      "angel_meaning_en": "Release and flow — tears are the body's way of clearing space."
-    },
-    {
-      "sentence": "不用急著想通，先給自己一點時間。",
-      "angel_number": "4444",
-      "angel_meaning": "穩定與信任，提醒你情緒會帶你回家。",
-      "angel_meaning_en": "Stability and trust — your emotions will guide you home."
-    },
-    {
-      "sentence": "情緒只是訊息，不是麻煩。",
+      "sentence": "就算現在什麼都不想做，也沒關係。",
       "angel_number": "555",
-      "angel_meaning": "變化與理解，提醒你情緒是導向覺察的指針。",
-      "angel_meaning_en": "Change and insight — emotions point you toward awareness."
+      "angel_meaning": "休息也是進程的一部分。"
     },
     {
-      "sentence": "不想說話的時候，就靜一靜也沒關係。",
-      "angel_number": "666",
-      "angel_meaning": "溫柔與空間，提醒你安靜也是一種回應。",
-      "angel_meaning_en": "Gentleness and space — silence can be its own answer."
+      "sentence": "你不需要完美，只要真實地活著就好。",
+      "angel_number": "3333",
+      "angel_meaning": "真誠本身就有力量。"
     },
     {
-      "sentence": "感覺很多的時候，不要急著整理，先陪自己待著。",
-      "angel_number": "222",
-      "angel_meaning": "平衡與陪伴，提醒你陪自己也是療癒的一部分。",
-      "angel_meaning_en": "Balance and companionship — being with yourself is healing."
+      "sentence": "覺得亂的時候，就先整理心裡那個角落。",
+      "angel_number": "2222",
+      "angel_meaning": "從能做到的地方開始就好。"
     },
     {
-      "sentence": "快樂不是要求，是慢慢靠近的結果。",
-      "angel_number": "333",
-      "angel_meaning": "理解與節奏，提醒你快樂不需被逼出來。",
-      "angel_meaning_en": "Understanding and rhythm — happiness doesn't need to be forced."
+      "sentence": "你已經足夠，不需要再證明什麼。",
+      "angel_number": "8888",
+      "angel_meaning": "豐盛是存在的，不需追。"
     },
     {
-      "sentence": "會痛、會笑、會想，那都代表你還在活著。",
+      "sentence": "穩定不是不動，而是知道自己在哪裡。",
+      "angel_number": "6666",
+      "angel_meaning": "和諧是一種柔軟的力量。"
+    },
+    {
+      "sentence": "有時的安全感，是允許自己不確定。",
+      "angel_number": "1111",
+      "angel_meaning": "信任混亂，也是一種穩定。"
+    },
+    {
+      "sentence": "別忘了，大地在你腳下，愛一直在。",
+      "angel_number": "4444",
+      "angel_meaning": "你從未被丟下。"
+    },
+    {
+      "sentence": "你不是不夠好，只是需要更溫柔地被自己擁抱。",
       "angel_number": "9999",
-      "angel_meaning": "完成與覺察，提醒你感受是生命力的證明。",
-      "angel_meaning_en": "Completion and awareness — feeling means you’re alive."
-    },
-    {
-      "sentence": "不一定要懂為什麼，能誠實地感覺就很好。",
-      "angel_number": "111",
-      "angel_meaning": "覺醒與自我允許，提醒你感受是自然的。",
-      "angel_meaning_en": "Awakening and permission — your emotions are natural."
-    },
-    {
-      "sentence": "不要對自己太兇，情緒來時只是要被聽見。",
-      "angel_number": "2222",
-      "angel_meaning": "接納與傾聽，提醒你溫柔也是一種力量。",
-      "angel_meaning_en": "Acceptance and listening — gentleness is also power."
-    },
-    {
-      "sentence": "有時只是需要一杯水、一口氣、一點空間。",
-      "angel_number": "444",
-      "angel_meaning": "穩定與回歸，提醒你身體知道怎麼安撫心。",
-      "angel_meaning_en": "Stability and grounding — your body knows how to soothe your heart."
-    },
-    {
-      "sentence": "你沒有壞掉，只是需要一點休息。",
-      "angel_number": "5555",
-      "angel_meaning": "改變與接納，提醒你完整不需被定義。",
-      "angel_meaning_en": "Change and acceptance — wholeness doesn’t need fixing."
-    },
-    {
-      "sentence": "當你允許自己脆弱時，也在變得更真實。",
-      "angel_number": "8888",
-      "angel_meaning": "力量與誠實，提醒你真實比完美更有力量。",
-      "angel_meaning_en": "Strength and honesty — being real is more powerful than perfect."
-    },
-    {
-      "sentence": "你不需要每天都開心，穩定比快樂更真實。",
-      "angel_number": "7777",
-      "angel_meaning": "內在平衡與節奏，提醒你情緒有自己的季節。",
-      "angel_meaning_en": "Inner balance and rhythm — emotions have their own seasons."
-    },
-    {
-      "sentence": "有時療癒就是，先別再逼自己了。",
-      "angel_number": "6666",
-      "angel_meaning": "休息與自我允許，提醒你放鬆會讓能量自己流動。",
-      "angel_meaning_en": "Rest and permission — relaxation lets energy move on its own."
-    },
-    {
-      "sentence": "喜歡、討厭、期待、失望都沒關係，這就是人。",
-      "angel_number": "999",
-      "angel_meaning": "人性與完整，提醒你感覺本身就是活著的證據。",
-      "angel_meaning_en": "Humanity and wholeness — your feelings prove you are alive."
-    },
-    {
-      "sentence": "別壓抑自己想表達的，情緒不會因為沉默就消失。",
-      "angel_number": "3333",
-      "angel_meaning": "表達與釋放，提醒你說出來是一種清理。",
-      "angel_meaning_en": "Expression and release — speaking out is a form of cleansing."
-    },
-    {
-      "sentence": "感覺混亂沒關係，這代表你正在誠實地活著。",
-      "angel_number": "1111",
-      "angel_meaning": "誠實與存在，提醒你混亂也有它的誠實。",
-      "angel_meaning_en": "Honesty and presence — even confusion is an honest state."
-    },
-    {
-      "sentence": "你不用成為誰希望的樣子，做自己就好。",
-      "angel_number": "222",
-      "angel_meaning": "平衡與自我認可，提醒你感覺自己才是中心。",
-      "angel_meaning_en": "Balance and self-recognition — feeling yourself is your center."
-    },
-    {
-      "sentence": "別逃避感覺，因為那裡藏著你最真實的力量。",
-      "angel_number": "555",
-      "angel_meaning": "轉化與力量，提醒你感覺是通往力量的門。",
-      "angel_meaning_en": "Transformation and strength — feelings are the doorway to power."
-    },
-    {
-      "sentence": "有時情緒只是提醒你，該休息一下了。",
-      "angel_number": "4444",
-      "angel_meaning": "穩定與關懷，提醒你身體與心都需要停下。",
-      "angel_meaning_en": "Stability and care — both body and heart need rest."
-    },
-    {
-      "sentence": "不用急著分析情緒，讓它走完就好。",
-      "angel_number": "666",
-      "angel_meaning": "信任與流動，提醒你情緒會自然平息。",
-      "angel_meaning_en": "Trust and flow — emotions settle on their own."
-    },
-    {
-      "sentence": "每個真實的感覺，都是靈魂在告訴你：我在這裡。",
-      "angel_number": "777",
-      "angel_meaning": "靈魂覺醒，提醒你感覺是靈魂的語言。",
-      "angel_meaning_en": "Soul awakening — feelings are your soul’s language."
+      "angel_meaning": "愛自己，從不急的擁抱開始。"
     }
-    ]
-  },
-  "蕊莯": {
-    "seed": "Ram (太陽神經叢輪)",
-    "color": "#FFDC64",
-    "class": "solar-glow",
-    "cards": [
+  ]
+},
+"薇莯": {
+  "seed": "Vam (臍輪)",
+  "color": "#FFA046",
+  "class": "sacral-glow",
+  "cards": [
     {
-      "sentence": "你可以說不，這是尊重自己的一種方式。",
-      "angel_number": "1111",
-      "angel_meaning": "新的界線與自我意識誕生。",
-      "angel_meaning_en": "A new boundary and self-awareness are forming."
-    },
-    {
-      "sentence": "你不需要被所有人喜歡，真實比討好更有力量。",
-      "angel_number": "3333",
-      "angel_meaning": "自我表達與內在力量平衡。",
-      "angel_meaning_en": "Balance between self-expression and inner power."
-    },
-    {
-      "sentence": "有時堅定不是硬撐，而是溫柔地說：我可以。",
-      "angel_number": "555",
-      "angel_meaning": "行動中的改變與信任。",
-      "angel_meaning_en": "Change through gentle yet confident action."
-    },
-    {
-      "sentence": "不需要證明什麼，你本來就夠好。",
-      "angel_number": "8888",
-      "angel_meaning": "內在價值與自信的確認。",
-      "angel_meaning_en": "Recognition of your inner worth and confidence."
-    },
-    {
-      "sentence": "有些事慢一點做，反而更穩、更準。",
-      "angel_number": "4444",
-      "angel_meaning": "穩定與行動的節奏平衡。",
-      "angel_meaning_en": "Stability and balance between pace and precision."
-    },
-    {
-      "sentence": "別把善良和委屈搞混，你的感受也很重要。",
+      "sentence": "你可以難過，也可以還沒想通，一切感覺都值得被聽見。",
       "angel_number": "2222",
-      "angel_meaning": "平衡與誠實，提醒你尊重自己。",
-      "angel_meaning_en": "Balance and honesty — respect your own needs."
+      "angel_meaning": "平衡與流動，情緒只是想被理解。"
     },
     {
-      "sentence": "你可以勇敢，也可以害怕，兩者能同時存在。",
-      "angel_number": "777",
-      "angel_meaning": "信任與內在覺醒，力量源於真實。",
-      "angel_meaning_en": "Trust and awakening — strength comes from authenticity."
+      "sentence": "不一定要趕快好起來，被理解就已經在療癒了。",
+      "angel_number": "3333",
+      "angel_meaning": "理解與接納，讓自己被看見就好。"
     },
     {
-      "sentence": "不確定的時候，先從一個小行動開始。",
-      "angel_number": "111",
-      "angel_meaning": "新的開始，鼓勵你邁出第一步。",
-      "angel_meaning_en": "A new start — take the first small step."
+      "sentence": "不急著想開，先讓自己待在現在也可以。",
+      "angel_number": "1111",
+      "angel_meaning": "新的覺察，陪自己待著就是愛。"
     },
     {
-      "sentence": "真正的自信，是能坦然承認自己還在學習。",
-      "angel_number": "5555",
-      "angel_meaning": "變化中的穩定，學習是成長的力量。",
-      "angel_meaning_en": "Stability through change — learning is power."
+      "sentence": "哭出來不是脆弱，是心在放鬆。",
+      "angel_number": "7777",
+      "angel_meaning": "釋放與清理，眼淚也是流動的光。"
     },
     {
-      "sentence": "你不需要很亮，穩穩發光就很美。",
-      "angel_number": "999",
-      "angel_meaning": "完成與真實的光，提醒你自然就足夠。",
-      "angel_meaning_en": "Completion and authenticity — your natural light is enough."
+      "sentence": "不用急著懂為什麼，感受本身就有答案。",
+      "angel_number": "4444",
+      "angel_meaning": "穩定與信任，情緒知道路。"
     },
     {
-      "sentence": "有時力量不是說出口，而是選擇不反應。",
-      "angel_number": "444",
-      "angel_meaning": "穩定與智慧，提醒你安靜也有力量。",
-      "angel_meaning_en": "Stability and wisdom — silence can be powerful."
+      "sentence": "情緒不是錯的，只是希望被你聽見。",
+      "angel_number": "555",
+      "angel_meaning": "理解與流動，讓情緒自由呼吸。"
     },
     {
-      "sentence": "別把壓力當成責任，你只需要盡力，而非完美。",
+      "sentence": "不想說話的時候，就安靜一會兒，世界會等你。",
       "angel_number": "666",
-      "angel_meaning": "溫柔與放下，提醒你釋放多餘的重量。",
-      "angel_meaning_en": "Gentleness and release — let go of unnecessary weight."
+      "angel_meaning": "溫柔與空間，安靜也是一種回應。"
     },
     {
-      "sentence": "別害怕被看見，你的光不是用來躲起來的。",
+      "sentence": "感覺太多沒關係，先陪自己待在裡面。",
+      "angel_number": "222",
+      "angel_meaning": "陪伴與允許，慢慢感受會變得柔軟。"
+    },
+    {
+      "sentence": "快樂不是目標，而是當你不再逼自己時出現的風景。",
+      "angel_number": "333",
+      "angel_meaning": "節奏與輕盈，幸福會自己靠近。"
+    },
+    {
+      "sentence": "會痛、會笑、會哭，代表你還有愛在流動。",
+      "angel_number": "9999",
+      "angel_meaning": "完成與覺察，感覺是活著的證明。"
+    },
+    {
+      "sentence": "不懂也沒關係，真實地感覺就夠了。",
+      "angel_number": "111",
+      "angel_meaning": "允許與覺醒，誠實的你最美。"
+    },
+    {
+      "sentence": "不要對自己那麼嚴厲，情緒只是想被擁抱。",
+      "angel_number": "2222",
+      "angel_meaning": "接納與溫柔，柔軟是力量。"
+    },
+    {
+      "sentence": "有時只是需要一杯水、一點陽光、一個擁抱。",
+      "angel_number": "444",
+      "angel_meaning": "回歸與安撫，身體知道怎麼照顧心。"
+    },
+    {
+      "sentence": "你沒有壞掉，只是太久沒被好好對待。",
+      "angel_number": "5555",
+      "angel_meaning": "接納與修復，你依然完整。"
+    },
+    {
+      "sentence": "當你允許自己脆弱時，也在學著更愛自己。",
+      "angel_number": "8888",
+      "angel_meaning": "真實與力量，愛從誠實開始。"
+    },
+    {
+      "sentence": "你不必每天都快樂，穩定更貼近真實。",
+      "angel_number": "7777",
+      "angel_meaning": "平衡與節奏，情緒有自己的呼吸。"
+    },
+    {
+      "sentence": "療癒不一定要做什麼，有時只是別再逼自己。",
+      "angel_number": "6666",
+      "angel_meaning": "放鬆與信任，讓能量自己流動。"
+    },
+    {
+      "sentence": "喜歡、討厭、難過、興奮，都是你的一部分。",
+      "angel_number": "999",
+      "angel_meaning": "完整與真實，情緒讓你更像自己。"
+    },
+    {
+      "sentence": "有話想說時，就讓它流出來，不用漂亮。",
+      "angel_number": "3333",
+      "angel_meaning": "表達與釋放，真實就是美。"
+    },
+    {
+      "sentence": "混亂不是壞事，代表你在真誠地面對自己。",
+      "angel_number": "1111",
+      "angel_meaning": "覺察與存在，混亂裡有真相。"
+    },
+    {
+      "sentence": "你不用取悅任何人，讓自己舒坦就好。",
+      "angel_number": "222",
+      "angel_meaning": "自我認可與自由，感覺自己才是中心。"
+    },
+    {
+      "sentence": "別壓抑情緒，它只是想告訴你需要被愛。",
+      "angel_number": "555",
+      "angel_meaning": "轉化與愛，感覺是通往柔軟的門。"
+    },
+    {
+      "sentence": "情緒來了就讓它走，像潮汐一樣自然。",
+      "angel_number": "4444",
+      "angel_meaning": "流動與關懷，所有感受終將平息。"
+    },
+    {
+      "sentence": "不用急著理解自己，先容許還在感覺中。",
+      "angel_number": "666",
+      "angel_meaning": "信任與流動，感覺會自己化開。"
+    },
+    {
+      "sentence": "每個真實的感覺，都是靈魂在說：我還在這裡。",
+      "angel_number": "777",
+      "angel_meaning": "靈魂對話，感覺是愛的語言。"
+    }
+  ]
+},
+"蕊莯": {
+  "seed": "Ram (太陽神經叢輪)",
+  "color": "#FFDC64",
+  "class": "solar-glow",
+  "cards": [
+    {
+      "sentence": "你可以說不，這不是拒絕世界，而是選擇自己。",
+      "angel_number": "1111",
+      "angel_meaning": "新的界線誕生，你正在學會愛自己。"
+    },
+    {
+      "sentence": "不需要被所有人喜歡，真實比討好更安心。",
+      "angel_number": "3333",
+      "angel_meaning": "自我表達與誠實共舞的時刻。"
+    },
+    {
+      "sentence": "堅定不是硬撐，是在心裡對自己說：我值得。",
+      "angel_number": "555",
+      "angel_meaning": "信任自己，讓力量自然長出。"
+    },
+    {
+      "sentence": "你不需要再證明什麼，你早已足夠。",
+      "angel_number": "8888",
+      "angel_meaning": "自信與價值從內在流出。"
+    },
+    {
+      "sentence": "慢一點沒有關係，穩穩走才會走得遠。",
+      "angel_number": "4444",
+      "angel_meaning": "節奏與信任正在對齊。"
+    },
+    {
+      "sentence": "你的溫柔不是退讓，而是力量的另一種形狀。",
+      "angel_number": "2222",
+      "angel_meaning": "平衡與覺察，真力量不需吵鬧。"
+    },
+    {
+      "sentence": "勇敢和害怕可以同時存在，這才是真實的勇氣。",
+      "angel_number": "777",
+      "angel_meaning": "真實與信任，允許自己在人性中發光。"
+    },
+    {
+      "sentence": "不確定也沒關係，從一個小動作開始就好。",
+      "angel_number": "111",
+      "angel_meaning": "行動會帶來清晰。"
+    },
+    {
+      "sentence": "真正的自信，是能承認自己還在學習。",
+      "angel_number": "5555",
+      "angel_meaning": "成長與包容並行。"
+    },
+    {
+      "sentence": "你不必很亮，柔柔的光也能溫暖人心。",
+      "angel_number": "999",
+      "angel_meaning": "真實與平靜的光最動人。"
+    },
+    {
+      "sentence": "有時力量，是選擇沉默不反擊。",
+      "angel_number": "444",
+      "angel_meaning": "穩定與智慧，安靜也是力量。"
+    },
+    {
+      "sentence": "盡力就好，完美從來不是愛的條件。",
+      "angel_number": "666",
+      "angel_meaning": "放下比較，回到真實。"
+    },
+    {
+      "sentence": "不要躲起來，你的光是這世界需要的。",
       "angel_number": "888",
-      "angel_meaning": "顯化與自信，提醒你勇敢展現自己。",
-      "angel_meaning_en": "Manifestation and confidence — let your light be seen."
+      "angel_meaning": "顯化與自信，勇敢被看見。"
     },
     {
-      "sentence": "有時堅強，是學會溫柔地照顧自己的需要。",
+      "sentence": "照顧自己不是自私，而是力量的根。",
       "angel_number": "222",
-      "angel_meaning": "平衡與自我關懷，提醒你力量中有柔軟。",
-      "angel_meaning_en": "Balance and care — strength can coexist with softness."
+      "angel_meaning": "關懷與平衡，先穩住自己再出發。"
     },
     {
-      "sentence": "別急著比較，每個人的時間都不同。",
+      "sentence": "每個人的時間都不同，不用急著趕路。",
       "angel_number": "333",
-      "angel_meaning": "信任與節奏，提醒你走自己的步調。",
-      "angel_meaning_en": "Trust and rhythm — move at your own pace."
+      "angel_meaning": "信任自己的步調。"
     },
     {
-      "sentence": "你做得比自己以為的還多。",
+      "sentence": "你做得比自己想像的還好。",
       "angel_number": "9999",
-      "angel_meaning": "完成與肯定，提醒你已經在進步。",
-      "angel_meaning_en": "Completion and affirmation — you’ve already grown."
+      "angel_meaning": "完成與肯定，請允許自己被誇獎。"
     },
     {
-      "sentence": "不要讓恐懼決定你的下一步。",
+      "sentence": "恐懼不代表你不能前進，只是要你多給自己一點信任。",
       "angel_number": "555",
-      "angel_meaning": "改變與勇氣，提醒你選擇自由。",
-      "angel_meaning_en": "Change and courage — choose from freedom, not fear."
+      "angel_meaning": "改變與信心，你可以。"
     },
     {
-      "sentence": "有時行動比思考更能讓事情清晰。",
+      "sentence": "行動本身就是答案，先動起來再調整。",
       "angel_number": "1111",
-      "angel_meaning": "新的動能，提醒你開始就會有答案。",
-      "angel_meaning_en": "New momentum — clarity comes through action."
+      "angel_meaning": "新的動能正在啟動。"
     },
     {
-      "sentence": "你有權利為自己感到驕傲。",
+      "sentence": "你有權利為自己驕傲，這不是驕傲，是誠實。",
       "angel_number": "8888",
-      "angel_meaning": "豐盛與價值，提醒你值得被肯定。",
-      "angel_meaning_en": "Abundance and worth — you deserve recognition."
+      "angel_meaning": "豐盛與價值，你值得肯定。"
     },
     {
-      "sentence": "不是所有衝突都要解決，有些只需被看見。",
+      "sentence": "有些事不必解釋，真實自然會說話。",
       "angel_number": "7777",
-      "angel_meaning": "理解與覺察，提醒你真實勝過對錯。",
-      "angel_meaning_en": "Understanding and awareness — being real matters more than being right."
+      "angel_meaning": "理解與存在，真實勝過對錯。"
     },
     {
-      "sentence": "別壓抑你的野心，那是靈魂在推你往前。",
+      "sentence": "願望不是貪心，是靈魂記得自己的方向。",
       "angel_number": "999",
-      "angel_meaning": "完成與啟動，提醒你願望是行動的種子。",
-      "angel_meaning_en": "Completion and initiation — desire is the seed of action."
+      "angel_meaning": "啟動與完成，願望是靈魂的地圖。"
     },
     {
-      "sentence": "你可以失誤，但別放棄自己。",
+      "sentence": "跌倒也沒關係，那也是往前的一步。",
       "angel_number": "4444",
-      "angel_meaning": "穩定與信任，提醒你跌倒也算在旅程裡。",
-      "angel_meaning_en": "Stability and trust — falling is part of the path."
+      "angel_meaning": "穩定與信任，旅程沒有白走的路。"
     },
     {
-      "sentence": "有時自信不是喊出來，而是安靜地知道：我可以。",
+      "sentence": "安靜的自信，比喧鬧的勇氣更有力量。",
       "angel_number": "2222",
-      "angel_meaning": "平衡與內在力量，提醒你不需要喧嘩也能閃耀。",
-      "angel_meaning_en": "Balance and inner power — you can shine quietly."
+      "angel_meaning": "平衡與內在力量，你可以柔中帶光。"
     },
     {
-      "sentence": "別再懷疑自己了，這次你真的準備好了。",
+      "sentence": "別再懷疑自己了，你真的準備好了。",
       "angel_number": "111",
-      "angel_meaning": "新的開始與確認，提醒你是時候相信自己。",
-      "angel_meaning_en": "New beginnings and affirmation — it’s time to trust yourself."
+      "angel_meaning": "確認與啟程，時機正好。"
     },
     {
-      "sentence": "你不需要努力被看見，你的存在就有意義。",
+      "sentence": "你不需要努力被看見，你本身就是光。",
       "angel_number": "6666",
-      "angel_meaning": "接納與信任，提醒你價值是與生俱來的。",
-      "angel_meaning_en": "Acceptance and trust — your worth was never in question."
+      "angel_meaning": "接納與信任，你天生有光。"
     }
-    ]
-  },
-  "芽莯": {
-    "seed": "Yam (心輪)",
-    "color": "#7ED957",
-    "class": "heart-glow",
-    "cards": [
+  ]
+},
+"芽莯": {
+  "seed": "Yam (心輪)",
+  "color": "#7ED957",
+  "class": "heart-glow",
+  "cards": [
     {
       "sentence": "愛不是犧牲自己，而是讓彼此都能呼吸。",
       "angel_number": "2222",
-      "angel_meaning": "平衡與關係的和諧，提醒你愛是雙向流動。",
-      "angel_meaning_en": "Balance and harmony in relationships — love flows both ways."
+      "angel_meaning": "平衡與和諧，愛是雙向的流動。"
     },
     {
-      "sentence": "你值得被愛，也值得休息。",
+      "sentence": "你值得被愛，也值得好好休息。",
       "angel_number": "6666",
-      "angel_meaning": "溫柔與自我照顧，提醒你愛自己也是愛的表現。",
-      "angel_meaning_en": "Gentleness and self-care — self-love is also love."
+      "angel_meaning": "溫柔與自我照顧，愛從自己開始。"
     },
     {
-      "sentence": "你不需要完美，才能被愛。",
+      "sentence": "你不需要完美，真實就足夠讓人喜歡。",
       "angel_number": "3333",
-      "angel_meaning": "接納與真實，提醒你愛存在於不完美裡。",
-      "angel_meaning_en": "Acceptance and authenticity — love lives in imperfection."
+      "angel_meaning": "接納與真誠，愛存在於不完美裡。"
     },
     {
-      "sentence": "有時勇敢不是做什麼，而是願意再相信一次。",
+      "sentence": "勇敢不一定是前進，有時是再相信一次愛。",
       "angel_number": "777",
-      "angel_meaning": "信任與療癒，提醒你愛會再次打開。",
-      "angel_meaning_en": "Trust and healing — love will open again."
+      "angel_meaning": "信任與療癒，愛會再次開花。"
     },
     {
-      "sentence": "你不必撐著笑，誠實的表情也很溫柔。",
+      "sentence": "你不必撐著笑，誠實的樣子也很溫柔。",
       "angel_number": "4444",
-      "angel_meaning": "穩定與真實，提醒你脆弱是安全的。",
-      "angel_meaning_en": "Stability and authenticity — vulnerability is safe."
+      "angel_meaning": "真實與穩定，脆弱是安全的地方。"
     },
     {
-      "sentence": "當你願意原諒，也是在釋放自己。",
+      "sentence": "原諒不是為了誰，而是讓心重新自由。",
       "angel_number": "999",
-      "angel_meaning": "完成與放下，提醒你寬恕是自由的開始。",
-      "angel_meaning_en": "Completion and release — forgiveness begins freedom."
+      "angel_meaning": "放下與圓滿，寬恕讓愛回家。"
     },
     {
-      "sentence": "溫柔不是軟弱，而是深知痛後還願意理解。",
+      "sentence": "溫柔不是退讓，是理解後仍選擇善良。",
       "angel_number": "8888",
-      "angel_meaning": "智慧與愛的力量，提醒你溫柔是成熟的勇氣。",
-      "angel_meaning_en": "Wisdom and loving strength — gentleness is mature courage."
+      "angel_meaning": "成熟與愛的智慧，柔軟是力量。"
     },
     {
-      "sentence": "別急著去愛別人，先學會愛自己。",
+      "sentence": "先愛自己，再去愛人，這樣的愛才會穩。",
       "angel_number": "1111",
-      "angel_meaning": "新的自我連結，提醒你愛從內在開始。",
-      "angel_meaning_en": "New self-connection — love starts within."
+      "angel_meaning": "新的連結，愛從內在開始延伸。"
     },
     {
-      "sentence": "心打開的時候，世界也會變得更近。",
+      "sentence": "當你打開心，世界會溫柔地靠近。",
       "angel_number": "555",
-      "angel_meaning": "改變與覺察，提醒你打開就會看見愛。",
-      "angel_meaning_en": "Change and awareness — openness reveals love."
+      "angel_meaning": "覺察與流動，打開就能遇見愛。"
     },
     {
-      "sentence": "愛不是討好，而是彼此都能做自己。",
+      "sentence": "真愛不是討好，而是能做自己。",
       "angel_number": "333",
-      "angel_meaning": "理解與平衡，提醒你真愛容得下真實。",
-      "angel_meaning_en": "Understanding and balance — true love holds truth."
+      "angel_meaning": "平衡與理解，真實是最深的連結。"
     },
     {
-      "sentence": "有時距離不是冷淡，而是給彼此空間呼吸。",
+      "sentence": "距離不是冷淡，而是給彼此呼吸的空間。",
       "angel_number": "222",
-      "angel_meaning": "平衡與尊重，提醒你愛也需要界線。",
-      "angel_meaning_en": "Balance and respect — love also needs space."
+      "angel_meaning": "尊重與平衡，愛需要界線。"
     },
     {
-      "sentence": "當你不再急著被愛，就能開始好好愛。",
+      "sentence": "不再急著被愛的時候，愛自然會靠近。",
       "angel_number": "7777",
-      "angel_meaning": "覺醒與內在平靜，提醒你愛是狀態不是追求。",
-      "angel_meaning_en": "Awakening and peace — love is a state, not a chase."
+      "angel_meaning": "平靜與覺醒，愛是一種存在，不是追求。"
     },
     {
-      "sentence": "有時只是被理解，就已經是一種被愛。",
+      "sentence": "有時被理解，就是一種被愛。",
       "angel_number": "444",
-      "angel_meaning": "穩定與連結，提醒你愛不只是一句話。",
-      "angel_meaning_en": "Stability and connection — love is felt, not just said."
+      "angel_meaning": "連結與穩定，愛是被看見的感覺。"
     },
     {
-      "sentence": "愛自己不是自私，是讓世界有更溫柔的你。",
+      "sentence": "愛自己不是自私，是讓世界更溫柔。",
       "angel_number": "888",
-      "angel_meaning": "豐盛與自我價值，提醒你愛自己是貢獻。",
-      "angel_meaning_en": "Abundance and worth — loving yourself is contribution."
+      "angel_meaning": "豐盛與價值，愛自己也是奉獻。"
     },
     {
-      "sentence": "有時最深的療癒，是讓自己被愛。",
+      "sentence": "最深的療癒，是允許自己被愛。",
       "angel_number": "5555",
-      "angel_meaning": "改變與接納，提醒你敞開能量接收。",
-      "angel_meaning_en": "Change and acceptance — healing comes from receiving."
+      "angel_meaning": "接納與流動，打開才能接收愛。"
     },
     {
-      "sentence": "你不需要壓抑感受，溫柔也能有邊界。",
+      "sentence": "溫柔可以有邊界，愛也需要誠實。",
       "angel_number": "666",
-      "angel_meaning": "界線與愛的平衡，提醒你誠實是愛的形式。",
-      "angel_meaning_en": "Boundaries and love — honesty is a form of love."
+      "angel_meaning": "界線與清晰，誠實是愛的一種表達。"
     },
     {
-      "sentence": "當你願意接納自己的不完美，也在愛著世界。",
+      "sentence": "當你願意接納自己，也在擁抱整個世界。",
       "angel_number": "9999",
-      "angel_meaning": "圓滿與慈悲，提醒你接納即是愛。",
-      "angel_meaning_en": "Wholeness and compassion — acceptance is love."
+      "angel_meaning": "慈悲與圓滿，接納即是愛。"
     },
     {
-      "sentence": "你可以柔軟，也可以有界線，兩者並不衝突。",
+      "sentence": "柔軟與界線都是真實的愛，缺一不可。",
       "angel_number": "2222",
-      "angel_meaning": "平衡與整合，提醒你愛中也有力量。",
-      "angel_meaning_en": "Balance and integration — love includes strength."
+      "angel_meaning": "平衡與整合，愛中也有力量。"
     },
     {
-      "sentence": "不是每個人都能理解你，但你可以理解自己。",
+      "sentence": "不是每個人都懂你，但你可以懂自己。",
       "angel_number": "111",
-      "angel_meaning": "新的自我覺察，提醒你自愛是內在的平靜。",
-      "angel_meaning_en": "New self-awareness — self-love brings inner peace."
+      "angel_meaning": "覺察與平靜，理解自己比被理解更重要。"
     },
     {
-      "sentence": "當你選擇善良，也在讓愛擴散。",
+      "sentence": "善良是一種回聲，會繞一圈回到你心裡。",
       "angel_number": "3333",
-      "angel_meaning": "正向能量與共振，提醒你善意會回到你身上。",
-      "angel_meaning_en": "Positive energy and resonance — kindness returns to you."
+      "angel_meaning": "共振與祝福，善意永遠有迴響。"
     },
     {
-      "sentence": "有時愛不是做什麼，而是願意聽。",
+      "sentence": "愛有時只是靜靜地聽著，不急著說話。",
       "angel_number": "4444",
-      "angel_meaning": "穩定與傾聽，提醒你理解比回應更重要。",
-      "angel_meaning_en": "Stability and listening — understanding matters more than answers."
+      "angel_meaning": "傾聽與理解，沉默裡也有愛。"
     },
     {
-      "sentence": "你不需要討愛，因為你本來就值得。",
+      "sentence": "你不需要證明自己值得愛，你本來就值得。",
       "angel_number": "8888",
-      "angel_meaning": "豐盛與自我確認，提醒你愛的資格是與生俱來的。",
-      "angel_meaning_en": "Abundance and affirmation — love is your birthright."
+      "angel_meaning": "確認與信任，愛是與生俱來的。"
     },
     {
-      "sentence": "有時溫柔比道理更有力量。",
+      "sentence": "溫柔比道理更能讓人被理解。",
       "angel_number": "555",
-      "angel_meaning": "轉化與包容，提醒你柔軟能改變世界。",
-      "angel_meaning_en": "Transformation and compassion — softness can change the world."
+      "angel_meaning": "包容與轉化，柔軟能讓世界改變。"
     },
     {
-      "sentence": "學會接受別人的好，也是一種成長。",
+      "sentence": "學會接受別人的好，也是一種愛。",
       "angel_number": "777",
-      "angel_meaning": "信任與流動，提醒你敞開讓愛進來。",
-      "angel_meaning_en": "Trust and flow — openness allows love in."
+      "angel_meaning": "信任與開放，讓愛有進出的門。"
     },
     {
-      "sentence": "愛是讓人更自由，而不是更怕失去。",
+      "sentence": "真正的愛讓人自由，而不是更害怕失去。",
       "angel_number": "999",
-      "angel_meaning": "釋放與信任，提醒你真愛不佔有。",
-      "angel_meaning_en": "Release and trust — true love does not possess."
+      "angel_meaning": "釋放與信任，真愛不佔有。"
     }
-    ]
-  },
-  "哈莯": {
-    "seed": "Ham (喉輪)",
-    "color": "#96C8FF",
-    "class": "throat-glow",
-    "cards": [
+  ]
+},
+"哈莯": {
+  "seed": "Ham (喉輪)",
+  "color": "#96C8FF",
+  "class": "throat-glow",
+  "cards": [
     {
-      "sentence": "你可以說出心裡的話，不用先猜別人會怎麼想。",
+      "sentence": "你可以說出心裡的話，不用先擔心別人怎麼想。",
       "angel_number": "1111",
-      "angel_meaning": "新的自我表達開啟，提醒你誠實就是力量。",
-      "angel_meaning_en": "A new phase of self-expression — honesty is strength."
+      "angel_meaning": "新的表達開始，誠實本身就是力量。"
     },
     {
-      "sentence": "說話可以慢一點，讓心有時間跟上。",
+      "sentence": "說慢一點沒關係，讓靈魂也有時間跟上。",
       "angel_number": "2222",
-      "angel_meaning": "平衡與節奏，提醒你表達不需急。",
-      "angel_meaning_en": "Balance and rhythm — expression doesn’t need to rush."
+      "angel_meaning": "節奏與平衡，真實不需要急。"
     },
     {
-      "sentence": "有話想說時，不一定要完美，真誠就好。",
+      "sentence": "不必完美地說，真心的語氣已經足夠。",
       "angel_number": "3333",
-      "angel_meaning": "真實與連結，提醒你語氣比字句更重要。",
-      "angel_meaning_en": "Authenticity and connection — tone matters more than words."
+      "angel_meaning": "連結與真實，溫度比詞句更重要。"
     },
     {
-      "sentence": "別害怕沉默，有時那是心在整理句子。",
+      "sentence": "沉默時，也在表達自己的誠實。",
       "angel_number": "444",
-      "angel_meaning": "穩定與內省，提醒你安靜也是一種表達。",
-      "angel_meaning_en": "Stability and introspection — silence can speak too."
+      "angel_meaning": "穩定與回歸，安靜也是一種說話。"
     },
     {
-      "sentence": "開口前，先聽聽自己心裡想說的是什麼。",
+      "sentence": "在開口之前，先問問心想說什麼。",
       "angel_number": "555",
-      "angel_meaning": "改變與覺察，提醒你內在的聲音最誠實。",
-      "angel_meaning_en": "Change and awareness — your inner voice is the truest one."
+      "angel_meaning": "覺察與清晰，內在聲音最真。"
     },
     {
-      "sentence": "不說也沒關係，真實不一定要被聽見才能存在。",
+      "sentence": "不說也沒關係，真實不會因為安靜而消失。",
       "angel_number": "6666",
-      "angel_meaning": "允許與信任，提醒你沉默也有力量。",
-      "angel_meaning_en": "Permission and trust — silence has its own power."
+      "angel_meaning": "信任與允許，沉默中也有真理。"
     },
     {
-      "sentence": "你可以不同意，這不代表你不善良。",
+      "sentence": "你可以不同意，這只是表達自己的樣子。",
       "angel_number": "777",
-      "angel_meaning": "真誠與勇氣，提醒你界線也是愛的方式。",
-      "angel_meaning_en": "Authenticity and courage — boundaries are a form of love."
+      "angel_meaning": "勇氣與真誠，界線也是愛的語言。"
     },
     {
-      "sentence": "說出想法，是在讓心有空氣。",
+      "sentence": "說出來，是讓心有空氣可以呼吸。",
       "angel_number": "888",
-      "angel_meaning": "力量與釋放，提醒你表達是能量流動的出口。",
-      "angel_meaning_en": "Power and release — expression lets energy flow."
+      "angel_meaning": "釋放與流動，表達讓能量重新流通。"
     },
     {
-      "sentence": "有時該說的話，不說會讓自己更累。",
+      "sentence": "該說的話若藏著，靈魂會變得沉重。",
       "angel_number": "999",
-      "angel_meaning": "釋放與完整，提醒你誠實帶來輕盈。",
-      "angel_meaning_en": "Release and wholeness — honesty lightens the heart."
+      "angel_meaning": "誠實與自由，說出來就是輕盈。"
     },
     {
-      "sentence": "你可以說不知道，誠實比答案更重要。",
+      "sentence": "你可以說不知道，真誠比答案更真實。",
       "angel_number": "111",
-      "angel_meaning": "新的覺察與清晰，提醒你真實比完美更有力量。",
-      "angel_meaning_en": "New awareness and clarity — truth matters more than perfection."
+      "angel_meaning": "清晰與自信，誠實是一種智慧。"
     },
     {
-      "sentence": "有時說出來，不是為了改變對方，而是讓自己自由。",
+      "sentence": "說出來不是為了改變誰，而是讓自己自由。",
       "angel_number": "5555",
-      "angel_meaning": "改變與解放，提醒你表達是自我釋放。",
-      "angel_meaning_en": "Change and liberation — expression is self-release."
+      "angel_meaning": "解放與理解，表達讓心鬆開。"
     },
     {
-      "sentence": "傾聽別人時，也別忘了傾聽自己。",
+      "sentence": "傾聽別人時，也記得聽聽自己的聲音。",
       "angel_number": "4444",
-      "angel_meaning": "穩定與回歸，提醒你平衡內外的聲音。",
-      "angel_meaning_en": "Stability and return — balance outer and inner voices."
+      "angel_meaning": "平衡與回歸，內外的聲音同樣重要。"
     },
     {
-      "sentence": "你不需要大聲才能被聽見，真誠自然會被感受到。",
+      "sentence": "你不必大聲，真心會自然被聽見。",
       "angel_number": "333",
-      "angel_meaning": "理解與共鳴，提醒你真實能穿透距離。",
-      "angel_meaning_en": "Understanding and resonance — authenticity bridges distance."
+      "angel_meaning": "共鳴與理解，真誠能穿透距離。"
     },
     {
-      "sentence": "想說的話就說，藏著反而更累。",
+      "sentence": "藏著比說錯更辛苦，真話能讓靈魂鬆開。",
       "angel_number": "7777",
-      "angel_meaning": "流動與覺醒，提醒你表達會讓能量恢復平衡。",
-      "angel_meaning_en": "Flow and awakening — expression restores balance."
+      "angel_meaning": "覺醒與釋放，真實是能量的平衡點。"
     },
     {
-      "sentence": "說出需要幫助不是弱，是勇敢。",
+      "sentence": "說出需要幫助，是勇氣的展現，不是軟弱。",
       "angel_number": "8888",
-      "angel_meaning": "自信與誠實，提醒你請求連結是一種力量。",
-      "angel_meaning_en": "Confidence and honesty — asking for connection is strength."
+      "angel_meaning": "信任與連結，願意請求是一種力量。"
     },
     {
-      "sentence": "有時沉默比回應更有力量。",
+      "sentence": "沉默也能溫柔，留白讓愛有呼吸的空間。",
       "angel_number": "2222",
-      "angel_meaning": "平衡與智慧，提醒你回應不等於理解。",
-      "angel_meaning_en": "Balance and wisdom — response isn’t the same as understanding."
+      "angel_meaning": "智慧與柔軟，愛不需要填滿所有空白。"
     },
     {
-      "sentence": "你不必用華麗的詞，只要真心說話就夠了。",
+      "sentence": "不用華麗的詞，真心最有力量。",
       "angel_number": "666",
-      "angel_meaning": "簡單與真誠，提醒你自然的語氣最動人。",
-      "angel_meaning_en": "Simplicity and sincerity — natural words touch hearts."
+      "angel_meaning": "簡單與純淨，自然就是美。"
     },
     {
-      "sentence": "別害怕說錯話，每一次表達都是在練習。",
+      "sentence": "每一次表達，都是學會愛自己的練習。",
       "angel_number": "9999",
-      "angel_meaning": "成長與釋放，提醒你練習也是進步。",
-      "angel_meaning_en": "Growth and release — every attempt is progress."
+      "angel_meaning": "成長與信任，練習讓心更自由。"
     },
     {
-      "sentence": "說真話不等於傷人，方式也能溫柔。",
+      "sentence": "誠實不一定刺人，語氣可以溫柔。",
       "angel_number": "555",
-      "angel_meaning": "轉化與理解，提醒你誠實可以帶著愛。",
-      "angel_meaning_en": "Transformation and understanding — honesty can carry love."
+      "angel_meaning": "轉化與理解，愛能讓真話變得柔軟。"
     },
     {
-      "sentence": "表達不是要贏，是為了被理解。",
+      "sentence": "表達不是要贏，是想被理解。",
       "angel_number": "1111",
-      "angel_meaning": "新的溝通層次，提醒你連結比對錯重要。",
-      "angel_meaning_en": "A new level of communication — connection matters more than being right."
+      "angel_meaning": "新的溝通層次，連結比對錯更重要。"
     },
     {
-      "sentence": "有時沉默，是給愛留一點空間。",
+      "sentence": "有時沉默，是讓真理自己發聲。",
       "angel_number": "444",
-      "angel_meaning": "穩定與柔軟，提醒你愛不需要佔滿所有聲音。",
-      "angel_meaning_en": "Stability and softness — love doesn’t need to fill all the silence."
+      "angel_meaning": "穩定與信任，靜默中也有力量。"
     },
     {
-      "sentence": "當你願意說出感受，也在告訴自己：我值得被聽見。",
+      "sentence": "當你真誠說出感受，也在對自己說：我值得被聽見。",
       "angel_number": "222",
-      "angel_meaning": "平衡與自信，提醒你表達是自我價值的展現。",
-      "angel_meaning_en": "Balance and confidence — expression reflects self-worth."
+      "angel_meaning": "自我確認與表達，真實讓你閃亮。"
     },
     {
-      "sentence": "你可以不同調，這不代表你錯了。",
+      "sentence": "你可以不同調，也依然和諧。",
       "angel_number": "3333",
-      "angel_meaning": "自我認同與尊重，提醒你真實的聲音值得存在。",
-      "angel_meaning_en": "Self-acceptance and respect — your authentic voice belongs."
+      "angel_meaning": "尊重與真實，每個聲音都值得存在。"
     },
     {
-      "sentence": "當你真誠說出心裡的話，宇宙也會回應你。",
+      "sentence": "當你願意誠實說話，宇宙會以回聲回應你。",
       "angel_number": "888",
-      "angel_meaning": "顯化與共振，提醒你真誠能打開能量之門。",
-      "angel_meaning_en": "Manifestation and resonance — honesty opens energetic doors."
+      "angel_meaning": "顯化與共振，真誠會喚醒共鳴。"
     },
     {
-      "sentence": "你不需要辯解，只要保持誠實和平靜。",
+      "sentence": "不需要辯解，清晰與平靜會替你說話。",
       "angel_number": "999",
-      "angel_meaning": "釋放與信任，提醒你清楚勝於喧嘩。",
-      "angel_meaning_en": "Release and trust — clarity speaks louder than noise."
+      "angel_meaning": "信任與釋放，真理不需噪音。"
     }
-    ]
-  },
-  "歐莯": {
-    "seed": "Om (眉心輪)",
-    "color": "#B496FF",
-    "class": "third-glow",
-    "cards": [
+  ]
+},
+"歐莯": {
+  "seed": "Om (眉心輪)",
+  "color": "#B496FF",
+  "class": "third-glow",
+  "cards": [
     {
-      "sentence": "有時答案不是想出來的，而是靜下來，它就出現了。",
+      "sentence": "答案不是想出來的，而是在靜下來時浮現。",
       "angel_number": "1111",
-      "angel_meaning": "新的覺察開啟，提醒你信任直覺的節奏。",
-      "angel_meaning_en": "A new awareness — trust the rhythm of intuition."
+      "angel_meaning": "新的覺察開啟，信任你的內在知曉。"
     },
     {
-      "sentence": "當你越想控制，越聽不見心的聲音。",
+      "sentence": "當你想掌控一切，直覺就會安靜。",
       "angel_number": "2222",
-      "angel_meaning": "平衡與放下，提醒你鬆開才會清晰。",
-      "angel_meaning_en": "Balance and release — clarity comes when you let go."
+      "angel_meaning": "平衡與放下，鬆開才能清晰。"
     },
     {
-      "sentence": "直覺不吵，它會在你靜下來時輕聲提醒你。",
+      "sentence": "直覺不吵，它在你願意安靜時說話。",
       "angel_number": "3333",
-      "angel_meaning": "洞察與內在連結，提醒你靜心能帶來答案。",
-      "angel_meaning_en": "Insight and inner connection — stillness brings answers."
+      "angel_meaning": "洞察與連結，寧靜裡藏著方向。"
     },
     {
-      "sentence": "不需要想太多，感覺通常比想法準確。",
+      "sentence": "心知道的，往往比頭腦快一步。",
       "angel_number": "444",
-      "angel_meaning": "穩定與信任，提醒你相信感受的智慧。",
-      "angel_meaning_en": "Stability and trust — your feelings carry wisdom."
+      "angel_meaning": "穩定與信任，感覺比想法更真實。"
     },
     {
-      "sentence": "有時迷路，只是靈魂在帶你走另一條路。",
+      "sentence": "迷路不是錯路，只是靈魂在帶你看不同的風景。",
       "angel_number": "555",
-      "angel_meaning": "變化與覺醒，提醒你每次偏離都在引導。",
-      "angel_meaning_en": "Change and awakening — every detour is guidance."
+      "angel_meaning": "改變與覺醒，每個轉彎都有意義。"
     },
     {
-      "sentence": "當事情變安靜時，不代表沒在發生。",
+      "sentence": "安靜的時候，生命正在說話。",
       "angel_number": "6666",
-      "angel_meaning": "信任與潛在流動，提醒你能量在暗處生長。",
-      "angel_meaning_en": "Trust and unseen flow — energy grows in silence."
+      "angel_meaning": "信任與流動，能量在看不見的地方成形。"
     },
     {
-      "sentence": "你已經知道答案，只是還沒勇氣承認。",
+      "sentence": "你早就知道答案，只是還沒準備承認。",
       "angel_number": "7777",
-      "angel_meaning": "覺醒與誠實，提醒你真相早就在心裡。",
-      "angel_meaning_en": "Awakening and honesty — truth already lives within you."
+      "angel_meaning": "誠實與覺醒，真相早在心裡。"
     },
     {
-      "sentence": "別急著尋找方向，讓方向自己浮現。",
+      "sentence": "別急著找方向，讓方向自己來找你。",
       "angel_number": "888",
-      "angel_meaning": "流動與信任，提醒你答案會自己出現。",
-      "angel_meaning_en": "Flow and trust — the way will reveal itself."
+      "angel_meaning": "流動與信任，答案會在對的時候出現。"
     },
     {
-      "sentence": "越想控制未來，越難聽見現在。",
+      "sentence": "越想控制未來，越容易錯過現在的訊息。",
       "angel_number": "999",
-      "angel_meaning": "釋放與當下，提醒你當下才是入口。",
-      "angel_meaning_en": "Release and presence — the now is your doorway."
+      "angel_meaning": "釋放與臨在，當下就是門。"
     },
     {
-      "sentence": "直覺不是推理，而是一種安心的知道。",
+      "sentence": "直覺不需要推理，它會讓你感到安心。",
       "angel_number": "111",
-      "angel_meaning": "新的理解與信任，提醒你真理會讓你平靜。",
-      "angel_meaning_en": "New understanding and trust — truth feels peaceful."
+      "angel_meaning": "新的理解與平靜，真理總是溫柔的。"
     },
     {
-      "sentence": "不確定的時候，就先不要勉強確定。",
+      "sentence": "不確定也沒關係，模糊有時是靈魂的保護。",
       "angel_number": "222",
-      "angel_meaning": "平衡與智慧，提醒你模糊也是一種過程。",
-      "angel_meaning_en": "Balance and wisdom — uncertainty is part of clarity."
+      "angel_meaning": "智慧與信任，霧中也在前進。"
     },
     {
-      "sentence": "別怕空白，靈感都從那裡長出來。",
+      "sentence": "空白不是空，是靈感的土壤。",
       "angel_number": "333",
-      "angel_meaning": "創造與靜心，提醒你空白是靈感的土壤。",
-      "angel_meaning_en": "Creativity and stillness — emptiness is fertile ground."
+      "angel_meaning": "創造與靜心，靜默孕育靈光。"
     },
     {
-      "sentence": "現在看不清沒關係，方向會在你準備好時出現。",
+      "sentence": "現在看不清沒關係，方向會在你準備好時亮起。",
       "angel_number": "4444",
-      "angel_meaning": "穩定與等待，提醒你霧散後會更明亮。",
-      "angel_meaning_en": "Stability and patience — clarity comes after the fog."
+      "angel_meaning": "穩定與等待，光會在時機成熟時出現。"
     },
     {
-      "sentence": "當你願意相信自己的感覺，世界會開始對齊。",
+      "sentence": "當你信任自己的感覺，宇宙會開始回應你。",
       "angel_number": "5555",
-      "angel_meaning": "改變與顯化，提醒你信任會讓現實回應你。",
-      "angel_meaning_en": "Change and manifestation — trust aligns reality with you."
+      "angel_meaning": "顯化與對齊，信任是最強的磁力。"
     },
     {
-      "sentence": "別急著問為什麼，先看看能感覺到什麼。",
+      "sentence": "別急著理解，先感覺它在說什麼。",
       "angel_number": "666",
-      "angel_meaning": "覺察與溫柔，提醒你理解不如體驗真實。",
-      "angel_meaning_en": "Awareness and gentleness — feeling is deeper than knowing."
+      "angel_meaning": "覺察與溫柔，體驗比分析更真實。"
     },
     {
-      "sentence": "安靜不是空白，而是靈魂在對你說話。",
+      "sentence": "寧靜不是空白，而是靈魂的語言。",
       "angel_number": "777",
-      "angel_meaning": "覺醒與連結，提醒你寧靜中藏著訊息。",
-      "angel_meaning_en": "Awakening and connection — silence carries messages."
+      "angel_meaning": "連結與覺醒，安靜中藏著訊息。"
     },
     {
-      "sentence": "別把頭腦當指南針，心更知道方向。",
+      "sentence": "別用頭腦尋找，讓心去感應方向。",
       "angel_number": "8888",
-      "angel_meaning": "智慧與直覺整合，提醒你心是最準的導航。",
-      "angel_meaning_en": "Integration of wisdom and intuition — the heart knows the way."
+      "angel_meaning": "智慧與直覺融合，心永遠知道路。"
     },
     {
-      "sentence": "當你信任感覺，混亂就不再那麼可怕。",
+      "sentence": "信任感覺的那一刻，混亂就開始有序。",
       "angel_number": "9999",
-      "angel_meaning": "完成與清晰，提醒你信任會帶來平靜。",
-      "angel_meaning_en": "Completion and clarity — trust brings peace."
+      "angel_meaning": "完成與平靜，信任會帶來明晰。"
     },
     {
-      "sentence": "你不需要想出答案，答案會在對的時候浮現。",
+      "sentence": "你不需要想出答案，時間會告訴你該怎麼走。",
       "angel_number": "1111",
-      "angel_meaning": "新的理解與流動，提醒你順著時間的節奏。",
-      "angel_meaning_en": "New understanding and flow — answers come in their time."
+      "angel_meaning": "流動與順時而行，一切自有節奏。"
     },
     {
-      "sentence": "當下的不確定，也可能是宇宙在調整節奏。",
+      "sentence": "當下的不確定，是宇宙在幫你校準方向。",
       "angel_number": "2222",
-      "angel_meaning": "平衡與信任，提醒你一切都在對的位置發生。",
-      "angel_meaning_en": "Balance and trust — everything is unfolding in order."
+      "angel_meaning": "信任與平衡，一切都在正確的位置。"
     },
     {
-      "sentence": "有時感覺對了，不需要理由。",
+      "sentence": "有時感覺對了，就足夠了。",
       "angel_number": "3333",
-      "angel_meaning": "直覺與真實，提醒你心的訊號比邏輯更快。",
-      "angel_meaning_en": "Intuition and truth — the heart signals faster than logic."
+      "angel_meaning": "直覺與真實，心的回應比理由更快。"
     },
     {
-      "sentence": "你沒有迷路，只是在練習相信自己的步伐。",
+      "sentence": "你沒有走錯，只是在學會信任自己的節奏。",
       "angel_number": "444",
-      "angel_meaning": "穩定與信任，提醒你每一步都在指引你。",
-      "angel_meaning_en": "Stability and trust — every step is guiding you."
+      "angel_meaning": "穩定與信任，每一步都算數。"
     },
     {
-      "sentence": "別懷疑自己的感受，那是靈魂在回答。",
+      "sentence": "別懷疑你的感覺，那是靈魂在回答你。",
       "angel_number": "555",
-      "angel_meaning": "覺醒與確認，提醒你感覺是宇宙的語言。",
-      "angel_meaning_en": "Awakening and confirmation — feelings are the universe’s language."
+      "angel_meaning": "確認與覺醒，感覺是靈魂的回信。"
     },
     {
-      "sentence": "有時看不清，不代表沒在前進。",
+      "sentence": "看不清的時候，也在被引導。",
       "angel_number": "6666",
-      "angel_meaning": "信任與耐心，提醒你霧只是過程的一部分。",
-      "angel_meaning_en": "Trust and patience — the fog is part of the path."
+      "angel_meaning": "耐心與信任，霧只是過渡的恩典。"
     },
     {
-      "sentence": "相信你的第一個感覺，通常那就是答案。",
+      "sentence": "第一個閃過的感覺，就是宇宙給你的提示。",
       "angel_number": "7777",
-      "angel_meaning": "清晰與覺察，提醒你直覺是最準的指南。",
-      "angel_meaning_en": "Clarity and awareness — intuition is your surest guide."
+      "angel_meaning": "清晰與共振，直覺是靈魂的語言。"
     }
-    ]
-  },
-  "奧莯": {
-    "seed": "Aum (頂輪)",
-    "color": "#FFC8FF",
-    "class": "crown-glow",
-    "cards": [
+  ]
+},
+"奧莯": {
+  "seed": "Aum (頂輪)",
+  "color": "#FFC8FF",
+  "class": "crown-glow",
+  "cards": [
     {
-      "sentence": "有些事不是努力想出來的，而是相信後，答案自然會浮現。",
+      "sentence": "答案不需努力想，當你願意相信，它自然浮現。",
       "angel_number": "1111",
-      "angel_meaning": "新的信念展開，提醒你信任看不見的安排。",
-      "angel_meaning_en": "A new belief opens — trust the unseen arrangement."
+      "angel_meaning": "新的信任展開，放手讓宇宙為你安排。"
     },
     {
-      "sentence": "當你放下控制，空間就出現了。",
+      "sentence": "當你鬆開掌控，空間與奇蹟會一起進來。",
       "angel_number": "2222",
-      "angel_meaning": "平衡與臣服，讓事情各就各位。",
-      "angel_meaning_en": "Balance and surrender — things fall into place."
+      "angel_meaning": "平衡與臣服，讓能量自由排列。"
     },
     {
-      "sentence": "你不一定要懂一切，先允許答案晚點到。",
+      "sentence": "你不需要現在就懂，時間會慢慢告訴你答案。",
       "angel_number": "3333",
-      "angel_meaning": "理解會自己整合，別急著下結論。",
-      "angel_meaning_en": "Understanding integrates on its own — no rush to conclude."
+      "angel_meaning": "理解在流動中成形，無須急著明白。"
     },
     {
-      "sentence": "放手不是放棄，而是讓事情重新流動。",
+      "sentence": "放手不是離開，而是讓生命重新呼吸。",
       "angel_number": "5555",
-      "angel_meaning": "改變與更新，騰出位置迎接新局。",
-      "angel_meaning_en": "Change and renewal — make room for the new."
+      "angel_meaning": "改變與更新，留白迎接新流向。"
     },
     {
-      "sentence": "你可以慢一點，宇宙的節奏本來就不趕人。",
+      "sentence": "宇宙不趕人，慢一點也剛剛好。",
       "angel_number": "7777",
-      "angel_meaning": "信任與步調，一切都有時間點。",
-      "angel_meaning_en": "Trust and timing — everything has its moment."
+      "angel_meaning": "信任與節奏，一切都在對的時間點上。"
     },
     {
-      "sentence": "不是每件事都有原因，能接住沒答案的當下就好。",
+      "sentence": "能接住沒答案的當下，就是覺醒的開始。",
       "angel_number": "6666",
-      "angel_meaning": "接納與寬心，容許未知存在。",
-      "angel_meaning_en": "Acceptance and ease — allow the unknown to exist."
+      "angel_meaning": "接納與寬心，未知也是一種回應。"
     },
     {
-      "sentence": "安靜一會兒，答案比較聽得見。",
+      "sentence": "安靜時，宇宙最容易對你說話。",
       "angel_number": "8888",
-      "angel_meaning": "連結與覺察，靜下來就能對焦。",
-      "angel_meaning_en": "Connection and awareness — stillness brings focus."
+      "angel_meaning": "連結與覺察，靜心讓你聽見微光的訊息。"
     },
     {
-      "sentence": "你沒有被丟下，只是人生在幫你換個方向。",
+      "sentence": "你沒有被落下，只是被帶往更高的版本。",
       "angel_number": "9999",
-      "angel_meaning": "圓滿與過渡，轉換是進程的一部分。",
-      "angel_meaning_en": "Wholeness and transition — change is part of the process."
+      "angel_meaning": "過渡與蛻變，改變是靈魂的推進。"
     },
     {
-      "sentence": "別再問為什麼是你，因為你有力量走過這一段。",
+      "sentence": "別問為什麼是你，因為你的光正能照亮別人。",
       "angel_number": "111",
-      "angel_meaning": "新的理解，肯定你的承載力。",
-      "angel_meaning_en": "New understanding — affirm your capacity."
+      "angel_meaning": "理解與使命，你的存在自帶意義。"
     },
     {
-      "sentence": "沒答案的時候，也可以先選擇相信。",
+      "sentence": "沒有方向的時候，就先安住當下。",
       "angel_number": "222",
-      "angel_meaning": "平靜與信念，先把心穩住。",
-      "angel_meaning_en": "Calm and faith — steady your heart first."
+      "angel_meaning": "平靜與信念，穩住心就是路。"
     },
     {
-      "sentence": "不用追求多遠，能回到自己就好。",
+      "sentence": "回到自己，是所有答案的起點。",
       "angel_number": "333",
-      "angel_meaning": "整合與覺醒，中心感帶來清楚。",
-      "angel_meaning_en": "Integration and awakening — centering brings clarity."
+      "angel_meaning": "整合與覺醒，中心感帶來清明。"
     },
     {
-      "sentence": "現在的混亂，是在重新整理出新的方向。",
+      "sentence": "現在的混亂，只是在重新排列秩序。",
       "angel_number": "4444",
-      "angel_meaning": "穩定與重組，秩序正在形成。",
-      "angel_meaning_en": "Stability and reordering — a new order is forming."
+      "angel_meaning": "穩定與重組，光正在穿越霧。"
     },
     {
-      "sentence": "你和宇宙沒有距離，只有有沒有留意。",
+      "sentence": "你和宇宙始終相連，只要願意留意。",
       "angel_number": "555",
-      "angel_meaning": "連結與覺察，注意力就是橋。",
-      "angel_meaning_en": "Connection and awareness — attention is the bridge."
+      "angel_meaning": "連結與覺察，注意力就是通道。"
     },
     {
-      "sentence": "靈性不是遠方，而是你怎麼過今天。",
+      "sentence": "靈性不是遠方，而是你如何活在當下。",
       "angel_number": "666",
-      "angel_meaning": "落地與實踐，把心放在日常。",
-      "angel_meaning_en": "Grounded practice — put heart into the everyday."
+      "angel_meaning": "落地與實踐，把光放進日常。"
     },
     {
-      "sentence": "即使現在不確定，你也正被生命溫柔帶著走。",
+      "sentence": "即使還不確定，也正被生命溫柔引領。",
       "angel_number": "777",
-      "angel_meaning": "信任與引導，不確定也在路上。",
-      "angel_meaning_en": "Trust and guidance — uncertainty is still the path."
+      "angel_meaning": "信任與指引，不確定中也有光。"
     },
     {
-      "sentence": "你不必像誰，真實的你就已經很好。",
+      "sentence": "你不必像誰，真實的你就已經是光。",
       "angel_number": "888",
-      "angel_meaning": "自我肯定與連結，真實就是門。",
-      "angel_meaning_en": "Self-affirmation and connection — authenticity is the doorway."
+      "angel_meaning": "自我肯定與本源，真實本身就是神聖。"
     },
     {
-      "sentence": "越是放下比較，越能聽見自己的路。",
+      "sentence": "當你放下比較，心就能聽見自己的節奏。",
       "angel_number": "999",
-      "angel_meaning": "釋放與清明，專注於你的章節。",
-      "angel_meaning_en": "Release and clarity — focus on your chapter."
+      "angel_meaning": "釋放與清明，專注於屬於你的篇章。"
     },
     {
-      "sentence": "別把一切想通再出發，走著走著就明白了。",
+      "sentence": "別等想通再走，走著走著就會明白。",
       "angel_number": "1111",
-      "angel_meaning": "新的行程展開，邊走邊清晰。",
-      "angel_meaning_en": "A new path opens — clarity comes as you go."
+      "angel_meaning": "新的旅程展開，明晰在行動中出現。"
     },
     {
-      "sentence": "宇宙一直在回應，只是你要靜下來才能聽見。",
+      "sentence": "宇宙一直在回應，只是你要先安靜。",
       "angel_number": "2222",
-      "angel_meaning": "平衡與調頻，把音量轉小聽見細節。",
-      "angel_meaning_en": "Balance and tuning — lower the noise to hear the signal."
+      "angel_meaning": "平衡與調頻，安靜才能聽見細節。"
     },
     {
-      "sentence": "請放心，你走在該走的位置上。",
+      "sentence": "請放心，你正走在該走的軌道上。",
       "angel_number": "3333",
-      "angel_meaning": "對齊與信任，一切恰到好處地展開。",
-      "angel_meaning_en": "Alignment and trust — things unfold just right."
+      "angel_meaning": "對齊與信任，一切都在剛剛好的節奏裡。"
     },
     {
-      "sentence": "當你不再緊盯結果，過程就會變得輕鬆。",
+      "sentence": "不緊盯結果，過程會更柔軟。",
       "angel_number": "444",
-      "angel_meaning": "穩定與放鬆，把注意放回步伐。",
-      "angel_meaning_en": "Stability and ease — return attention to your steps."
+      "angel_meaning": "穩定與放鬆，專注於當下的步伐。"
     },
     {
-      "sentence": "多一點信任，生活就多一點順。",
+      "sentence": "多一點信任，世界就多一點順。",
       "angel_number": "5555",
-      "angel_meaning": "改變與助力，信任讓路打開。",
-      "angel_meaning_en": "Change and support — trust opens the way."
+      "angel_meaning": "助力與流動，信任讓路變得寬廣。"
     },
     {
-      "sentence": "當你放下「一定要如何」，更好的選項才進得來。",
+      "sentence": "放下「一定要」，才有空間迎接「更好」。",
       "angel_number": "6666",
-      "angel_meaning": "接納與擴展，鬆手才有空位。",
-      "angel_meaning_en": "Acceptance and expansion — release to make room."
+      "angel_meaning": "接納與擴展，鬆手讓奇蹟有入口。"
     },
     {
       "sentence": "宇宙不急，你也可以慢慢來。",
       "angel_number": "7777",
-      "angel_meaning": "時間與耐心，節奏對了什麼都對。",
-      "angel_meaning_en": "Timing and patience — when the pace is right, all aligns."
+      "angel_meaning": "時間與節奏，所有步伐都恰到好處。"
     },
     {
-      "sentence": "當你信任當下，整體就鬆一口氣。",
+      "sentence": "當你信任當下，整個世界都會為你鬆一口氣。",
       "angel_number": "8888",
-      "angel_meaning": "連結與呼應，你的安定會被世界接住。",
-      "angel_meaning_en": "Connection and resonance — your calm is met by the world."
+      "angel_meaning": "連結與呼應，你的安定就是世界的安定。"
     }
   ]
-  }
+}
 }

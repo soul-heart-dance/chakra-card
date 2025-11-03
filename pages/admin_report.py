@@ -38,13 +38,13 @@ def render_admin_report():
     # ---- 台灣時間 ----
     taiwan_now = datetime.now(timezone(timedelta(hours=8)))
     today_str = taiwan_now.strftime("%Y-%m-%d")
-    csv_filename = f"Soul_Heart_Dance_Report_{taiwan_now.strftime('%Y-%m')}_{taiwan_now.strftime('%H%M%S')}.csv"
 
     # ---- 今日訪問數 ----
     today_count = int(df.loc[df["日期"] == today_str, "當日訪問"].values[0]) if today_str in df["日期"].values else 0
 
-    # ---- 最新月份 ----
-    latest_month = sorted(df["年月"].unique(), reverse=True)[0]
+    # ---- 月份清單 ----
+    months = sorted(df["年月"].unique(), reverse=True)
+    latest_month = months[0]
     month_df = df[df["年月"] == latest_month]
 
     # ---- 統計數字 ----
@@ -89,19 +89,26 @@ def render_admin_report():
     else:
         st.warning("🌙 本月尚無訪問紀錄")
 
-    # —— 間距：圖表與下載按鈕 ——
+    # ---- 折線圖與下載報表之間留一點距離 ----
     st.markdown("<div style='height:10px'></div>", unsafe_allow_html=True)
 
+    # ---- 月份選擇（放在下載按鈕上方）----
+    months = sorted(df["年月"].unique(), reverse=True)
+    selected_month = st.selectbox("查詢時間", months, index=0)
+
     # ---- 下載報表 ----
+    month_df = df[df["年月"] == selected_month]
+    csv_filename = f"Soul_Heart_Dance_Report_{selected_month}_{taiwan_now.strftime('%H%M%S')}.csv"
     csv_data = month_df.to_csv(index=False, encoding="utf-8-sig").encode("utf-8-sig")
+
     st.download_button(
-        label=f"下載 {latest_month} 報表（CSV）",
+        label=f"💾 下載 {selected_month} 報表（CSV）",
         data=BytesIO(csv_data),
         file_name=csv_filename,
         mime="text/csv",
         use_container_width=True
     )
-
+    
     # ---- Hover 動態特效 ----
     st.markdown("""
         <style>
@@ -119,15 +126,31 @@ def render_admin_report():
         </style>
     """, unsafe_allow_html=True)
 
-    # ---- 月份選單 ----
-    months = sorted(df["年月"].unique(), reverse=True)
-    selected_month = st.selectbox("查詢時間", months, index=months.index(latest_month))
-    table_df = df[df["年月"] == selected_month]
+    # ---- 更新時間放在下載按鈕下方、表格上方 ----
+    st.markdown(f"""
+    <div class='update-time'>🕓 更新時間：{taiwan_now.strftime('%Y-%m-%d %H:%M')}（台北時間）</div>
+
+    <style>
+      .update-time {{
+          text-align: center !important;
+          font-size: 0.9rem !important;
+          color: #e8d4ff !important;
+          opacity: 0.8 !important;
+          text-shadow: 0 0 6px #cfa7ff !important;
+          animation: glow 4s ease-in-out infinite alternate !important;
+          margin: 0.5rem 0 0.8rem 0 !important;  /* 👈 上下留距讓版面呼吸 */
+      }}
+      @keyframes glow {{
+          from {{ text-shadow: 0 0 6px #cfa7ff; opacity: 0.65; }}
+          to {{ text-shadow: 0 0 12px #ffdbff; opacity: 0.95; }}
+      }}
+    </style>
+    """, unsafe_allow_html=True)
 
     # ---- 表格 ----
-    if not table_df.empty:
+    if not month_df.empty:
         st.dataframe(
-            table_df[["日期", "當日訪問", "累積訪問"]],
+            month_df[["日期", "當日訪問", "累積訪問"]],
             hide_index=True,
             use_container_width=True
         )
@@ -135,30 +158,15 @@ def render_admin_report():
         st.info("🌸 該月份目前沒有訪問資料")
 
     # ---- Footer ----
-    st.markdown(f"""
+    st.markdown("""
     <div class='footer'>© 2025 Soul Heart Dance · 與靈魂之心共舞</div>
-    <div class='update-time'>🕓 更新時間：{taiwan_now.strftime('%Y-%m-%d %H:%M')}（台北時間）</div>
-
     <style>
-        /* Footer 與更新時間樣式 */
-        .footer {{
-            margin-top: 0rem !important;
-            padding-top: 0rem !important;
-            text-align: center !important;
-        }}
-        .update-time {{
-            position: fixed;
-            bottom: 14px;
-            right: 20px;
-            font-size: 0.88rem;
-            color: #e8d4ff;
-            opacity: 0.7;
-            text-shadow: 0 0 6px #cfa7ff;
-            animation: glow 4s ease-in-out infinite alternate;
-        }}
-        @keyframes glow {{
-            from {{ text-shadow: 0 0 6px #cfa7ff; opacity: 0.65; }}
-            to {{ text-shadow: 0 0 12px #ffdbff; opacity: 0.95; }}
-        }}
+      .footer {
+          text-align: center !important;
+          color: #d8bfff !important;
+          font-size: 0.92rem !important;
+          margin-top: 1rem !important;
+          padding-bottom: 0.8rem !important;
+      }
     </style>
     """, unsafe_allow_html=True)

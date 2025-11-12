@@ -52,7 +52,7 @@ def render_chakra_card():
     <div class="reminder-box fade-in">
       想著當下最想了解的問題再抽<br>
       或讓自己放鬆、隨心點選也可以<br>
-      靈魂總會在此刻傳遞最適合你的指引 🌙
+      靈魂總會在此刻傳遞最適合你的指引🌙
     </div>
     """, unsafe_allow_html=True)
 

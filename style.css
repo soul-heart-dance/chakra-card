@@ -275,7 +275,7 @@ div[data-testid="stButtonContainer"],
   font-size: 0.8rem;
   color: #FFD6F6;
   margin: 1.2rem auto 1.2rem auto;
-  width: min(260px, 66vw);
+  width: min(270px, 70vw);
   box-shadow: 0 0 10px rgba(255, 200, 250, 0.18);
   backdrop-filter: blur(4px);
   line-height: 1.55;

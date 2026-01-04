@@ -82,4 +82,4 @@ def render_chakra_card():
         st.markdown("<p class='hint'>🌙 點擊上方按鈕開始抽卡 🌙</p>", unsafe_allow_html=True)
 
     # === 💫 Footer ===
-    st.markdown("<div class='footer'>© 2025 Soul Heart Dance · 與靈魂之心共舞</div>", unsafe_allow_html=True)
+    st.markdown("<div class='footer'>© 2026 Soul Heart Dance · 與靈魂之心共舞</div>", unsafe_allow_html=True)

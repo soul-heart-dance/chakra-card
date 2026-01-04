@@ -159,7 +159,7 @@ def render_admin_report():
 
     # ---- Footer ----
     st.markdown("""
-    <div class='footer'>© 2025 Soul Heart Dance · 與靈魂之心共舞</div>
+    <div class='footer'>© 2026 Soul Heart Dance · 與靈魂之心共舞</div>
     <style>
       .footer {
           text-align: center !important;
